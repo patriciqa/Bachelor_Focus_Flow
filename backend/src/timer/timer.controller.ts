@@ -10,13 +10,13 @@ export class TimerController {
   @Get()
   async getAllTimestamps() {
     // return this.timersService.getTimeslots();
-    return this.timersService.findAll();
+    return this.timersService.getTimeSlots();
   }
 
   @Post()
   async startTimer(@Body() createTimerDto: CreateTimerDto) {
     createTimerDto.startTime = Date.now();
-    this.timersService.create(createTimerDto);
+    this.timersService.createTimeSlot(createTimerDto);
     // this.timersService.createTimeSlot(createTimerDto);
   }
 }

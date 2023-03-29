@@ -7,26 +7,18 @@ import { Timer } from './timer.model';
 
 @Injectable()
 export class TimerService {
-  constructor(@InjectModel("Timer") private timerModel: Model<Timer>) {}
+  constructor(@InjectModel('Timer') private timerModel: Model<Timer>) {}
 
-  private timers = [];
-
-  createTimeSlot(timerDto: TimerDto) {
-    return this.timers.push(timerDto);
-  }
-
-  getTimeslots() {
-    return this.timers;
-  }
-
-  async create(timerDto: TimerDto): Promise<Timer> {
+  async createTimeSlot(timerDto: TimerDto): Promise<Timer> {
     const createdTimer = new this.timerModel(timerDto);
     return createdTimer.save();
   }
-
-  async findAll(): Promise<Timer[]> {
+  
+  async getTimeSlots(): Promise<Timer[]> {
     return this.timerModel.find().exec();
   }
+
+
 
   //   async getSingleProduct(productId: string) {
   //     const product = await this.findProduct(productId);

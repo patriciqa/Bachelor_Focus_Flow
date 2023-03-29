@@ -1,23 +1,26 @@
+version: '3.8'
 services:
-  node-app:
-    image: study-tool-bachelor/server
-    build: .
-    depends_on:
-      - influx
-      - graphdb
-      - mysql
+  mongodb:
+    image: mongo:latest
+    env_file:
+      - .env
     ports:
-      - "8080:8080"
-      - "3000:3000"
-    # volumes:
-    #   - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/fullchain1.pem:/app/cert/fullchain.pem:ro
-    #   - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/privkey1.pem:/app/cert/privkey.pem:ro
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
 
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: patriciqa
-      MONGO_INITDB_ROOT_PASSWORD: Bachelor2023
+  api: 
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    command: npm run start:dev
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
 
-  
+volumes:
+  mongodb_data_container:

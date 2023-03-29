@@ -11,7 +11,7 @@ import { TimerModule } from './timer/timer.module';
       envFilePath: '.env',
     }),
     TimerModule,
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRoot(process.env.MONGODB_URL),
   ],
   controllers: [AppController],
 })
