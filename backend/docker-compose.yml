@@ -1,0 +1,23 @@
+services:
+  node-app:
+    image: study-tool-bachelor/server
+    build: .
+    depends_on:
+      - influx
+      - graphdb
+      - mysql
+    ports:
+      - "8080:8080"
+      - "3000:3000"
+    # volumes:
+    #   - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/fullchain1.pem:/app/cert/fullchain.pem:ro
+    #   - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/privkey1.pem:/app/cert/privkey.pem:ro
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: patriciqa
+      MONGO_INITDB_ROOT_PASSWORD: Bachelor2023
+
+  
