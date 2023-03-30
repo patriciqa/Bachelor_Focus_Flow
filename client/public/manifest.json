@@ -1,0 +1,9 @@
+{
+    "theme_color": "#50e3c2",
+    "background_color": "#6a35f6",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "name": "StudyTool",
+    "short_name": "StudyTool"
+}
