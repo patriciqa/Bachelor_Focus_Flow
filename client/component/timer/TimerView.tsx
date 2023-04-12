@@ -23,7 +23,7 @@ export default function TimerView({
 
   useEffect(() => {
     const runIndexDb = async () => {
-      await indexedDb.createObjectStore(["study"]);
+      await db.createObjectStore(["study"]);
       // await indexedDb.getValue("study", 62).then((d: Timestamp) => {
       //   console.log(d);
       //   setDuration(d.duration);
@@ -88,7 +88,7 @@ export default function TimerView({
           <div>study</div>
           <button
             onClick={() => {
-              indexedDb.putValue("study", {
+              db.putValue("study", {
                 // id: Date.now(),
                 startTime: Date.now(),
                 // timer: {
@@ -108,7 +108,7 @@ export default function TimerView({
           </button>{" "}
           <button
             onClick={() => {
-              indexedDb.putValue(
+              db.putValue(
                 "study",
                 {
                   // id: Date.now(),
