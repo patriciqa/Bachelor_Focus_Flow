@@ -1,0 +1,37 @@
+{
+    "examPhase": [
+        {
+            "startDate": "223423",
+            "endDate": "234556",
+            "title": "FS23",
+            "breakEntries": [
+                {
+                    "timer": {
+                        "id": "1",
+                        "startTime": "100000",
+                        "duration": "200"
+                    },
+                    "mood": "1",
+                    "breakActivity": {
+                        "title": "dance",
+                        "wentWell": "1"
+                    } 
+                }
+            ],
+            "studyEntries": [
+                {
+                    "timer": {
+                        "id": "2",
+                        "starttime": "100000",
+                        "duration": "20"
+                    },
+                    "mood": "-1",
+                    "cause": {
+                        "title": "distraction",
+                        "wentWell": "0"
+                    } 
+                }
+            ]
+        }
+    ]
+}
