@@ -1,37 +1,81 @@
 {
-    "examPhase": [
-        {
-            "startDate": "223423",
-            "endDate": "234556",
-            "title": "FS23",
-            "breakEntries": [
-                {
-                    "timer": {
-                        "id": "1",
-                        "startTime": "100000",
-                        "duration": "200"
-                    },
-                    "mood": "1",
-                    "breakActivity": {
-                        "title": "dance",
-                        "wentWell": "1"
-                    } 
-                }
-            ],
-            "studyEntries": [
-                {
-                    "timer": {
-                        "id": "2",
-                        "starttime": "100000",
-                        "duration": "20"
-                    },
-                    "mood": "-1",
-                    "cause": {
-                        "title": "distraction",
-                        "wentWell": "0"
-                    } 
-                }
-            ]
-        }
-    ]
+    "Settings": {
+        "causes": [
+            {
+                "title": "bad sleep",
+                "icon": "sth",
+                "statistic": 3,
+                "goodCause": false,
+                "archived": false
+            },
+            {
+                "title": "distraction",
+                "icon": "sth",
+                "statistic": 1,
+                "goodCause": false,
+                "archived": false
+            }
+        ],
+        "breakActivities": [
+            {
+                "title": "meditation",
+                "icon": "icon",
+                "statistic": 1
+            },
+            {
+                "title": "yoga",
+                "icon": "icon",
+                "statistic": 1
+            }
+        ],
+        "examPhase": [
+            {
+                "startDate": "223423",
+                "endDate": "234556",
+                "title": "FS23",
+                "breakEntries": [
+                    {
+                        "id": 121789,
+                        "timer": {
+                            "startTime": "100000",
+                            "duration": "200"
+                        },
+                        "breakActivity": {
+                            "activity": {
+                                "title": "Yoga",
+                                "icon": "icon",
+                                "statistic": "5",
+                                "archieved": false
+                            },
+                            "mood": "1"
+                        }
+                    }
+                ],
+                "studyEntries": [
+                    {
+                        "id": 121123,
+                        "timer": {
+                            "starttime": "100000",
+                            "duration": "20"
+                        },
+                        "mood": "-1",
+                        "causes": [
+                            {
+                                "title": "bad sleep",
+                                "icon": "sth",
+                                "statistic": 3,
+                                "goodCause": "false"
+                            },
+                            {
+                                "title": "bad weather",
+                                "icon": "weather",
+                                "statistic": 7,
+                                "goodCause": "false"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }

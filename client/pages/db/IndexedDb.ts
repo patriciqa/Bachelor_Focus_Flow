@@ -44,17 +44,17 @@ class IndexedDb {
     return result;
   }
 
-  public async putValue(tableName: string, value: object, key?: number) {
+  public async putValue(tableName: string, value: object) {
     const tx = this.db.transaction(tableName, "readwrite");
     const store = tx.objectStore(tableName);
     try {
       await tx.complete;
       let result;
-      if (key) {
-        result = await store.put(value, key);
-      } else {
-        result = await store.put(value);
-      }
+      // if (key) {
+      //   result = await store.put(value, key);
+      // } else {
+      result = await store.put(value);
+      // }
       console.log("Put Data ", JSON.stringify(result));
     } catch (err: any) {
       console.log("error", err.message);
