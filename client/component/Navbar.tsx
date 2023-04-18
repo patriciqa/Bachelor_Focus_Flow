@@ -1,13 +1,26 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const router = useRouter().route;
+
   return (
-    <div className="flex justify-center flex-row fixed bottom-0">
-      <ul className="flex justify-center items-center	">
-        <li className=" text-3xl font-bold ">
-          <Link href="/Timer">Timer</Link>
+    <div className="fixed bottom-0 flex flex-col items-center justify-center w-screen">
+      <ul className="flex justify-center w-full">
+        <li
+          className={
+            "w-full  p-5 align-center  justify-center flex " +
+            (router === "/" && "bg-metal")
+          }
+        >
+          <Link href="/">Timer</Link>
         </li>
-        <li className=" text-3xl font-bold">
+        <li
+          className={
+            "w-full  p-5 align-center  justify-center flex " +
+            (router === "/Overview" && "bg-metal")
+          }
+        >
           <Link href="/Overview">Overview</Link>
         </li>
       </ul>

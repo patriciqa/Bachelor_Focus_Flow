@@ -7,6 +7,13 @@ class IndexedDb {
   constructor(database: string) {
     this.database = database;
   }
+  public async databaseExists(dbname: string) {
+    const isExisting = await (await window.indexedDB.databases())
+      .map((db) => db.name)
+      .includes(dbname);
+    console.log(isExisting);
+    return isExisting;
+  }
 
   public async createObjectStore(tableNames: string[]) {
     try {
@@ -23,6 +30,7 @@ class IndexedDb {
           }
         },
       });
+      console.log(this.db);
     } catch (error) {
       return false;
     }
@@ -45,6 +53,8 @@ class IndexedDb {
   }
 
   public async putValue(tableName: string, value: object) {
+    console.log(this.db);
+
     const tx = this.db.transaction(tableName, "readwrite");
     const store = tx.objectStore(tableName);
     try {

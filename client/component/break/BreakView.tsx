@@ -1,16 +1,14 @@
-import { Break, PageComponent, Settings, Study } from "@/types/Timer";
+import { Break, PageComponent, Study } from "@/types/Timer";
 import React, { useEffect, useState } from "react";
 
 export const BreakView = ({
   setShowComponent,
   breakEntry,
   setBreakEntry,
-  settings,
 }: {
   setShowComponent: (s: PageComponent) => void;
   breakEntry: Break;
   setBreakEntry: (s: Break) => void;
-  settings: Settings;
 }) => {
   const [startTimer, setStartTimer] = useState(false);
   const [timerFinished, setTimerFinished] = useState(false);
@@ -45,19 +43,20 @@ export const BreakView = ({
         {state.seconds <= 10 ? `0${state.seconds}` : state.seconds}
       </div>
 
-      {settings.breakActivities.map((c) => (
+      {/* {settings.breakActivities.map((c) => (
         <div>
           <button
             onClick={() => {
               const s = { ...breakEntry };
               s.breakActivity = { activity: c };
+              console.log(s);
               setBreakEntry(s);
             }}
           >
             {c.title}
           </button>
         </div>
-      ))}
+      ))} */}
       <button
         onClick={() => {
           setBreakEntry({

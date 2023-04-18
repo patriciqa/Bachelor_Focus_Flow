@@ -1,7 +1,7 @@
 import { Study } from "@/types/Timer";
 import React from "react";
 
-export default function BadCauses({
+export default function GoodCauses({
   studyEntry,
   setStudyEntry,
 }: {
@@ -11,9 +11,9 @@ export default function BadCauses({
   return (
     <>
       <div>Study - {studyEntry.timer.duration}</div>
-      <div>Why did it go not so well?</div>
+      <div>Great! Why did it go well?</div>
       {/* {settings.causes.forEach((s) => {
-        if (!s.goodCause) {
+        if (s.goodCause) {
           <button
             onClick={() => {
               const entry = { ...studyEntry };

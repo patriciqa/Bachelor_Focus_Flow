@@ -1,5 +1,3 @@
-import { ExamPhase } from "@/Config";
-
 export enum PageComponent {
   STUDYTIMER,
   BREAKTIMER,
@@ -7,6 +5,12 @@ export enum PageComponent {
   BREAKMOOD,
   GOODCAUSE,
   BADCAUSE,
+  ONBOARDINGEXAMPHASE,
+  EXAMPHASEINPUT,
+
+  OVERVIEW,
+  SETTINGS,
+  SETTINGS_EXAMPHASES,
 }
 enum Mood {
   GOOD = "1",
@@ -14,6 +18,22 @@ enum Mood {
   BAD = "-1",
 }
 export default Mood;
+
+export interface ExamPhase {
+  startDate?: number;
+  endDate?: number;
+  title?: string;
+  studyEntries?: Study[];
+  breakEntries?: Break[];
+  archived?: boolean;
+}
+export interface Entry {
+  id: number;
+  timer: Timer;
+  causes?: Cause[];
+  mood?: "1" | "0" | "-1";
+}
+
 export interface Study {
   id: number;
   timer: Timer;
@@ -26,33 +46,29 @@ export interface Timer {
 }
 
 export interface Cause {
+  id: number;
   title: string;
   icon: string;
-  statistic: number;
   goodCause: boolean;
   archived: false;
 }
 
-export interface Settings {
-  causes: Cause[];
-  examPhases: ExamPhase[];
-  breakActivities: Activity[];
-}
+// export interface Settings {
+//   causes: Cause[];
+//   examPhases: ExamPhase[];
+//   breakActivities: Activity[];
+// }
 
 export interface Activity {
+  id: number;
   title: string;
   icon: string;
-  statistic: number;
   archived?: boolean;
 }
 
 export interface Break {
   id: number;
   timer: Timer;
-  breakActivity?: BreakEntry;
-}
-
-export interface BreakEntry {
-  activity?: Activity;
+  breakActivity?: Activity;
   mood?: Mood;
 }

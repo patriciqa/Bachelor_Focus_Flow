@@ -4,14 +4,12 @@
             {
                 "title": "bad sleep",
                 "icon": "sth",
-                "statistic": 3,
                 "goodCause": false,
                 "archived": false
             },
             {
                 "title": "distraction",
                 "icon": "sth",
-                "statistic": 1,
                 "goodCause": false,
                 "archived": false
             }
@@ -20,12 +18,12 @@
             {
                 "title": "meditation",
                 "icon": "icon",
-                "statistic": 1
+                "archieved": true
             },
             {
                 "title": "yoga",
                 "icon": "icon",
-                "statistic": 1
+                "archieved": true
             }
         ],
         "examPhase": [

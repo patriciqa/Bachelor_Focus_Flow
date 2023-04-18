@@ -1,13 +1,12 @@
-import IndexedDb from "@/pages/db/IndexedDb";
+import IndexedDb from "@/component/archive/IndexedDb";
 import Mood, { Break, PageComponent } from "@/types/Timer";
+import { useEffect, useState } from "react";
 
 export default function BreakMoodCheckIn({
-  db,
   breakEntry,
   setBreakEntry,
   setShowComponent,
 }: {
-  db: IndexedDb;
   breakEntry: Break;
   setBreakEntry: (s: Break) => void;
   setShowComponent: (s: PageComponent) => void;
@@ -19,10 +18,8 @@ export default function BreakMoodCheckIn({
         onClick={() => {
           () => {
             const s = { ...breakEntry };
-            if (s.breakActivity) {
-              s.breakActivity.mood = Mood.GOOD;
-              setBreakEntry(s);
-            }
+            s.mood = Mood.GOOD;
+            setBreakEntry(s);
           };
         }}
       >
@@ -31,9 +28,7 @@ export default function BreakMoodCheckIn({
       <button
         onClick={() => {
           const s = { ...breakEntry };
-          if (s.breakActivity) {
-            s.breakActivity.mood = Mood.NEUTRAL;
-          }
+          s.mood = Mood.NEUTRAL;
           setBreakEntry(s);
         }}
       >
@@ -42,17 +37,15 @@ export default function BreakMoodCheckIn({
       <button
         onClick={() => {
           const s = { ...breakEntry };
-          if (s.breakActivity) {
-            s.breakActivity.mood = Mood.NEUTRAL;
-            setBreakEntry(s);
-          }
+          s.mood = Mood.NEUTRAL;
+          setBreakEntry(s);
         }}
       >
         bad
       </button>
       <button
         onClick={() => {
-          db.putValue("study", breakEntry);
+          // db.putValue("study", breakEntry);
         }}
       >
         continue

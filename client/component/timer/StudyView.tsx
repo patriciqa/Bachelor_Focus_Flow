@@ -59,7 +59,7 @@ export const StudyView = ({
           setShowComponent(PageComponent.STUDYMOOD);
         }}
       >
-        Take a break
+        Finished
       </button>
     </div>
   );
