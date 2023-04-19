@@ -1,12 +1,11 @@
 import IndexedDb from "@/component/archive/IndexedDb";
+import { OverviewContext } from "@/component/context/OverviewContext";
 import { PageComponent } from "@/types/Timer";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
-const Settings = ({
-  setShowComponent,
-}: {
-  setShowComponent: (d: PageComponent) => void;
-}): React.ReactElement => {
+const Settings = (): React.ReactElement => {
+  const { setShowComponent } = useContext(OverviewContext);
+
   return (
     <div>
       <div>settings</div>

@@ -10,7 +10,7 @@ export default function Navbar() {
         <li
           className={
             "w-full  p-5 align-center  justify-center flex " +
-            (router === "/" && "bg-metal")
+            (router === "/overview/" && "bg-metal")
           }
         >
           <Link href="/">Timer</Link>
