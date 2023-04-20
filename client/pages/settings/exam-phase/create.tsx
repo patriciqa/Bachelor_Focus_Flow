@@ -1,22 +1,17 @@
-import { addElement } from "@/db/Actions";
+import { ExamContext } from "@/component/context/ExamPhaseContext";
+import { addElement, editElement, getElement } from "@/db/Actions";
 import { ExamPhase, PageComponent } from "@/types/Timer";
-import { useState } from "react";
+import Link from "next/link";
+import { useContext, useState } from "react";
 import Calendar from "react-calendar";
 export type PickedDate = {
   from: number;
   to: number;
 };
-export default function ExampPhaseInput({
-  setShowComponent,
-}: {
-  setShowComponent: (d: PageComponent) => void;
-}) {
-  let [range, setRange] = useState({
-    start: Date.now(),
-    end: Date.now(),
-  });
+export default function CreateExamPhase() {
   const [showCalender, setShowCalender] = useState(false);
   const [date, setDate] = useState<PickedDate>();
+  const { examPhaseId, setExamPhaseId } = useContext(ExamContext);
 
   const getDate = (): string => {
     let d = "";
@@ -47,6 +42,7 @@ export default function ExampPhaseInput({
           console.log(i.target.value);
           const e = { ...examPhase };
           e.title = i.target.value;
+          e.id = i.target.value;
           setExamPhase(e);
         }}
       />
@@ -65,7 +61,6 @@ export default function ExampPhaseInput({
       {showCalender && (
         <Calendar
           onChange={(d: any) => {
-            console.log(d[1]);
             // let sortedDate = date.sort((a, b) => a.getTime() - b.getTime());
             if (d[1]) {
               setDate({
@@ -76,7 +71,6 @@ export default function ExampPhaseInput({
               const e = { ...examPhase };
               e.startDate = d[0].getTime();
               e.endDate = d[1].getTime();
-              setExamPhase(e);
               console.log(examPhase);
             } else {
               const s = d[0];
@@ -99,16 +93,19 @@ export default function ExampPhaseInput({
           showNeighboringMonth={false}
         />
       )}
-      <button
+      <Link
+        href="/settings/exam-phase"
         onClick={() => {
           if (examPhase !== undefined) {
             addElement("examPhases", examPhase);
+            if (examPhase.title !== undefined) {
+              localStorage.setItem("examId", examPhase.title);
+            }
           }
-          setShowComponent(PageComponent.STUDYTIMER);
         }}
       >
-        save
-      </button>
+        Save
+      </Link>
     </div>
   );
 }

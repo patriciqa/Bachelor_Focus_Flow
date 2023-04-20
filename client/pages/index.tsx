@@ -1,58 +1,48 @@
-import BadCauses from "@/component/timer/BadCauses";
-import BreakMoodCheckIn from "@/component/break/BreakMoodCheckIn";
-import { Break, PageComponent, Study } from "@/types/Timer";
-import React, { useEffect, useState } from "react";
-import TimerComponent from "../component/TimerComponent";
-import StudyMoodCheckIn from "@/component/timer/StudyMoodCheckIn";
-import GoodCauses from "@/component/timer/GoodCauses";
+import { Break, Study } from "@/types/Timer";
+import React, { useContext, useEffect, useState } from "react";
 import initDb from "@/db/InitDb";
+import { StudyView } from "@/component/timer/StudyView";
+import { BreakView } from "@/component/timer/BreakView";
 import { getElement } from "@/db/Actions";
-import CreateExamPhase from "@/component/timer/CreateExamPhase";
-import ExampPhaseInput from "@/component/overview/settings/ExamPhaseInput";
-
-const Timer = () => {
-  const [showComponent, setShowComponent] = useState<PageComponent>(
-    PageComponent.STUDYTIMER
-  );
+import CreatePhaseView from "@/component/timer/CreatePhaseView";
+import { ExamContext } from "@/component/context/ExamPhaseContext";
+enum ShowPage {
+  STUDY,
+  BREAK,
+  EXAMPHASE,
+}
+const Timer = ({
+  studyEntryy,
+  setStudyEntryy,
+  breakEntryy,
+  setBreakEntryy,
+}: {
+  studyEntryy: Study;
+  setStudyEntryy: (s: Study) => void;
+  breakEntryy: Break;
+  setBreakEntryy: (s: Break) => void;
+}) => {
+  const [shownPage, setShownPage] = useState<ShowPage>(ShowPage.STUDY);
+  const { examPhaseId, setExamPhaseId } = useContext(ExamContext);
 
   useEffect(() => {
     initDb();
-    // addElement("activities", {
-    //   title: "Meditation",
-    //   icon: "sth",
-    //   archived: false,
-    // });
-    //  addElement("go for a walk", {
-    //   title: "Meditation",
-    //   icon: "sth",
-    //   archived: false,
-    // });
     getElement("examPhases", "all").then(
       (result: any) => {
-        if (result.length === 0 && showComponent !== PageComponent.EXAMPHASEINPUT) {
-          setShowComponent(PageComponent.ONBOARDINGEXAMPHASE);
+        if (result.length === 0) {
+          setShownPage(ShowPage.EXAMPHASE);
+        } else {
+          setShownPage(ShowPage.STUDY);
+          const id = localStorage.getItem("examId");
+          if (id !== null) {
+            setExamPhaseId(id);
+          }
         }
       },
       (error) => {
         console.log(error);
       }
     );
-  });
-
-  const [studyEntry, setStudyEntry] = useState<Study>({
-    id: 0,
-    timer: {
-      startTime: 0,
-      duration: 0,
-    },
-  });
-
-  const [breakEntry, setBreakEntry] = useState<Break>({
-    id: 0,
-    timer: {
-      startTime: 0,
-      duration: 0,
-    },
   });
 
   // const [settings, setSettings] = useState<Settings>({
@@ -92,68 +82,32 @@ const Timer = () => {
 
   const showPage = (): React.ReactElement => {
     let component;
-    switch (showComponent) {
-      case PageComponent.ONBOARDINGEXAMPHASE:
-        component = <CreateExamPhase setShowComponent={setShowComponent} />;
-        break;
-      case PageComponent.EXAMPHASEINPUT:
-        component = <ExampPhaseInput setShowComponent={setShowComponent} />;
-        break;
-      case PageComponent.STUDYTIMER:
+    switch (shownPage) {
+      case ShowPage.STUDY:
         component = (
-          <TimerComponent
-            setShowComponent={setShowComponent}
-            breakEntry={breakEntry}
-            setStudyEntry={setStudyEntry}
-            setBreakEntry={setBreakEntry}
+          <StudyView
+            studyEntryy={studyEntryy}
+            setStudyEntryy={setStudyEntryy}
           />
         );
         break;
-      case PageComponent.STUDYMOOD:
+      case ShowPage.BREAK:
         component = (
-          <StudyMoodCheckIn
-            studyEntry={studyEntry}
-            setStudyEntry={setStudyEntry}
-            setShowComponent={setShowComponent}
+          <BreakView
+            breakEntryy={breakEntryy}
+            setBreakEntryy={setBreakEntryy}
           />
         );
         break;
-      case PageComponent.BREAKTIMER:
-        component = (
-          <TimerComponent
-            setShowComponent={setShowComponent}
-            breakEntry={breakEntry}
-            setStudyEntry={setStudyEntry}
-            setBreakEntry={setBreakEntry}
-          />
-        );
+      case ShowPage.EXAMPHASE:
+        component = <CreatePhaseView />;
         break;
-      case PageComponent.BREAKMOOD:
-        component = (
-          <BreakMoodCheckIn
-            breakEntry={breakEntry}
-            setBreakEntry={setBreakEntry}
-            setShowComponent={setShowComponent}
-          />
-        );
-        break;
-      case PageComponent.BADCAUSE:
-        component = (
-          <BadCauses studyEntry={studyEntry} setStudyEntry={setStudyEntry} />
-        );
-        break;
-      case PageComponent.GOODCAUSE:
-        component = (
-          <GoodCauses studyEntry={studyEntry} setStudyEntry={setStudyEntry} />
-        );
-        break;
+
       default:
         component = (
-          <TimerComponent
-            setShowComponent={setShowComponent}
-            setStudyEntry={setStudyEntry}
-            breakEntry={breakEntry}
-            setBreakEntry={setBreakEntry}
+          <StudyView
+            studyEntryy={studyEntryy}
+            setStudyEntryy={setStudyEntryy}
           />
         );
     }
@@ -162,7 +116,58 @@ const Timer = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen">
-      {showPage()}
+      {/* {showPage()} */}
+      <>
+        {/* <button
+        onClick={() =>
+          addElement("activities", {
+            title: "bad sleep",
+            icon: "sth",
+            statistic: 3,
+            goodCause: false,
+            archived: false,
+          })
+        }
+      >
+        eintrag
+      </button> */}
+        <div className="flex justify-center w-full p-5 ">
+          <button
+            onClick={() => setShownPage(ShowPage.STUDY)}
+            className={"w-full  " + (shownPage ? "bg-metal " : "white	 ")}
+          >
+            study
+          </button>
+          <button
+            onClick={() => setShownPage(ShowPage.BREAK)}
+            className={"w-full  " + (shownPage ? "white " : "bg-metal ")}
+          >
+            break
+          </button>
+        </div>
+        {/* <input
+        type="time"
+        id="appt"
+        name="appt"
+        min="09:00"
+        max="18:00"
+        required
+        onChange={() => {
+          let inputValue = (document.getElementById("appt") as HTMLInputElement)
+            .value;
+          setState({
+            time: parseInt(inputValue) - 1,
+            minutes: Math.floor((parseInt(inputValue) - 1) / 60),
+            seconds:
+              parseInt(inputValue) -
+              Math.floor((parseInt(inputValue) - 1) / 60) * 60 -
+              1,
+          });
+          console.log(parseInt(inputValue));
+        }}
+      /> */}
+        {showPage()}
+      </>
     </div>
   );
 };

@@ -10,7 +10,7 @@ export default function Navbar() {
         <li
           className={
             "w-full  p-5 align-center  justify-center flex " +
-            (router === "/overview/" && "bg-metal")
+            (router === "/" && "bg-metal")
           }
         >
           <Link href="/">Timer</Link>
@@ -18,10 +18,10 @@ export default function Navbar() {
         <li
           className={
             "w-full  p-5 align-center  justify-center flex " +
-            (router === "/Overview" && "bg-metal")
+            (router === "/overview" && "bg-metal")
           }
         >
-          <Link href="/Overview">Overview</Link>
+          <Link href="/overview">Overview</Link>
         </li>
       </ul>
     </div>

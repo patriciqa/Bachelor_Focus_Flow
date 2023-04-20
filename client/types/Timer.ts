@@ -20,6 +20,7 @@ enum Mood {
 export default Mood;
 
 export interface ExamPhase {
+  id?: string;
   startDate?: number;
   endDate?: number;
   title?: string;
@@ -35,8 +36,8 @@ export interface Entry {
 }
 
 export interface Study {
-  id: number;
-  timer: Timer;
+  id?: number;
+  timer?: Timer;
   causes?: Cause[];
   mood?: "1" | "0" | "-1";
 }
@@ -69,6 +70,6 @@ export interface Activity {
 export interface Break {
   id: number;
   timer: Timer;
-  breakActivity?: Activity;
+  breakActivity: Activity;
   mood?: Mood;
 }

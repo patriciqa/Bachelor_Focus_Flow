@@ -1,5 +1,6 @@
 let db: IDBDatabase;
-export const getElement = <T>(store: string, key: string) => {
+
+export const getElement = <T>(store: string, key: number | string) => {
   const open = indexedDB.open("data");
   return new Promise<T>((resolve, reject) => {
     open.onsuccess = () => {
@@ -23,13 +24,12 @@ export const addElement = (store: string, payload: object) => {
   const open = indexedDB.open("data");
   open.onsuccess = () => {
     db = open.result;
-    console.log(db.objectStoreNames);
-    console.log([...db.objectStoreNames].find((name) => name === store));
     if ([...db.objectStoreNames].find((name) => name === store)) {
       const transaction = db.transaction(store, "readwrite");
       const objectStore = transaction.objectStore(store);
       const serialized = JSON.parse(JSON.stringify(payload));
       const request = objectStore.add(serialized);
+      console.log(request);
       request.onerror = () => console.error(request.error);
       transaction.oncomplete = () => db.close();
     } else {
@@ -37,7 +37,11 @@ export const addElement = (store: string, payload: object) => {
     }
   };
 };
-export const editElement = <T>(store: string, key: string, payload: object) => {
+export const editElement = <T>(
+  store: string,
+  key: number | string,
+  payload: object
+) => {
   const open = indexedDB.open("data");
   return new Promise<T>((resolve, reject) => {
     open.onsuccess = () => {

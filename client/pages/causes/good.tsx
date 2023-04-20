@@ -1,4 +1,5 @@
 import { Study } from "@/types/Timer";
+import Link from "next/link";
 import React from "react";
 
 export default function GoodCauses({
@@ -10,7 +11,7 @@ export default function GoodCauses({
 }) {
   return (
     <>
-      <div>Study - {studyEntry.timer.duration}</div>
+      {/* <div>Study - {studyEntry.timer.duration}</div> */}
       <div>Great! Why did it go well?</div>
       {/* {settings.causes.forEach((s) => {
         if (s.goodCause) {
@@ -33,7 +34,7 @@ export default function GoodCauses({
           </button>;
         }
       })} */}
-      <button onClick={() => {}}>complete</button>
+      <Link href="/">complete</Link>
     </>
   );
 }

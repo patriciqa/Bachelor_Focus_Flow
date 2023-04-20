@@ -1,22 +1,21 @@
 import IndexedDb from "@/component/archive/IndexedDb";
-import { OverviewContext } from "@/component/context/OverviewContext";
 import { PageComponent } from "@/types/Timer";
+import Link from "next/link";
 import React, { useContext, useEffect } from "react";
 
-const Settings = (): React.ReactElement => {
-  const { setShowComponent } = useContext(OverviewContext);
-
+const settings = (): React.ReactElement => {
   return (
     <div>
       <div>settings</div>
-      <button
+      {/* <button
         className="bg-tahiti"
         onClick={() => setShowComponent(PageComponent.SETTINGS_EXAMPHASES)}
       >
         Exam Phases
-      </button>
+      </button> */}
+      <Link href="/settings/exam-phase">Exam Phases</Link>
     </div>
   );
 };
 
-export default Settings;
+export default settings;
