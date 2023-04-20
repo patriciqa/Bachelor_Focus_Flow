@@ -1,6 +1,6 @@
 import { ExamContext } from "@/component/context/ExamPhaseContext";
 import { addElement, editElement, getElement } from "@/db/Actions";
-import { ExamPhase, PageComponent } from "@/types/Timer";
+import { ExamPhase } from "@/types/Timer";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import Calendar from "react-calendar";

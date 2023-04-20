@@ -1,5 +1,5 @@
 import { getElement } from "@/db/Actions";
-import { ExamPhase, PageComponent } from "@/types/Timer";
+import { ExamPhase } from "@/types/Timer";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 

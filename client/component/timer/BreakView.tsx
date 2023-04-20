@@ -1,5 +1,5 @@
 import { getElement } from "@/db/Actions";
-import { Activity, Break, PageComponent, Study } from "@/types/Timer";
+import { Activity, Break, Study } from "@/types/Timer";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ export const BreakView = ({
 }) => {
   const [startTimer, setStartTimer] = useState(false);
   const [timerFinished, setTimerFinished] = useState(false);
-  let duration = 3;
+  const [duration, setDuration] = useState(3);
 
   const [state, setState] = useState({
     time: duration,
@@ -63,11 +63,26 @@ export const BreakView = ({
         {state.minutes}:
         {state.seconds <= 10 ? `0${state.seconds}` : state.seconds}
       </div>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="duration (number)"
+        required
+        className="bg-silver"
+        onChange={(i) => {
+          const e = { ...breakEntryy };
+          const d = parseInt(i.target.value);
+          e.timer.duration = d;
+          setBreakEntryy(e);
+          setDuration(d);
+        }}
+      />
       {activities?.map((a) => {
         <button
           onClick={() => {
             const s = { ...breakEntryy };
-            s.breakActivity = a;
+            s.breakActivityId = a.id;
             console.log(s);
             setBreakEntryy(s);
           }}
@@ -75,7 +90,15 @@ export const BreakView = ({
           {a.title}
         </button>;
       })}
-
+      <button
+        onClick={() => {
+          const e = { ...breakEntryy };
+          e.timer.startTime = Date.now();
+          setBreakEntryy(e);
+        }}
+      >
+        start
+      </button>
       <Link href="/mood/break"> finished</Link>
     </>
   );

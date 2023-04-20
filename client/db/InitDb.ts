@@ -3,7 +3,6 @@ export default function initDb() {
     activities: [{ name: "uuid", unique: true }],
     causes: [{ name: "uuid", unique: true }],
     examPhases: [{ name: "uuid", unique: true }],
-    active: [],
   };
   let db!: IDBDatabase;
   const request = indexedDB.open("data", 1);
@@ -17,7 +16,7 @@ export default function initDb() {
       autoIncrement: true,
     });
     const causeStore = db.createObjectStore("causes", {
-      keyPath: keys.causes[0].name,
+      keyPath: "id",
       autoIncrement: true,
     });
     const examPhaseStore = db.createObjectStore("examPhases", {
@@ -31,9 +30,9 @@ export default function initDb() {
     keys.activities.forEach((key) =>
       activityStore.createIndex(key.name, key.name, { unique: key.unique })
     );
-    keys.causes.forEach((key) =>
-      causeStore.createIndex(key.name, key.name, { unique: key.unique })
-    );
+    // keys.causes.forEach((key) =>
+    //   causeStore.createIndex(key.name, key.name, { unique: key.unique })
+    // );
     // keys.examPhases.forEach((key) =>
     //   examPhaseStore.createIndex(key.name, key.name, { unique: key.unique })
     // );

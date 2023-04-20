@@ -1,4 +1,4 @@
-import { Break, Study } from "@/types/Timer";
+import { Break, ShowPage, Study } from "@/types/Timer";
 import React, { useContext, useEffect, useState } from "react";
 import initDb from "@/db/InitDb";
 import { StudyView } from "@/component/timer/StudyView";
@@ -6,23 +6,22 @@ import { BreakView } from "@/component/timer/BreakView";
 import { getElement } from "@/db/Actions";
 import CreatePhaseView from "@/component/timer/CreatePhaseView";
 import { ExamContext } from "@/component/context/ExamPhaseContext";
-enum ShowPage {
-  STUDY,
-  BREAK,
-  EXAMPHASE,
-}
+
 const Timer = ({
   studyEntryy,
   setStudyEntryy,
   breakEntryy,
   setBreakEntryy,
+  shownPage,
+  setShownPage,
 }: {
   studyEntryy: Study;
   setStudyEntryy: (s: Study) => void;
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
+  shownPage: ShowPage;
+  setShownPage: (s: ShowPage) => void;
 }) => {
-  const [shownPage, setShownPage] = useState<ShowPage>(ShowPage.STUDY);
   const { examPhaseId, setExamPhaseId } = useContext(ExamContext);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const Timer = ({
         if (result.length === 0) {
           setShownPage(ShowPage.EXAMPHASE);
         } else {
-          setShownPage(ShowPage.STUDY);
+          // setShownPage(ShowPage.STUDY);
           const id = localStorage.getItem("examId");
           if (id !== null) {
             setExamPhaseId(id);
@@ -102,7 +101,6 @@ const Timer = ({
       case ShowPage.EXAMPHASE:
         component = <CreatePhaseView />;
         break;
-
       default:
         component = (
           <StudyView
@@ -116,31 +114,23 @@ const Timer = ({
 
   return (
     <div className="flex flex-col items-center justify-center w-screen">
-      {/* {showPage()} */}
       <>
-        {/* <button
-        onClick={() =>
-          addElement("activities", {
-            title: "bad sleep",
-            icon: "sth",
-            statistic: 3,
-            goodCause: false,
-            archived: false,
-          })
-        }
-      >
-        eintrag
-      </button> */}
         <div className="flex justify-center w-full p-5 ">
           <button
             onClick={() => setShownPage(ShowPage.STUDY)}
-            className={"w-full  " + (shownPage ? "bg-metal " : "white	 ")}
+            className={
+              "w-full  " +
+              (shownPage === ShowPage.STUDY ? "bg-metal " : "white	 ")
+            }
           >
             study
           </button>
           <button
             onClick={() => setShownPage(ShowPage.BREAK)}
-            className={"w-full  " + (shownPage ? "white " : "bg-metal ")}
+            className={
+              "w-full  " +
+              (shownPage === ShowPage.BREAK ? "bg-metal " : "white ")
+            }
           >
             break
           </button>

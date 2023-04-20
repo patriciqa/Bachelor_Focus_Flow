@@ -1,5 +1,4 @@
-import { editElement, getElement } from "@/db/Actions";
-import { ExamPhase, PageComponent, Study } from "@/types/Timer";
+import {  Study } from "@/types/Timer";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { ExamContext } from "../context/ExamPhaseContext";
@@ -15,7 +14,8 @@ export const StudyView = ({
   const [timerFinished, setTimerFinished] = useState(false);
   const { examPhaseId, setExamPhaseId } = useContext(ExamContext);
 
-  let duration = 3;
+  const [duration, setDuration] = useState(3);
+
   const [state, setState] = useState({
     time: duration,
     minutes: Math.floor((duration - 1) / 60),
@@ -36,37 +36,40 @@ export const StudyView = ({
         });
       }, 1000);
     }
-  }, [state.time, startTimer]);
-  const entry: Study = { id: 3, timer: { startTime: 30, duration: 30 } };
+  }, [state.time, startTimer, duration]);
+
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       <div>Study</div>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="duration (number)"
+        required
+        className="bg-silver"
+        onChange={(i) => {
+          const e = { ...studyEntryy };
+          const d = parseInt(i.target.value);
+          e.timer.duration = d;
+          setStudyEntryy(e);
+          setDuration(d);
+        }}
+      />
+      <div>
+        {state.minutes}:
+        {state.seconds <= 10 ? `0${state.seconds}` : state.seconds}
+        <p>(slider)</p>
+      </div>
       <button
         onClick={() => {
-          const a = getElement("examPhases", examPhaseId);
-          a.then((e: any) => {
-            const hi: ExamPhase = { ...e };
-            if (hi.studyEntries) {
-              hi.studyEntries.push(entry);
-            } else {
-              const empty = [];
-              empty.push(entry);
-              hi.studyEntries = empty;
-            }
-            console.log(hi);
-            console.log(examPhaseId);
-            editElement("examPhases", examPhaseId, hi);
-          });
-          // editElement("examPhases");
-          // editElement("examPhases", "3", entry);
+          const e = { ...studyEntryy };
+          e.timer.startTime = Date.now();
+          setStudyEntryy(e);
         }}
       >
         start
       </button>
-      <div>
-        {state.minutes}:
-        {state.seconds <= 10 ? `0${state.seconds}` : state.seconds}
-      </div>
 
       <Link href="/mood/study"> finished</Link>
     </div>

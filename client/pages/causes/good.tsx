@@ -1,39 +1,68 @@
-import { Study } from "@/types/Timer";
+import { getElement } from "@/db/Actions";
+import { Cause, Study } from "@/types/Timer";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function GoodCauses({
-  studyEntry,
-  setStudyEntry,
+  studyEntryy,
+  setStudyEntryy,
 }: {
-  studyEntry: Study;
-  setStudyEntry: (s: Study) => void;
+  studyEntryy: Study;
+  setStudyEntryy: (s: Study) => void;
 }) {
+  const [causes, setCauses] = useState<Cause[]>();
+  // const [selected, setSelected] = useState<Cause[]>();
+  const selectedCause: Cause[] = [];
+
+  const getCauses = async (): Promise<Cause[]> => {
+    const a = (await getElement("causes", "all").then((result) => {
+      return result;
+    })) as Cause[];
+    return a;
+  };
+
+  useEffect(() => {
+    getCauses().then((a: Cause[]) => {
+      a.forEach((p) => {
+        selectedCause.push(p);
+        setCauses(a);
+        console.log(a);
+      });
+    });
+  });
+
+  useEffect(() => {
+    console.log(causes);
+  });
   return (
     <>
-      {/* <div>Study - {studyEntry.timer.duration}</div> */}
       <div>Great! Why did it go well?</div>
-      {/* {settings.causes.forEach((s) => {
-        if (s.goodCause) {
-          <button
-            onClick={() => {
-              const entry = { ...studyEntry };
-              entry.causes = [
-                {
-                  title: s.title,
-                  icon: s.icon,
-                  statistic: s.statistic,
-                  goodCause: s.goodCause,
-                  archived: s.archived,
-                },
-              ];
-              setStudyEntry(entry);
-            }}
-          >
-            {s.title}
-          </button>;
+      <div>{causes !== undefined && causes[0].title}</div>
+      {/*TODO GET CAUSES*/}
+      {causes?.forEach((a) => {
+        <div>why</div>;
+        {
+          a.goodCause === true && (
+            <>
+              <div> a</div>
+              <button
+                onClick={() => {
+                  console.log();
+                  const s = { ...studyEntryy };
+                  selectedCause.push(a);
+                  s.causeIds = selectedCause.map((e) => {
+                    return e.id;
+                  });
+                  console.log(s);
+                  setStudyEntryy(s);
+                }}
+              >
+                {a.title} hi
+              </button>
+            </>
+          );
         }
-      })} */}
+      })}
       <Link href="/">complete</Link>
     </>
   );
