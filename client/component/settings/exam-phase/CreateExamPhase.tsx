@@ -1,4 +1,4 @@
-import { ExamContext } from "@/component/context/ExamPhaseContext";
+import { ExamContext } from "@/context/ExamPhaseContext";
 import { addElement, editElement, getElement } from "@/db/Actions";
 import { ExamPhase } from "@/types/Timer";
 import Link from "next/link";

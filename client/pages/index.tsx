@@ -1,11 +1,11 @@
 import { Break, ShowPage, Study } from "@/types/Timer";
 import React, { useContext, useEffect, useState } from "react";
 import initDb from "@/db/InitDb";
-import { StudyView } from "@/component/timer/StudyView";
-import { BreakView } from "@/component/timer/BreakView";
+import { BreakView } from "@/component/timer/break/BreakView";
 import { getElement } from "@/db/Actions";
 import CreatePhaseView from "@/component/timer/CreatePhaseView";
-import { ExamContext } from "@/component/context/ExamPhaseContext";
+import { ExamContext } from "@/context/ExamPhaseContext";
+import { StudyView } from "@/component/timer/study/StudyView";
 
 const Timer = ({
   studyEntryy,
@@ -45,12 +45,12 @@ const Timer = ({
   });
 
   // const [settings, setSettings] = useState<Settings>({
-  //   causes: [
+  //   reasons: [
   //     {
   //       title: "bad sleep",
   //       icon: "sth",
   //       statistic: 3,
-  //       goodCause: false,
+  //       goodReason: false,
   //       archived: false,
   //     },
   //   ],
@@ -93,6 +93,8 @@ const Timer = ({
       case ShowPage.BREAK:
         component = (
           <BreakView
+            shownPage={shownPage}
+            setShownPage={setShownPage}
             breakEntryy={breakEntryy}
             setBreakEntryy={setBreakEntryy}
           />

@@ -1,6 +1,6 @@
 import ExamContextProvider, {
   ExamContext,
-} from "@/component/context/ExamPhaseContext";
+} from "@/context/ExamPhaseContext";
 import Layout from "@/component/Layout";
 import "@/pages/globals.css";
 import { Break, ShowPage, Study } from "@/types/Timer";

@@ -3,7 +3,7 @@ import { ExamPhase } from "@/types/Timer";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 
-export default function examPhaseOverview() {
+export default function ExamPhaseOverview() {
   const [phases, setPhases] = useState<ExamPhase[]>();
   const examphases: ExamPhase[] = [];
 

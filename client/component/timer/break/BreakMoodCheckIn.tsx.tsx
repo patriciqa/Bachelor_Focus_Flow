@@ -1,14 +1,15 @@
-import { ExamContext } from "@/component/context/ExamPhaseContext";
-import { editElement, getElement } from "@/db/Actions";
+import { ExamContext } from "@/context/ExamPhaseContext";
 import saveToDb from "@/hooks/SaveToDb";
-import { Mood, Break, ExamPhase } from "@/types/Timer";
-import Link from "next/link";
+import { BreakComponent } from "@/types/Components";
+import { Mood, Break, } from "@/types/Timer";
 import { useContext } from "react";
 
 export default function BreakMoodCheckIn({
+  setShowComponent,
   breakEntryy,
   setBreakEntryy,
 }: {
+  setShowComponent: (p: BreakComponent) => void;
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
 }) {
@@ -65,7 +66,22 @@ export default function BreakMoodCheckIn({
       >
         bad
       </button>
-      <Link href={getLink()}>continue</Link>
+      <button
+        onClick={() => {
+          switch (breakEntryy.mood) {
+            case Mood.GOOD:
+            case Mood.NEUTRAL:
+              setShowComponent(BreakComponent.NO_COMPONENT);
+              saveToDb(breakEntryy, false);
+              break;
+            case Mood.BAD:
+              setShowComponent(BreakComponent.EXTEND_BREAK);
+              break;
+          }
+        }}
+      >
+        continue
+      </button>
     </div>
   );
 }

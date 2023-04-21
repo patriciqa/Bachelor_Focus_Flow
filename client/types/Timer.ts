@@ -31,8 +31,8 @@ export interface Activity {
   icon: string;
   archived: false;
 }
-export interface Cause extends Activity {
-  goodCause: boolean;
+export interface Reason extends Activity {
+  goodReason: boolean;
 }
 
 export interface Entry {
@@ -42,7 +42,7 @@ export interface Entry {
 }
 
 export interface Study extends Entry {
-  causeIds?: number[];
+  reasonIds?: number[];
 }
 
 export interface Break extends Entry {

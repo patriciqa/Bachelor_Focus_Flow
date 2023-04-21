@@ -1,15 +1,26 @@
+import { Modal } from "@/component/Modal";
 import { getElement } from "@/db/Actions";
-import { Activity, Break, Study } from "@/types/Timer";
-import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import { BreakComponent } from "@/types/Components";
+import { Activity, Break, ShowPage } from "@/types/Timer";
+import { AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import BreakMoodCheckIn from "./BreakMoodCheckIn.tsx";
+import ExtendBreak from "./ExtendBreak";
+
 
 export const BreakView = ({
+  shownPage: showPage,
+  setShownPage: setShowPage,
   breakEntryy,
   setBreakEntryy,
 }: {
+  shownPage: ShowPage;
+  setShownPage: (d: ShowPage) => void;
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
 }) => {
+  let [open, setOpen] = useState(false);
+  let [showComponent, setShowComponent] = useState(BreakComponent.NO_COMPONENT);
   const [startTimer, setStartTimer] = useState(false);
   const [timerFinished, setTimerFinished] = useState(false);
   const [duration, setDuration] = useState(3);
@@ -56,6 +67,34 @@ export const BreakView = ({
     });
   });
 
+  const showBreakPage = (): React.ReactElement | null => {
+    let component = null;
+    switch (showComponent) {
+      case BreakComponent.NO_COMPONENT:
+        component = null;
+        break;
+      case BreakComponent.MOODCHECKIN:
+        component = (
+          <BreakMoodCheckIn
+            breakEntryy={breakEntryy}
+            setBreakEntryy={setBreakEntryy}
+            setShowComponent={setShowComponent}
+          />
+        );
+        break;
+      case BreakComponent.EXTEND_BREAK:
+        component = (
+          <ExtendBreak
+            showPage={showPage}
+            setShownPage={setShowPage}
+            setShowComponent={setShowComponent}
+          />
+        );
+        break;
+    }
+    return component;
+  };
+
   return (
     <>
       <div>Break</div>
@@ -99,7 +138,28 @@ export const BreakView = ({
       >
         start
       </button>
-      <Link href="/mood/break"> finished</Link>
+
+      <button
+        onClick={() => {
+          setOpen(true);
+          setShowComponent(BreakComponent.MOODCHECKIN);
+        }}
+      >
+        modal
+      </button>
+      <AnimatePresence>
+        {open && (
+          <Modal onClose={() => setOpen(false)}>
+            <button
+              className="mr-1 text-blue-500 focus:outline-none"
+              onClick={() => setOpen(false)}
+            >
+              Cancel
+            </button>
+            {showBreakPage() !== null ? showBreakPage() : setOpen(false)}
+          </Modal>
+        )}
+      </AnimatePresence>
     </>
   );
 };

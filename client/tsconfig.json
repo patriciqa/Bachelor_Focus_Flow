@@ -18,6 +18,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "component/archive/index", "causes/settings/inputtsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "component/archive/index", "reasons/settings/inputtsx"],
   "exclude": ["node_modules"]
 }

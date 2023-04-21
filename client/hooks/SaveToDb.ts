@@ -1,4 +1,4 @@
-import { ExamContext } from "@/component/context/ExamPhaseContext";
+import { ExamContext } from "@/context/ExamPhaseContext";
 import { editElement, getElement } from "@/db/Actions";
 import { Break, ExamPhase } from "@/types/Timer";
 import { useContext } from "react";

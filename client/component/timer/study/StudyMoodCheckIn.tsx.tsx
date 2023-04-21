@@ -1,12 +1,15 @@
 import { addElement } from "@/db/Actions";
+import { StudyComponent } from "@/types/Components";
 import { Mood, Study } from "@/types/Timer";
-import Link from "next/link";
-import { useContext, useEffect } from "react";
 
 export default function StudyMoodCheckIn({
+  showComponent,
+  setShowComponent,
   studyEntryy,
   setStudyEntryy,
 }: {
+  showComponent: StudyComponent;
+  setShowComponent: (p: StudyComponent) => void;
   studyEntryy: Study;
   setStudyEntryy: (s: Study) => void;
 }) {
@@ -15,10 +18,10 @@ export default function StudyMoodCheckIn({
     if (studyEntryy !== undefined) {
       switch (studyEntryy.mood) {
         case Mood.GOOD:
-          url = "/causes/good";
+          url = "/reasons/good";
           break;
         case Mood.BAD:
-          url = "/causes/bad";
+          url = "/reasons/bad";
           break;
         case Mood.NEUTRAL:
           url = "/";
@@ -34,7 +37,7 @@ export default function StudyMoodCheckIn({
     <>
       <div>Study - {studyEntryy.timer.duration}</div>
       <div>How did your studying go?</div>
-      <div className="flex">
+      <div className="flex justify-center">
         <button
           onClick={() => {
             const s = { ...studyEntryy };
@@ -57,14 +60,31 @@ export default function StudyMoodCheckIn({
           onClick={() => {
             const s = { ...studyEntryy };
             s.mood = Mood.BAD;
-            s.causeIds = [];
+            s.reasonIds = [];
             setStudyEntryy(s);
           }}
         >
           bad
         </button>
       </div>
-      <Link href={getLink()}>Continue</Link>;
+      <button
+        onClick={() => {
+          switch (studyEntryy.mood) {
+            case Mood.GOOD:
+              setShowComponent(StudyComponent.GOOD_CAUSE);
+              break;
+            case Mood.NEUTRAL:
+              setShowComponent(StudyComponent.NO_COMPONENT);
+              break;
+            case Mood.BAD:
+              setShowComponent(StudyComponent.BAD_CAUSE);
+              break;
+          }
+        }}
+      >
+        Continue
+      </button>
+      {/* <Link href={getLink()}>Continue</Link> */}
     </>
   );
 }

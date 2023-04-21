@@ -1,16 +1,16 @@
 {
     "Settings": {
-        "causes": [
+        "reasons": [
             {
                 "title": "bad sleep",
                 "icon": "sth",
-                "goodCause": false,
+                "goodReason": false,
                 "archived": false
             },
             {
                 "title": "distraction",
                 "icon": "sth",
-                "goodCause": false,
+                "goodReason": false,
                 "archived": false
             }
         ],
@@ -57,18 +57,18 @@
                             "duration": "20"
                         },
                         "mood": "-1",
-                        "causes": [
+                        "reasons": [
                             {
                                 "title": "bad sleep",
                                 "icon": "sth",
                                 "statistic": 3,
-                                "goodCause": "false"
+                                "goodReason": "false"
                             },
                             {
                                 "title": "bad weather",
                                 "icon": "weather",
                                 "statistic": 7,
-                                "goodCause": "false"
+                                "goodReason": "false"
                             }
                         ]
                     }

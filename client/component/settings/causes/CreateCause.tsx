@@ -1,14 +1,14 @@
 import { addElement } from "@/db/Actions";
-import { Cause } from "@/types/Timer";
+import { Reason } from "@/types/Timer";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function CreateCause({}) {
-  const [createdCause, setCreatedCause] = useState<Cause>({
+export default function CreateReason({}) {
+  const [createdReason, setCreatedReason] = useState<Reason>({
     id: 0,
     title: "",
     icon: "",
-    goodCause: true,
+    goodReason: true,
     archived: false,
   });
   return (
@@ -21,16 +21,16 @@ export default function CreateCause({}) {
           required
           className="bg-silver"
           onChange={(i) => {
-            if (createdCause) {
-              createdCause.title = i.target.value;
+            if (createdReason) {
+              createdReason.title = i.target.value;
             }
           }}
         />
       </div>
       <Link
-        href={"/settings/causes/"}
+        href={"/settings/reasons/"}
         onClick={() => {
-          addElement("causes", createdCause);
+          addElement("reasons", createdReason);
         }}
       >
         Save
