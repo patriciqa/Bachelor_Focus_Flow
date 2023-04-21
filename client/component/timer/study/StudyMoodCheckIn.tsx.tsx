@@ -1,6 +1,9 @@
+import { ExamContext } from "@/context/ExamPhaseContext";
 import { addElement } from "@/db/Actions";
+import saveToDb from "@/hooks/SaveToDb";
 import { StudyComponent } from "@/types/Components";
 import { Mood, Study } from "@/types/Timer";
+import { useContext } from "react";
 
 export default function StudyMoodCheckIn({
   showComponent,
@@ -13,25 +16,7 @@ export default function StudyMoodCheckIn({
   studyEntryy: Study;
   setStudyEntryy: (s: Study) => void;
 }) {
-  const getLink = (): string => {
-    let url = "";
-    if (studyEntryy !== undefined) {
-      switch (studyEntryy.mood) {
-        case Mood.GOOD:
-          url = "/reasons/good";
-          break;
-        case Mood.BAD:
-          url = "/reasons/bad";
-          break;
-        case Mood.NEUTRAL:
-          url = "/";
-          addElement("examPhases", studyEntryy);
-          break;
-      }
-    }
-
-    return url;
-  };
+  const { examPhaseId } = useContext(ExamContext);
 
   return (
     <>
@@ -74,6 +59,7 @@ export default function StudyMoodCheckIn({
               setShowComponent(StudyComponent.GOOD_CAUSE);
               break;
             case Mood.NEUTRAL:
+              saveToDb(examPhaseId, studyEntryy, true);
               setShowComponent(StudyComponent.NO_COMPONENT);
               break;
             case Mood.BAD:

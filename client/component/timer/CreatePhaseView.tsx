@@ -1,12 +1,44 @@
-import Link from "next/link";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { Pop } from "../transitions/Pop";
+import CreateExamPhase from "../settings/exam-phase/CreateExamPhase";
 
-export default function CreatePhaseView(
-  
-) {
+export default function CreatePhaseView() {
+  let [open, setOpen] = useState(false);
+
   return (
-    <div className="flex flex-col justify-center">
-      <p>Start a new exam phase to track your data.</p>
-      <Link href="/settings/exam-phase/create">Create Exam Phase</Link>
-    </div>
+    <>
+      <div className="flex flex-col justify-center">
+        <p>Start a new exam phase to track your data.</p>
+        {/* <button onClick={() => { } }>Create Exam Phase</button>
+      button
+      onClick={() => {
+        setOpen(true);
+        // setShowComponent(SettingComponent.CAUSES_OVERVIEW);
+      // } 
+      > */}
+        <button
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Create exam phase
+        </button>
+        <AnimatePresence>
+          {open && (
+            <Pop onClose={() => setOpen(false)}>
+              {/* <button
+              className=""
+              onClick={() => setShowComponent(SettingComponent.NO_COMPONENT)}
+            >
+              Back
+            </button> */}
+              {/* <ExamPhaseOverview /> */}
+              <CreateExamPhase />
+            </Pop>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   );
 }

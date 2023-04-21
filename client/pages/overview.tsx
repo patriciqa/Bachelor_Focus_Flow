@@ -1,9 +1,7 @@
-import { Modal } from "@/component/Modal";
-import ExamPhaseOverview from "@/component/settings/exam-phase/ExamPhaseOverview";
 import Settings from "@/component/settings/Settings";
+import { Modal } from "@/component/transitions/Modal";
 import { AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Overview = () => {
   let [open, setOpen] = useState(false);
@@ -11,7 +9,6 @@ const Overview = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-screen">
-        {/* <Link href="/settings">settings</Link> */}
         <button
           onClick={() => {
             setOpen(true);

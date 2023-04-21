@@ -1,7 +1,7 @@
 import { ExamContext } from "@/context/ExamPhaseContext";
 import saveToDb from "@/hooks/SaveToDb";
 import { BreakComponent } from "@/types/Components";
-import { Mood, Break, } from "@/types/Timer";
+import { Mood, Break } from "@/types/Timer";
 import { useContext } from "react";
 
 export default function BreakMoodCheckIn({
@@ -15,21 +15,6 @@ export default function BreakMoodCheckIn({
 }) {
   const { examPhaseId } = useContext(ExamContext);
 
-  const getLink = (): string => {
-    let url = "";
-    switch (breakEntryy.mood) {
-      case Mood.BAD:
-        url = "/mood/extend";
-        saveToDb(breakEntryy, false);
-        break;
-      case Mood.GOOD:
-      case Mood.NEUTRAL:
-        url = "/";
-        saveToDb(breakEntryy, false);
-        break;
-    }
-    return url;
-  };
   return (
     <div className="flex flex-col">
       <div>Break - {breakEntryy.timer.duration} </div>
@@ -72,7 +57,7 @@ export default function BreakMoodCheckIn({
             case Mood.GOOD:
             case Mood.NEUTRAL:
               setShowComponent(BreakComponent.NO_COMPONENT);
-              saveToDb(breakEntryy, false);
+              saveToDb(examPhaseId, breakEntryy, false);
               break;
             case Mood.BAD:
               setShowComponent(BreakComponent.EXTEND_BREAK);

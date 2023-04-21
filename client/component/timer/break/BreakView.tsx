@@ -1,12 +1,12 @@
-import { Modal } from "@/component/Modal";
+import { Modal } from "@/component/transitions/Modal";
 import { getElement } from "@/db/Actions";
 import { BreakComponent } from "@/types/Components";
 import { Activity, Break, ShowPage } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import ActivitySelection from "./ActivitySelection";
 import BreakMoodCheckIn from "./BreakMoodCheckIn.tsx";
 import ExtendBreak from "./ExtendBreak";
-
 
 export const BreakView = ({
   shownPage: showPage,
@@ -20,6 +20,7 @@ export const BreakView = ({
   setBreakEntryy: (s: Break) => void;
 }) => {
   let [open, setOpen] = useState(false);
+  let [openActivites, setOpenActivites] = useState(false);
   let [showComponent, setShowComponent] = useState(BreakComponent.NO_COMPONENT);
   const [startTimer, setStartTimer] = useState(false);
   const [timerFinished, setTimerFinished] = useState(false);
@@ -48,24 +49,24 @@ export const BreakView = ({
     }
   }, [state.time, startTimer]);
 
-  const [activities, setActivities] = useState<Activity[]>();
-  const breakActivities: Activity[] = [];
+  // // const [activities, setActivities] = useState<Activity[]>();
+  // const breakActivities: Activity[] = [];
 
-  const getActivities = async (): Promise<Activity[]> => {
-    const a = (await getElement("activities", "all").then((result) => {
-      return result;
-    })) as Activity[];
-    return a;
-  };
+  // const getActivities = async (): Promise<Activity[]> => {
+  //   const a = (await getElement("activities", "all").then((result) => {
+  //     return result;
+  //   })) as Activity[];
+  //   return a;
+  // };
 
-  useEffect(() => {
-    getActivities().then((a: Activity[]) => {
-      a.forEach((p) => {
-        breakActivities.push(p);
-        setActivities(a);
-      });
-    });
-  });
+  // useEffect(() => {
+  //   getActivities().then((a: Activity[]) => {
+  //     a.forEach((p) => {
+  //       breakActivities.push(p);
+  //       setActivities(a);
+  //     });
+  //   });
+  // });
 
   const showBreakPage = (): React.ReactElement | null => {
     let component = null;
@@ -117,7 +118,7 @@ export const BreakView = ({
           setDuration(d);
         }}
       />
-      {activities?.map((a) => {
+      {/* {activities?.map((a) => {
         <button
           onClick={() => {
             const s = { ...breakEntryy };
@@ -128,7 +129,14 @@ export const BreakView = ({
         >
           {a.title}
         </button>;
-      })}
+      })} */}
+      <div
+        onClick={() => {
+          setOpenActivites(true);
+        }}
+      >
+        select activity
+      </div>
       <button
         onClick={() => {
           const e = { ...breakEntryy };
@@ -138,7 +146,6 @@ export const BreakView = ({
       >
         start
       </button>
-
       <button
         onClick={() => {
           setOpen(true);
@@ -157,6 +164,17 @@ export const BreakView = ({
               Cancel
             </button>
             {showBreakPage() !== null ? showBreakPage() : setOpen(false)}
+          </Modal>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {openActivites && (
+          <Modal onClose={() => setOpen(false)}>
+            <button className="" onClick={() => setOpenActivites(false)}>
+              Cancel
+            </button>
+            <ActivitySelection />
           </Modal>
         )}
       </AnimatePresence>

@@ -3,7 +3,7 @@ import { Study } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import React, {  useEffect, useState } from "react";
-import { Modal } from "@/component/Modal";
+import { Modal } from "@/component/transitions/Modal";
 import { StudyComponent } from "@/types/Components";
 import GoodReasons from "./causes/GoodReasons";
 import BadReasons from "./causes/BadReasons";

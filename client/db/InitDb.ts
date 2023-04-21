@@ -11,25 +11,22 @@ export default function initDb() {
   request.onsuccess = () => (db = request.result);
   request.onupgradeneeded = () => {
     const db = request.result;
-    const activityStore = db.createObjectStore("activities", {
-      keyPath: keys.activities[0].name,
-      autoIncrement: true,
-    });
-    const reasonStore = db.createObjectStore("reasons", {
+    db.createObjectStore("activities", {
       keyPath: "id",
       autoIncrement: true,
     });
-    const examPhaseStore = db.createObjectStore("examPhases", {
+    db.createObjectStore("reasons", {
       keyPath: "id",
       autoIncrement: true,
     });
-    const activeStore = db.createObjectStore("active", {
+    db.createObjectStore("examPhases", {
       keyPath: "id",
       autoIncrement: true,
     });
-    keys.activities.forEach((key) =>
-      activityStore.createIndex(key.name, key.name, { unique: key.unique })
-    );
+   
+    // keys.activities.forEach((key) =>
+    //   activityStore.createIndex(key.name, key.name, { unique: key.unique })
+    // );
     // keys.reasons.forEach((key) =>
     //   reasonStore.createIndex(key.name, key.name, { unique: key.unique })
     // );

@@ -24,13 +24,6 @@ export default function GoodReasons({
     return data;
   }
 
-  // const getReasons = async (): Promise<Reason[]> => {
-  //   const a = (await getElement("reasons", "all").then((result) => {
-  //     return result;
-  //   })) as Reason[];
-  //   return a;
-  // };
-
   useEffect(() => {
     getData().then((c) => {
       c.map((a) => {
@@ -39,13 +32,6 @@ export default function GoodReasons({
         setReasons(selectedReason);
       });
     });
-    // getReasons().then((a: Reason[]) => {
-    //   a.forEach((p) => {
-    //     selectedReason.push(p);
-    //     setReasons(a);
-    //     console.log(a);
-    //   });
-    // });
   });
 
   return (

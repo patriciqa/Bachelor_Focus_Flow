@@ -31,9 +31,10 @@ export default function ExamPhaseOverview() {
           phases.map((p) => <div key={p.title}>{p.title}</div>)}
       </div>
       {/* <button onClick={() => setShowComponent(PageComponent.EXAMPHASEINPUT)}>
-        Create Phase
+        Create Phase TODO
       </button> */}
-      <Link href="/settings/exam-phase/create">Create Phase</Link>
+      
+      {/* <Link href="/settings/exam-phase/create">Create Phase</Link> */}
     </div>
   );
 }

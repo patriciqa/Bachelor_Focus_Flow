@@ -1,8 +1,8 @@
 import { SettingComponent } from "@/types/Components";
 import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
-import { Pop } from "../Pop";
-import ReasonsOverview from "./causes/CausesOverview";
+import { Pop } from "../transitions/Pop";
+import ReasonsOverview from "./causes/ReasonsOverview";
 import ExamPhaseOverview from "./exam-phase/ExamPhaseOverview";
 
 const Settings = (): React.ReactElement => {
@@ -10,6 +10,7 @@ const Settings = (): React.ReactElement => {
   let [showComponent, setShowComponent] = useState(
     SettingComponent.NO_COMPONENT
   );
+  
   const showPage = (): React.ReactElement | null => {
     let component = null;
     switch (showComponent) {
