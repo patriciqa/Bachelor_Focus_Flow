@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fseehawer/react-circular-slider": "^2.5.16",
     "@headlessui/react": "^1.7.14",
+    "@thomasloven/round-slider": "^0.6.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
@@ -21,6 +23,8 @@
     "prettier": "^2.8.7",
     "react": "18.2.0",
     "react-calendar": "^4.2.1",
+    "react-circular-slider-svg": "^0.2.0",
+    "react-countdown-circle-timer": "^3.2.1",
     "react-dom": "18.2.0",
     "react-onsenui": "^1.13.2",
     "typescript": "5.0.2"

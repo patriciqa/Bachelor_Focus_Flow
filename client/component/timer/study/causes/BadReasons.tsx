@@ -5,13 +5,13 @@ import React from "react";
 export default function BadReasons({
   showComponent,
   setShowComponent,
-  studyEntryy,
-  setStudyEntryy,
+  studyEntry,
+  setStudyEntry,
 }: {
   showComponent: StudyComponent;
   setShowComponent: (p: StudyComponent) => void;
-  studyEntryy: Study;
-  setStudyEntryy: (s: Study) => void;
+  studyEntry: Study;
+  setStudyEntry: (s: Study) => void;
 }) {
   return (
     <>

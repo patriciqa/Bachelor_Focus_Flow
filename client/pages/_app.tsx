@@ -8,7 +8,7 @@ import type { AppProps } from "next/app";
 import { useState } from "react";
 import "../component/Calendar.css";
 export default function App({ Component, pageProps }: AppProps) {
-  const [studyEntryy, setStudyEntryy] = useState<Study>({
+  const [studyEntry, setStudyEntry] = useState<Study>({
     timer: { duration: 0, startTime: 0 },
   });
   const [breakEntryy, setBreakEntryy] = useState<Break>({
@@ -21,8 +21,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <ExamContextProvider>
         <Component
           {...pageProps}
-          studyEntryy={studyEntryy}
-          setStudyEntryy={setStudyEntryy}
+          studyEntry={studyEntry}
+          setStudyEntry={setStudyEntry}
           breakEntryy={breakEntryy}
           setBreakEntryy={setBreakEntryy}
           shownPage={shownPage}

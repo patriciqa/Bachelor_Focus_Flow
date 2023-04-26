@@ -8,15 +8,15 @@ import { ExamContext } from "@/context/ExamPhaseContext";
 import { StudyView } from "@/component/timer/study/StudyView";
 
 const Timer = ({
-  studyEntryy,
-  setStudyEntryy,
+  studyEntry,
+  setStudyEntry,
   breakEntryy,
   setBreakEntryy,
   shownPage,
   setShownPage,
 }: {
-  studyEntryy: Study;
-  setStudyEntryy: (s: Study) => void;
+  studyEntry: Study;
+  setStudyEntry: (s: Study) => void;
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
   shownPage: ShowPage;
@@ -85,8 +85,8 @@ const Timer = ({
       case ShowPage.STUDY:
         component = (
           <StudyView
-            studyEntryy={studyEntryy}
-            setStudyEntryy={setStudyEntryy}
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
           />
         );
         break;
@@ -106,8 +106,8 @@ const Timer = ({
       default:
         component = (
           <StudyView
-            studyEntryy={studyEntryy}
-            setStudyEntryy={setStudyEntryy}
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
           />
         );
     }

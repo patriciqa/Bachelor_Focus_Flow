@@ -2,18 +2,19 @@ import StudyMoodCheckIn from "@/component/timer/study/StudyMoodCheckIn.tsx";
 import { Study } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "@/component/transitions/Modal";
 import { StudyComponent } from "@/types/Components";
 import GoodReasons from "./causes/GoodReasons";
 import BadReasons from "./causes/BadReasons";
+import TimerSlider from "@/component/TimerSlider";
 
 export const StudyView = ({
-  studyEntryy,
-  setStudyEntryy,
+  studyEntry,
+  setStudyEntry,
 }: {
-  studyEntryy: Study;
-  setStudyEntryy: (s: Study) => void;
+  studyEntry: Study;
+  setStudyEntry: (s: Study) => void;
 }) => {
   let [open, setOpen] = useState(false);
   let [showComponent, setShowComponent] = useState(StudyComponent.NO_COMPONENT);
@@ -21,30 +22,7 @@ export const StudyView = ({
   const [startTimer, setStartTimer] = useState(false);
   const [timerFinished, setTimerFinished] = useState(false);
 
-  const [duration, setDuration] = useState(3);
-
-  const [state, setState] = useState({
-    time: duration,
-    minutes: Math.floor((duration - 1) / 60),
-    seconds: duration - Math.floor((duration - 1) / 60) * 60 - 1,
-  });
-
-  useEffect(() => {
-    if (startTimer) {
-      setTimeout(() => {
-        if (state.time === 0) {
-          setTimerFinished(true);
-          return;
-        }
-
-        setState({
-          time: state.time - 1,
-          minutes: Math.floor((state.time - 1) / 60),
-          seconds: state.time - Math.floor((state.time - 1) / 60) * 60 - 1,
-        });
-      }, 1000);
-    }
-  }, [state.time, startTimer, duration]);
+  const [duration, setDuration] = useState(10);
 
   const showPage = (): React.ReactElement | null => {
     let component;
@@ -55,8 +33,8 @@ export const StudyView = ({
       case StudyComponent.MOODCHECKIN:
         component = (
           <StudyMoodCheckIn
-            studyEntryy={studyEntryy}
-            setStudyEntryy={setStudyEntryy}
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
             showComponent={showComponent}
             setShowComponent={setShowComponent}
           />
@@ -65,8 +43,8 @@ export const StudyView = ({
       case StudyComponent.GOOD_CAUSE:
         component = (
           <GoodReasons
-            studyEntryy={studyEntryy}
-            setStudyEntryy={setStudyEntryy}
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
             showComponent={showComponent}
             setShowComponent={setShowComponent}
           />
@@ -75,8 +53,8 @@ export const StudyView = ({
       default:
         component = (
           <BadReasons
-            studyEntryy={studyEntryy}
-            setStudyEntryy={setStudyEntryy}
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
             showComponent={showComponent}
             setShowComponent={setShowComponent}
           />
@@ -86,38 +64,13 @@ export const StudyView = ({
   };
   return (
     <div className="flex flex-col items-center justify-center">
-      <div>Study</div>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        placeholder="duration (number)"
-        required
-        className="bg-silver"
-        onChange={(i) => {
-          const e = { ...studyEntryy };
-          const d = parseInt(i.target.value);
-          e.timer.duration = d;
-          setStudyEntryy(e);
-          setDuration(d);
-        }}
+      <TimerSlider
+        duration={duration}
+        setDuration={setDuration}
+        studyEntry={studyEntry}
+        setStudyEntry={setStudyEntry}
       />
-      <div>
-        {state.minutes}:
-        {state.seconds <= 10 ? `0${state.seconds}` : state.seconds}
-        <p>(slider)</p>
-      </div>
-      <button
-        onClick={() => {
-          const e = { ...studyEntryy };
-          e.timer.startTime = Date.now();
-          setStudyEntryy(e);
-        }}
-      >
-        start
-      </button>
 
-      <Link href="/mood/study"> finished</Link>
       <button
         onClick={() => {
           setOpen(true);

@@ -7,13 +7,13 @@ import { Button } from "react-onsenui";
 export default function GoodReasons({
   showComponent,
   setShowComponent,
-  studyEntryy,
-  setStudyEntryy,
+  studyEntry,
+  setStudyEntry,
 }: {
   showComponent: StudyComponent;
   setShowComponent: (p: StudyComponent) => void;
-  studyEntryy: Study;
-  setStudyEntryy: (s: Study) => void;
+  studyEntry: Study;
+  setStudyEntry: (s: Study) => void;
 }) {
   const [reasons, setReasons] = useState<Reason[]>();
   // const [selected, setSelected] = useState<Reason[]>();
@@ -58,13 +58,13 @@ export default function GoodReasons({
               <button
                 onClick={() => {
                   console.log();
-                  const s = { ...studyEntryy };
+                  const s = { ...studyEntry };
                   selectedReason.push(a);
                   s.reasonIds = selectedReason.map((e) => {
                     return e.id;
                   });
                   console.log(s);
-                  setStudyEntryy(s);
+                  setStudyEntry(s);
                 }}
               >
                 {a.title} hi
