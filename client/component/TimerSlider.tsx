@@ -1,41 +1,38 @@
-import { Study } from "@/types/Timer";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
+import { useNavbarContext } from "@/context/HideNavbarContext";
+import { Study, TimerValues } from "@/types/Timer";
 import CircularSlider from "@fseehawer/react-circular-slider";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { TimerViewState } from "./timer/study/StudyView";
 
 export default function TimerSlider({
+  runningTimer,
+  setRunningTimer,
   duration,
   setDuration,
   studyEntry,
   setStudyEntry,
 }: {
+  runningTimer: TimerViewState;
+  setRunningTimer: (t: TimerViewState) => void;
   duration: number;
   setDuration: (d: number) => void;
   studyEntry: Study;
   setStudyEntry: (d: Study) => void;
 }) {
-  const [startTimer, setStartTimer] = useState(false);
-  const [timerFinished, setTimerFinished] = useState(false);
-  const [state, setState] = useState({
-    time: duration,
-    minutes: Math.floor(duration / 60),
-    seconds: duration - Math.floor(duration / 60) * 60 - 1,
-  });
+
   useEffect(() => {
-    if (startTimer) {
+    if (runningTimer === TimerViewState.RUNNING) {
       setTimeout(() => {
-        if (state.time === 0) {
-          setTimerFinished(true);
+        if (duration === 0) {
+          setRunningTimer(TimerViewState.FINISHED);
           return;
         }
 
-        setState({
-          time: state.time - 1,
-          minutes: Math.floor((state.time - 1) / 60),
-          seconds: state.time - Math.floor((state.time - 1) / 60) * 60 - 1,
-        });
+        setDuration(duration - 1);
       }, 1000);
     }
-  }, [state.time, startTimer]);
+  }, [duration, runningTimer]);
 
   const toMinutesSeconds = (totalSeconds: number): string => {
     const seconds = Math.floor(totalSeconds % 60);
@@ -52,7 +49,7 @@ export default function TimerSlider({
         <CircularSlider
           min={0}
           max={5400}
-          dataIndex={state.time}
+          dataIndex={duration}
           hideLabelValue
           labelColor="#005a58"
           labelBottom={true}
@@ -64,9 +61,6 @@ export default function TimerSlider({
           trackColor="#eeeeee"
           trackSize={24}
           onChange={(value: number) => {
-            const e = { ...studyEntry };
-            e.timer.duration = value;
-            setStudyEntry(e);
             setDuration(value);
           }}
         >
@@ -78,18 +72,6 @@ export default function TimerSlider({
           {toMinutesSeconds(duration)}
         </div>
       </div>
-      <button
-        onClick={() => {
-          setStartTimer(true);
-          setState({
-            time: duration,
-            minutes: Math.floor(duration / 60),
-            seconds: duration - Math.floor(duration / 60) * 60 - 1,
-          });
-        }}
-      >
-        start timer
-      </button>
     </>
   );
 }

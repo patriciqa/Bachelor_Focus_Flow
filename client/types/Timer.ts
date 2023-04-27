@@ -10,6 +10,12 @@ export enum Mood {
   BAD = "-1",
 }
 
+export interface TimerValues {
+  time: number;
+  minutes: number;
+  seconds: number;
+}
+
 export interface ExamPhase {
   id?: string;
   startDate?: number;

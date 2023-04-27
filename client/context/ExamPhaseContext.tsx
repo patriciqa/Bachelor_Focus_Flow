@@ -25,6 +25,6 @@ export default function ExamContextProvider({
   );
 }
 
-export function useAppContext() {
+export function useExamPhaseContext() {
   return useContext(ExamContext);
 }

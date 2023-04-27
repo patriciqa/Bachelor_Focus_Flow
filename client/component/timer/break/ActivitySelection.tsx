@@ -24,6 +24,7 @@ export default function ActivitySelection() {
       });
     });
   });
+  
   return (
     <div className="flex flex-col justify-center">
       {activities !== undefined &&

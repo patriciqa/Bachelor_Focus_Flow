@@ -46,6 +46,7 @@ export default function GoodReasons({
             </>
           ))}
       </div>
+      
       <div>Add </div>
       {/* <div>{reasons !== undefined && reasons[0].title}</div> */}
       {/*TODO GET CAUSES*/}

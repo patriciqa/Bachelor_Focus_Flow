@@ -84,10 +84,7 @@ const Timer = ({
     switch (shownPage) {
       case ShowPage.STUDY:
         component = (
-          <StudyView
-            studyEntry={studyEntry}
-            setStudyEntry={setStudyEntry}
-          />
+          <StudyView studyEntry={studyEntry} setStudyEntry={setStudyEntry} />
         );
         break;
       case ShowPage.BREAK:
@@ -105,15 +102,11 @@ const Timer = ({
         break;
       default:
         component = (
-          <StudyView
-            studyEntry={studyEntry}
-            setStudyEntry={setStudyEntry}
-          />
+          <StudyView studyEntry={studyEntry} setStudyEntry={setStudyEntry} />
         );
     }
     return component;
   };
-
   return (
     <div className="flex flex-col items-center justify-center w-screen">
       <>
@@ -137,27 +130,7 @@ const Timer = ({
             break
           </button>
         </div>
-        {/* <input
-        type="time"
-        id="appt"
-        name="appt"
-        min="09:00"
-        max="18:00"
-        required
-        onChange={() => {
-          let inputValue = (document.getElementById("appt") as HTMLInputElement)
-            .value;
-          setState({
-            time: parseInt(inputValue) - 1,
-            minutes: Math.floor((parseInt(inputValue) - 1) / 60),
-            seconds:
-              parseInt(inputValue) -
-              Math.floor((parseInt(inputValue) - 1) / 60) * 60 -
-              1,
-          });
-          console.log(parseInt(inputValue));
-        }}
-      /> */}
+
         {showPage()}
       </>
     </div>

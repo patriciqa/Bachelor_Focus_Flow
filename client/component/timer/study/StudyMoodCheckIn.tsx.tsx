@@ -70,7 +70,6 @@ export default function StudyMoodCheckIn({
       >
         Continue
       </button>
-      {/* <Link href={getLink()}>Continue</Link> */}
     </>
   );
 }
