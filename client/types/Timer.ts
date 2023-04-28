@@ -1,7 +1,13 @@
-export enum ShowPage {
+export enum WhichTimer {
   STUDY,
   BREAK,
   EXAMPHASE,
+}
+
+export enum TimerViewState {
+  START,
+  RUNNING,
+  FINISHED,
 }
 
 export enum Mood {
@@ -32,7 +38,7 @@ export interface Timer {
 }
 
 export interface Activity {
-  id: number;
+  id: string;
   title: string;
   icon: string;
   archived: false;
@@ -43,12 +49,12 @@ export interface Reason extends Activity {
 
 export interface Entry {
   mood?: Mood;
-  id?: number;
+  id?: string;
   timer: Timer;
 }
 
 export interface Study extends Entry {
-  reasonIds?: number[];
+  reasonIds?: string[];
 }
 
 export interface Break extends Entry {

@@ -1,14 +1,14 @@
 import { BreakComponent } from "@/types/Components";
-import { ShowPage } from "@/types/Timer";
+import { WhichTimer } from "@/types/Timer";
 
 export default function ExtendBreak({
   setShowComponent,
-  showPage,
-  setShownPage,
+  whichTimer,
+  setWhichTimer,
 }: {
   setShowComponent: (d: BreakComponent) => void;
-  showPage: ShowPage;
-  setShownPage: (p: ShowPage) => void;
+  whichTimer: WhichTimer;
+  setWhichTimer: (p: WhichTimer) => void;
 }) {
   return (
     <div className="flex flex-col ">
@@ -16,7 +16,7 @@ export default function ExtendBreak({
 
       <button
         onClick={() => {
-          setShownPage(ShowPage.BREAK);
+          setWhichTimer(WhichTimer.BREAK);
           setShowComponent(BreakComponent.NO_COMPONENT);
         }}
       >
@@ -24,7 +24,7 @@ export default function ExtendBreak({
       </button>
       <button
         onClick={() => {
-          setShownPage(ShowPage.STUDY);
+          setWhichTimer(WhichTimer.STUDY);
           setShowComponent(BreakComponent.NO_COMPONENT);
         }}
       >

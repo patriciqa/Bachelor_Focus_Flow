@@ -1,7 +1,7 @@
+import CreateExamPhase from "@/pages/settings/exam-phase/CreateExamPhase";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Pop } from "../transitions/Pop";
-import CreateExamPhase from "../settings/exam-phase/CreateExamPhase";
 
 export default function CreatePhaseView() {
   let [open, setOpen] = useState(false);

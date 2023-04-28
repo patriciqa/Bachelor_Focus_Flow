@@ -1,7 +1,7 @@
 import { Modal } from "@/component/transitions/Modal";
 import { getElement } from "@/db/Actions";
 import { BreakComponent } from "@/types/Components";
-import { Activity, Break, ShowPage } from "@/types/Timer";
+import { Activity, Break, WhichTimer } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import ActivitySelection from "./ActivitySelection";
@@ -9,13 +9,13 @@ import BreakMoodCheckIn from "./BreakMoodCheckIn.tsx";
 import ExtendBreak from "./ExtendBreak";
 
 export const BreakView = ({
-  shownPage: showPage,
-  setShownPage: setShowPage,
+  whichTimer: whichTimer,
+  setWhichTimer: setWhichTimer,
   breakEntryy,
   setBreakEntryy,
 }: {
-  shownPage: ShowPage;
-  setShownPage: (d: ShowPage) => void;
+  whichTimer: WhichTimer;
+  setWhichTimer: (d: WhichTimer) => void;
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
 }) => {
@@ -86,8 +86,8 @@ export const BreakView = ({
       case BreakComponent.EXTEND_BREAK:
         component = (
           <ExtendBreak
-            showPage={showPage}
-            setShownPage={setShowPage}
+            whichTimer={whichTimer}
+            setWhichTimer={setWhichTimer}
             setShowComponent={setShowComponent}
           />
         );

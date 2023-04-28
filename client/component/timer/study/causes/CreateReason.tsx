@@ -1,19 +1,22 @@
 import { addElement } from "@/db/Actions";
 import { Activity, Reason } from "@/types/Timer";
-import Link from "next/link";
 import { useState } from "react";
 
-export default function CreateActivity({
+export default function CreateReason({
   setOpen,
+  goodReason,
 }: {
   setOpen: (d: boolean) => void;
+  goodReason: boolean;
 }) {
-  const [activities, setActivities] = useState<Activity>({
-    id: "",
+  const [reasons, setReasons] = useState<Reason>({
+    id: '',
     title: "",
     icon: "",
     archived: false,
+    goodReason: true,
   });
+
   return (
     <>
       <div>
@@ -24,21 +27,27 @@ export default function CreateActivity({
           required
           className="bg-silver"
           onChange={(i) => {
-            const a = { ...activities };
+            const a = { ...reasons };
             a.title = i.target.value;
             a.archived = false;
             a.id = i.target.value;
-            setActivities(a);
+            if (goodReason) {
+              a.goodReason = true;
+            } else {
+              a.goodReason = false;
+            }
+            setReasons(a);
           }}
         />
       </div>
+
       <button
         onClick={() => {
-          addElement("activities", activities);
+          addElement("reasons", reasons);
           setOpen(false);
         }}
       >
-        save activity
+        save reason
       </button>
     </>
   );

@@ -1,4 +1,5 @@
 import { Modal } from "@/component/transitions/Modal";
+import { Pop } from "@/component/transitions/Pop";
 import { getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
@@ -24,7 +25,7 @@ export default function ActivitySelection() {
       });
     });
   });
-  
+
   return (
     <div className="flex flex-col justify-center">
       {activities !== undefined &&
@@ -39,12 +40,12 @@ export default function ActivitySelection() {
 
       <AnimatePresence>
         {open && (
-          <Modal onClose={() => setOpen(false)}>
+          <Pop onClose={() => setOpen(false)}>
             <button className="" onClick={() => setOpen(false)}>
               Cancel
             </button>
             <CreateActivity setOpen={setOpen} />
-          </Modal>
+          </Pop>
         )}
       </AnimatePresence>
     </div>

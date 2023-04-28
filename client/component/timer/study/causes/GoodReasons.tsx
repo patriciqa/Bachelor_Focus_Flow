@@ -1,23 +1,32 @@
+import { Pop } from "@/component/transitions/Pop";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
+import saveToDb from "@/hooks/SaveToDb";
 import { StudyComponent } from "@/types/Components";
-import { Reason, Study } from "@/types/Timer";
+import { Reason, WhichTimer, Study } from "@/types/Timer";
+import { AnimatePresence } from "framer-motion";
+import { filter, includes } from "lodash";
 import React, { useEffect, useState } from "react";
-import { Button } from "react-onsenui";
+import CreateReason from "./CreateReason";
 
 export default function GoodReasons({
+  setWhichTimer,
   showComponent,
   setShowComponent,
   studyEntry,
   setStudyEntry,
 }: {
+  setWhichTimer: (d: WhichTimer) => void;
   showComponent: StudyComponent;
   setShowComponent: (p: StudyComponent) => void;
   studyEntry: Study;
   setStudyEntry: (s: Study) => void;
 }) {
+  const { examPhaseId } = useExamPhaseContext();
+  let [open, setOpen] = useState(false);
   const [reasons, setReasons] = useState<Reason[]>();
-  // const [selected, setSelected] = useState<Reason[]>();
   const selectedReason: Reason[] = [];
+  const [selected, setSelected] = useState<string[]>();
 
   async function getData(): Promise<Reason[]> {
     const data: Reason[] = await getElement("reasons", "all");
@@ -27,56 +36,77 @@ export default function GoodReasons({
   useEffect(() => {
     getData().then((c) => {
       c.map((a) => {
-        console.log(a);
         selectedReason.push(a);
         setReasons(selectedReason);
       });
     });
   });
 
+  useEffect(() => {
+    const s = { ...studyEntry };
+    s.reasonIds = selected;
+    setStudyEntry(s);
+  }, [selected]);
+
   return (
     <>
       <div>Great! Why did it go well?</div>
       <div>
         {reasons !== undefined &&
-          reasons.map((c) => (
+          reasons.map((reason) => (
             <>
-              <button>{c.title}</button>
-              <button>{c.goodReason}</button>
+              <button
+                className={
+                  "w-full  p-2 align-center  justify-center flex " +
+                  (includes(selected, reason.id) === true && "bg-metal")
+                }
+                onClick={() => {
+                  let selectedReasons;
+                  if (selected === undefined) {
+                    selectedReasons = [reason.id];
+                  } else if (includes(selected, reason.id)) {
+                    selectedReasons = selected.filter((e) => e !== reason.id);
+                  } else {
+                    selectedReasons = [...selected];
+                    selectedReasons.push(reason.id);
+                  }
+                  setSelected(selectedReasons);
+                }}
+              >
+                {reason.icon}
+                {reason.title}
+              </button>
             </>
           ))}
       </div>
-      
-      <div>Add </div>
-      {/* <div>{reasons !== undefined && reasons[0].title}</div> */}
-      {/*TODO GET CAUSES*/}
-      {/* {reasons?.forEach((a) => {
-        <div>why</div>;
-        {
-          a.goodReason === true && (
-            <>
-              <div> a</div>
-              <button
-                onClick={() => {
-                  console.log();
-                  const s = { ...studyEntry };
-                  selectedReason.push(a);
-                  s.reasonIds = selectedReason.map((e) => {
-                    return e.id;
-                  });
-                  console.log(s);
-                  setStudyEntry(s);
-                }}
-              >
-                {a.title} hi
-              </button>
-            </>
-          );
-        }
-      })} */}
-      <button onClick={() => setShowComponent(StudyComponent.NO_COMPONENT)}>
+
+      <button
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        create new reason
+      </button>
+
+      <button
+        onClick={() => {
+          saveToDb(examPhaseId, studyEntry, true);
+          setShowComponent(StudyComponent.NO_COMPONENT);
+          setWhichTimer(WhichTimer.BREAK);
+        }}
+      >
         complete
       </button>
+      <AnimatePresence>
+        {open && (
+          <Pop onClose={() => setOpen(false)}>
+            <button className="" onClick={() => setOpen(false)}>
+              Cancel
+            </button>
+            <CreateReason setOpen={setOpen} goodReason />
+          </Pop>
+        )}
+      </AnimatePresence>
     </>
   );
 }

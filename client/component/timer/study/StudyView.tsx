@@ -1,7 +1,6 @@
 import StudyMoodCheckIn from "@/component/timer/study/StudyMoodCheckIn.tsx";
-import { Study, TimerValues } from "@/types/Timer";
+import { WhichTimer, Study, TimerValues, TimerViewState } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Modal } from "@/component/transitions/Modal";
 import { StudyComponent } from "@/types/Components";
@@ -12,21 +11,18 @@ import { useNavbarContext } from "@/context/HideNavbarContext";
 import ExtendTimer from "../ExtendTimer";
 import saveToDb from "@/hooks/SaveToDb";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
-export enum TimerViewState {
-  START,
-  RUNNING,
-  FINISHED,
-}
 
 export const StudyView = ({
+  setWhichTimer,
   studyEntry,
   setStudyEntry,
 }: {
+  setWhichTimer: (d: WhichTimer) => void;
   studyEntry: Study;
   setStudyEntry: (s: Study) => void;
 }) => {
   const { examPhaseId } = useExamPhaseContext();
-  const { setHideNavbar, hideNavbar } = useNavbarContext();
+  const { setHideNavbar } = useNavbarContext();
   let [open, setOpen] = useState(false);
   let [showComponent, setShowComponent] = useState(StudyComponent.NO_COMPONENT);
 
@@ -40,7 +36,7 @@ export const StudyView = ({
     seconds: duration - Math.floor(duration / 60) * 60 - 1,
   });
 
-  const showPage = (): React.ReactElement | null => {
+  const whichTimer = (): React.ReactElement | null => {
     let component;
     switch (showComponent) {
       case StudyComponent.NO_COMPONENT:
@@ -59,6 +55,7 @@ export const StudyView = ({
       case StudyComponent.GOOD_CAUSE:
         component = (
           <GoodReasons
+            setWhichTimer={setWhichTimer}
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}
             showComponent={showComponent}
@@ -174,7 +171,7 @@ export const StudyView = ({
             >
               Cancel
             </button>
-            {showPage() !== null ? showPage() : setOpen(false)}
+            {whichTimer() !== null ? whichTimer() : setOpen(false)}
           </Modal>
         )}
       </AnimatePresence>

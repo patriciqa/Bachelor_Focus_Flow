@@ -1,7 +1,7 @@
+import { Pop } from "@/component/transitions/Pop";
 import { SettingComponent } from "@/types/Components";
 import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
-import { Pop } from "../transitions/Pop";
 import ReasonsOverview from "./causes/ReasonsOverview";
 import ExamPhaseOverview from "./exam-phase/ExamPhaseOverview";
 
@@ -10,7 +10,7 @@ const Settings = (): React.ReactElement => {
   let [showComponent, setShowComponent] = useState(
     SettingComponent.NO_COMPONENT
   );
-  
+
   const showPage = (): React.ReactElement | null => {
     let component = null;
     switch (showComponent) {
@@ -27,8 +27,8 @@ const Settings = (): React.ReactElement => {
     return component;
   };
   return (
-    <div className="flex flex-col ">
-      <div>settings</div>
+    <div className="flex flex-col items-center justify-center w-screen">
+      <div>Settings</div>
       <button
         onClick={() => {
           setOpen(true);
@@ -62,7 +62,6 @@ const Settings = (): React.ReactElement => {
             >
               Back
             </button>
-            {/* <ExamPhaseOverview /> */}
             {showPage() !== null ? showPage() : setOpen(false)}
           </Pop>
         )}

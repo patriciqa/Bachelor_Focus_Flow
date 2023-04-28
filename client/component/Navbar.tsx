@@ -24,6 +24,22 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
               }
             >
               <Link href="/overview">Overview</Link>
+            </li>{" "}
+            <li
+              className={
+                "w-full  p-5 align-center  justify-center flex " +
+                (router === "/analytics" && "bg-metal")
+              }
+            >
+              <Link href="/analytics">Analytics</Link>
+            </li>{" "}
+            <li
+              className={
+                "w-full  p-5 align-center  justify-center flex " +
+                (router === "/settings" && "bg-metal")
+              }
+            >
+              <Link href="/settings">settings</Link>
             </li>
           </ul>
         </div>

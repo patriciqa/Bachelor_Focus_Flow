@@ -1,4 +1,4 @@
-import { Break, ShowPage, Study } from "@/types/Timer";
+import { Break, WhichTimer, Study } from "@/types/Timer";
 import React, { useContext, useEffect, useState } from "react";
 import initDb from "@/db/InitDb";
 import { BreakView } from "@/component/timer/break/BreakView";
@@ -6,32 +6,34 @@ import { getElement } from "@/db/Actions";
 import CreatePhaseView from "@/component/timer/CreatePhaseView";
 import { ExamContext } from "@/context/ExamPhaseContext";
 import { StudyView } from "@/component/timer/study/StudyView";
+import { useNavbarContext } from "@/context/HideNavbarContext";
 
 const Timer = ({
   studyEntry,
   setStudyEntry,
   breakEntryy,
   setBreakEntryy,
-  shownPage,
-  setShownPage,
+  whichTimer,
+  setWhichTimer,
 }: {
   studyEntry: Study;
   setStudyEntry: (s: Study) => void;
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
-  shownPage: ShowPage;
-  setShownPage: (s: ShowPage) => void;
+  whichTimer: WhichTimer;
+  setWhichTimer: (s: WhichTimer) => void;
 }) => {
   const { examPhaseId, setExamPhaseId } = useContext(ExamContext);
+  const { setHideNavbar, hideNavbar } = useNavbarContext();
 
   useEffect(() => {
     initDb();
     getElement("examPhases", "all").then(
       (result: any) => {
         if (result.length === 0) {
-          setShownPage(ShowPage.EXAMPHASE);
+          setWhichTimer(WhichTimer.EXAMPHASE);
         } else {
-          // setShownPage(ShowPage.STUDY);
+          // setWhichTimer(whichTimer.STUDY);
           const id = localStorage.getItem("examId");
           if (id !== null) {
             setExamPhaseId(id);
@@ -81,28 +83,36 @@ const Timer = ({
 
   const showPage = (): React.ReactElement => {
     let component;
-    switch (shownPage) {
-      case ShowPage.STUDY:
+    switch (whichTimer) {
+      case WhichTimer.STUDY:
         component = (
-          <StudyView studyEntry={studyEntry} setStudyEntry={setStudyEntry} />
+          <StudyView
+            setWhichTimer={setWhichTimer}
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
+          />
         );
         break;
-      case ShowPage.BREAK:
+      case WhichTimer.BREAK:
         component = (
           <BreakView
-            shownPage={shownPage}
-            setShownPage={setShownPage}
+            whichTimer={whichTimer}
+            setWhichTimer={setWhichTimer}
             breakEntryy={breakEntryy}
             setBreakEntryy={setBreakEntryy}
           />
         );
         break;
-      case ShowPage.EXAMPHASE:
+      case WhichTimer.EXAMPHASE:
         component = <CreatePhaseView />;
         break;
       default:
         component = (
-          <StudyView studyEntry={studyEntry} setStudyEntry={setStudyEntry} />
+          <StudyView
+            setWhichTimer={setWhichTimer}
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
+          />
         );
     }
     return component;
@@ -110,21 +120,25 @@ const Timer = ({
   return (
     <div className="flex flex-col items-center justify-center w-screen">
       <>
-        <div className="flex justify-center w-full p-5 ">
+        <div
+          className={
+            "flex justify-center w-full p-5  " + (hideNavbar && "invisible")
+          }
+        >
           <button
-            onClick={() => setShownPage(ShowPage.STUDY)}
+            onClick={() => setWhichTimer(WhichTimer.STUDY)}
             className={
               "w-full  " +
-              (shownPage === ShowPage.STUDY ? "bg-metal " : "white	 ")
+              (whichTimer === WhichTimer.STUDY ? "bg-metal " : "white	 ")
             }
           >
             study
           </button>
           <button
-            onClick={() => setShownPage(ShowPage.BREAK)}
+            onClick={() => setWhichTimer(WhichTimer.BREAK)}
             className={
               "w-full  " +
-              (shownPage === ShowPage.BREAK ? "bg-metal " : "white ")
+              (whichTimer === WhichTimer.BREAK ? "bg-metal " : "white ")
             }
           >
             break
