@@ -9,6 +9,7 @@ import { useNavbarContext } from "@/context/HideNavbarContext";
 import ExtendTimer from "../ExtendTimer";
 import saveToDb from "@/hooks/SaveToDb";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
+import Reasons from "./causes/Reasons";
 
 export const StudyView = ({
   setWhichTimer,

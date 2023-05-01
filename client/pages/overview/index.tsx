@@ -10,6 +10,7 @@ const Overview = () => {
   const [studySummary, setStudySummary] = useState(0);
   const [breakSummary, setBreakSummary] = useState(0);
   const [entries, setEntries] = useState<any>([]);
+  let allE: any = [];
 
   async function getData(): Promise<ExamPhase[]> {
     const data: ExamPhase[] = await getElement("examPhases", "all");
@@ -25,23 +26,22 @@ const Overview = () => {
     let choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
     getData().then((phases) => {
       phases.map((phase) => {
+        console.log(phase);
         calculateSummary(phase, choosenDate);
       });
     });
   };
 
   const calculateSummary = (phase: ExamPhase, choosenDate: number): void => {
-    let totalSeconds = 0;
+    let totalStudySeconds = 0;
     let totalBreakSeconds = 0;
-    let allE: any = [];
     phase.studyEntries?.map((e) => {
       let thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);
       if (choosenDate === thatDay) {
-        totalSeconds += e.timer.duration;
+        totalStudySeconds += e.timer.duration;
         allE.push(e);
       }
-      console.log(totalSeconds);
-      setStudySummary(totalSeconds);
+      setStudySummary(totalStudySeconds);
     });
     phase.breakEntries?.map((e) => {
       let thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);
@@ -51,8 +51,8 @@ const Overview = () => {
       }
       setBreakSummary(totalBreakSeconds);
     });
+    console.log("all", allE);
     setEntries(sortBy(allE, "timer.startTime"));
-    console.log(entries);
   };
 
   return (
