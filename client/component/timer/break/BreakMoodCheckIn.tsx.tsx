@@ -1,8 +1,7 @@
-import { ExamContext } from "@/context/ExamPhaseContext";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import saveToDb from "@/hooks/SaveToDb";
 import { BreakComponent } from "@/types/Components";
 import { Mood, Break } from "@/types/Timer";
-import { useContext } from "react";
 
 export default function BreakMoodCheckIn({
   setShowComponent,
@@ -13,7 +12,7 @@ export default function BreakMoodCheckIn({
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
 }) {
-  const { examPhaseId } = useContext(ExamContext);
+  const { examPhaseId } = useExamPhaseContext();
 
   return (
     <div className="flex flex-col">

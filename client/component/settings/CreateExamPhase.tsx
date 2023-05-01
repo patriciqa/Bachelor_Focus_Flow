@@ -1,18 +1,26 @@
-import { ExamContext } from "@/context/ExamPhaseContext";
-import { addElement, editElement, getElement } from "@/db/Actions";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
+import { addElement } from "@/db/Actions";
+import { SettingComponent } from "@/types/Components";
 import { ExamPhase } from "@/types/Timer";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import Calendar from "react-calendar";
 export type PickedDate = {
   from: number;
   to: number;
 };
-export default function CreateExamPhase() {
+export default function CreateExamPhase({
+  setShowComponent,
+  setOpen,
+}: {
+  setShowComponent?: (c: SettingComponent) => void;
+  setOpen?: (c: boolean) => void;
+}) {
   const [showCalender, setShowCalender] = useState(false);
   const [date, setDate] = useState<PickedDate>();
-  const { examPhaseId, setExamPhaseId } = useContext(ExamContext);
-
+  const { examPhaseId, setExamPhaseId } = useExamPhaseContext();
+  const router = useRouter().route;
   const getDate = (): string => {
     let d = "";
     if (date) {
@@ -31,7 +39,6 @@ export default function CreateExamPhase() {
   return (
     <div className="flex flex-col">
       <div>Create new Exam Phase</div>
-      {/* <input type="text"></input> */}
       <input
         type="text"
         id="name"
@@ -93,8 +100,7 @@ export default function CreateExamPhase() {
           showNeighboringMonth={false}
         />
       )}
-      <Link
-        href="/settings/exam-phase"
+      <button
         onClick={() => {
           if (examPhase !== undefined) {
             addElement("examPhases", examPhase);
@@ -102,10 +108,20 @@ export default function CreateExamPhase() {
               localStorage.setItem("examId", examPhase.title);
             }
           }
+          if (router === "/settings" && setShowComponent !== undefined) {
+            setShowComponent(SettingComponent.EXAMPHASE_OVERVIEW);
+            if (setOpen !== undefined) {
+              setOpen(false);
+            }
+          } else {
+            if (setOpen !== undefined) {
+              setOpen(false);
+            }
+          }
         }}
       >
         Save
-      </Link>
+      </button>
     </div>
   );
 }

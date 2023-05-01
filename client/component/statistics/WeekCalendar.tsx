@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import {
   format,
   startOfWeek,
@@ -82,7 +82,7 @@ const WeekCalendar = ({
                 ? "bg-white "
                 : ""
             }`}
-            // key={day}
+            key={i}
             onClick={() => {
               const dayStr = format(cloneDay, "ccc dd MMM yy");
               console.log(dayStr);
@@ -95,7 +95,11 @@ const WeekCalendar = ({
         day = addDays(day, 1);
       }
 
-      rows.push(<div className="flex flex-row w-full">{days}</div>);
+      rows.push(
+        <div key="key" className="flex flex-row w-full">
+          {days}
+        </div>
+      );
       days = [];
     }
     return <div className="body">{rows}</div>;

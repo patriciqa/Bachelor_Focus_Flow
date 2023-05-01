@@ -1,9 +1,10 @@
-import { Pop } from "@/component/transitions/Pop";
+import BreakActivities from "@/component/settings/activities/BreakActivities";
+import ReasonsOverview from "@/component/settings/causes/ReasonsOverview";
+import { Modal } from "@/component/transitions/Modal";
 import { SettingComponent } from "@/types/Components";
 import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
-import ReasonsOverview from "./causes/ReasonsOverview";
-import ExamPhaseOverview from "./exam-phase/ExamPhaseOverview";
+import ExamPhaseOverview from "../../component/settings/ExamPhaseOverview";
 
 const Settings = (): React.ReactElement => {
   let [open, setOpen] = useState(false);
@@ -18,10 +19,19 @@ const Settings = (): React.ReactElement => {
         component = null;
         break;
       case SettingComponent.EXAMPHASE_OVERVIEW:
-        component = <ExamPhaseOverview />;
+        component = <ExamPhaseOverview setShowComponent={setShowComponent} />;
         break;
-      case SettingComponent.CAUSES_OVERVIEW:
-        component = <ReasonsOverview />;
+      case SettingComponent.GOOD_REASONS:
+        component = <ReasonsOverview good={true} />;
+        break;
+      case SettingComponent.BAD_REASONS:
+        component = <ReasonsOverview good={false} />;
+        break;
+      case SettingComponent.BAD_REASONS:
+        component = <ReasonsOverview good={false} />;
+        break;
+      case SettingComponent.BREAK_ACTIVITIES:
+        component = <BreakActivities />;
         break;
     }
     return component;
@@ -40,22 +50,30 @@ const Settings = (): React.ReactElement => {
       <button
         onClick={() => {
           setOpen(true);
-          setShowComponent(SettingComponent.CAUSES_OVERVIEW);
+          setShowComponent(SettingComponent.GOOD_REASONS);
         }}
       >
-        Reasons
+        Good Reasons
       </button>{" "}
       <button
         onClick={() => {
           setOpen(true);
-          setShowComponent(SettingComponent.CAUSES_OVERVIEW);
+          setShowComponent(SettingComponent.BAD_REASONS);
+        }}
+      >
+        Bad Reasons
+      </button>{" "}
+      <button
+        onClick={() => {
+          setOpen(true);
+          setShowComponent(SettingComponent.BREAK_ACTIVITIES);
         }}
       >
         Break activities
       </button>
       <AnimatePresence>
         {open && (
-          <Pop onClose={() => setOpen(false)}>
+          <Modal onClose={() => setOpen(false)}>
             <button
               className=""
               onClick={() => setShowComponent(SettingComponent.NO_COMPONENT)}
@@ -63,7 +81,7 @@ const Settings = (): React.ReactElement => {
               Back
             </button>
             {showPage() !== null ? showPage() : setOpen(false)}
-          </Pop>
+          </Modal>
         )}
       </AnimatePresence>
     </div>

@@ -7,9 +7,9 @@ import React, {
   useState,
 } from "react";
 
-export const ExamContext = createContext<{
+const ExamContext = createContext<{
   examPhaseId: string;
-  setExamPhaseId: Dispatch<SetStateAction<string>>;
+  setExamPhaseId: (d: string) => void;
 }>({ examPhaseId: "", setExamPhaseId: () => null });
 
 export default function ExamContextProvider({

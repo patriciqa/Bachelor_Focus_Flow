@@ -1,4 +1,4 @@
-import CreateExamPhase from "@/pages/settings/exam-phase/CreateExamPhase";
+import CreateExamPhase from "@/component/settings/CreateExamPhase";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Pop } from "../transitions/Pop";
@@ -10,13 +10,6 @@ export default function CreatePhaseView() {
     <>
       <div className="flex flex-col justify-center">
         <p>Start a new exam phase to track your data.</p>
-        {/* <button onClick={() => { } }>Create Exam Phase</button>
-      button
-      onClick={() => {
-        setOpen(true);
-        // setShowComponent(SettingComponent.CAUSES_OVERVIEW);
-      // } 
-      > */}
         <button
           onClick={() => {
             setOpen(true);
@@ -27,14 +20,7 @@ export default function CreatePhaseView() {
         <AnimatePresence>
           {open && (
             <Pop onClose={() => setOpen(false)}>
-              {/* <button
-              className=""
-              onClick={() => setShowComponent(SettingComponent.NO_COMPONENT)}
-            >
-              Back
-            </button> */}
-              {/* <ExamPhaseOverview /> */}
-              <CreateExamPhase />
+              <CreateExamPhase setOpen={setOpen} />
             </Pop>
           )}
         </AnimatePresence>

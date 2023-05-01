@@ -1,7 +1,8 @@
 import WeekCalendar from "@/component/statistics/WeekCalendar";
 import { getElement } from "@/db/Actions";
-import { Break, ExamPhase, Study } from "@/types/Timer";
+import { ExamPhase } from "@/types/Timer";
 import { format } from "date-fns";
+import { sortBy } from "lodash";
 import React, { useState, useEffect } from "react";
 
 const Overview = () => {
@@ -20,28 +21,11 @@ const Overview = () => {
     console.log(entries);
   }, [selectedDate]);
 
-  const getTodaysEntries = (): void => {
-    console.log(getElement("examPhases", "all"));
-    getElement("examPhases", "all").then((entries) => {});
-  };
-
   const getEntries = (): void => {
     let choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
     getData().then((phases) => {
       phases.map((phase) => {
         calculateSummary(phase, choosenDate);
-        phase.studyEntries;
-        let e: any = [];
-        if (phase.studyEntries !== undefined) {
-          e = phase.studyEntries;
-        }
-        if (phase.breakEntries !== undefined) {
-          phase.breakEntries.map((b) => {
-            e.push(b);
-          });
-          console.log(e);
-          setEntries(e);
-        }
       });
     });
   };
@@ -49,10 +33,12 @@ const Overview = () => {
   const calculateSummary = (phase: ExamPhase, choosenDate: number): void => {
     let totalSeconds = 0;
     let totalBreakSeconds = 0;
+    let allE: any = [];
     phase.studyEntries?.map((e) => {
       let thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);
       if (choosenDate === thatDay) {
         totalSeconds += e.timer.duration;
+        allE.push(e);
       }
       console.log(totalSeconds);
       setStudySummary(totalSeconds);
@@ -61,9 +47,12 @@ const Overview = () => {
       let thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);
       if (choosenDate === thatDay) {
         totalBreakSeconds += e.timer.duration;
+        allE.push(e);
       }
       setBreakSummary(totalBreakSeconds);
     });
+    setEntries(sortBy(allE, "timer.startTime"));
+    console.log(entries);
   };
 
   return (

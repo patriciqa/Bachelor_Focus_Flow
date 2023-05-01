@@ -1,9 +1,7 @@
-import { ExamContext } from "@/context/ExamPhaseContext";
-import { addElement } from "@/db/Actions";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import saveToDb from "@/hooks/SaveToDb";
 import { StudyComponent } from "@/types/Components";
 import { Mood, Study } from "@/types/Timer";
-import { useContext } from "react";
 
 export default function StudyMoodCheckIn({
   showComponent,
@@ -16,7 +14,7 @@ export default function StudyMoodCheckIn({
   studyEntry: Study;
   setStudyEntry: (s: Study) => void;
 }) {
-  const { examPhaseId } = useContext(ExamContext);
+  const { examPhaseId } = useExamPhaseContext();
 
   return (
     <>
@@ -56,14 +54,14 @@ export default function StudyMoodCheckIn({
         onClick={() => {
           switch (studyEntry.mood) {
             case Mood.GOOD:
-              setShowComponent(StudyComponent.GOOD_CAUSE);
+              setShowComponent(StudyComponent.GOOD_REASON);
               break;
             case Mood.NEUTRAL:
               saveToDb(examPhaseId, studyEntry, true);
               setShowComponent(StudyComponent.NO_COMPONENT);
               break;
             case Mood.BAD:
-              setShowComponent(StudyComponent.BAD_CAUSE);
+              setShowComponent(StudyComponent.BAD_REASON);
               break;
           }
         }}

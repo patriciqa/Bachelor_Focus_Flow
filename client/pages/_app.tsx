@@ -1,4 +1,4 @@
-import ExamContextProvider, { ExamContext } from "@/context/ExamPhaseContext";
+import ExamContextProvider from "@/context/ExamPhaseContext";
 import Layout from "@/component/Layout";
 import "@/pages/globals.css";
 import { Break, WhichTimer, Study } from "@/types/Timer";

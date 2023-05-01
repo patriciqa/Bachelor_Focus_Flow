@@ -1,9 +1,9 @@
 import { getElement } from "@/db/Actions";
 import { Reason } from "@/types/Timer";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ReasonsOverview() {
+export default function ReasonsOverview({ good }: { good: boolean }) {
   const [studyReasons, setStudyReasons] = useState<Reason[]>();
   const reasons: Reason[] = [];
 
@@ -17,11 +17,21 @@ export default function ReasonsOverview() {
   useEffect(() => {
     getPhases().then((c: Reason[]) => {
       c.forEach((p) => {
-        reasons.push(p);
-        setStudyReasons(c);
+        if (good) {
+          if (p.goodReason) {
+            reasons.push(p);
+            setStudyReasons(reasons);
+          }
+        } else {
+          if (!p.goodReason) {
+            reasons.push(p);
+            setStudyReasons(reasons);
+          }
+        }
+        console.log(studyReasons);
       });
     });
-  });
+  }, [studyReasons]);
 
   return (
     <div>
@@ -29,7 +39,6 @@ export default function ReasonsOverview() {
         {studyReasons !== undefined &&
           studyReasons.map((p) => <div key={p.title}>{p.title}</div>)}
       </div>
-      {/* <button>Create Reason</button> */}
     </div>
   );
 }

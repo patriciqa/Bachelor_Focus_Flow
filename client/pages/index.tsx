@@ -4,7 +4,7 @@ import initDb from "@/db/InitDb";
 import { BreakView } from "@/component/timer/break/BreakView";
 import { getElement } from "@/db/Actions";
 import CreatePhaseView from "@/component/timer/CreatePhaseView";
-import { ExamContext } from "@/context/ExamPhaseContext";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { StudyView } from "@/component/timer/study/StudyView";
 import { useNavbarContext } from "@/context/HideNavbarContext";
 
@@ -23,8 +23,8 @@ const Timer = ({
   whichTimer: WhichTimer;
   setWhichTimer: (s: WhichTimer) => void;
 }) => {
-  const { examPhaseId, setExamPhaseId } = useContext(ExamContext);
-  const { setHideNavbar, hideNavbar } = useNavbarContext();
+  const { setExamPhaseId } = useExamPhaseContext();
+  const { hideNavbar } = useNavbarContext();
 
   useEffect(() => {
     initDb();

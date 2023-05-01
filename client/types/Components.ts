@@ -1,20 +1,22 @@
 export enum StudyComponent {
-    NO_COMPONENT,
-    MOODCHECKIN,
-    GOOD_CAUSE,
-    BAD_CAUSE,
-  }
-  
-  export enum BreakComponent {
-    NO_COMPONENT,
-    MOODCHECKIN,
-    ACTIVITIES,
-    EXTEND_BREAK,
-  }
-  
-  export enum SettingComponent {
-    NO_COMPONENT,
-    SETTINGS,
-    EXAMPHASE_OVERVIEW,
-    CAUSES_OVERVIEW
-  }
+  NO_COMPONENT,
+  MOODCHECKIN,
+  GOOD_REASON,
+  BAD_REASON,
+}
+
+export enum BreakComponent {
+  NO_COMPONENT,
+  MOODCHECKIN,
+  ACTIVITIES,
+  EXTEND_BREAK,
+}
+
+export enum SettingComponent {
+  NO_COMPONENT,
+  SETTINGS,
+  EXAMPHASE_OVERVIEW,
+  GOOD_REASONS,
+  BAD_REASONS,
+  BREAK_ACTIVITIES,
+}

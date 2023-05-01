@@ -9,15 +9,15 @@ import { filter, includes } from "lodash";
 import React, { useEffect, useState } from "react";
 import CreateReason from "./CreateReason";
 
-export default function GoodReasons({
+export default function Reasons({
+  good,
   setWhichTimer,
-  showComponent,
   setShowComponent,
   studyEntry,
   setStudyEntry,
 }: {
+  good: boolean;
   setWhichTimer: (d: WhichTimer) => void;
-  showComponent: StudyComponent;
   setShowComponent: (p: StudyComponent) => void;
   studyEntry: Study;
   setStudyEntry: (s: Study) => void;
@@ -36,8 +36,17 @@ export default function GoodReasons({
   useEffect(() => {
     getData().then((c) => {
       c.map((a) => {
-        selectedReason.push(a);
-        setReasons(selectedReason);
+        if (good) {
+          if (a.goodReason) {
+            selectedReason.push(a);
+            setReasons(selectedReason);
+          }
+        } else {
+          if (!a.goodReason) {
+            selectedReason.push(a);
+            setReasons(selectedReason);
+          }
+        }
       });
     });
   });
@@ -50,7 +59,11 @@ export default function GoodReasons({
 
   return (
     <>
-      <div>Great! Why did it go well?</div>
+      {good ? (
+        <div>Great! Why did it go well?</div>
+      ) : (
+        <div>Why did it go not so well?</div>
+      )}
       <div>
         {reasons !== undefined &&
           reasons.map((reason) => (
@@ -103,7 +116,7 @@ export default function GoodReasons({
             <button className="" onClick={() => setOpen(false)}>
               Cancel
             </button>
-            <CreateReason setOpen={setOpen} goodReason />
+            <CreateReason setOpen={setOpen} goodReason={good ? true : false} />
           </Pop>
         )}
       </AnimatePresence>

@@ -1,11 +1,9 @@
 import StudyMoodCheckIn from "@/component/timer/study/StudyMoodCheckIn.tsx";
-import { WhichTimer, Study, TimerValues, TimerViewState } from "@/types/Timer";
+import { WhichTimer, Study, TimerViewState } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Modal } from "@/component/transitions/Modal";
 import { StudyComponent } from "@/types/Components";
-import GoodReasons from "./causes/GoodReasons";
-import BadReasons from "./causes/BadReasons";
 import TimerSlider from "@/component/TimerSlider";
 import { useNavbarContext } from "@/context/HideNavbarContext";
 import ExtendTimer from "../ExtendTimer";
@@ -47,23 +45,24 @@ export const StudyView = ({
           />
         );
         break;
-      case StudyComponent.GOOD_CAUSE:
+      case StudyComponent.GOOD_REASON:
         component = (
-          <GoodReasons
+          <Reasons
+            good
             setWhichTimer={setWhichTimer}
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}
-            showComponent={showComponent}
             setShowComponent={setShowComponent}
           />
         );
         break;
       default:
         component = (
-          <BadReasons
+          <Reasons
+            good={false}
+            setWhichTimer={setWhichTimer}
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}
-            showComponent={showComponent}
             setShowComponent={setShowComponent}
           />
         );

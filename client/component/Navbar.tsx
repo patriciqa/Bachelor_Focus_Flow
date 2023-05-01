@@ -39,7 +39,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 (router === "/settings" && "bg-metal")
               }
             >
-              <Link href="/settings">settings</Link>
+              <Link href="/settings">Settings</Link>
             </li>
           </ul>
         </div>
