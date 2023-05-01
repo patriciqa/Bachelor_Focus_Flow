@@ -30,11 +30,6 @@ export const StudyView = ({
     TimerViewState.START
   );
   const [duration, setDuration] = useState(2);
-  const [state, setState] = useState<TimerValues>({
-    time: duration,
-    minutes: Math.floor(duration / 60),
-    seconds: duration - Math.floor(duration / 60) * 60 - 1,
-  });
 
   const whichTimer = (): React.ReactElement | null => {
     let component;
@@ -86,14 +81,6 @@ export const StudyView = ({
         setHideNavbar(true);
     }
   }, [runningTimer]);
-  // if (isStarting) {
-
-  //   setRunningTimer(TimerViewState.);
-  //   setHideNavbar(true);
-  // } else {
-  //   setRunningTimer(false);
-  //   setHideNavbar(false);
-  // }
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -105,26 +92,17 @@ export const StudyView = ({
         studyEntry={studyEntry}
         setStudyEntry={setStudyEntry}
       />
-      {/* <ExtendTimer
-        state={state}
-        setState={setState}
-        duration={duration}
-        setDuration={setDuration}
-        studyEntry={studyEntry}
-        setStudyEntry={setStudyEntry}
-      /> */}
 
       {runningTimer === TimerViewState.START && (
         <button
           onClick={() => {
-            // startOrStoppTimer(TimerViewState.RUNNING);
             setRunningTimer(TimerViewState.RUNNING);
             setDuration(duration);
             const e = { ...studyEntry };
             e.timer.startTime = Date.now();
             e.timer.duration = duration;
+            e.studyTimer = true;
             setStudyEntry(e);
-            // setDuration(value);
           }}
         >
           start timer

@@ -51,6 +51,7 @@ export interface Entry {
   mood?: Mood;
   id?: string;
   timer: Timer;
+  studyTimer?: boolean;
 }
 
 export interface Study extends Entry {

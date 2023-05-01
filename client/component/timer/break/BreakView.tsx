@@ -26,47 +26,16 @@ export const BreakView = ({
   const [timerFinished, setTimerFinished] = useState(false);
   const [duration, setDuration] = useState(3);
 
-  const [state, setState] = useState({
-    time: duration,
-    minutes: Math.floor((duration - 1) / 60),
-    seconds: duration - Math.floor((duration - 1) / 60) * 60 - 1,
-  });
-
   useEffect(() => {
     if (startTimer) {
       setTimeout(() => {
-        if (state.time === 0) {
+        if (duration === 0) {
           setTimerFinished(true);
           return;
         }
-
-        setState({
-          time: state.time - 1,
-          minutes: Math.floor((state.time - 1) / 60),
-          seconds: state.time - Math.floor((state.time - 1) / 60) * 60 - 1,
-        });
       }, 1000);
     }
-  }, [state.time, startTimer]);
-
-  // // const [activities, setActivities] = useState<Activity[]>();
-  // const breakActivities: Activity[] = [];
-
-  // const getActivities = async (): Promise<Activity[]> => {
-  //   const a = (await getElement("activities", "all").then((result) => {
-  //     return result;
-  //   })) as Activity[];
-  //   return a;
-  // };
-
-  // useEffect(() => {
-  //   getActivities().then((a: Activity[]) => {
-  //     a.forEach((p) => {
-  //       breakActivities.push(p);
-  //       setActivities(a);
-  //     });
-  //   });
-  // });
+  }, [duration, startTimer]);
 
   const showBreakPage = (): React.ReactElement | null => {
     let component = null;
@@ -99,10 +68,6 @@ export const BreakView = ({
   return (
     <>
       <div>Break</div>
-      <div>
-        {state.minutes}:
-        {state.seconds <= 10 ? `0${state.seconds}` : state.seconds}
-      </div>
       <input
         type="text"
         id="name"
@@ -114,6 +79,7 @@ export const BreakView = ({
           const e = { ...breakEntryy };
           const d = parseInt(i.target.value);
           e.timer.duration = d;
+          e.studyTimer = false;
           setBreakEntryy(e);
           setDuration(d);
         }}
@@ -141,6 +107,7 @@ export const BreakView = ({
         onClick={() => {
           const e = { ...breakEntryy };
           e.timer.startTime = Date.now();
+          e.studyTimer = false;
           setBreakEntryy(e);
         }}
       >
