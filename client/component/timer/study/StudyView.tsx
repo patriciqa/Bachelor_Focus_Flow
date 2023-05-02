@@ -24,6 +24,7 @@ export const StudyView = ({
   const { setHideNavbar } = useNavbarContext();
   let [open, setOpen] = useState(false);
   let [showComponent, setShowComponent] = useState(StudyComponent.NO_COMPONENT);
+  const [iconLabel, setIconLabel] = useState("");
 
   const [runningTimer, setRunningTimer] = useState<TimerViewState>(
     TimerViewState.START
@@ -89,8 +90,8 @@ export const StudyView = ({
         setRunningTimer={setRunningTimer}
         duration={duration}
         setDuration={setDuration}
-        studyEntry={studyEntry}
-        setStudyEntry={setStudyEntry}
+        entry={studyEntry}
+        setEntry={setStudyEntry}
       />
 
       {runningTimer === TimerViewState.START && (
@@ -105,7 +106,7 @@ export const StudyView = ({
             setStudyEntry(e);
           }}
         >
-          start timer
+          Start Timer
         </button>
       )}
 

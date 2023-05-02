@@ -1,6 +1,6 @@
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
-import { Study, TimerValues, TimerViewState } from "@/types/Timer";
+import { Break, Study, TimerValues, TimerViewState } from "@/types/Timer";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import { useEffect } from "react";
 
@@ -9,15 +9,15 @@ export default function TimerSlider({
   setRunningTimer,
   duration,
   setDuration,
-  studyEntry,
-  setStudyEntry,
+  entry,
+  setEntry,
 }: {
   runningTimer: TimerViewState;
   setRunningTimer: (t: TimerViewState) => void;
   duration: number;
   setDuration: (d: number) => void;
-  studyEntry: Study;
-  setStudyEntry: (d: Study) => void;
+  entry: Study | Break;
+  setEntry: (d: Study | Break) => void;
 }) {
   useEffect(() => {
     if (runningTimer === TimerViewState.RUNNING) {

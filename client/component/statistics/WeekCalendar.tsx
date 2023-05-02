@@ -75,12 +75,12 @@ const WeekCalendar = ({
         const cloneDay = day;
         days.push(
           <div
-            className={`flex-grow h-5 bg-tahiti ${
+            className={`flex-grow h-5  ${
               isSameDay(day, new Date())
-                ? "today"
+                ? "today bg-silver"
                 : isSameDay(day, selectedDate)
-                ? "bg-white "
-                : ""
+                ? "bg-tahiti "
+                : "bg-white"
             }`}
             key={i}
             onClick={() => {

@@ -1,13 +1,15 @@
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import saveToDb from "@/hooks/SaveToDb";
 import { BreakComponent } from "@/types/Components";
-import { Mood, Break } from "@/types/Timer";
+import { Mood, Break, WhichTimer } from "@/types/Timer";
 
 export default function BreakMoodCheckIn({
+  setWhichTimer,
   setShowComponent,
   breakEntryy,
   setBreakEntryy,
 }: {
+  setWhichTimer: (d: WhichTimer) => void;
   setShowComponent: (p: BreakComponent) => void;
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
@@ -17,16 +19,12 @@ export default function BreakMoodCheckIn({
   return (
     <div className="flex flex-col">
       <div>Break - {breakEntryy.timer.duration} </div>
-      <div>
-        How do you feel after {breakEntryy.breakActivityId} (get title of
-        activity)
-      </div>
+      <div>How do you feel after your break?</div>
       <button
         onClick={() => {
           const s = { ...breakEntryy };
           s.mood = Mood.GOOD;
           setBreakEntryy(s);
-          console.log(s);
         }}
       >
         good
@@ -36,7 +34,6 @@ export default function BreakMoodCheckIn({
           const s = { ...breakEntryy };
           s.mood = Mood.NEUTRAL;
           setBreakEntryy(s);
-          console.log(s);
         }}
       >
         neutral
@@ -57,6 +54,7 @@ export default function BreakMoodCheckIn({
             case Mood.NEUTRAL:
               setShowComponent(BreakComponent.NO_COMPONENT);
               saveToDb(examPhaseId, breakEntryy, false);
+              setWhichTimer(WhichTimer.STUDY)
               break;
             case Mood.BAD:
               setShowComponent(BreakComponent.EXTEND_BREAK);

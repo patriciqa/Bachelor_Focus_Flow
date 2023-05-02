@@ -3,10 +3,17 @@ import { Pop } from "@/component/transitions/Pop";
 import { getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
+import { includes } from "lodash";
 import { useEffect, useState } from "react";
 import CreateActivity from "./CreateActivity";
 
-export default function ActivitySelection() {
+export default function ActivitySelection({
+  selected,
+  setSelected,
+}: {
+  selected: string;
+  setSelected: (d: string) => void;
+}) {
   const [activities, setActivities] = useState<Activity[]>();
   const activityArray: Activity[] = [];
   let [open, setOpen] = useState(false);
@@ -29,7 +36,21 @@ export default function ActivitySelection() {
   return (
     <div className="flex flex-col justify-center">
       {activities !== undefined &&
-        activities.map((c) => <button>{c.title}</button>)}
+        activities.map((c) => (
+          <button
+            className={
+              "w-full  p-2 align-center  justify-center flex " +
+              (includes(selected, c.title) === true && "bg-metal")
+            }
+            onClick={() => {
+              let selectedActivity;
+              selectedActivity = c.title;
+              setSelected(selectedActivity);
+            }}
+          >
+            {c.title}
+          </button>
+        ))}
       <button
         onClick={() => {
           setOpen(true);

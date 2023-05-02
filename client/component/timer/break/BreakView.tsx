@@ -1,7 +1,9 @@
+import TimerSlider from "@/component/TimerSlider";
 import { Modal } from "@/component/transitions/Modal";
+import { useNavbarContext } from "@/context/HideNavbarContext";
 import { getElement } from "@/db/Actions";
 import { BreakComponent } from "@/types/Components";
-import { Activity, Break, WhichTimer } from "@/types/Timer";
+import { Activity, Break, TimerViewState, WhichTimer } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import ActivitySelection from "./ActivitySelection";
@@ -9,8 +11,8 @@ import BreakMoodCheckIn from "./BreakMoodCheckIn.tsx";
 import ExtendBreak from "./ExtendBreak";
 
 export const BreakView = ({
-  whichTimer: whichTimer,
-  setWhichTimer: setWhichTimer,
+  whichTimer,
+  setWhichTimer,
   breakEntryy,
   setBreakEntryy,
 }: {
@@ -20,22 +22,15 @@ export const BreakView = ({
   setBreakEntryy: (s: Break) => void;
 }) => {
   let [open, setOpen] = useState(false);
-  let [openActivites, setOpenActivites] = useState(false);
-  let [showComponent, setShowComponent] = useState(BreakComponent.NO_COMPONENT);
-  const [startTimer, setStartTimer] = useState(false);
-  const [timerFinished, setTimerFinished] = useState(false);
-  const [duration, setDuration] = useState(3);
+  let [showTimer, setShowTimer] = useState(false);
+  const [runningTimer, setRunningTimer] = useState<TimerViewState>(
+    TimerViewState.START
+  );
+  const { setHideNavbar } = useNavbarContext();
+  const [selected, setSelected] = useState<string>("");
 
-  useEffect(() => {
-    if (startTimer) {
-      setTimeout(() => {
-        if (duration === 0) {
-          setTimerFinished(true);
-          return;
-        }
-      }, 1000);
-    }
-  }, [duration, startTimer]);
+  let [showComponent, setShowComponent] = useState(BreakComponent.NO_COMPONENT);
+  const [duration, setDuration] = useState(3);
 
   const showBreakPage = (): React.ReactElement | null => {
     let component = null;
@@ -46,6 +41,7 @@ export const BreakView = ({
       case BreakComponent.MOODCHECKIN:
         component = (
           <BreakMoodCheckIn
+            setWhichTimer={setWhichTimer}
             breakEntryy={breakEntryy}
             setBreakEntryy={setBreakEntryy}
             setShowComponent={setShowComponent}
@@ -55,6 +51,7 @@ export const BreakView = ({
       case BreakComponent.EXTEND_BREAK:
         component = (
           <ExtendBreak
+            breakEntryy={breakEntryy}
             whichTimer={whichTimer}
             setWhichTimer={setWhichTimer}
             setShowComponent={setShowComponent}
@@ -65,62 +62,112 @@ export const BreakView = ({
     return component;
   };
 
+  useEffect(() => {
+    switch (runningTimer) {
+      case TimerViewState.START:
+        setHideNavbar(false);
+        break;
+      case TimerViewState.RUNNING:
+      case TimerViewState.FINISHED:
+        setHideNavbar(true);
+    }
+  }, [runningTimer]);
+
   return (
     <>
       <div>Break</div>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        placeholder="duration (number)"
-        required
-        className="bg-silver"
-        onChange={(i) => {
-          const e = { ...breakEntryy };
-          const d = parseInt(i.target.value);
-          e.timer.duration = d;
-          e.studyTimer = false;
-          setBreakEntryy(e);
-          setDuration(d);
-        }}
-      />
-      {/* {activities?.map((a) => {
-        <button
-          onClick={() => {
-            const s = { ...breakEntryy };
-            s.breakActivityId = a.id;
-            console.log(s);
-            setBreakEntryy(s);
-          }}
-        >
-          {a.title}
-        </button>;
-      })} */}
-      <div
-        onClick={() => {
-          setOpenActivites(true);
-        }}
-      >
-        select activity
-      </div>
-      <button
-        onClick={() => {
-          const e = { ...breakEntryy };
-          e.timer.startTime = Date.now();
-          e.studyTimer = false;
-          setBreakEntryy(e);
-        }}
-      >
-        start
-      </button>
-      <button
+
+      {showTimer ? (
+        <>
+          <div className="flex flex-col items-center justify-center">
+            <TimerSlider
+              runningTimer={runningTimer}
+              setRunningTimer={setRunningTimer}
+              duration={duration}
+              setDuration={setDuration}
+              entry={breakEntryy}
+              setEntry={setBreakEntryy}
+            />
+          </div>
+
+          {runningTimer === TimerViewState.START && (
+            <button
+              onClick={() => {
+                setRunningTimer(TimerViewState.RUNNING);
+                setDuration(duration);
+                const e = { ...breakEntryy };
+                e.timer.startTime = Date.now();
+                e.timer.duration = duration;
+                e.studyTimer = false;
+                e.breakActivityId = selected;
+                setBreakEntryy(e);
+              }}
+            >
+              Start Timer
+            </button>
+          )}
+
+          {runningTimer === TimerViewState.RUNNING && (
+            <button
+              onClick={() => {
+                setRunningTimer(TimerViewState.START);
+                // saveToDb(examPhaseId, studyEntry, true);
+              }}
+            >
+              Stop Timer
+            </button>
+          )}
+
+          {runningTimer === TimerViewState.FINISHED && (
+            <>
+              <div>Welcome back!</div>
+              <button
+                onClick={() => {
+                  setOpen(true);
+                  setShowComponent(BreakComponent.MOODCHECKIN);
+                  setRunningTimer(TimerViewState.START);
+                }}
+              >
+                Finish
+              </button>
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          <ActivitySelection selected={selected} setSelected={setSelected} />
+          <button
+            onClick={() => {
+              setShowTimer(true);
+              setRunningTimer(TimerViewState.START);
+            }}
+          >
+            Set Timer
+          </button>
+        </>
+      )}
+
+      <AnimatePresence>
+        {open && (
+          <Modal onClose={() => setOpen(false)}>
+            <button
+              className="mr-1 text-blue-500 focus:outline-none"
+              onClick={() => setOpen(false)}
+            >
+              Cancel
+            </button>
+            {showBreakPage() !== null ? showBreakPage() : setOpen(false)}
+          </Modal>
+        )}
+      </AnimatePresence>
+      {/* <button
         onClick={() => {
           setOpen(true);
           setShowComponent(BreakComponent.MOODCHECKIN);
         }}
       >
         modal
-      </button>
+      </button> */}
       <AnimatePresence>
         {open && (
           <Modal onClose={() => setOpen(false)}>
@@ -135,7 +182,7 @@ export const BreakView = ({
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {openActivites && (
           <Modal onClose={() => setOpen(false)}>
             <button className="" onClick={() => setOpenActivites(false)}>
@@ -144,7 +191,7 @@ export const BreakView = ({
             <ActivitySelection />
           </Modal>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </>
   );
 };

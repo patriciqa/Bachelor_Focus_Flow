@@ -89,6 +89,9 @@ const Overview = () => {
                 {entry.reasonIds !== undefined && (
                   <div>Reason: {entry.reasonIds}</div>
                 )}
+                {entry.breakActivityId !== undefined && (
+                  <div>Activity: {entry.breakActivityId}</div>
+                )}
               </button>
             </>
           ))}
