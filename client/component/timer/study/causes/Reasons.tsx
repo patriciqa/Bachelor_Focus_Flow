@@ -1,13 +1,13 @@
-import { Pop } from "@/component/transitions/Pop";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
 import saveToDb from "@/hooks/SaveToDb";
 import { StudyComponent } from "@/types/Components";
 import { Reason, WhichTimer, Study } from "@/types/Timer";
-import { AnimatePresence } from "framer-motion";
-import { filter, includes } from "lodash";
+import { includes } from "lodash";
 import React, { useEffect, useState } from "react";
 import CreateReason from "./CreateReason";
+import TextWithIcon from "@/component/icon/TextWithIcon";
+import ModalPage from "@/component/settings/causes/ModalPage";
 
 export default function Reasons({
   good,
@@ -86,8 +86,7 @@ export default function Reasons({
                   setSelected(selectedReasons);
                 }}
               >
-                {reason.icon}
-                {reason.title}
+                <TextWithIcon icon={reason.icon} text={reason.title} />
               </button>
             </>
           ))}
@@ -110,16 +109,13 @@ export default function Reasons({
       >
         complete
       </button>
-      <AnimatePresence>
-        {open && (
-          <Pop onClose={() => setOpen(false)}>
-            <button className="" onClick={() => setOpen(false)}>
-              Cancel
-            </button>
-            <CreateReason setOpen={setOpen} goodReason={good ? true : false} />
-          </Pop>
-        )}
-      </AnimatePresence>
+      <ModalPage
+        open={open}
+        setOpen={setOpen}
+        component={
+          <CreateReason setOpen={setOpen} goodReason={good ? true : false} />
+        }
+      />
     </>
   );
 }

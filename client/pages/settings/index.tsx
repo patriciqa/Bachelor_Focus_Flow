@@ -1,8 +1,7 @@
-import BreakActivities from "@/component/settings/activities/BreakActivities";
+import BreakActivityOverview from "@/component/settings/activities/BreakActivityOverview";
+import ModalPage from "@/component/settings/causes/ModalPage";
 import ReasonsOverview from "@/component/settings/causes/ReasonsOverview";
-import { Modal } from "@/component/transitions/Modal";
 import { SettingComponent } from "@/types/Components";
-import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import ExamPhaseOverview from "../../component/settings/ExamPhaseOverview";
 
@@ -12,12 +11,9 @@ const Settings = (): React.ReactElement => {
     SettingComponent.NO_COMPONENT
   );
 
-  const showPage = (): React.ReactElement | null => {
+  const showPage = (): React.ReactElement => {
     let component = null;
     switch (showComponent) {
-      case SettingComponent.NO_COMPONENT:
-        component = null;
-        break;
       case SettingComponent.EXAMPHASE_OVERVIEW:
         component = <ExamPhaseOverview setShowComponent={setShowComponent} />;
         break;
@@ -31,7 +27,10 @@ const Settings = (): React.ReactElement => {
         component = <ReasonsOverview good={false} />;
         break;
       case SettingComponent.BREAK_ACTIVITIES:
-        component = <BreakActivities />;
+        component = <BreakActivityOverview />;
+        break;
+      default:
+        component = <div />;
         break;
     }
     return component;
@@ -71,19 +70,9 @@ const Settings = (): React.ReactElement => {
       >
         Break activities
       </button>
-      <AnimatePresence>
-        {open && (
-          <Modal onClose={() => setOpen(false)}>
-            <button
-              className=""
-              onClick={() => setShowComponent(SettingComponent.NO_COMPONENT)}
-            >
-              Back
-            </button>
-            {showPage() !== null ? showPage() : setOpen(false)}
-          </Modal>
-        )}
-      </AnimatePresence>
+      {showComponent !== SettingComponent.NO_COMPONENT && (
+        <ModalPage open={open} setOpen={setOpen} component={showPage()} />
+      )}
     </div>
   );
 };

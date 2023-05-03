@@ -1,8 +1,9 @@
+import TextWithIcon from "@/component/icon/TextWithIcon";
 import { getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
 import { useEffect, useState } from "react";
 
-export default function BreakActivities() {
+export default function BreakActivityOverview() {
   const [activities, setActivities] = useState<Activity[]>();
   const activityArray: Activity[] = [];
 
@@ -25,7 +26,7 @@ export default function BreakActivities() {
     <div>
       <div className="flex flex-col justify-center">
         {activities !== undefined &&
-          activities.map((c) => <button>{c.title}</button>)}
+          activities.map((c) => <TextWithIcon text={c.title} icon={c.icon} />)}
       </div>
     </div>
   );

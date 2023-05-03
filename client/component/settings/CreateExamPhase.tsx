@@ -1,15 +1,10 @@
-import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { addElement } from "@/db/Actions";
 import { SettingComponent } from "@/types/Components";
-import { ExamPhase } from "@/types/Timer";
-import Link from "next/link";
+import { ExamPhase, PickedDate } from "@/types/Timer";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Calendar from "react-calendar";
-export type PickedDate = {
-  from: number;
-  to: number;
-};
+
 export default function CreateExamPhase({
   setShowComponent,
   setOpen,
@@ -19,7 +14,6 @@ export default function CreateExamPhase({
 }) {
   const [showCalender, setShowCalender] = useState(false);
   const [date, setDate] = useState<PickedDate>();
-  const { examPhaseId, setExamPhaseId } = useExamPhaseContext();
   const router = useRouter().route;
   const getDate = (): string => {
     let d = "";

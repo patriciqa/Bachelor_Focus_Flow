@@ -1,12 +1,12 @@
-import { Break, WhichTimer, Study } from "@/types/Timer";
-import React, { useContext, useEffect, useState } from "react";
-import initDb from "@/db/InitDb";
 import { BreakView } from "@/component/timer/break/BreakView";
-import { getElement } from "@/db/Actions";
 import CreatePhaseView from "@/component/timer/CreatePhaseView";
-import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { StudyView } from "@/component/timer/study/StudyView";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
+import { getElement } from "@/db/Actions";
+import initDb from "@/db/InitDb";
+import { Break, Study, WhichTimer } from "@/types/Timer";
+import React, { useEffect } from "react";
 
 const Timer = ({
   studyEntry,

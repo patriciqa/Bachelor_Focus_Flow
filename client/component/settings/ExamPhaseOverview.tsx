@@ -2,9 +2,8 @@ import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
 import { SettingComponent } from "@/types/Components";
 import { ExamPhase } from "@/types/Timer";
-import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Modal } from "../transitions/Modal";
+import ModalPage from "./causes/ModalPage";
 import CreateExamPhase from "./CreateExamPhase";
 
 export default function ExamPhaseOverview({
@@ -53,24 +52,16 @@ export default function ExamPhaseOverview({
           ))}
       </div>
       <button onClick={() => setOpen(true)}>Create Phase</button>
-      <AnimatePresence>
-        {open && (
-          <>
-            <Modal onClose={() => setOpen(false)}>
-              <button
-                className="mr-1 text-blue-500 focus:outline-none"
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </button>
-              <CreateExamPhase
-                setOpen={setOpen}
-                setShowComponent={setShowComponent}
-              />
-            </Modal>
-          </>
-        )}
-      </AnimatePresence>
+      <ModalPage
+        open={open}
+        setOpen={setOpen}
+        component={
+          <CreateExamPhase
+            setOpen={setOpen}
+            setShowComponent={setShowComponent}
+          />
+        }
+      />
     </div>
   );
 }

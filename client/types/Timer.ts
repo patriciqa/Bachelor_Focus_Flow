@@ -16,6 +16,10 @@ export enum Mood {
   BAD = "-1",
 }
 
+export type PickedDate = {
+  from: number;
+  to: number;
+};
 export interface TimerValues {
   time: number;
   minutes: number;

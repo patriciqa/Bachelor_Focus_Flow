@@ -1,11 +1,14 @@
+import TextWithIcon from "@/component/icon/TextWithIcon";
+import CreateReason from "@/component/timer/study/causes/CreateReason";
 import { getElement } from "@/db/Actions";
 import { Reason } from "@/types/Timer";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import ModalPage from "./ModalPage";
 
 export default function ReasonsOverview({ good }: { good: boolean }) {
   const [studyReasons, setStudyReasons] = useState<Reason[]>();
   const reasons: Reason[] = [];
+  let [open, setOpen] = useState(false);
 
   const getPhases = async (): Promise<Reason[]> => {
     const a = (await getElement("reasons", "all").then((result) => {
@@ -28,7 +31,6 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
             setStudyReasons(reasons);
           }
         }
-        console.log(studyReasons);
       });
     });
   }, [studyReasons]);
@@ -37,7 +39,19 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
     <div>
       <div>
         {studyReasons !== undefined &&
-          studyReasons.map((p) => <div key={p.title}>{p.title}</div>)}
+          studyReasons.map((p) => (
+            <div key={p.title}>
+              <TextWithIcon icon={p.icon} text={p.title} />
+            </div>
+          ))}
+        <button onClick={() => setOpen(true)}>Create Reason </button>
+        <ModalPage
+          open={open}
+          setOpen={setOpen}
+          component={
+            <CreateReason setOpen={setOpen} goodReason={good ? true : false} />
+          }
+        />
       </div>
     </div>
   );

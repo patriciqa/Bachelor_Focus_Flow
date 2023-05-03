@@ -1,10 +1,8 @@
+import ModalPage from "@/component/settings/causes/ModalPage";
 import TimerSlider from "@/component/TimerSlider";
-import { Modal } from "@/component/transitions/Modal";
 import { useNavbarContext } from "@/context/HideNavbarContext";
-import { getElement } from "@/db/Actions";
 import { BreakComponent } from "@/types/Components";
-import { Activity, Break, TimerViewState, WhichTimer } from "@/types/Timer";
-import { AnimatePresence } from "framer-motion";
+import { Break, TimerViewState, WhichTimer } from "@/types/Timer";
 import React, { useEffect, useState } from "react";
 import ActivitySelection from "./ActivitySelection";
 import BreakMoodCheckIn from "./BreakMoodCheckIn.tsx";
@@ -32,12 +30,9 @@ export const BreakView = ({
   let [showComponent, setShowComponent] = useState(BreakComponent.NO_COMPONENT);
   const [duration, setDuration] = useState(3);
 
-  const showBreakPage = (): React.ReactElement | null => {
-    let component = null;
+  const showBreakPage = (): React.ReactElement => {
+    let component;
     switch (showComponent) {
-      case BreakComponent.NO_COMPONENT:
-        component = null;
-        break;
       case BreakComponent.MOODCHECKIN:
         component = (
           <BreakMoodCheckIn
@@ -58,6 +53,8 @@ export const BreakView = ({
           />
         );
         break;
+      default:
+        component = <div />;
     }
     return component;
   };
@@ -146,52 +143,9 @@ export const BreakView = ({
           </button>
         </>
       )}
-
-      <AnimatePresence>
-        {open && (
-          <Modal onClose={() => setOpen(false)}>
-            <button
-              className="mr-1 text-blue-500 focus:outline-none"
-              onClick={() => setOpen(false)}
-            >
-              Cancel
-            </button>
-            {showBreakPage() !== null ? showBreakPage() : setOpen(false)}
-          </Modal>
-        )}
-      </AnimatePresence>
-      {/* <button
-        onClick={() => {
-          setOpen(true);
-          setShowComponent(BreakComponent.MOODCHECKIN);
-        }}
-      >
-        modal
-      </button> */}
-      <AnimatePresence>
-        {open && (
-          <Modal onClose={() => setOpen(false)}>
-            <button
-              className="mr-1 text-blue-500 focus:outline-none"
-              onClick={() => setOpen(false)}
-            >
-              Cancel
-            </button>
-            {showBreakPage() !== null ? showBreakPage() : setOpen(false)}
-          </Modal>
-        )}
-      </AnimatePresence>
-
-      {/* <AnimatePresence>
-        {openActivites && (
-          <Modal onClose={() => setOpen(false)}>
-            <button className="" onClick={() => setOpenActivites(false)}>
-              Cancel
-            </button>
-            <ActivitySelection />
-          </Modal>
-        )}
-      </AnimatePresence> */}
+      {showComponent !== null && (
+        <ModalPage open={open} setOpen={setOpen} component={showBreakPage()} />
+      )}
     </>
   );
 };

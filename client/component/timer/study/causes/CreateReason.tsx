@@ -1,5 +1,6 @@
+import IconPicker from "@/component/icon/IconPicker";
 import { addElement } from "@/db/Actions";
-import { Activity, Reason } from "@/types/Timer";
+import { Reason } from "@/types/Timer";
 import { useState } from "react";
 
 export default function CreateReason({
@@ -9,8 +10,16 @@ export default function CreateReason({
   setOpen: (d: boolean) => void;
   goodReason: boolean;
 }) {
+  const [icon, seticon] = useState("fa fa-home");
+  const onIconChange = (icon: string) => {
+    seticon(icon);
+    console.log(icon);
+    const a = { ...reasons };
+    a.icon = icon;
+    setReasons(a);
+  };
   const [reasons, setReasons] = useState<Reason>({
-    id: '',
+    id: "",
     title: "",
     icon: "",
     archived: false,
@@ -18,7 +27,7 @@ export default function CreateReason({
   });
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center">
       <div>
         <input
           type="text"
@@ -40,7 +49,7 @@ export default function CreateReason({
           }}
         />
       </div>
-
+      <IconPicker value={icon} onChange={onIconChange} />
       <button
         onClick={() => {
           addElement("reasons", reasons);
@@ -49,6 +58,6 @@ export default function CreateReason({
       >
         save reason
       </button>
-    </>
+    </div>
   );
 }

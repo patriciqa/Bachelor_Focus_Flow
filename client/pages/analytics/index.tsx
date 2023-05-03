@@ -1,6 +1,4 @@
-import { Modal } from "@/component/transitions/Modal";
-import { AnimatePresence } from "framer-motion";
-import React, { useState } from "react";
+import React from "react";
 
 const Analytics = () => {
   return (

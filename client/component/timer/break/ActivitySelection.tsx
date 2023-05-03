@@ -1,8 +1,6 @@
-import { Modal } from "@/component/transitions/Modal";
-import { Pop } from "@/component/transitions/Pop";
+import ModalPage from "@/component/settings/causes/ModalPage";
 import { getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
-import { AnimatePresence } from "framer-motion";
 import { includes } from "lodash";
 import { useEffect, useState } from "react";
 import CreateActivity from "./CreateActivity";
@@ -59,16 +57,11 @@ export default function ActivitySelection({
         create new activity
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <Pop onClose={() => setOpen(false)}>
-            <button className="" onClick={() => setOpen(false)}>
-              Cancel
-            </button>
-            <CreateActivity setOpen={setOpen} />
-          </Pop>
-        )}
-      </AnimatePresence>
+      <ModalPage
+        open={open}
+        setOpen={setOpen}
+        component={<CreateActivity setOpen={setOpen} />}
+      />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import CreateExamPhase from "@/component/settings/CreateExamPhase";
-import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Pop } from "../transitions/Pop";
+import ModalPage from "../settings/causes/ModalPage";
 
 export default function CreatePhaseView() {
   let [open, setOpen] = useState(false);
@@ -17,13 +16,11 @@ export default function CreatePhaseView() {
         >
           Create exam phase
         </button>
-        <AnimatePresence>
-          {open && (
-            <Pop onClose={() => setOpen(false)}>
-              <CreateExamPhase setOpen={setOpen} />
-            </Pop>
-          )}
-        </AnimatePresence>
+        <ModalPage
+          open={open}
+          setOpen={setOpen}
+          component={<CreateExamPhase setOpen={setOpen} />}
+        />
       </div>
     </>
   );
