@@ -1,15 +1,17 @@
+import TextWithIcon from "@/component/icon/TextWithIcon";
 import WeekCalendar from "@/component/statistics/WeekCalendar";
 import { getElement } from "@/db/Actions";
-import { ExamPhase } from "@/types/Timer";
+import { Activity, ExamPhase } from "@/types/Timer";
 import { format } from "date-fns";
 import { sortBy } from "lodash";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Overview = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [studySummary, setStudySummary] = useState(0);
   const [breakSummary, setBreakSummary] = useState(0);
   const [entries, setEntries] = useState<any>([]);
+  const [activity, setActivity] = useState<Activity>();
   let allE: any = [];
 
   async function getData(): Promise<ExamPhase[]> {
@@ -30,6 +32,19 @@ const Overview = () => {
         calculateSummary(phase, choosenDate);
       });
     });
+  };
+
+  const getReasons = (ids: string[]): any => {
+    let reason = [{ title: "", icon: "" }];
+    for (let i = 0; i < ids.length; i++) {
+      getElement("reasons", ids[i]).then((result: any) => {
+        reason[i].title = result.title;
+        reason[i].icon = result.icon;
+      });
+    }
+
+    console.log(reason);
+    return "hi";
   };
 
   const calculateSummary = (phase: ExamPhase, choosenDate: number): void => {
@@ -86,11 +101,19 @@ const Overview = () => {
                   {format(new Date(entry.timer.startTime), "HH:mm dd/LL/yyyy")}
                 </div>
                 <div>mood: {entry.mood}</div>
-                {entry.reasonIds !== undefined && (
-                  <div>Reason: {entry.reasonIds}</div>
-                )}
+                {/* {entry.reasonIds !== undefined && (
+                  <>
+                    <div>Reason: {entry.reasonIds}</div>
+                    <div>{getReasons(entry.reasonIds)}</div>
+                  </>
+                )} */}
                 {entry.breakActivityId !== undefined && (
-                  <div>Activity: {entry.breakActivityId}</div>
+                  <>
+                    <div>Activity: {entry.breakActivityId}</div>
+                    <>
+                      <TextWithIcon text="idk" icon="icon" />
+                    </>
+                  </>
                 )}
               </button>
             </>

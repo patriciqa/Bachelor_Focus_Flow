@@ -23,7 +23,7 @@ export default function initDb() {
       keyPath: "id",
       autoIncrement: true,
     });
-   
+
     // keys.activities.forEach((key) =>
     //   activityStore.createIndex(key.name, key.name, { unique: key.unique })
     // );

@@ -6,7 +6,7 @@ export default function TextWithIcon({
   text,
 }: {
   icon: string;
-  text: string;
+  text: string | Promise<string>;
 }) {
   return (
     <div className="flex flex-row items-center justify-center">

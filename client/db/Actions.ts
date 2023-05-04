@@ -15,7 +15,8 @@ export const getElement = <T>(store: string, key: number | string) => {
         request.onsuccess = () => resolve(request.result);
         transaction.oncomplete = () => db.close();
       } else {
-        indexedDB.deleteDatabase("data");
+        console.error("could not get Element");
+        // indexedDB.deleteDatabase("data");
       }
     };
   });

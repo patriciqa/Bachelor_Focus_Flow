@@ -1,3 +1,4 @@
+import TextWithIcon from "@/component/icon/TextWithIcon";
 import ModalPage from "@/component/settings/causes/ModalPage";
 import { getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
@@ -46,7 +47,7 @@ export default function ActivitySelection({
               setSelected(selectedActivity);
             }}
           >
-            {c.title}
+            <TextWithIcon text={c.title} icon={c.icon} />
           </button>
         ))}
       <button
