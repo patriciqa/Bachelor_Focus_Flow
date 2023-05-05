@@ -3,8 +3,8 @@ import { getElement } from "@/db/Actions";
 import { SettingComponent } from "@/types/Components";
 import { ExamPhase, WhichTimer } from "@/types/Timer";
 import { useEffect, useState } from "react";
-import ModalPage from "./causes/ModalPage";
 import CreateExamPhase from "./CreateExamPhase";
+import ModalPage from "./reasons/ModalPage";
 
 export default function ExamPhaseOverview({
   setShowComponent,
@@ -55,6 +55,7 @@ export default function ExamPhaseOverview({
       </div>
       <button onClick={() => setOpen(true)}>Create Phase</button>
       <ModalPage
+        isStudy={false}
         open={open}
         setOpen={setOpen}
         component={

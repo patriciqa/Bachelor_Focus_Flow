@@ -1,11 +1,14 @@
+import CancelButton from "@/component/CancellButton";
 import { Modal } from "@/component/transitions/Modal";
 import { AnimatePresence } from "framer-motion";
 
 export default function ModalPage({
+  isStudy,
   open,
   setOpen,
   component,
 }: {
+  isStudy?: boolean;
   open: boolean;
   setOpen: (o: boolean) => void;
   component: React.ReactElement;
@@ -14,11 +17,9 @@ export default function ModalPage({
     <AnimatePresence>
       {open && (
         <Modal onClose={() => setOpen(false)}>
-          <button className="" onClick={() => setOpen(false)}>
-            Cancel
-          </button>
+          <CancelButton setOpen={setOpen} isStudy={isStudy} />
+
           {component}
-          {/* <CreateReason setOpen={setOpen} goodReason={good ? true : false} /> */}
         </Modal>
       )}
     </AnimatePresence>

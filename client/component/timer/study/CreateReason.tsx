@@ -1,3 +1,4 @@
+import CustomButton from "@/component/CustomButton";
 import IconPicker from "@/component/icon/IconPicker";
 import { addElement } from "@/db/Actions";
 import { Reason } from "@/types/Timer";
@@ -50,14 +51,14 @@ export default function CreateReason({
         />
       </div>
       <IconPicker value={icon} onChange={onIconChange} />
-      <button
+      <CustomButton
         onClick={() => {
           addElement("reasons", reasons);
           setOpen(false);
         }}
       >
         save reason
-      </button>
+      </CustomButton>
     </div>
   );
 }

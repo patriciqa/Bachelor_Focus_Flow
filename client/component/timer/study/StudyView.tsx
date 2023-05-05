@@ -1,15 +1,15 @@
-import StudyMoodCheckIn from "@/component/timer/study/StudyMoodCheckIn.tsx";
+import CustomButton from "@/component/CustomButton";
+import ModalPage from "@/component/settings/reasons/ModalPage";
 import TimerSlider from "@/component/TimerSlider";
-import { Modal } from "@/component/transitions/Modal";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
 import saveToDb from "@/hooks/SaveToDb";
 import { StudyComponent } from "@/types/Components";
 import { Study, TimerViewState, WhichTimer } from "@/types/Timer";
-import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import ExtendTimer from "../ExtendTimer";
-import Reasons from "./reasons/Reasons";
+import MoodCheckIn from "../MoodCheckIn";
+import ExtendTimer from "./ExtendTimer";
+import Reasons from "./Reasons";
 
 export const StudyView = ({
   setWhichTimer,
@@ -32,20 +32,24 @@ export const StudyView = ({
   );
   const [duration, setDuration] = useState(2);
 
-  const whichTimer = (): React.ReactElement | null => {
+  const whichTimer = (): React.ReactElement => {
     let component;
     switch (showComponent) {
-      case StudyComponent.NO_COMPONENT:
-        component = null;
-        break;
       case StudyComponent.MOODCHECKIN:
         component = (
-          <StudyMoodCheckIn
-            studyEntry={studyEntry}
-            setStudyEntry={setStudyEntry}
-            showComponent={showComponent}
-            setShowComponent={setShowComponent}
+          <MoodCheckIn
+            isStudy={true}
+            setWhichTimer={setWhichTimer}
+            entry={studyEntry}
+            setEntry={setStudyEntry}
+            setStudyShowComponent={setShowComponent}
           />
+          // <StudyMoodCheckIn
+          //   studyEntry={studyEntry}
+          //   setStudyEntry={setStudyEntry}
+          //   showComponent={showComponent}
+          //   setShowComponent={setShowComponent}
+          // />
         );
         break;
       case StudyComponent.GOOD_REASON:
@@ -60,15 +64,7 @@ export const StudyView = ({
         );
         break;
       default:
-        component = (
-          <Reasons
-            good={false}
-            setWhichTimer={setWhichTimer}
-            studyEntry={studyEntry}
-            setStudyEntry={setStudyEntry}
-            setShowComponent={setShowComponent}
-          />
-        );
+        component = <div />;
     }
     return component;
   };
@@ -94,7 +90,9 @@ export const StudyView = ({
       />
 
       {runningTimer === TimerViewState.START && (
-        <button
+        <CustomButton
+          size="regular"
+          variant="study"
           onClick={() => {
             setRunningTimer(TimerViewState.RUNNING);
             setDuration(duration);
@@ -106,18 +104,20 @@ export const StudyView = ({
           }}
         >
           start timer
-        </button>
+        </CustomButton>
       )}
 
       {runningTimer === TimerViewState.RUNNING && (
-        <button
+        <CustomButton
+          size="regular"
+          variant="study"
           onClick={() => {
             setRunningTimer(TimerViewState.START);
             saveToDb(examPhaseId, studyEntry, true);
           }}
         >
           stop timer
-        </button>
+        </CustomButton>
       )}
 
       {runningTimer === TimerViewState.FINISHED && (
@@ -128,7 +128,9 @@ export const StudyView = ({
             setStudyEntry={setStudyEntry}
             setRunningTimer={setRunningTimer}
           />
-          <button
+          <CustomButton
+            size="regular"
+            variant="study"
             onClick={() => {
               setOpen(true);
               setShowComponent(StudyComponent.MOODCHECKIN);
@@ -136,22 +138,17 @@ export const StudyView = ({
             }}
           >
             finish
-          </button>
+          </CustomButton>
         </>
       )}
-      <AnimatePresence>
-        {open && (
-          <Modal onClose={() => setOpen(false)}>
-            <button
-              className="mr-1 text-blue-500 focus:outline-none"
-              onClick={() => setOpen(false)}
-            >
-              Cancel
-            </button>
-            {whichTimer() !== null ? whichTimer() : setOpen(false)}
-          </Modal>
-        )}
-      </AnimatePresence>
+      {showComponent !== null && (
+        <ModalPage
+          isStudy
+          open={open}
+          setOpen={setOpen}
+          component={whichTimer()}
+        />
+      )}
     </div>
   );
 };

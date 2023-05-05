@@ -1,4 +1,5 @@
-import ModalPage from "@/component/settings/causes/ModalPage";
+import CustomButton from "@/component/CustomButton";
+import ModalPage from "@/component/settings/reasons/ModalPage";
 import TimerSlider from "@/component/TimerSlider";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
@@ -6,8 +7,8 @@ import saveToDb from "@/hooks/SaveToDb";
 import { BreakComponent } from "@/types/Components";
 import { Break, TimerViewState, WhichTimer } from "@/types/Timer";
 import React, { useEffect, useState } from "react";
+import MoodCheckIn from "../MoodCheckIn";
 import ActivitySelection from "./ActivitySelection";
-import BreakMoodCheckIn from "./BreakMoodCheckIn.tsx";
 import ExtendBreak from "./ExtendBreak";
 
 export const BreakView = ({
@@ -41,10 +42,11 @@ export const BreakView = ({
     switch (showComponent) {
       case BreakComponent.MOODCHECKIN:
         component = (
-          <BreakMoodCheckIn
+          <MoodCheckIn
+            isStudy={false}
             setWhichTimer={setWhichTimer}
-            breakEntryy={breakEntryy}
-            setBreakEntryy={setBreakEntryy}
+            entry={breakEntryy}
+            setEntry={setBreakEntryy}
             setShowComponent={setShowComponent}
           />
         );
@@ -79,7 +81,6 @@ export const BreakView = ({
   return (
     <>
       <div>Break</div>
-
       {showTimer ? (
         <>
           <div className="flex flex-col items-center justify-center">
@@ -92,7 +93,7 @@ export const BreakView = ({
           </div>
 
           {runningTimer === TimerViewState.START && (
-            <button
+            <CustomButton
               onClick={() => {
                 setRunningTimer(TimerViewState.RUNNING);
                 setDuration(duration);
@@ -105,32 +106,32 @@ export const BreakView = ({
               }}
             >
               start timer
-            </button>
+            </CustomButton>
           )}
 
           {runningTimer === TimerViewState.RUNNING && (
-            <button
+            <CustomButton
               onClick={() => {
                 setRunningTimer(TimerViewState.START);
                 saveToDb(examPhaseId, breakEntryy, true);
               }}
             >
               stop timer
-            </button>
+            </CustomButton>
           )}
 
           {runningTimer === TimerViewState.FINISHED && (
             <>
               <div>Welcome back!</div>
-              <button
+              <CustomButton
                 onClick={() => {
                   setOpen(true);
                   setShowComponent(BreakComponent.MOODCHECKIN);
                   setRunningTimer(TimerViewState.START);
                 }}
               >
-                Finish
-              </button>
+                finish{" "}
+              </CustomButton>
             </>
           )}
         </>
@@ -138,18 +139,24 @@ export const BreakView = ({
         <>
           <div>what would you like to do in your break?</div>
           <ActivitySelection selected={selected} setSelected={setSelected} />
-          <button
+          <CustomButton
+            variant="break"
             onClick={() => {
               setShowTimer(true);
               setRunningTimer(TimerViewState.START);
             }}
           >
             set timer
-          </button>
+          </CustomButton>
         </>
       )}
       {showComponent !== null && (
-        <ModalPage open={open} setOpen={setOpen} component={showBreakPage()} />
+        <ModalPage
+          isStudy={false}
+          open={open}
+          setOpen={setOpen}
+          component={showBreakPage()}
+        />
       )}
     </>
   );

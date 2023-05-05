@@ -26,7 +26,15 @@ module.exports = {
       'bermuda': '#78dcca',
 
       "darkGrey": "#959494",
+      "inactiveGrey": "#CFCFD9",
       "breakGreen": "#48B065",
+      "studyBlue": "#5A55F4",
+      "gray3": "#828282",
+      brand: {
+        break: "#48B065",
+        DEFAULT: '#ff77e9',
+        study: "#5A55F4",
+      },
     },
     extend: {
       fontFamily: {

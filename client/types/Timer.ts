@@ -11,9 +11,10 @@ export enum TimerViewState {
 }
 
 export enum Mood {
-  GOOD = "1",
-  NEUTRAL = "0",
-  BAD = "-1",
+  GOOD = "good",
+  RATHER_GOOD = "rather good",
+  RATHER_BAD = "rather bad",
+  BAD = "bad",
 }
 
 export type PickedDate = {

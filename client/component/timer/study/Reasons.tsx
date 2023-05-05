@@ -1,5 +1,6 @@
+import CustomButton from "@/component/CustomButton";
 import TextWithIcon from "@/component/icon/TextWithIcon";
-import ModalPage from "@/component/settings/causes/ModalPage";
+import ModalPage from "@/component/settings/reasons/ModalPage";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
 import saveToDb from "@/hooks/SaveToDb";
@@ -91,16 +92,16 @@ export default function Reasons({
             </>
           ))}
       </div>
-
-      <button
+      <CustomButton
         onClick={() => {
           setOpen(true);
         }}
       >
         create new reason
-      </button>
-
-      <button
+      </CustomButton>
+      <CustomButton
+        size="regular"
+        variant="break"
         onClick={() => {
           saveToDb(examPhaseId, studyEntry, true);
           setShowComponent(StudyComponent.NO_COMPONENT);
@@ -108,7 +109,8 @@ export default function Reasons({
         }}
       >
         complete
-      </button>
+      </CustomButton>
+
       <ModalPage
         open={open}
         setOpen={setOpen}

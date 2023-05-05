@@ -21,7 +21,7 @@ beforeEach(async () => {
   );
 });
 describe("Study Timer View Test", () => {
-  //   it("Check if the  Timer starts when Start Timer button  is clicked", async () => {
+  //   it("Check if the  Timer starfts when Start Timer button  is clicked", async () => {
   //     const button = screen.getAllByRole("button", { name: "break" });
   //     fireEvent.click(button[0]);
   //   });

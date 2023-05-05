@@ -1,6 +1,6 @@
 import BreakActivityOverview from "@/component/settings/activities/BreakActivityOverview";
-import ModalPage from "@/component/settings/causes/ModalPage";
-import ReasonsOverview from "@/component/settings/causes/ReasonsOverview";
+import ModalPage from "@/component/settings/reasons/ModalPage";
+import ReasonsOverview from "@/component/settings/reasons/ReasonsOverview";
 import { SettingComponent } from "@/types/Components";
 import { WhichTimer } from "@/types/Timer";
 import React, { useState } from "react";
@@ -52,7 +52,7 @@ const Settings = ({
         }}
       >
         Exam Phases
-      </button>{" "}
+      </button>
       <button
         onClick={() => {
           setOpen(true);

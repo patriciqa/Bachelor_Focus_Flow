@@ -1,5 +1,6 @@
+import CustomButton from "@/component/CustomButton";
 import TextWithIcon from "@/component/icon/TextWithIcon";
-import ModalPage from "@/component/settings/causes/ModalPage";
+import ModalPage from "@/component/settings/reasons/ModalPage";
 import { getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
 import { includes } from "lodash";
@@ -51,14 +52,14 @@ export default function ActivitySelection({
             <TextWithIcon text={c.title} icon={c.icon} />
           </button>
         ))}
-      <button
+      <CustomButton
+        variant="break"
         onClick={() => {
           setOpen(true);
         }}
       >
         create new activity
-      </button>
-
+      </CustomButton>
       <ModalPage
         open={open}
         setOpen={setOpen}

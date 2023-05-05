@@ -1,7 +1,7 @@
 import CreateExamPhase from "@/component/settings/CreateExamPhase";
 import { WhichTimer } from "@/types/Timer";
 import { useState } from "react";
-import ModalPage from "../settings/causes/ModalPage";
+import ModalPage from "../settings/reasons/ModalPage";
 
 export default function CreatePhaseView({
   setWhichTimer,
@@ -14,7 +14,6 @@ export default function CreatePhaseView({
     <>
       <div className="flex flex-col justify-center">
         <p>Start a new exam phase to track your data.</p>
-        <button>hi</button>
         <button
           onClick={() => {
             setOpen(true);
