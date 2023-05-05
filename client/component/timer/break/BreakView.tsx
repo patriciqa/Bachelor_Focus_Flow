@@ -1,6 +1,8 @@
 import ModalPage from "@/component/settings/causes/ModalPage";
 import TimerSlider from "@/component/TimerSlider";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
+import saveToDb from "@/hooks/SaveToDb";
 import { BreakComponent } from "@/types/Components";
 import { Break, TimerViewState, WhichTimer } from "@/types/Timer";
 import React, { useEffect, useState } from "react";
@@ -19,15 +21,19 @@ export const BreakView = ({
   breakEntryy: Break;
   setBreakEntryy: (s: Break) => void;
 }) => {
-  let [open, setOpen] = useState(false);
-  let [showTimer, setShowTimer] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [showTimer, setShowTimer] = useState(false);
   const [runningTimer, setRunningTimer] = useState<TimerViewState>(
     TimerViewState.START
   );
+  const { examPhaseId } = useExamPhaseContext();
+
   const { setHideNavbar } = useNavbarContext();
   const [selected, setSelected] = useState<string>("");
 
-  let [showComponent, setShowComponent] = useState(BreakComponent.NO_COMPONENT);
+  const [showComponent, setShowComponent] = useState(
+    BreakComponent.NO_COMPONENT
+  );
   const [duration, setDuration] = useState(3);
 
   const showBreakPage = (): React.ReactElement => {
@@ -82,8 +88,6 @@ export const BreakView = ({
               setRunningTimer={setRunningTimer}
               duration={duration}
               setDuration={setDuration}
-              entry={breakEntryy}
-              setEntry={setBreakEntryy}
             />
           </div>
 
@@ -100,7 +104,7 @@ export const BreakView = ({
                 setBreakEntryy(e);
               }}
             >
-              Start Timer
+              start timer
             </button>
           )}
 
@@ -108,10 +112,10 @@ export const BreakView = ({
             <button
               onClick={() => {
                 setRunningTimer(TimerViewState.START);
-                // saveToDb(examPhaseId, studyEntry, true);
+                saveToDb(examPhaseId, breakEntryy, true);
               }}
             >
-              Stop Timer
+              stop timer
             </button>
           )}
 
@@ -132,6 +136,7 @@ export const BreakView = ({
         </>
       ) : (
         <>
+          <div>what would you like to do in your break?</div>
           <ActivitySelection selected={selected} setSelected={setSelected} />
           <button
             onClick={() => {
@@ -139,7 +144,7 @@ export const BreakView = ({
               setRunningTimer(TimerViewState.START);
             }}
           >
-            Set Timer
+            set timer
           </button>
         </>
       )}

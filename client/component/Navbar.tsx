@@ -1,9 +1,9 @@
+/* eslint-disable react/jsx-filename-extension */
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
   const router = useRouter().route;
-
   return (
     <>
       {!hideNavbar && (

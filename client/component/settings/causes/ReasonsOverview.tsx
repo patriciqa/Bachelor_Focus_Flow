@@ -1,5 +1,5 @@
 import TextWithIcon from "@/component/icon/TextWithIcon";
-import CreateReason from "@/component/timer/study/causes/CreateReason";
+import CreateReason from "@/component/timer/study/reasons/CreateReason";
 import { getElement } from "@/db/Actions";
 import { Reason } from "@/types/Timer";
 import { useEffect, useState } from "react";

@@ -1,15 +1,13 @@
-import { Study, TimerValues, TimerViewState } from "@/types/Timer";
+import { Study, TimerViewState } from "@/types/Timer";
 import Slider from "@mui/material/Slider";
 import { useState } from "react";
 
 export default function ExtendTimer({
-  duration,
   setDuration,
   studyEntry,
   setStudyEntry,
   setRunningTimer,
 }: {
-  duration: number;
   setDuration: (d: number) => void;
   studyEntry: Study;
   setStudyEntry: (d: Study) => void;
@@ -29,7 +27,7 @@ export default function ExtendTimer({
           valueLabelDisplay="on"
           max={20}
           onChange={(extend: any) => {
-            let extenedValue = extend.target.value;
+            const extenedValue = extend.target.value;
             setExtend(extenedValue * 60);
             setDuration(extenedValue * 60);
           }}

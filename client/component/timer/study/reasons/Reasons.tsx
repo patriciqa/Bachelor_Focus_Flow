@@ -1,13 +1,13 @@
+import TextWithIcon from "@/component/icon/TextWithIcon";
+import ModalPage from "@/component/settings/causes/ModalPage";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
 import saveToDb from "@/hooks/SaveToDb";
 import { StudyComponent } from "@/types/Components";
-import { Reason, WhichTimer, Study } from "@/types/Timer";
+import { Reason, Study, WhichTimer } from "@/types/Timer";
 import { includes } from "lodash";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CreateReason from "./CreateReason";
-import TextWithIcon from "@/component/icon/TextWithIcon";
-import ModalPage from "@/component/settings/causes/ModalPage";
 
 export default function Reasons({
   good,
@@ -23,7 +23,7 @@ export default function Reasons({
   setStudyEntry: (s: Study) => void;
 }) {
   const { examPhaseId } = useExamPhaseContext();
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [reasons, setReasons] = useState<Reason[]>();
   const selectedReason: Reason[] = [];
   const [selected, setSelected] = useState<string[]>();

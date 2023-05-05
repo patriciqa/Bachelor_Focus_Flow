@@ -1,7 +1,7 @@
 import TextWithIcon from "@/component/icon/TextWithIcon";
 import WeekCalendar from "@/component/statistics/WeekCalendar";
 import { getElement } from "@/db/Actions";
-import { Activity, ExamPhase } from "@/types/Timer";
+import { ExamPhase } from "@/types/Timer";
 import { format } from "date-fns";
 import { sortBy } from "lodash";
 import { useEffect, useState } from "react";
@@ -11,8 +11,7 @@ const Overview = () => {
   const [studySummary, setStudySummary] = useState(0);
   const [breakSummary, setBreakSummary] = useState(0);
   const [entries, setEntries] = useState<any>([]);
-  const [activity, setActivity] = useState<Activity>();
-  let allE: any = [];
+  const allE: any = [];
 
   async function getData(): Promise<ExamPhase[]> {
     const data: ExamPhase[] = await getElement("examPhases", "all");
@@ -25,7 +24,7 @@ const Overview = () => {
   }, [selectedDate]);
 
   const getEntries = (): void => {
-    let choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
+    const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
     getData().then((phases) => {
       phases.map((phase) => {
         console.log(phase);
@@ -35,7 +34,7 @@ const Overview = () => {
   };
 
   const getReasons = (ids: string[]): any => {
-    let reason = [{ title: "", icon: "" }];
+    const reason = [{ title: "", icon: "" }];
     for (let i = 0; i < ids.length; i++) {
       getElement("reasons", ids[i]).then((result: any) => {
         reason[i].title = result.title;
@@ -51,7 +50,7 @@ const Overview = () => {
     let totalStudySeconds = 0;
     let totalBreakSeconds = 0;
     phase.studyEntries?.map((e) => {
-      let thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);
+      const thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);
       if (choosenDate === thatDay) {
         totalStudySeconds += e.timer.duration;
         allE.push(e);
@@ -59,7 +58,7 @@ const Overview = () => {
       setStudySummary(totalStudySeconds);
     });
     phase.breakEntries?.map((e) => {
-      let thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);
+      const thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);
       if (choosenDate === thatDay) {
         totalBreakSeconds += e.timer.duration;
         allE.push(e);

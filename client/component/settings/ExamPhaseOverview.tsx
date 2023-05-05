@@ -11,7 +11,7 @@ export default function ExamPhaseOverview({
 }: {
   setShowComponent: (c: SettingComponent) => void;
 }) {
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [phases, setPhases] = useState<ExamPhase[]>();
   const examphases: ExamPhase[] = [];
   const { examPhaseId, setExamPhaseId } = useExamPhaseContext();

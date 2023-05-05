@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-nocheck
 import React, { useState } from "react";
 
-import { Icons } from "../../types/Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Icons } from "../../types/Icons";
 
 const IconPicker = ({
   value,

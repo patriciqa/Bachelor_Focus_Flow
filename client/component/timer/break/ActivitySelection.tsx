@@ -15,7 +15,7 @@ export default function ActivitySelection({
 }) {
   const [activities, setActivities] = useState<Activity[]>();
   const activityArray: Activity[] = [];
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   async function getData(): Promise<Activity[]> {
     const data: Activity[] = await getElement("activities", "all");
@@ -37,12 +37,13 @@ export default function ActivitySelection({
       {activities !== undefined &&
         activities.map((c) => (
           <button
+            key={c.id}
             className={
               "w-full  p-2 align-center  justify-center flex " +
               (includes(selected, c.title) === true && "bg-metal")
             }
             onClick={() => {
-              let selectedActivity;
+              let selectedActivity = "";
               selectedActivity = c.title;
               setSelected(selectedActivity);
             }}

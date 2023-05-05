@@ -16,8 +16,15 @@
     "incremental": true,
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "component/archive/index", "reasons/settings/inputtsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "component/archive/index",
+    "reasons/settings/inputtsx"
+  ],
   "exclude": ["node_modules"]
 }

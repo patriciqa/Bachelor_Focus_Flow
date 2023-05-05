@@ -1,15 +1,15 @@
 import StudyMoodCheckIn from "@/component/timer/study/StudyMoodCheckIn.tsx";
-import { WhichTimer, Study, TimerViewState } from "@/types/Timer";
+import TimerSlider from "@/component/TimerSlider";
+import { Modal } from "@/component/transitions/Modal";
+import { useExamPhaseContext } from "@/context/ExamPhaseContext";
+import { useNavbarContext } from "@/context/HideNavbarContext";
+import saveToDb from "@/hooks/SaveToDb";
+import { StudyComponent } from "@/types/Components";
+import { Study, TimerViewState, WhichTimer } from "@/types/Timer";
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { Modal } from "@/component/transitions/Modal";
-import { StudyComponent } from "@/types/Components";
-import TimerSlider from "@/component/TimerSlider";
-import { useNavbarContext } from "@/context/HideNavbarContext";
 import ExtendTimer from "../ExtendTimer";
-import saveToDb from "@/hooks/SaveToDb";
-import { useExamPhaseContext } from "@/context/ExamPhaseContext";
-import Reasons from "./causes/Reasons";
+import Reasons from "./reasons/Reasons";
 
 export const StudyView = ({
   setWhichTimer,
@@ -22,9 +22,10 @@ export const StudyView = ({
 }) => {
   const { examPhaseId } = useExamPhaseContext();
   const { setHideNavbar } = useNavbarContext();
-  let [open, setOpen] = useState(false);
-  let [showComponent, setShowComponent] = useState(StudyComponent.NO_COMPONENT);
-  const [iconLabel, setIconLabel] = useState("");
+  const [open, setOpen] = useState(false);
+  const [showComponent, setShowComponent] = useState(
+    StudyComponent.NO_COMPONENT
+  );
 
   const [runningTimer, setRunningTimer] = useState<TimerViewState>(
     TimerViewState.START
@@ -90,8 +91,6 @@ export const StudyView = ({
         setRunningTimer={setRunningTimer}
         duration={duration}
         setDuration={setDuration}
-        entry={studyEntry}
-        setEntry={setStudyEntry}
       />
 
       {runningTimer === TimerViewState.START && (
@@ -106,7 +105,7 @@ export const StudyView = ({
             setStudyEntry(e);
           }}
         >
-          Start Timer
+          start timer
         </button>
       )}
 
@@ -117,14 +116,13 @@ export const StudyView = ({
             saveToDb(examPhaseId, studyEntry, true);
           }}
         >
-          Stop Timer
+          stop timer
         </button>
       )}
 
       {runningTimer === TimerViewState.FINISHED && (
         <>
           <ExtendTimer
-            duration={duration}
             setDuration={setDuration}
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}
@@ -137,7 +135,7 @@ export const StudyView = ({
               setRunningTimer(TimerViewState.START);
             }}
           >
-            Finish
+            finish
           </button>
         </>
       )}
