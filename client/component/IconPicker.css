@@ -19,12 +19,18 @@ input.nosubmit {
 .icon-picker .pick-box-container {
   display: flex;
 }
+
+.icon-picker a {
+  display: flex;
+  justify-content: center;
+}
 .pick-box {
-  position: absolute;
+  /* position: absolute; */
   top: 100%;
-  padding: 8px;
+  margin-top: 10px;
+  padding: 8x;
   left: 0;
-  width: 400px;
+  width: 300px;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;

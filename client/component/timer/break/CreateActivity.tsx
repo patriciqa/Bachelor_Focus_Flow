@@ -15,7 +15,7 @@ export default function CreateActivity({
     icon: "",
     archived: false,
   });
-  
+
   const onIconChange = (icon: string) => {
     seticon(icon);
     console.log(icon);
@@ -26,13 +26,13 @@ export default function CreateActivity({
 
   return (
     <>
-      <div>
+      <div className="flex flex-col items-center justify-center">
+        <div>add new break activity</div>
         <input
           type="text"
           id="name"
-          name="name"
+          className="bg-white border-2 rounded-md border-darkGrey"
           required
-          className="bg-silver"
           onChange={(i) => {
             const a = { ...activities };
             a.title = i.target.value;
@@ -41,17 +41,16 @@ export default function CreateActivity({
             setActivities(a);
           }}
         />
+        <IconPicker value={icon} onChange={onIconChange} />
+        <button
+          onClick={() => {
+            addElement("activities", activities);
+            setOpen(false);
+          }}
+        >
+          save activity
+        </button>
       </div>
-      <IconPicker value={icon} onChange={onIconChange} />
-
-      <button
-        onClick={() => {
-          addElement("activities", activities);
-          setOpen(false);
-        }}
-      >
-        save activity
-      </button>
     </>
   );
 }

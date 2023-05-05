@@ -1,8 +1,13 @@
 import CreateExamPhase from "@/component/settings/CreateExamPhase";
+import { WhichTimer } from "@/types/Timer";
 import { useState } from "react";
 import ModalPage from "../settings/causes/ModalPage";
 
-export default function CreatePhaseView() {
+export default function CreatePhaseView({
+  setWhichTimer,
+}: {
+  setWhichTimer: (d: WhichTimer) => void;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -20,7 +25,9 @@ export default function CreatePhaseView() {
         <ModalPage
           open={open}
           setOpen={setOpen}
-          component={<CreateExamPhase setOpen={setOpen} />}
+          component={
+            <CreateExamPhase setOpen={setOpen} setWhichTimer={setWhichTimer} />
+          }
         />
       </div>
     </>

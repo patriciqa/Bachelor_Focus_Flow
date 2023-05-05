@@ -1,6 +1,6 @@
 import { addElement } from "@/db/Actions";
 import { SettingComponent } from "@/types/Components";
-import { ExamPhase, PickedDate } from "@/types/Timer";
+import { ExamPhase, PickedDate, WhichTimer } from "@/types/Timer";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Calendar from "react-calendar";
@@ -8,9 +8,11 @@ import Calendar from "react-calendar";
 export default function CreateExamPhase({
   setShowComponent,
   setOpen,
+  setWhichTimer,
 }: {
   setShowComponent?: (c: SettingComponent) => void;
   setOpen?: (c: boolean) => void;
+  setWhichTimer: (d: WhichTimer) => void;
 }) {
   const [showCalender, setShowCalender] = useState(false);
   const [date, setDate] = useState<PickedDate>();
@@ -18,11 +20,11 @@ export default function CreateExamPhase({
   const getDate = (): string => {
     let d = "";
     if (date) {
-      let fromDay = new Date(date.from).getDate();
-      let fromMonth = new Date(date.from).getMonth() + 1;
-      let toDay = new Date(date.to).getDate();
-      let toMonth = new Date(date.to).getMonth() + 1;
-      let toYear = new Date(date.to).getFullYear();
+      const fromDay = new Date(date.from).getDate();
+      const fromMonth = new Date(date.from).getMonth() + 1;
+      const toDay = new Date(date.to).getDate();
+      const toMonth = new Date(date.to).getMonth() + 1;
+      const toYear = new Date(date.to).getFullYear();
       d = `${fromDay}.${fromMonth} - ${toDay}.${toMonth}.${toYear}`;
     }
 
@@ -62,7 +64,6 @@ export default function CreateExamPhase({
       {showCalender && (
         <Calendar
           onChange={(d: any) => {
-            // let sortedDate = date.sort((a, b) => a.getTime() - b.getTime());
             if (d[1]) {
               setDate({
                 from: d[0].getTime(),
@@ -110,6 +111,7 @@ export default function CreateExamPhase({
           } else {
             if (setOpen !== undefined) {
               setOpen(false);
+              setWhichTimer(WhichTimer.STUDY);
             }
           }
         }}

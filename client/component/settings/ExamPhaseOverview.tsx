@@ -1,20 +1,22 @@
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
 import { SettingComponent } from "@/types/Components";
-import { ExamPhase } from "@/types/Timer";
+import { ExamPhase, WhichTimer } from "@/types/Timer";
 import { useEffect, useState } from "react";
 import ModalPage from "./causes/ModalPage";
 import CreateExamPhase from "./CreateExamPhase";
 
 export default function ExamPhaseOverview({
   setShowComponent,
+  setWhichTimer,
 }: {
   setShowComponent: (c: SettingComponent) => void;
+  setWhichTimer: (d: WhichTimer) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [phases, setPhases] = useState<ExamPhase[]>();
   const examphases: ExamPhase[] = [];
-  const { examPhaseId, setExamPhaseId } = useExamPhaseContext();
+  const { setExamPhaseId } = useExamPhaseContext();
 
   const getPhases = async (): Promise<ExamPhase[]> => {
     const a = (await getElement("examPhases", "all").then((result) => {
@@ -59,6 +61,7 @@ export default function ExamPhaseOverview({
           <CreateExamPhase
             setOpen={setOpen}
             setShowComponent={setShowComponent}
+            setWhichTimer={setWhichTimer}
           />
         }
       />

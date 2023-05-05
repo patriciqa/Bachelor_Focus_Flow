@@ -2,12 +2,17 @@ import BreakActivityOverview from "@/component/settings/activities/BreakActivity
 import ModalPage from "@/component/settings/causes/ModalPage";
 import ReasonsOverview from "@/component/settings/causes/ReasonsOverview";
 import { SettingComponent } from "@/types/Components";
+import { WhichTimer } from "@/types/Timer";
 import React, { useState } from "react";
 import ExamPhaseOverview from "../../component/settings/ExamPhaseOverview";
 
-const Settings = (): React.ReactElement => {
-  let [open, setOpen] = useState(false);
-  let [showComponent, setShowComponent] = useState(
+const Settings = ({
+  setWhichTimer,
+}: {
+  setWhichTimer: (d: WhichTimer) => void;
+}): React.ReactElement => {
+  const [open, setOpen] = useState(false);
+  const [showComponent, setShowComponent] = useState(
     SettingComponent.NO_COMPONENT
   );
 
@@ -15,13 +20,15 @@ const Settings = (): React.ReactElement => {
     let component = null;
     switch (showComponent) {
       case SettingComponent.EXAMPHASE_OVERVIEW:
-        component = <ExamPhaseOverview setShowComponent={setShowComponent} />;
+        component = (
+          <ExamPhaseOverview
+            setShowComponent={setShowComponent}
+            setWhichTimer={setWhichTimer}
+          />
+        );
         break;
       case SettingComponent.GOOD_REASONS:
         component = <ReasonsOverview good={true} />;
-        break;
-      case SettingComponent.BAD_REASONS:
-        component = <ReasonsOverview good={false} />;
         break;
       case SettingComponent.BAD_REASONS:
         component = <ReasonsOverview good={false} />;

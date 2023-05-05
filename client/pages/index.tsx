@@ -104,7 +104,7 @@ const Timer = ({
         );
         break;
       case WhichTimer.EXAMPHASE:
-        component = <CreatePhaseView />;
+        component = <CreatePhaseView setWhichTimer={setWhichTimer} />;
         break;
       default:
         component = (

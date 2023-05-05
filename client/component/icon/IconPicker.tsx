@@ -57,7 +57,7 @@ const IconPicker = ({
           }}
           style={{ marginLeft: "8px" }}
         >
-          <FontAwesomeIcon icon={value} />
+          <FontAwesomeIcon size="6x" icon={value} color="#48B065" />
           {/* Change */}
         </a>
         {IsOpen && (
@@ -124,7 +124,7 @@ const IconPicker = ({
                         onClick={() => selectIcon(icon.title)}
                       >
                         <div className="icon">
-                          <FontAwesomeIcon icon={icon.title} />
+                          <FontAwesomeIcon icon={icon.title} color="#48B065" />
                         </div>
                       </div>
                     );
