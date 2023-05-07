@@ -26,6 +26,7 @@ export default function BreakActivityOverview() {
     <div>
       <div className="flex flex-col justify-center">
         {activities !== undefined &&
+          // eslint-disable-next-line react/jsx-key
           activities.map((c) => <TextWithIcon text={c.title} icon={c.icon} />)}
       </div>
     </div>

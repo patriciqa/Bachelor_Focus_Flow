@@ -28,6 +28,8 @@ const Overview = () => {
     getData().then((phases) => {
       phases.map((phase) => {
         console.log(phase);
+        //2x ausgeführt
+
         calculateSummary(phase, choosenDate);
       });
     });
@@ -94,9 +96,9 @@ const Overview = () => {
                     : "bg-bubble-gum  items-end")
                 }
               >
+                <div> {entry.id} </div>
                 <div>duration: {entry.timer.duration} seconds</div>
                 <div>
-                  startTime:
                   {format(new Date(entry.timer.startTime), "HH:mm dd/LL/yyyy")}
                 </div>
                 <div>mood: {entry.mood}</div>
