@@ -30,7 +30,7 @@ export const BreakView = ({
   const { examPhaseId } = useExamPhaseContext();
 
   const { setHideNavbar } = useNavbarContext();
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState<number>();
 
   const [showComponent, setShowComponent] = useState(
     BreakComponent.NO_COMPONENT
@@ -101,7 +101,7 @@ export const BreakView = ({
                 e.timer.startTime = Date.now();
                 e.timer.duration = duration;
                 e.studyTimer = false;
-                // e.breakActivityId = selected;
+                e.breakActivityId = selected;
                 setBreakEntryy(e);
               }}
             >

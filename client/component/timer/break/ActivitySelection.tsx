@@ -3,7 +3,6 @@ import TextWithIcon from "@/component/icon/TextWithIcon";
 import ModalPage from "@/component/settings/reasons/ModalPage";
 import { getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
-import { includes } from "lodash";
 import { useEffect, useState } from "react";
 import CreateActivity from "./CreateActivity";
 
@@ -11,8 +10,8 @@ export default function ActivitySelection({
   selected,
   setSelected,
 }: {
-  selected: string;
-  setSelected: (d: string) => void;
+  selected: number;
+  setSelected: (d: number) => void;
 }) {
   const [activities, setActivities] = useState<Activity[]>();
   const activityArray: Activity[] = [];
@@ -39,13 +38,17 @@ export default function ActivitySelection({
         activities.map((c) => (
           <button
             key={c.id}
-            className={
-              "w-full  p-2 align-center  justify-center flex " +
-              (includes(selected, c.title) === true && "bg-metal")
-            }
+            // className={
+            //   "w-full  p-2 align-center  justify-center flex " +
+            //   // (c.id !== undefined &&
+            //   //   includes(selected, c.id) === true &&
+            //   //   "bg-metal")
+            // }
             onClick={() => {
-              let selectedActivity = "";
-              selectedActivity = c.title;
+              let selectedActivity = -1;
+              if (c.id !== undefined) {
+                selectedActivity = c.id;
+              }
               setSelected(selectedActivity);
             }}
           >
