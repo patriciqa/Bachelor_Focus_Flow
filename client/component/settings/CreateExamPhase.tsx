@@ -45,7 +45,7 @@ export default function CreateExamPhase({
           console.log(i.target.value);
           const e = { ...examPhase };
           e.title = i.target.value;
-          e.id = i.target.value;
+          // e.id = i.target.value;
           setExamPhase(e);
         }}
       />
@@ -74,6 +74,7 @@ export default function CreateExamPhase({
               e.startDate = d[0].getTime();
               e.endDate = d[1].getTime();
               console.log(examPhase);
+              setExamPhase(e);
             } else {
               const s = d[0];
               const newD = new Date(s.getTime() + 60 * 60 * 24 * 1000);
@@ -98,9 +99,10 @@ export default function CreateExamPhase({
       <button
         onClick={() => {
           if (examPhase !== undefined) {
+            console.log(examPhase);
             addElement("examPhases", examPhase);
-            if (examPhase.title !== undefined) {
-              localStorage.setItem("examId", examPhase.title);
+            if (setOpen !== undefined) {
+              setOpen(false);
             }
           }
           if (router === "/settings" && setShowComponent !== undefined) {

@@ -10,7 +10,6 @@ export default function CreateActivity({
 }) {
   const [icon, seticon] = useState("fa fa-home");
   const [activities, setActivities] = useState<Activity>({
-    id: "",
     title: "",
     icon: "",
     archived: false,
@@ -18,7 +17,6 @@ export default function CreateActivity({
 
   const onIconChange = (icon: string) => {
     seticon(icon);
-    console.log(icon);
     const a = { ...activities };
     a.icon = icon;
     setActivities(a);
@@ -37,13 +35,13 @@ export default function CreateActivity({
             const a = { ...activities };
             a.title = i.target.value;
             a.archived = false;
-            a.id = i.target.value;
             setActivities(a);
           }}
         />
         <IconPicker value={icon} onChange={onIconChange} />
         <button
           onClick={() => {
+            console.log(activities);
             addElement("activities", activities);
             setOpen(false);
           }}

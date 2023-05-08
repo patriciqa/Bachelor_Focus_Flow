@@ -101,7 +101,7 @@ export const BreakView = ({
                 e.timer.startTime = Date.now();
                 e.timer.duration = duration;
                 e.studyTimer = false;
-                e.breakActivityId = selected;
+                // e.breakActivityId = selected;
                 setBreakEntryy(e);
               }}
             >

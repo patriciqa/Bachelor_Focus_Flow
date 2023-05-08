@@ -15,6 +15,7 @@ export default function ExamPhaseOverview({
 }) {
   const [open, setOpen] = useState(false);
   const [phases, setPhases] = useState<ExamPhase[]>();
+  const [examPhaseTitle, setExamPhaseTitle] = useState<string>();
   const examphases: ExamPhase[] = [];
   const { setExamPhaseId } = useExamPhaseContext();
 
@@ -32,20 +33,29 @@ export default function ExamPhaseOverview({
         setPhases(phase);
       });
     });
-  });
+    const id = localStorage.getItem("examId");
+    if (id !== null) {
+      getElement("examPhases", parseInt(id)).then((result: any) => {
+        setExamPhaseTitle(result.title);
+      });
+    }
+  }, [phases]); //todo renders too much
 
   return (
     <div className="flex flex-col">
-      <div className="bg-tahiti">active:{localStorage.getItem("examId")}</div>
+      <div className="bg-tahiti">
+        active:
+        {examPhaseTitle}
+      </div>
       <div className="flex flex-col">
         {phases !== undefined &&
           phases.map((p) => (
             <button
               key={p.title}
               onClick={() => {
-                if (p.title !== undefined) {
-                  localStorage.setItem("examId", p.title);
-                  setExamPhaseId(p.title);
+                if (p.id !== undefined) {
+                  localStorage.setItem("examId", p.id.toString());
+                  setExamPhaseId(p.id);
                 }
               }}
             >

@@ -43,7 +43,7 @@ export interface Timer {
 }
 
 export interface Activity {
-  id: string;
+  id?: number;
   title: string;
   icon: string;
   archived: false;
@@ -54,15 +54,15 @@ export interface Reason extends Activity {
 
 export interface Entry {
   mood?: Mood;
-  id?: string;
+  id?: number;
   timer: Timer;
   studyTimer?: boolean;
 }
 
 export interface Study extends Entry {
-  reasonIds?: string[];
+  reasonIds?: number[];
 }
 
 export interface Break extends Entry {
-  breakActivityId?: string;
+  breakActivityId?: number;
 }

@@ -20,7 +20,6 @@ export default function CreateReason({
     setReasons(a);
   };
   const [reasons, setReasons] = useState<Reason>({
-    id: "",
     title: "",
     icon: "",
     archived: false,
@@ -40,7 +39,7 @@ export default function CreateReason({
             const a = { ...reasons };
             a.title = i.target.value;
             a.archived = false;
-            a.id = i.target.value;
+            // a.id = i.target.value;
             if (goodReason) {
               a.goodReason = true;
             } else {

@@ -3,7 +3,7 @@ import { Mood, WhichTimer } from "@/types/Timer";
 import { render } from "@testing-library/react";
 const entry = {
   mood: Mood.GOOD,
-  id: "id",
+  id: 0,
   timer: { startTime: 0, duration: 1 },
   studyTimer: true,
 };

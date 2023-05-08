@@ -6,7 +6,7 @@ export default function saveToDb(
   entry: Break | Study,
   isStudyEntry: boolean
 ) {
-  const currentPhase = getElement("examPhases", examPhaseId);
+  const currentPhase = getElement("examPhases", parseInt(examPhaseId));
   currentPhase.then((e: any) => {
     const updatedPhase: ExamPhase = { ...e };
     if (isStudyEntry) {

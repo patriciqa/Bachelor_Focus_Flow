@@ -5,7 +5,7 @@ import { expect } from "vitest";
 
 const entry = {
   mood: Mood.GOOD,
-  id: "id",
+  id: 0,
   timer: { startTime: 0, duration: 1 },
   studyTimer: false,
 };

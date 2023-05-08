@@ -1,9 +1,9 @@
 export default function initDb() {
-  const keys = {
-    activities: [{ name: "uuid", unique: true }],
-    reasons: [{ name: "uuid", unique: true }],
-    examPhases: [{ name: "uuid", unique: true }],
-  };
+  // const keys = {
+  //   activities: [{ name: "uuid", unique: true }],
+  //   // reasons: [{ name: "uuid", unique: true }],
+  //   examPhases: [{ name: "uuid", unique: true }],
+  // };
   let db!: IDBDatabase;
   const request = indexedDB.open("data", 1);
   request.onerror = (err) =>
@@ -29,6 +29,9 @@ export default function initDb() {
     // );
     // keys.reasons.forEach((key) =>
     //   reasonStore.createIndex(key.name, key.name, { unique: key.unique })
+    // );
+    // keys.examPhases.forEach((key) =>
+    //   examPhaseStore.createIndex(key.name, key.name, { unique: key.unique })
     // );
     // keys.examPhases.forEach((key) =>
     //   examPhaseStore.createIndex(key.name, key.name, { unique: key.unique })

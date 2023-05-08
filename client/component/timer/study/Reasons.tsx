@@ -27,7 +27,7 @@ export default function Reasons({
   const [open, setOpen] = useState(false);
   const [reasons, setReasons] = useState<Reason[]>();
   const selectedReason: Reason[] = [];
-  const [selected, setSelected] = useState<string[]>();
+  const [selected, setSelected] = useState<number[]>();
 
   async function getData(): Promise<Reason[]> {
     const data: Reason[] = await getElement("reasons", "all");

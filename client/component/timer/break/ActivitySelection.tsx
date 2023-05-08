@@ -31,7 +31,7 @@ export default function ActivitySelection({
         setActivities(activityArray);
       });
     });
-  });
+  }); //todo renders too much
 
   return (
     <div className="flex flex-col justify-center">
