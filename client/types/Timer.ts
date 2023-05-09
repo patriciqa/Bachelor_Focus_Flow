@@ -49,7 +49,7 @@ export interface Activity {
   archived: false;
 }
 export interface Reason extends Activity {
-  goodReason: boolean;
+  goodReason: boolean | null;
 }
 
 export interface Entry {

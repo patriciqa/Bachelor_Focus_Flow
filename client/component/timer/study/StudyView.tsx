@@ -44,18 +44,23 @@ export const StudyView = ({
             setEntry={setStudyEntry}
             setStudyShowComponent={setShowComponent}
           />
-          // <StudyMoodCheckIn
-          //   studyEntry={studyEntry}
-          //   setStudyEntry={setStudyEntry}
-          //   showComponent={showComponent}
-          //   setShowComponent={setShowComponent}
-          // />
         );
         break;
       case StudyComponent.GOOD_REASON:
         component = (
           <Reasons
             good
+            setWhichTimer={setWhichTimer}
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
+            setShowComponent={setShowComponent}
+          />
+        );
+        break;
+      case StudyComponent.BAD_REASON:
+        component = (
+          <Reasons
+            good={false}
             setWhichTimer={setWhichTimer}
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}

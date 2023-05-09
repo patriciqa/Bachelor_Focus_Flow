@@ -84,15 +84,6 @@ const Timer = ({
   const showPage = (): React.ReactElement => {
     let component;
     switch (whichTimer) {
-      case WhichTimer.STUDY:
-        component = (
-          <StudyView
-            setWhichTimer={setWhichTimer}
-            studyEntry={studyEntry}
-            setStudyEntry={setStudyEntry}
-          />
-        );
-        break;
       case WhichTimer.BREAK:
         component = (
           <BreakView
@@ -107,6 +98,7 @@ const Timer = ({
         component = <CreatePhaseView setWhichTimer={setWhichTimer} />;
         break;
       default:
+      case WhichTimer.STUDY:
         component = (
           <StudyView
             setWhichTimer={setWhichTimer}
@@ -114,9 +106,11 @@ const Timer = ({
             setStudyEntry={setStudyEntry}
           />
         );
+        break;
     }
     return component;
   };
+
   return (
     <div className="flex flex-col items-center justify-center w-screen">
       <>

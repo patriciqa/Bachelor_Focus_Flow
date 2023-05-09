@@ -8,7 +8,7 @@ import { StudyComponent } from "@/types/Components";
 import { Reason, Study, WhichTimer } from "@/types/Timer";
 import { includes } from "lodash";
 import { useEffect, useState } from "react";
-import CreateReason from "./CreateReason";
+import CreateView from "../CreateView";
 
 export default function Reasons({
   good,
@@ -27,7 +27,7 @@ export default function Reasons({
   const [open, setOpen] = useState(false);
   const [reasons, setReasons] = useState<Reason[]>();
   const selectedReason: Reason[] = [];
-  const [selected, setSelected] = useState<number[]>();
+  const [selected, setSelected] = useState<number[] | undefined>();
 
   async function getData(): Promise<Reason[]> {
     const data: Reason[] = await getElement("reasons", "all");
@@ -59,7 +59,7 @@ export default function Reasons({
   }, [selected]);
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center">
       {good ? (
         <div>Great! Why did it go well?</div>
       ) : (
@@ -75,16 +75,20 @@ export default function Reasons({
                   (includes(selected, reason.id) === true && "bg-metal")
                 }
                 onClick={() => {
-                  let selectedReasons;
-                  if (selected === undefined) {
-                    selectedReasons = [reason.id];
-                  } else if (includes(selected, reason.id)) {
-                    selectedReasons = selected.filter((e) => e !== reason.id);
-                  } else {
-                    selectedReasons = [...selected];
-                    selectedReasons.push(reason.id);
+                  let selectedReasons = [];
+                  if (reason.id !== undefined) {
+                    if (selected === undefined) {
+                      selectedReasons = [reason.id];
+                    } else if (includes(selected, reason.id)) {
+                      selectedReasons = selected.filter((e) => e !== reason.id);
+                    } else {
+                      selectedReasons = [...selected];
+                      if (reason.id !== undefined) {
+                        selectedReasons.push(reason.id);
+                      }
+                    }
+                    setSelected(selectedReasons);
                   }
-                  setSelected(selectedReasons);
                 }}
               >
                 <TextWithIcon icon={reason.icon} text={reason.title} />
@@ -115,9 +119,9 @@ export default function Reasons({
         open={open}
         setOpen={setOpen}
         component={
-          <CreateReason setOpen={setOpen} goodReason={good ? true : false} />
+          <CreateView setOpen={setOpen} goodReason={good ? true : false} />
         }
       />
-    </>
+    </div>
   );
 }

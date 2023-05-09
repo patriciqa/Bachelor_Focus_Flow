@@ -15,12 +15,12 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
       {!hideNavbar && (
         <div className="fixed bottom-0 flex flex-col items-center justify-center w-screen">
           <ul className="flex justify-center w-full">
-            <Link href="/">
-              <li
-                className={
-                  "w-full  p-5 align-center  justify-center flex bg-white"
-                }
-              >
+            <li
+              className={
+                "w-full  p-5 align-center  justify-center flex bg-white"
+              }
+            >
+              <Link href="/">
                 {initialRenderComplete && (
                   <FontAwesomeIcon
                     icon={["fas", "clock"]}
@@ -28,8 +28,8 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                     size="2x"
                   />
                 )}
-              </li>
-            </Link>
+              </Link>
+            </li>
 
             <li
               className={

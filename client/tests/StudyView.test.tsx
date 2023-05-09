@@ -19,6 +19,10 @@ beforeEach(async () => {
     />
   );
 });
+
+//Given entry.mood = mood.Bad -> überschreiben (muss neu gerendert werden): fixtures.detectChanges
+//Given, TimerViewState
+//state bearbeiten in vitest in react
 describe("Study Timer View Test", () => {
   it("Check if the  Timer starts when Start Timer button  is clicked", async () => {
     const button = screen.getAllByRole("button", { name: /start timer/i });

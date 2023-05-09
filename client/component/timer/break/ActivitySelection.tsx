@@ -4,7 +4,7 @@ import ModalPage from "@/component/settings/reasons/ModalPage";
 import { getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
 import { useEffect, useState } from "react";
-import CreateActivity from "./CreateActivity";
+import CreateView from "../CreateView";
 
 export default function ActivitySelection({
   selected,
@@ -38,12 +38,10 @@ export default function ActivitySelection({
         activities.map((c) => (
           <button
             key={c.id}
-            // className={
-            //   "w-full  p-2 align-center  justify-center flex " +
-            //   // (c.id !== undefined &&
-            //   //   includes(selected, c.id) === true &&
-            //   //   "bg-metal")
-            // }
+            className={
+              "w-full  p-2 align-center  justify-center flex " +
+              (c.id !== undefined && selected === c.id && "bg-metal")
+            }
             onClick={() => {
               let selectedActivity = -1;
               if (c.id !== undefined) {
@@ -66,7 +64,7 @@ export default function ActivitySelection({
       <ModalPage
         open={open}
         setOpen={setOpen}
-        component={<CreateActivity setOpen={setOpen} />}
+        component={<CreateView setOpen={setOpen} />}
       />
     </div>
   );

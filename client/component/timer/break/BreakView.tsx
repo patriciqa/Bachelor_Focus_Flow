@@ -30,7 +30,7 @@ export const BreakView = ({
   const { examPhaseId } = useExamPhaseContext();
 
   const { setHideNavbar } = useNavbarContext();
-  const [selected, setSelected] = useState<number>();
+  const [selected, setSelected] = useState<number>(-1);
 
   const [showComponent, setShowComponent] = useState(
     BreakComponent.NO_COMPONENT

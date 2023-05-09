@@ -1,5 +1,5 @@
 import TextWithIcon from "@/component/icon/TextWithIcon";
-import CreateReason from "@/component/timer/study/CreateReason";
+import CreateView from "@/component/timer/CreateView";
 import { getElement } from "@/db/Actions";
 import { Reason } from "@/types/Timer";
 import { useEffect, useState } from "react";
@@ -50,7 +50,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
           open={open}
           setOpen={setOpen}
           component={
-            <CreateReason setOpen={setOpen} goodReason={good ? true : false} />
+            <CreateView setOpen={setOpen} goodReason={good ? true : false} />
           }
         />
       </div>

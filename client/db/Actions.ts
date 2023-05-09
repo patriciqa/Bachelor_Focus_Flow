@@ -31,7 +31,6 @@ export const addElement = (store: string, payload: object) => {
       const serialized = JSON.parse(JSON.stringify(payload));
       const request = objectStore.add(serialized);
       console.log(request);
-      // console.log( request.result);
       request.onerror = () => console.error(request.error);
       transaction.oncomplete = () => db.close();
       request.onsuccess = function (event: any) {
@@ -46,39 +45,6 @@ export const addElement = (store: string, payload: object) => {
     }
   };
 };
-// export const getKey = () => {
-//   const open = indexedDB.open("data");
-//   open.onsuccess = () => {
-//     db = open.result;
-
-//     const title = "as";
-
-//     // Open up a transaction as usual
-//     const objectStore = db
-//       .transaction(["examPhases"], "readwrite")
-//       .objectStore("examPhases");
-
-//     // Get the to-do list object that has this title as it's title
-//     const objectStoreTitleRequest = objectStore.getAllKeys();
-
-//     objectStoreTitleRequest.onsuccess = function () {
-//       // Grab the data object returned as the result
-//       const data: any = objectStoreTitleRequest.result;
-
-//       data.map;
-//       // // Update the notified value in the object to "yes"
-//       // data.icon = "yes";
-
-//       // Create another request that inserts the item back into the database
-//       const updateTitleRequest = objectStore.put(data);
-
-//       // When this new request succeeds, run the displayData() function again to update the display
-//       updateTitleRequest.onsuccess = function () {
-//         console.log(updateTitleRequest);
-//       };
-//     };
-//   };
-// };
 
 export const editElement = <T>(
   store: string,
