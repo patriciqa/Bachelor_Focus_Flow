@@ -1,4 +1,4 @@
-import Timer from "@/pages";
+import Timer from "@/pages/overview";
 import { Mood, WhichTimer } from "@/types/Timer";
 import { render } from "@testing-library/react";
 const entry = {

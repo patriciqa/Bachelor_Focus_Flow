@@ -4,7 +4,7 @@ import ReasonsOverview from "@/component/settings/reasons/ReasonsOverview";
 import { SettingComponent } from "@/types/Components";
 import { WhichTimer } from "@/types/Timer";
 import React, { useState } from "react";
-import ExamPhaseOverview from "../../component/settings/ExamPhaseOverview";
+import ExamPhaseOverview from "../component/settings/ExamPhaseOverview";
 
 const Settings = ({
   setWhichTimer,

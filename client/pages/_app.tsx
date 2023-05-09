@@ -1,19 +1,19 @@
-import ExamContextProvider from "@/context/ExamPhaseContext";
 import Layout from "@/component/Layout";
+import ExamContextProvider from "@/context/ExamPhaseContext";
 import "@/pages/globals.css";
-import { Break, WhichTimer, Study } from "@/types/Timer";
+import { Break, Study, WhichTimer } from "@/types/Timer";
 import type { AppProps } from "next/app";
 import { useState } from "react";
 import "../component/Calendar.css";
 import "../component/IconPicker.css";
 // import Font Awesome CSS
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
 import HideNavbarProvider from "@/context/HideNavbarContext";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 // import your icons
-import { fas } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [studyEntry, setStudyEntry] = useState<Study>({

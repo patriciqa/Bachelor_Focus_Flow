@@ -32,7 +32,10 @@ export default function TimerSlider({
     if (minutes === -1) {
       minutes = 0;
     }
-    return `${minutes}:${seconds}`;
+
+    return `${minutes < 10 ? `0${minutes}` : minutes}:${
+      seconds < 10 ? `0${seconds}` : seconds
+    }`;
   };
 
   return (

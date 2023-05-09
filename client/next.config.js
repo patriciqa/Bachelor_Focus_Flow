@@ -10,3 +10,9 @@ const withPWA = require('next-pwa')({
 module.exports = withPWA({
   reactStrictMode: true,
 })
+
+const nextConfig = {
+  reactStrictMode: false
+}
+
+module.exports = nextConfig

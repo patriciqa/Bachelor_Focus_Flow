@@ -1,6 +1,7 @@
 import MoodIcon from "@/component/icon/MoodIcon";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import saveToDb from "@/hooks/SaveToDb";
+import sToM from "@/hooks/SecondsToMinutes";
 import { BreakComponent, StudyComponent } from "@/types/Components";
 import { Break, Mood, Study, WhichTimer } from "@/types/Timer";
 import CustomButton from "../CustomButton";
@@ -26,12 +27,12 @@ export default function MoodCheckIn({
     <div className="flex flex-col items-center justify-center">
       {isStudy ? (
         <>
-          <div>study - {entry.timer.duration / 60}min </div>
+          <div>study - {sToM(entry.timer.duration)} min </div>
           <div className="text-center">How did your studying go?</div>
         </>
       ) : (
         <>
-          <div>break - {entry.timer.duration / 60}min </div>
+          <div>break - {sToM(entry.timer.duration)} min </div>
           <div className="text-center">
             How do you feel after <br /> this break?
           </div>

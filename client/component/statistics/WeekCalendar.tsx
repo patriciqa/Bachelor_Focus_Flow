@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  format,
-  startOfWeek,
   addDays,
+  addWeeks,
+  getWeek,
   isSameDay,
   lastDayOfWeek,
-  getWeek,
-  addWeeks,
+  startOfWeek,
   subWeeks,
 } from "date-fns";
+import moment from "moment";
+import { useEffect, useState } from "react";
 
 const WeekCalendar = ({
   selectedDate,
@@ -19,7 +20,10 @@ const WeekCalendar = ({
 }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
-
+  const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+  useEffect(() => {
+    setInitialRenderComplete(true);
+  }, []);
   const changeWeekHandle = (btnType: string) => {
     if (btnType === "prev") {
       setCurrentMonth(subWeeks(currentMonth, 1));
@@ -40,52 +44,62 @@ const WeekCalendar = ({
     return (
       <div className="flex flex-row w-full flex-middle">
         <div className="flex-grow"></div>
-        <div className="flex-grow text-center">
-          <span>{format(currentMonth, dateFormat)}</span>
+
+        <div className="flex flex-grow w-full text-center">
+          {initialRenderComplete && (
+            <FontAwesomeIcon icon={["fas", "calendar"]} />
+          )}
+          <span>{moment(currentMonth).format(dateFormat)}</span>
         </div>
         <div className="flex-grow text-right"></div>
       </div>
     );
   };
   const renderDays = () => {
-    const dateFormat = "EEE";
+    const dateFormat = "ddd";
     const days = [];
     let startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
     for (let i = 0; i < 7; i++) {
       days.push(
-        <div className="flex-grow text-center" key={i}>
-          {format(addDays(startDate, i), dateFormat)}
+        <div className="flex-1 text-center " key={i}>
+          {moment(addDays(startDate, i)).format(dateFormat)}
         </div>
       );
     }
-    return <div className="flex flex-row w-full days">{days}</div>;
+    return (
+      <>
+        <div className="flex flex-row w-full days">
+          <div className="flex-1 text-center"></div>
+          {days}
+          <div className="flex-1 text-center"></div>
+        </div>
+      </>
+    );
   };
 
   const renderCells = () => {
     const startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
     const endDate = lastDayOfWeek(currentMonth, { weekStartsOn: 1 });
-    const dateFormat = "d";
+    const dateFormat = "D";
     const rows = [];
     let days = [];
     let day = startDate;
     let formattedDate = "";
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
-        formattedDate = format(day, dateFormat);
+        formattedDate = moment(day).format(dateFormat);
         const cloneDay = day;
         days.push(
           <div
-            className={`flex-grow h-5  ${
+            className={`flex-1	text-center ${
               isSameDay(day, new Date())
-                ? "today bg-silver"
+                ? "today italic text-tahiti	"
                 : isSameDay(day, selectedDate)
-                ? "bg-tahiti "
+                ? "underline decoration-solid "
                 : "bg-white"
             }`}
             key={i}
             onClick={() => {
-              const dayStr = format(cloneDay, "ccc dd MMM yy");
-              console.log(dayStr);
               onDateClickHandle(cloneDay);
             }}
           >
@@ -97,7 +111,23 @@ const WeekCalendar = ({
 
       rows.push(
         <div key="key" className="flex flex-row w-full">
+          <div
+            className="flex-1 text-center "
+            onClick={() => changeWeekHandle("prev")}
+          >
+            {initialRenderComplete && (
+              <FontAwesomeIcon icon={["fas", "chevron-left"]} />
+            )}
+          </div>
           {days}
+          <div
+            className="flex-1 text-center "
+            onClick={() => changeWeekHandle("next")}
+          >
+            {initialRenderComplete && (
+              <FontAwesomeIcon icon={["fas", "chevron-right"]} />
+            )}{" "}
+          </div>
         </div>
       );
       days = [];
@@ -123,11 +153,11 @@ const WeekCalendar = ({
     );
   };
   return (
-    <div className="calendar">
+    <div className="w-full calendar">
       {renderHeader()}
       {renderDays()}
       {renderCells()}
-      {renderFooter()}
+      {/* {renderFooter()} */}
     </div>
   );
 };
