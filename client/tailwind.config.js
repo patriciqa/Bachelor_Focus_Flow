@@ -30,6 +30,8 @@ module.exports = {
       "breakGreen": "#48B065",
       "studyBlue": "#5A55F4",
       "gray3": "#828282",
+      "break": "#48B065",
+      "study": "#5A55F4",
       brand: {
         break: "#48B065",
         DEFAULT: '#ff77e9',

@@ -1,8 +1,8 @@
+import { ExamPhase } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   addDays,
   addWeeks,
-  getWeek,
   isSameDay,
   lastDayOfWeek,
   startOfWeek,
@@ -12,14 +12,15 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 
 const WeekCalendar = ({
+  activePhase,
   selectedDate,
   setSelectedDate,
 }: {
+  activePhase: ExamPhase;
   selectedDate: Date;
   setSelectedDate: (d: Date) => void;
 }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
   useEffect(() => {
     setInitialRenderComplete(true);
@@ -27,11 +28,9 @@ const WeekCalendar = ({
   const changeWeekHandle = (btnType: string) => {
     if (btnType === "prev") {
       setCurrentMonth(subWeeks(currentMonth, 1));
-      setCurrentWeek(getWeek(subWeeks(currentMonth, 1)));
     }
     if (btnType === "next") {
       setCurrentMonth(addWeeks(currentMonth, 1));
-      setCurrentWeek(getWeek(addWeeks(currentMonth, 1)));
     }
   };
 
@@ -39,19 +38,31 @@ const WeekCalendar = ({
     setSelectedDate(day);
   };
 
+  const getDate = (): any => {
+    let start = "";
+    let end = "";
+    if (activePhase) {
+      start = moment(activePhase.startDate).format("L");
+      end = moment(activePhase.endDate).format("L");
+    }
+
+    return `${start} – ${end}`;
+  };
+
   const renderHeader = () => {
     const dateFormat = "MMM yyyy";
     return (
-      <div className="flex flex-row w-full flex-middle">
-        <div className="flex-grow"></div>
-
+      <div className="flex flex-col w-full flex-middle">
+        <div>
+          <p>{activePhase?.title}</p>
+          <p>{getDate()}</p>
+        </div>
         <div className="flex flex-grow w-full text-center">
           {initialRenderComplete && (
             <FontAwesomeIcon icon={["fas", "calendar"]} />
           )}
           <span>{moment(currentMonth).format(dateFormat)}</span>
         </div>
-        <div className="flex-grow text-right"></div>
       </div>
     );
   };
@@ -134,30 +145,12 @@ const WeekCalendar = ({
     }
     return <div className="body">{rows}</div>;
   };
-  const renderFooter = () => {
-    return (
-      <div className="flex flex-row w-full header flex-middle">
-        <div className="flex-grow col-start">
-          <div className="" onClick={() => changeWeekHandle("prev")}>
-            prev week
-          </div>
-        </div>
-        <div>{currentWeek}</div>
-        <div
-          className="flex-grow text-right"
-          onClick={() => changeWeekHandle("next")}
-        >
-          <div className="">next week</div>
-        </div>
-      </div>
-    );
-  };
+
   return (
-    <div className="w-full calendar">
+    <div className="w-full my-9 calendar">
       {renderHeader()}
       {renderDays()}
       {renderCells()}
-      {/* {renderFooter()} */}
     </div>
   );
 };

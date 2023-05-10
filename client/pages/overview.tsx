@@ -1,7 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import Victory from "@/component/charts/Victory";
+import MoodChart from "@/component/charts/MoodChart";
+import WeekCalendar from "@/component/overview/WeekCalendar";
 import { getElement } from "@/db/Actions";
+import sToM from "@/hooks/SecondsToMinutes";
 import { Activity, ExamPhase, Mood, Reason } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { sortBy } from "lodash";
@@ -54,17 +56,6 @@ const Overview = () => {
     getAllReasons();
     getAllActivites();
   }, [selectedDate]);
-
-  const getDate = (): any => {
-    let start = "";
-    let end = "";
-    if (activePhase) {
-      start = moment(activePhase.startDate).format("L");
-      end = moment(activePhase.endDate).format("L");
-    }
-
-    return `${start} – ${end}`;
-  };
 
   const calculateSummary = (
     phase: ExamPhase | undefined,
@@ -134,25 +125,18 @@ const Overview = () => {
 
   return (
     <>
-      <Victory entries={entries} />
-      {/* 
       <div className="flex flex-col items-center justify-center w-screen">
-        <div>
-          <p>{activePhase?.title}</p>
-          <p>{getDate()}</p>
-        </div>
         <WeekCalendar
+          activePhase={activePhase}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
 
-        <MoodChart entries={entries} />
-
-        <button onClick={() => getData()}></button>
         <div className="flex justify-between w-full ">
-          <div className="bg-silver">Study {sToM(studySummary)} min</div>
-          <div className="bg-bubble-gum">Break: {sToM(breakSummary)} min</div>
+          <div className="bg-study">Study {sToM(studySummary)} min</div>
+          <div className="bg-break">Break: {sToM(breakSummary)} min</div>
         </div>
+        <MoodChart entries={entries} />
         <>
           {entries !== undefined &&
             entries.map((entry: any) => (
@@ -161,8 +145,8 @@ const Overview = () => {
                   className={
                     " p-2  w-screen justify-center  flex flex-col " +
                     (entry.studyTimer === true
-                      ? "bg-silver  items-start"
-                      : "bg-bubble-gum  items-end")
+                      ? "bg-study  items-start"
+                      : "bg-break  items-end")
                   }
                 >
                   <div className="flex">
@@ -201,7 +185,7 @@ const Overview = () => {
               </div>
             ))}
         </>
-      </div> */}
+      </div>
     </>
   );
 };
