@@ -1,14 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import MoodChart from "@/component/charts/MoodChart";
-import WeekCalendar from "@/component/statistics/WeekCalendar";
+import Victory from "@/component/charts/Victory";
 import { getElement } from "@/db/Actions";
-import sToM from "@/hooks/SecondsToMinutes";
 import { Activity, ExamPhase, Mood, Reason } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { sortBy } from "lodash";
 import moment from "moment";
 import { useEffect, useState } from "react";
+
 export function getIcon(mood: Mood): React.ReactElement {
   let icon;
   switch (mood) {
@@ -135,6 +134,8 @@ const Overview = () => {
 
   return (
     <>
+      <Victory entries={entries} />
+      {/* 
       <div className="flex flex-col items-center justify-center w-screen">
         <div>
           <p>{activePhase?.title}</p>
@@ -144,6 +145,7 @@ const Overview = () => {
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
+
         <MoodChart entries={entries} />
 
         <button onClick={() => getData()}></button>
@@ -199,7 +201,7 @@ const Overview = () => {
               </div>
             ))}
         </>
-      </div>
+      </div> */}
     </>
   );
 };

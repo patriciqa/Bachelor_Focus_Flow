@@ -44,7 +44,8 @@
     "react-countdown-circle-timer": "^3.2.1",
     "react-dom": "18.2.0",
     "react-onsenui": "^1.13.2",
-    "typescript": "5.0.2"
+    "typescript": "5.0.2",
+    "victory": "^36.6.10"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
