@@ -26,28 +26,15 @@ export default function MoodIcon({
       <button
         className={
           "p-2 rounded-md m-2 " +
-          (entry.mood === Mood.GOOD ? color : "bg-inactiveGrey")
+          (entry.mood === Mood.BAD ? color : "bg-inactiveGrey")
         }
         onClick={() => {
           const s = { ...entry };
-          s.mood = Mood.GOOD;
+          s.mood = Mood.BAD;
           setEntry(s);
         }}
       >
         <FontAwesomeIcon icon={["fas", "face-frown"]} color="white" size="2x" />
-      </button>
-      <button
-        className={
-          "p-2 rounded-md m-2 " +
-          (entry.mood === Mood.RATHER_GOOD ? color : "bg-inactiveGrey")
-        }
-        onClick={() => {
-          const s = { ...entry };
-          s.mood = Mood.RATHER_GOOD;
-          setEntry(s);
-        }}
-      >
-        <FontAwesomeIcon icon={["fas", "face-meh"]} color="white" size="2x" />
       </button>
       <button
         className={
@@ -60,16 +47,29 @@ export default function MoodIcon({
           setEntry(s);
         }}
       >
+        <FontAwesomeIcon icon={["fas", "face-meh"]} color="white" size="2x" />
+      </button>
+      <button
+        className={
+          "p-2 rounded-md m-2 " +
+          (entry.mood === Mood.RATHER_GOOD ? color : "bg-inactiveGrey")
+        }
+        onClick={() => {
+          const s = { ...entry };
+          s.mood = Mood.RATHER_GOOD;
+          setEntry(s);
+        }}
+      >
         <FontAwesomeIcon icon={["fas", "face-smile"]} color="white" size="2x" />
       </button>{" "}
       <button
         className={
           "p-2 rounded-md  m-2 " +
-          (entry.mood === Mood.BAD ? color : "bg-inactiveGrey")
+          (entry.mood === Mood.GOOD ? color : "bg-inactiveGrey")
         }
         onClick={() => {
           const s = { ...entry };
-          s.mood = Mood.BAD;
+          s.mood = Mood.GOOD;
           setEntry(s);
         }}
       >
