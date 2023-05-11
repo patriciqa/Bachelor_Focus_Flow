@@ -6,12 +6,12 @@ export default function TextWithIcon({
   icon,
   text,
 }: {
-  icon: string;
+  icon?: string;
   text: string | Promise<string>;
 }) {
   return (
     <div className="flex flex-row items-center justify-center">
-      <FontAwesomeIcon icon={icon} />
+      {icon !== undefined && <FontAwesomeIcon icon={icon} />}
       <div className="px-3"> {text}</div>
     </div>
   );

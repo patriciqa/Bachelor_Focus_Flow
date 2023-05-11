@@ -97,12 +97,14 @@ const Overview = () => {
     let entry = <div />;
     reasons?.map((reason: Reason) => {
       if (reason.id === id) {
-        entry = (
-          <div className="flex flex-row">
-            <FontAwesomeIcon icon={reason.icon} />
-            {reason.title}
-          </div>
-        );
+        // entry = (
+        //   // <div className="flex flex-row" key={reason.id}>
+        //   //   {/* {reason.icon !== undefined && (
+        //   //     <FontAwesomeIcon icon={reason.icon} />
+        //   //   )} */}
+        //   //   {reason.title}
+        //   // </div>
+        // );
       }
     });
     return entry;
@@ -112,12 +114,14 @@ const Overview = () => {
     let entry = <div />;
     activites?.map((activity: Activity) => {
       if (activity.id === id) {
-        entry = (
-          <div className="flex flex-row">
-            <FontAwesomeIcon icon={activity.icon} />
-            {activity.title}
-          </div>
-        );
+        // entry = (
+        //   // <div className="flex flex-row" key={activity.id}>
+        //   //   {/* {activity.icon !== undefined && (
+        //   //     <FontAwesomeIcon icon={activity.icon} />
+        //   //   )} */}
+        //   //   {activity.title}
+        //   // </div>
+        // );
       }
     });
     return entry;
@@ -165,7 +169,10 @@ const Overview = () => {
                       <div className="flex ">
                         {entry.reasonIds !== undefined &&
                           entry.reasonIds.map((reason: number) => (
-                            <div className="border-2 border-white border-solid rounded-md">
+                            <div
+                              key={reason}
+                              className="border-2 border-white border-solid rounded-md"
+                            >
                               {getReason(reason)}
                             </div>
                           ))}

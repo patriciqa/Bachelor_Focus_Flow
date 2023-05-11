@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { Mood } from "@/types/Timer";
-import { useEffect } from "react";
+import { useEffect, useId, useState } from "react";
 import {
   VictoryAxis,
   VictoryChart,
@@ -9,6 +9,16 @@ import {
   VictoryLine,
   VictoryScatter,
 } from "victory";
+
+export const useIsServerSide = () => {
+  const [isServerSide, setIsServerSide] = useState(true);
+
+  useEffect(() => {
+    setIsServerSide(false);
+  }, [setIsServerSide]);
+
+  return isServerSide;
+};
 
 export default function MoodChart({ entries }: { entries: any }) {
   //   const YAxisIcon = ({ x, y, datum }) => (
@@ -147,6 +157,8 @@ export default function MoodChart({ entries }: { entries: any }) {
     </g>
   );
 
+  const isServerSide = useIsServerSide();
+  if (isServerSide) return null;
   return (
     <div className="flex m-5">
       <VictoryChart>
@@ -212,7 +224,12 @@ export default function MoodChart({ entries }: { entries: any }) {
           textAnchor="middle"
           style={{ fontSize: 16 }}
         />
-        <VictoryLine data={allEntries()} x="x" y="y" />
+        <VictoryLine
+          id="test"
+          key={useId}
+          instanceId={useId}
+          data={allEntries()}
+        />
       </VictoryChart>
     </div>
   );

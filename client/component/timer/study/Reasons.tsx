@@ -91,7 +91,10 @@ export default function Reasons({
                   }
                 }}
               >
-                <TextWithIcon icon={reason.icon} text={reason.title} />
+                <TextWithIcon
+                  icon={reason.icon !== "" ? reason.icon : undefined}
+                  text={reason.title}
+                />
               </button>
             </>
           ))}
