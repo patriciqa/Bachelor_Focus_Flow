@@ -37,11 +37,7 @@ module.exports = {
       "studyChart3": "#B5B3F5",
       'background': '#F0F0F0',
 
-      brand: {
-        break: "#48B065",
-        DEFAULT: '#ff77e9',
-        study: "#5A55F4",
-      },
+
     },
     extend: {
       fontFamily: {

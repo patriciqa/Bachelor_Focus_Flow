@@ -6,29 +6,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { VictoryPie } from "victory";
 
-export default function PieChartStudy() {
-  const [activePhase, setActivePhase] = useState<ExamPhase>();
+export default function PieChartStudy({
+  activePhase,
+}: {
+  activePhase: ExamPhase;
+}) {
+  // const [activePhase, setActivePhase] = useState<ExamPhase>();
   const [topThree, setTopThree] = useState<number[]>();
   const [topThreeId, setTopThreeId] = useState<string[]>();
   const [badTopThree, setBadTopThree] = useState<number[]>();
   const [badTopThreeId, setBadTopThreeId] = useState<string[]>();
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [selectedDate, setSelectedDate] = useState(new Date());
   const [reasons, setReasons] = useState<Reason[]>();
 
-  const getData = async (): Promise<ExamPhase[]> => {
-    const data: ExamPhase[] = await getElement("examPhases", "all");
-    data.map((phase) => {
-      const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
+  // const getData = async (): Promise<ExamPhase[]> => {
+  //   const data: ExamPhase[] = await getElement("examPhases", "all");
+  //   data.map((phase) => {
+  //     const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
 
-      if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {
-        setActivePhase(phase);
-      }
-    });
-    return data;
-  };
+  //     if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {
+  //       setActivePhase(phase);
+  //     }
+  //   });
+  //   return data;
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  //   getAllReasons();
+  // }, []);
 
   useEffect(() => {
-    getData();
     getAllReasons();
   }, []);
 
@@ -204,7 +212,6 @@ export default function PieChartStudy() {
         );
       }
     });
-    console.log("entry", entry);
     return entry;
   };
 

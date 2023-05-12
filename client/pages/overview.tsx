@@ -8,6 +8,7 @@ import { Activity, ExamPhase, Mood, Reason } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { sortBy } from "lodash";
 import moment from "moment";
+import "moment/locale/de-ch";
 import { useEffect, useState } from "react";
 
 export function getIcon(mood: Mood): React.ReactElement {

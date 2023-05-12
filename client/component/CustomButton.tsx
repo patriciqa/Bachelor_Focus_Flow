@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import { type ButtonHTMLAttributes, type ReactNode } from "react";
 
-type buttonVariant = "study" | "break" | "ghost" | "link";
+type buttonVariant = "study" | "break" | "disabled";
 type buttonSize = "regular" | "large" | "small";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -27,12 +27,11 @@ const CustomButton = ({
         size === "regular" && "px-4 py-2 text-sm",
         size === "small" && "px-2 py-2",
         variant === "study" &&
-          "bg-brand-study text-white hover:bg-brand disabled:hover:bg-brand",
+          "bg-study text-white flex w-[235px] items-center justify-center h-12",
         variant === "break" &&
-          "bg-brand-break text-white hover:bg-brand disabled:hover:bg-brand",
-        variant === "ghost" &&
-          "text-brand hover:bg-brand-light disabled:hover:bg-transparent",
-        variant === "link" && "text-brand hover:underline disabled:no-underline"
+          "bg-break text-white flex w-[235px] items-center justify-center h-12",
+        variant === "disabled" &&
+          "bg-inactiveGrey text-white flex w-[235px] items-center justify-center h-12"
       )}
       {...props}
     >

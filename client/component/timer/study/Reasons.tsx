@@ -1,9 +1,10 @@
 import CustomButton from "@/component/CustomButton";
-import TextWithIcon from "@/component/icon/TextWithIcon";
+import ButtonList, { ButtonVariant } from "@/component/icon/ButtonList";
 import ModalPage from "@/component/settings/reasons/ModalPage";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
 import saveToDb from "@/hooks/SaveToDb";
+import sToM from "@/hooks/SecondsToMinutes";
 import { StudyComponent } from "@/types/Components";
 import { Reason, Study, WhichTimer } from "@/types/Timer";
 import { includes } from "lodash";
@@ -61,15 +62,21 @@ export default function Reasons({
   return (
     <div className="flex flex-col items-center justify-center">
       {good ? (
-        <div>Great! Why did it go well?</div>
+        <>
+          <div>study {sToM(studyEntry.timer.duration)}min</div>
+          <div>Great! Why did it go well?</div>
+        </>
       ) : (
-        <div>Why did it go not so well?</div>
+        <>
+          <div>study {sToM(studyEntry.timer.duration)}min</div>
+          <div>Why did it go bad?</div>
+        </>
       )}
       <div>
         {reasons !== undefined &&
           reasons.map((reason) => (
             <>
-              <button
+              {/* <button
                 className={
                   "w-full  p-2 align-center  justify-center flex " +
                   (includes(selected, reason.id) === true && "bg-metal")
@@ -90,12 +97,31 @@ export default function Reasons({
                     setSelected(selectedReasons);
                   }
                 }}
-              >
-                <TextWithIcon
-                  icon={reason.icon !== "" ? reason.icon : undefined}
-                  text={reason.title}
-                />
-              </button>
+              > */}
+              <ButtonList
+                reason={reason}
+                selected={selected}
+                whenClicked={() => {
+                  let selectedReasons = [];
+                  if (reason.id !== undefined) {
+                    if (selected === undefined) {
+                      selectedReasons = [reason.id];
+                    } else if (includes(selected, reason.id)) {
+                      selectedReasons = selected.filter((e) => e !== reason.id);
+                    } else {
+                      selectedReasons = [...selected];
+                      if (reason.id !== undefined) {
+                        selectedReasons.push(reason.id);
+                      }
+                    }
+                    setSelected(selectedReasons);
+                  }
+                }}
+                icon={reason.icon !== "" ? reason.icon : undefined}
+                text={reason.title}
+                buttonVariant={ButtonVariant.STUDY}
+              />
+              {/* </button> */}
             </>
           ))}
       </div>
@@ -108,7 +134,9 @@ export default function Reasons({
       </CustomButton>
       <CustomButton
         size="regular"
-        variant="break"
+        variant={
+          selected !== undefined && selected.length >= 1 ? "study" : "disabled"
+        }
         onClick={() => {
           saveToDb(examPhaseId, studyEntry, true);
           setShowComponent(StudyComponent.NO_COMPONENT);

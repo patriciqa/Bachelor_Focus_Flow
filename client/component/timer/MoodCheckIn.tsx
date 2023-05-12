@@ -48,7 +48,7 @@ export default function MoodCheckIn({
       <div>{entry.mood}</div>
       <CustomButton
         size="regular"
-        variant="break"
+        variant={isStudy ? "study" : "break"}
         onClick={() => {
           switch (entry.mood) {
             case Mood.GOOD:

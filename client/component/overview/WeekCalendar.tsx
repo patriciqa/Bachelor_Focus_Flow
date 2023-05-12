@@ -9,6 +9,7 @@ import {
   subWeeks,
 } from "date-fns";
 import moment from "moment";
+import "moment/locale/de-ch";
 import { useEffect, useState } from "react";
 
 const WeekCalendar = ({

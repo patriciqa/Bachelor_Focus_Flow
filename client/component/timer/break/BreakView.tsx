@@ -80,7 +80,6 @@ export const BreakView = ({
 
   return (
     <>
-      <div>Break</div>
       {showTimer ? (
         <>
           <div className="flex flex-col items-center justify-center">
@@ -137,7 +136,7 @@ export const BreakView = ({
         </>
       ) : (
         <>
-          <div>what would you like to do in your break?</div>
+          <div>What would you like to do in your break?</div>
           <ActivitySelection selected={selected} setSelected={setSelected} />
           <CustomButton
             variant="break"
