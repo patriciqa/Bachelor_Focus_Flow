@@ -32,6 +32,11 @@ module.exports = {
       "gray3": "#828282",
       "break": "#48B065",
       "study": "#5A55F4",
+      "studyChart1": "#332CF2",
+      "studyChart2": "#7571F2",
+      "studyChart3": "#B5B3F5",
+      'background': '#F0F0F0',
+
       brand: {
         break: "#48B065",
         DEFAULT: '#ff77e9',

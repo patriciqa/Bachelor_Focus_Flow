@@ -13,7 +13,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
   return (
     <>
       {!hideNavbar && (
-        <div className="fixed bottom-0 flex flex-col items-center justify-center w-screen">
+        <div className="fixed bottom-0 z-10 flex flex-col items-center justify-center w-screen ">
           <ul className="flex justify-center w-full">
             <li
               className={
