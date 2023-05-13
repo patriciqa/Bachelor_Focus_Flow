@@ -5,7 +5,10 @@ import { ExamPhase, Mood, Reason, Study } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { VictoryPie } from "victory";
-
+interface MoodCount {
+  id?: number;
+  mood?: number;
+}
 export default function PieChartStudy({
   activePhase,
 }: {
@@ -46,11 +49,6 @@ export default function PieChartStudy({
     }
   }, [activePhase]);
 
-  interface MoodCount {
-    id?: number;
-    mood?: number;
-  }
-
   const getGoodAndBadReasons = (phase: ExamPhase) => {
     let moodReason: [MoodCount] = [{}];
     phase.studyEntries?.map((entry: Study) => {
@@ -79,27 +77,29 @@ export default function PieChartStudy({
       });
     });
     console.log("moodReason", moodReason);
-    const summarize: { [key: number]: number } = moodReason.reduce(
-      (acc: any, curr) => {
-        const { id, mood } = curr;
-        if (id !== undefined) {
-          if (!acc[id]) {
-            acc[id] = mood;
-          } else {
-            acc[id] += mood;
+    if (moodReason.length !== 1) {
+      const summarize: { [key: number]: number } = moodReason.reduce(
+        (acc: any, curr) => {
+          const { id, mood } = curr;
+          if (id !== undefined) {
+            if (!acc[id]) {
+              acc[id] = mood;
+            } else {
+              acc[id] += mood;
+            }
           }
-        }
 
-        return acc;
-      },
-      {}
-    );
-    console.log("result", summarize);
+          return acc;
+        },
+        {}
+      );
+      console.log("result", summarize);
 
-    const createdArray = Object.entries(summarize).map(([key, value]) => ({
-      [key]: value,
-    }));
-    getTopThree(createdArray);
+      const createdArray = Object.entries(summarize).map(([key, value]) => ({
+        [key]: value,
+      }));
+      getTopThree(createdArray);
+    }
   };
 
   const getTopThree = (
@@ -150,16 +150,18 @@ export default function PieChartStudy({
       console.log(mutatedArray, "asdf");
       if (mutatedArray !== undefined) {
         for (let i = 0; i < 3; i++) {
-          if (Object.values(mutatedArray[i])[0] > 0) {
-            if (good.length === 1 && good[0] === 0) {
-              good = [Object.values(mutatedArray[i])[0]];
-            } else {
-              good.push(Object.values(mutatedArray[i])[0]);
-            }
-            if (goodId.length === 1 && goodId[0] === "") {
-              goodId = [Object.keys(mutatedArray[i])[0]];
-            } else {
-              goodId.push(Object.keys(mutatedArray[i])[0]);
+          if (mutatedArray[i] !== undefined) {
+            if (Object.values(mutatedArray[i])[0] > 0) {
+              if (good.length === 1 && good[0] === 0) {
+                good = [Object.values(mutatedArray[i])[0]];
+              } else {
+                good.push(Object.values(mutatedArray[i])[0]);
+              }
+              if (goodId.length === 1 && goodId[0] === "") {
+                goodId = [Object.keys(mutatedArray[i])[0]];
+              } else {
+                goodId.push(Object.keys(mutatedArray[i])[0]);
+              }
             }
           }
         }
@@ -172,16 +174,18 @@ export default function PieChartStudy({
 
       if (mutatedArray !== undefined) {
         for (let i = 0; i < 3; i++) {
-          if (Object.values(mutatedArray[i])[0] < 0) {
-            if (bad.length === 1 && bad[0] === 0) {
-              bad = [Object.values(mutatedArray[i])[0]];
-            } else {
-              bad.push(Object.values(mutatedArray[i])[0]);
-            }
-            if (badId.length === 1 && badId[0] === "") {
-              badId = [Object.keys(mutatedArray[i])[0]];
-            } else {
-              badId.push(Object.keys(mutatedArray[i])[0]);
+          if (mutatedArray[i] !== undefined) {
+            if (Object.values(mutatedArray[i])[0] < 0) {
+              if (bad.length === 1 && bad[0] === 0) {
+                bad = [Object.values(mutatedArray[i])[0]];
+              } else {
+                bad.push(Object.values(mutatedArray[i])[0]);
+              }
+              if (badId.length === 1 && badId[0] === "") {
+                badId = [Object.keys(mutatedArray[i])[0]];
+              } else {
+                badId.push(Object.keys(mutatedArray[i])[0]);
+              }
             }
           }
         }
