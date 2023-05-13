@@ -11,7 +11,7 @@ export default function TextWithIcon({
 }) {
   return (
     <div className="flex flex-row items-center justify-center">
-      {icon !== undefined && <FontAwesomeIcon icon={icon} />}
+      {icon !== "" && <FontAwesomeIcon icon={icon} />}
       <div className="px-3"> {text}</div>
     </div>
   );

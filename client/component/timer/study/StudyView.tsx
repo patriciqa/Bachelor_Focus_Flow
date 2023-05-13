@@ -94,7 +94,6 @@ export const StudyView = ({
         duration={duration}
         setDuration={setDuration}
       />
-
       {runningTimer === TimerViewState.START && (
         <CustomButton
           size="regular"
@@ -116,13 +115,17 @@ export const StudyView = ({
       {runningTimer === TimerViewState.RUNNING && (
         <CustomButton
           size="regular"
-          variant="study"
+          variant="study-unfilled"
           onClick={() => {
+            const s = { ...studyEntry };
+            s.timer.duration = Math.round(
+              (Date.now() - s.timer.startTime) / 1000
+            );
             setRunningTimer(TimerViewState.START);
-            saveToDb(examPhaseId, studyEntry, true);
+            saveToDb(examPhaseId, s, true);
           }}
         >
-          stop timer
+          cancel timer
         </CustomButton>
       )}
 

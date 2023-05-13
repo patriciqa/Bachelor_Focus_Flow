@@ -142,13 +142,13 @@ const Overview = () => {
           <div className="bg-break">Break: {sToM(breakSummary)} min</div>
         </div>
         <MoodChart entries={entries} />
-        <>
+        <div className="pb-[100px]">
           {entries !== undefined &&
             entries.map((entry: any) => (
               <div key={entry.timer.startTime}>
                 <button
                   className={
-                    " p-2  w-screen justify-center  flex flex-col " +
+                    " p-2 w-screen  justify-center  flex flex-col " +
                     (entry.studyTimer === true
                       ? "bg-study  items-start"
                       : "bg-break  items-end")
@@ -193,7 +193,7 @@ const Overview = () => {
                 </button>
               </div>
             ))}
-        </>
+        </div>
       </div>
     </>
   );

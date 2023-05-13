@@ -1,4 +1,5 @@
 import { Study, TimerViewState } from "@/types/Timer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Slider from "@mui/material/Slider";
 import { useState } from "react";
 
@@ -34,6 +35,7 @@ export default function ExtendTimer({
         />
         {/* <Slider defaultValue={30} step={10} marks min={10} max={110} disabled /> */}
         <button
+          className="p-3 mb-5 border rounded-md bg-study"
           onClick={() => {
             const e = { ...studyEntry };
             e.timer.duration += extend;
@@ -41,7 +43,11 @@ export default function ExtendTimer({
             setRunningTimer(TimerViewState.RUNNING);
           }}
         >
-          extend start
+          <FontAwesomeIcon
+            icon={["fas", "clock-rotate-left"]}
+            color="white"
+            size="2x"
+          />
         </button>
       </div>
     </>

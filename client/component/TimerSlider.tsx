@@ -107,7 +107,7 @@ export default function TimerSlider({
 
   return (
     <>
-      <div className="z-0">
+      <div className="z-0 ">
         {/* <div>
           <button onClick={showNotification}>Show Notification</button>
           <button onClick={stopTimer}>Stop Timer</button>

@@ -112,12 +112,18 @@ export const BreakView = ({
 
           {runningTimer === TimerViewState.RUNNING && (
             <CustomButton
+              variant="break-unfilled"
               onClick={() => {
+                const b = { ...breakEntryy };
+                b.timer.duration = Math.round(
+                  (Date.now() - b.timer.startTime) / 1000
+                );
                 setRunningTimer(TimerViewState.START);
-                saveToDb(examPhaseId, breakEntryy, true);
+                saveToDb(examPhaseId, b, true);
+                // setBreakEntryy(b);
               }}
             >
-              stop timer
+              cancel timer
             </CustomButton>
           )}
 
@@ -125,13 +131,14 @@ export const BreakView = ({
             <>
               <div>Welcome back!</div>
               <CustomButton
+                variant="break"
                 onClick={() => {
                   setOpen(true);
                   setShowComponent(BreakComponent.MOODCHECKIN);
                   setRunningTimer(TimerViewState.START);
                 }}
               >
-                finish{" "}
+                finish
               </CustomButton>
             </>
           )}
