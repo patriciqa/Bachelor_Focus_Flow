@@ -63,9 +63,6 @@ export default function ActivitySelection({
             className={
               "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] border-inactiveGrey " +
               (selected === null && "bg-inactiveGrey text-white")
-              // + getBorderColor() +
-              // " " +
-              // getBackground()
             }
           >
             set no activity
@@ -84,14 +81,6 @@ export default function ActivitySelection({
           </button>
         </div>
       </div>
-      {/* <CustomButton
-        variant="break"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        create new activity
-      </CustomButton> */}
       <ModalPage
         open={open}
         setOpen={setOpen}

@@ -169,6 +169,7 @@ const Overview = () => {
                       </div>
                       <div className="flex ">
                         {entry.reasonIds !== undefined &&
+                          entry.reasonIds !== null &&
                           entry.reasonIds.map((reason: number) => (
                             <div
                               key={reason}

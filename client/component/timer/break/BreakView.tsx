@@ -84,6 +84,7 @@ export const BreakView = ({
         <>
           <div className="flex flex-col items-center justify-center">
             <TimerSlider
+              isStudy={false}
               runningTimer={runningTimer}
               setRunningTimer={setRunningTimer}
               duration={duration}
@@ -93,6 +94,7 @@ export const BreakView = ({
 
           {runningTimer === TimerViewState.START && (
             <CustomButton
+              variant="break"
               onClick={() => {
                 setRunningTimer(TimerViewState.RUNNING);
                 setDuration(duration);

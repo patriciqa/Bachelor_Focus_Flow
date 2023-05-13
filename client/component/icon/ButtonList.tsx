@@ -85,15 +85,22 @@ export default function ButtonList({
       }
     >
       <div className="grow-[1] pr-3">
-        {icon !== undefined ? (
-          <FontAwesomeIcon icon={icon} className={getIconColor()} />
-        ) : (
-          <div>
-            <FontAwesomeIcon
-              icon={["fas", "circle-chevron-right"]}
-              color={"hsla(0, 100%, 90%, 0)"}
-            />
-          </div>
+        {icon !== undefined && (
+          <>
+            {icon !== "" ? (
+              <FontAwesomeIcon
+                icon={icon !== null && icon}
+                className={getIconColor()}
+              />
+            ) : (
+              <div>
+                <FontAwesomeIcon
+                  icon={["fas", "plus"]}
+                  color={"hsla(0, 100%, 90%, 0)"}
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
       <div

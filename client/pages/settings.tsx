@@ -3,7 +3,7 @@ import ModalPage from "@/component/settings/reasons/ModalPage";
 import ReasonsOverview from "@/component/settings/reasons/ReasonsOverview";
 import { SettingComponent } from "@/types/Components";
 import { WhichTimer } from "@/types/Timer";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import ExamPhaseOverview from "../component/settings/ExamPhaseOverview";
 
 const Settings = ({
@@ -15,6 +15,21 @@ const Settings = ({
   const [showComponent, setShowComponent] = useState(
     SettingComponent.NO_COMPONENT
   );
+
+  const workerRef = useRef<Worker>();
+
+  useEffect(() => {
+    workerRef.current = new Worker(new URL("../worker.ts", import.meta.url));
+    workerRef.current.onmessage = (event: MessageEvent<number>) =>
+      alert(`WebWorker Response => ${event.data}`);
+    return () => {
+      workerRef.current?.terminate();
+    };
+  }, []);
+
+  const handleWork = useCallback(async () => {
+    workerRef.current?.postMessage(100000);
+  }, []);
 
   const showPage = (): React.ReactElement => {
     let component = null;
@@ -44,6 +59,7 @@ const Settings = ({
   };
   return (
     <div className="flex flex-col items-center justify-center w-screen">
+      <button onClick={handleWork}>Calculate PI</button>
       <div>Settings</div>
       <button
         onClick={() => {

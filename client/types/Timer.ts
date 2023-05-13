@@ -60,7 +60,7 @@ export interface Entry {
 }
 
 export interface Study extends Entry {
-  reasonIds?: number[];
+  reasonIds?: number[] | null;
 }
 
 export interface Break extends Entry {

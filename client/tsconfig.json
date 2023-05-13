@@ -24,7 +24,8 @@
     "**/*.ts",
     "**/*.tsx",
     "component/archive/index",
-    "reasons/settings/inputtsx"
+    "reasons/settings/inputtsx",
+    "component/timerWorker.hs"
   ],
   "exclude": ["node_modules"]
 }

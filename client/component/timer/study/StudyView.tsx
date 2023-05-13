@@ -88,6 +88,7 @@ export const StudyView = ({
   return (
     <div className="flex flex-col items-center justify-center ">
       <TimerSlider
+        isStudy
         runningTimer={runningTimer}
         setRunningTimer={setRunningTimer}
         duration={duration}

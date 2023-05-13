@@ -7,8 +7,9 @@ import saveToDb from "@/hooks/SaveToDb";
 import sToM from "@/hooks/SecondsToMinutes";
 import { StudyComponent } from "@/types/Components";
 import { Reason, Study, WhichTimer } from "@/types/Timer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { includes } from "lodash";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import CreateView from "../CreateView";
 
 export default function Reasons({
@@ -28,7 +29,7 @@ export default function Reasons({
   const [open, setOpen] = useState(false);
   const [reasons, setReasons] = useState<Reason[]>();
   const selectedReason: Reason[] = [];
-  const [selected, setSelected] = useState<number[] | undefined>();
+  const [selected, setSelected] = useState<number[] | null>([]);
 
   async function getData(): Promise<Reason[]> {
     const data: Reason[] = await getElement("reasons", "all");
@@ -72,70 +73,75 @@ export default function Reasons({
           <div>Why did it go bad?</div>
         </>
       )}
-      <div>
-        {reasons !== undefined &&
-          reasons.map((reason) => (
-            <>
-              {/* <button
-                className={
-                  "w-full  p-2 align-center  justify-center flex " +
-                  (includes(selected, reason.id) === true && "bg-metal")
-                }
-                onClick={() => {
-                  let selectedReasons = [];
-                  if (reason.id !== undefined) {
-                    if (selected === undefined) {
-                      selectedReasons = [reason.id];
-                    } else if (includes(selected, reason.id)) {
-                      selectedReasons = selected.filter((e) => e !== reason.id);
-                    } else {
-                      selectedReasons = [...selected];
+      <div className="flex flex-col justify-center">
+        <div className="h-[50vh] relative py-4">
+          <div className="max-h-full overflow-auto">
+            {reasons !== undefined &&
+              reasons.map((reason) => (
+                <>
+                  <ButtonList
+                    reason={reason}
+                    selected={selected}
+                    whenClicked={() => {
+                      let selectedReasons: SetStateAction<number[] | null> = [];
                       if (reason.id !== undefined) {
-                        selectedReasons.push(reason.id);
+                        if (selected === undefined) {
+                          selectedReasons = [reason.id];
+                        } else if (
+                          includes(selected, reason.id) &&
+                          selected !== null
+                        ) {
+                          selectedReasons = selected.filter(
+                            (e) => e !== reason.id
+                          );
+                        } else {
+                          if (selected !== null) {
+                            selectedReasons = [...selected];
+                            if (reason.id !== undefined) {
+                              selectedReasons.push(reason.id);
+                            }
+                          }
+                        }
+                        setSelected(selectedReasons);
                       }
-                    }
-                    setSelected(selectedReasons);
-                  }
-                }}
-              > */}
-              <ButtonList
-                reason={reason}
-                selected={selected}
-                whenClicked={() => {
-                  let selectedReasons = [];
-                  if (reason.id !== undefined) {
-                    if (selected === undefined) {
-                      selectedReasons = [reason.id];
-                    } else if (includes(selected, reason.id)) {
-                      selectedReasons = selected.filter((e) => e !== reason.id);
-                    } else {
-                      selectedReasons = [...selected];
-                      if (reason.id !== undefined) {
-                        selectedReasons.push(reason.id);
-                      }
-                    }
-                    setSelected(selectedReasons);
-                  }
-                }}
-                icon={reason.icon !== "" ? reason.icon : undefined}
-                text={reason.title}
-                buttonVariant={ButtonVariant.STUDY}
+                    }}
+                    icon={reason.icon !== "" ? reason.icon : undefined}
+                    text={reason.title}
+                    buttonVariant={ButtonVariant.STUDY}
+                  />
+                </>
+              ))}
+            <button
+              onClick={() => {
+                setSelected(null);
+                console.log(selected);
+              }}
+              className={
+                "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] border-inactiveGrey " +
+                (selected === null && "bg-inactiveGrey text-white")
+              }
+            >
+              i don't know
+            </button>
+            <button
+              className="flex items-center justify-center w-full my-6 text-study"
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              <FontAwesomeIcon
+                className="pr-2 text-study"
+                icon={["fas", "plus"]}
               />
-              {/* </button> */}
-            </>
-          ))}
+              add new course
+            </button>
+          </div>
+        </div>
       </div>
-      <CustomButton
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        create new reason
-      </CustomButton>
       <CustomButton
         size="regular"
         variant={
-          selected !== undefined && selected.length >= 1 ? "study" : "disabled"
+          selected !== null && selected.length >= 1 ? "study" : "disabled"
         }
         onClick={() => {
           saveToDb(examPhaseId, studyEntry, true);

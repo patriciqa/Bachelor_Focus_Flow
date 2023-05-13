@@ -55,7 +55,7 @@ const WeekCalendar = ({
     return (
       <div className="flex flex-col w-full flex-middle">
         <div>
-          <p>{activePhase?.title}</p>
+          <p> examphase {activePhase?.title}</p>
           <p>{getDate()}</p>
         </div>
         <div className="flex flex-grow w-full text-center">
