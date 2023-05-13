@@ -18,7 +18,7 @@ export default function ButtonList({
   buttonVariant,
 }: {
   reason: any;
-  selected: number[] | undefined | number;
+  selected: number[] | null | number;
   whenClicked: () => void;
   icon?: string;
   text: string | Promise<string>;
@@ -27,7 +27,8 @@ export default function ButtonList({
   const getBackground = (): string => {
     if (
       buttonVariant === ButtonVariant.STUDY &&
-      includes(selected, reason.id) === true
+      includes(selected, reason.id) === true &&
+      selected !== null
     ) {
       return "bg-study text-white";
     } else if (
@@ -37,6 +38,7 @@ export default function ButtonList({
     ) {
       return "bg-break text-white";
     }
+
     return "";
   };
 
@@ -53,18 +55,22 @@ export default function ButtonList({
     ) {
       return "#fffff";
     }
-    if (buttonVariant === ButtonVariant.STUDY) {
-      return "#5A55F4";
-    } else if (buttonVariant === ButtonVariant.BREAK) {
-      return "#48B065";
+    if (buttonVariant === ButtonVariant.STUDY && selected !== null) {
+      return "text-study";
+    } else if (buttonVariant === ButtonVariant.BREAK && selected !== null) {
+      return "text-break";
+    } else if (selected === null) {
+      return "text-inactiveGrey";
     }
   };
 
   const getBorderColor = (): string => {
-    if (buttonVariant === ButtonVariant.STUDY) {
+    if (buttonVariant === ButtonVariant.STUDY && selected !== null) {
       return "border-study";
-    } else if (buttonVariant === ButtonVariant.BREAK) {
+    } else if (buttonVariant === ButtonVariant.BREAK && selected !== null) {
       return "border-break";
+    } else if (selected === null) {
+      return "border-inactiveGrey";
     }
   };
 
@@ -72,7 +78,7 @@ export default function ButtonList({
     <button
       onClick={whenClicked}
       className={
-        "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] " +
+        "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px]  w-[80vw] " +
         getBorderColor() +
         " " +
         getBackground()
@@ -80,7 +86,7 @@ export default function ButtonList({
     >
       <div className="grow-[1] pr-3">
         {icon !== undefined ? (
-          <FontAwesomeIcon icon={icon} color={getIconColor()} />
+          <FontAwesomeIcon icon={icon} className={getIconColor()} />
         ) : (
           <div>
             <FontAwesomeIcon
@@ -90,7 +96,15 @@ export default function ButtonList({
           </div>
         )}
       </div>
-      <div className="grow-[5] flex items-left w-[180px]"> {text}</div>
+      <div
+        className={
+          "grow-[5] flex items-left " +
+          (selected === null && "text-inactiveGrey")
+        }
+      >
+        {" "}
+        {text}
+      </div>
     </button>
   );
 }

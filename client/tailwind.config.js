@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const defaultTheme = require("tailwindcss/defaultTheme")
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
@@ -56,11 +58,20 @@ module.exports = {
         cs: ['1.125rem', '1.5'], // 18px
         cxs: ['1rem', '1.6'], // 16px
         cxxs: ['0.875rem', '1.5'], // 14px
+        201616: ['16px', '16px'],
+        20: ['20px', '20px'],
+        24: ['24px', '24px']
       },
 
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addBase }) {
+      addBase({
+        'html': { fontSize: "20px" },
+      })
+    }),
+  ],
 }
 
 

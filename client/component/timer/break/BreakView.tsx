@@ -30,7 +30,7 @@ export const BreakView = ({
   const { examPhaseId } = useExamPhaseContext();
 
   const { setHideNavbar } = useNavbarContext();
-  const [selected, setSelected] = useState<number>(-1);
+  const [selected, setSelected] = useState<number | null>(-1);
 
   const [showComponent, setShowComponent] = useState(
     BreakComponent.NO_COMPONENT
@@ -136,7 +136,10 @@ export const BreakView = ({
         </>
       ) : (
         <>
-          <div>What would you like to do in your break?</div>
+          <div className="flex text-center text-24">
+            What would you like to do <br /> in your break?
+          </div>
+          <p className="text-16 text-inactiveGrey">select 1 activity</p>
           <ActivitySelection selected={selected} setSelected={setSelected} />
           <CustomButton
             variant="break"

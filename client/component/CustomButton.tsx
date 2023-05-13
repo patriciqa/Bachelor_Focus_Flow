@@ -27,11 +27,11 @@ const CustomButton = ({
         size === "regular" && "px-4 py-2 text-sm",
         size === "small" && "px-2 py-2",
         variant === "study" &&
-          "bg-study text-white flex w-[235px] items-center justify-center h-12",
+          "bg-study text-white flex w-[80vw] items-center justify-center h-12",
         variant === "break" &&
-          "bg-break text-white flex w-[235px] items-center justify-center h-12",
+          "bg-break text-white flex w-[80vw] items-center justify-center h-12",
         variant === "disabled" &&
-          "bg-inactiveGrey text-white flex w-[235px] items-center justify-center h-12"
+          "bg-inactiveGrey text-white flex w-[80vw] items-center justify-center h-12"
       )}
       {...props}
     >
