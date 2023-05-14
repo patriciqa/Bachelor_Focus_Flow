@@ -16,16 +16,16 @@ export function getIcon(mood: Mood): React.ReactElement {
   let icon;
   switch (mood) {
     case Mood.BAD:
-      icon = <FontAwesomeIcon icon={["fas", "face-frown"]} />;
+      icon = <FontAwesomeIcon icon={["fas", "face-frown"]} size="2x" />;
       break;
     case Mood.RATHER_BAD:
-      icon = <FontAwesomeIcon icon={["fas", "face-meh"]} />;
+      icon = <FontAwesomeIcon icon={["fas", "face-meh"]} size="2x" />;
       break;
     case Mood.RATHER_GOOD:
-      icon = <FontAwesomeIcon icon={["fas", "face-smile"]} />;
+      icon = <FontAwesomeIcon icon={["fas", "face-smile"]} size="2x" />;
       break;
     case Mood.GOOD:
-      icon = <FontAwesomeIcon icon={["fas", "face-grin"]} />;
+      icon = <FontAwesomeIcon icon={["fas", "face-grin"]} size="2x" />;
       break;
   }
   return icon;
@@ -100,10 +100,16 @@ const Overview = () => {
     reasons?.map((reason: Reason) => {
       if (reason.id === id) {
         entry = (
-          <div className="flex flex-row" key={reason.id}>
-            {reason.icon !== undefined && (
-              <FontAwesomeIcon icon={reason.icon} />
-            )}
+          <div
+            className="flex flex-row items-center border border-white rounded-[32px] py-1 px-2"
+            key={reason.id}
+          >
+            <div className="pr-2">
+              {reason.icon !== undefined && (
+                <FontAwesomeIcon icon={reason.icon} />
+              )}
+            </div>
+
             {reason.title}
           </div>
         );
@@ -153,32 +159,37 @@ const Overview = () => {
               <div key={entry.timer.startTime}>
                 <button
                   className={
-                    " p-2 w-screen  justify-center  flex flex-col " +
-                    (entry.studyTimer === true
-                      ? "bg-study  items-start"
-                      : "bg-break  items-end")
+                    " m-6  py-4  h-[25vh] flex flex-col  rounded w-[90vw] text-white " +
+                    (entry.studyTimer === true ? "bg-study " : "bg-break ")
                   }
                 >
-                  <div className="flex">
-                    <div> {getIcon(entry.mood)}</div>
+                  <div className="flex justify-center">
+                    <div className="flex flex-col items-center w-[25vw]">
+                      <div>{getIcon(entry.mood)}</div>
+                      <div className="flex items-center justify-center w-4 text-center text-h12">
+                        {entry.mood}
+                      </div>
+                    </div>
                     <div>
-                      <div>{sToM(entry.timer.duration)} min</div>
-                      <div>
+                      <div className="font-bold text-h24">
+                        {sToM(entry.timer.duration)} min
+                      </div>
+                      <div className="flex text-h16">
                         {moment(new Date(entry.timer.startTime)).format(
-                          " HH:mm "
-                        )}{" "}
+                          "HH:mm "
+                        )}
                         -
                         {moment(new Date(entry.timer.startTime))
                           .add(entry.timer.duration)
                           .format("HH:mm")}
                       </div>
-                      <div className="flex ">
+                      <div className="flex flex-col ">
                         {entry.reasonIds !== undefined &&
                           entry.reasonIds !== null &&
                           entry.reasonIds.map((reason: number) => (
                             <div
                               key={reason}
-                              className="border-2 border-white border-solid rounded-md"
+                              className="flex items-center py-1"
                             >
                               {getReason(reason)}
                             </div>
@@ -187,7 +198,7 @@ const Overview = () => {
                       <div className="flex">
                         {entry.breakActivityId !== undefined && (
                           <>
-                            <div className="border-2 border-white border-solid rounded-md">
+                            <div className="flex items-center ">
                               {getActivity(entry.breakActivityId)}
                             </div>
                           </>
