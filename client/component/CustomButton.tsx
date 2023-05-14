@@ -26,21 +26,20 @@ const CustomButton = ({
   return (
     <button
       className={clsx(
-        "h-fit w-fit rounded-lg text-xs font-medium transition-all",
-        "disabled:cursor-not-allowed disabled:opacity-50",
-        size === "large" && "px-5 py-3 text-base",
-        size === "regular" && "px-4 py-2 text-sm",
+        "h-fit w-fit rounded   transition-all",
+        size === "large" && "px-5 py-3",
+        size === "regular" && "px-4 py-2",
         size === "small" && "px-2 py-2",
         variant === "study" &&
-          "bg-study text-white flex w-[80vw] items-center justify-center h-12",
+          "  bg-study text-white flex w-5/6	 items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "study-unfilled" &&
-          "text-study border-study border flex w-[80vw] items-center justify-center h-12",
+          "  bg-white text-study border flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break" &&
-          "bg-break text-white flex w-[80vw] items-center justify-center h-12",
+          "  bg-break text-white flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break-unfilled" &&
-          "text-break border-break border flex w-[80vw] items-center justify-center h-12",
+          "  bg-white text-break border flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "disabled" &&
-          "bg-inactiveGrey text-white flex w-[80vw] items-center justify-center h-12"
+          "  bg-inactiveGrey text-white flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal "
       )}
       {...props}
     >

@@ -117,7 +117,7 @@ const Timer = ({
         {/* <Toggle /> */}
         <div
           className={
-            "flex justify-center w-full px-20 py-10  " +
+            "flex justify-center w-full pt-20 px-14 pb-12	" +
             (hideNavbar && "invisible")
           }
         >
@@ -125,9 +125,7 @@ const Timer = ({
             onClick={() => setWhichTimer(WhichTimer.STUDY)}
             className={
               "w-1/2 rounded-l-lg text-white p-2  bg-inactiveGrey " +
-              (whichTimer === WhichTimer.STUDY
-                ? "bg-study rounded  "
-                : "white	 ")
+              (whichTimer === WhichTimer.STUDY && "bg-study rounded  ")
             }
           >
             study
@@ -136,15 +134,15 @@ const Timer = ({
             onClick={() => setWhichTimer(WhichTimer.BREAK)}
             className={
               "w-1/2 rounded-r-lg text-white p-2  bg-inactiveGrey " +
-              (whichTimer === WhichTimer.BREAK
-                ? "bg-[#48B065] rounded"
-                : "white	 ")
+              (whichTimer === WhichTimer.BREAK && "bg-opposite rounded  ")
             }
           >
             break
           </button>
         </div>
-        <div className="p-5 bg-white rounded h-[60vh]">{showPage()}</div>
+        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[63vh] w-[90vw]">
+          {showPage()}
+        </div>
       </>
     </div>
   );

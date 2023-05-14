@@ -62,6 +62,7 @@ export default function MoodCheckIn({
                   setShowComponent(BreakComponent.NO_COMPONENT);
                   saveToDb(examPhaseId, entry, false);
                   setWhichTimer(WhichTimer.STUDY);
+                  setEntry({ timer: { startTime: 0, duration: 0 } });
                 }
               }
 

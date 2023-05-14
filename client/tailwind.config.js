@@ -15,6 +15,9 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    // fontFamily: {
+    //   sofiaPro: ['Sofia Pro', 'sans-serif'],
+    // },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -28,26 +31,34 @@ module.exports = {
       'bermuda': '#78dcca',
 
       "darkGrey": "#959494",
-      "inactiveGrey": "#CFCFD9",
       "breakGreen": "#48B065",
       "studyBlue": "#5A55F4",
       "gray3": "#828282",
+      "opposite": "#48B065",
       "break": "#48B065",
       "study": "#5A55F4",
       "studyChart1": "#332CF2",
       "studyChart2": "#7571F2",
       "studyChart3": "#B5B3F5",
       'background': '#F0F0F0',
+      'lightBlue': 'E5F0FF',
+      "inactiveGrey": "#CFCFD9",
+
 
 
     },
     extend: {
       fontFamily: {
-        sans: [
-          '"Source Sans 3Variable"',
-          ...defaultTheme.fontFamily.sans,
-        ],
+        sans: ["Sofia Pro", ...defaultTheme.fontFamily.sans],
       },
+      // fontFamily: {
+      //   sofiaPro: ['Sofia Pro', 'sans-serif'],
+      //   // fontFamily: {
+      //   //   sans: [
+      //   //     '"Source Sans 3Variable"',
+      //   //     ...defaultTheme.fontFamily.sans,
+      //   //   ],
+      // },
       fontSize: {
         h1: ['2.625rem', '1.2'], // 42px
         h2: ['1.625rem', '1.2'], // 26px
@@ -58,9 +69,10 @@ module.exports = {
         cs: ['1.125rem', '1.5'], // 18px
         cxs: ['1rem', '1.6'], // 16px
         cxxs: ['0.875rem', '1.5'], // 14px
-        201616: ['16px', '16px'],
-        20: ['20px', '20px'],
-        24: ['24px', '24px']
+        h16: ['16px', '16px'],
+        h20: ['20px', '20px'],
+        h24: ['24px', '24px'],
+        // 30: ['30px', '30px'],
       },
 
     },

@@ -74,7 +74,7 @@ export default function Reasons({
         </>
       )}
       <div className="flex flex-col justify-center">
-        <div className="h-[50vh] relative py-4">
+        <div className="h-[50vh] relative py-4 w-[70vw]">
           <div className="max-h-full overflow-auto">
             {reasons !== undefined &&
               reasons.map((reason) => (
@@ -147,6 +147,7 @@ export default function Reasons({
           saveToDb(examPhaseId, studyEntry, true);
           setShowComponent(StudyComponent.NO_COMPONENT);
           setWhichTimer(WhichTimer.BREAK);
+          setStudyEntry({ timer: { startTime: 0, duration: 0 } });
         }}
       >
         complete

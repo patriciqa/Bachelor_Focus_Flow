@@ -95,7 +95,7 @@ export default function TimerSlider({
 
   const toMinutesSeconds = (totalSeconds: number): string => {
     const seconds = Math.floor(totalSeconds % 60);
-    let minutes = Math.floor((totalSeconds - 1) / 60);
+    let minutes = Math.floor(totalSeconds / 60);
     if (minutes === -1) {
       minutes = 0;
     }
@@ -131,7 +131,7 @@ export default function TimerSlider({
             progressColorTo={isStudy ? "#5A55F4" : "#48B065"}
             progressSize={20}
             trackColor="#eeeeee"
-            trackSize={16}
+            trackSize={12}
             onChange={(value: number) => {
               setDuration(value);
             }}
@@ -150,7 +150,7 @@ export default function TimerSlider({
         )}
       </div>
       <div className="absolute">
-        <div className="z-10 flex items-center content-center justify-center w-20 h-20 pb-10 text-4xl ">
+        <div className="z-10 flex items-center content-center justify-center w-20 h-20 text-4xl pb-28 ">
           {toMinutesSeconds(duration)}
         </div>
       </div>

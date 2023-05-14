@@ -86,7 +86,7 @@ export const StudyView = ({
   }, [runningTimer]);
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center h-[50vh] my-20 ">
       <TimerSlider
         isStudy
         runningTimer={runningTimer}
@@ -95,38 +95,44 @@ export const StudyView = ({
         setDuration={setDuration}
       />
       {runningTimer === TimerViewState.START && (
-        <CustomButton
-          size="regular"
-          variant="study"
-          onClick={() => {
-            setRunningTimer(TimerViewState.RUNNING);
-            setDuration(duration);
-            const e = { ...studyEntry };
-            e.timer.startTime = Date.now();
-            e.timer.duration = duration;
-            e.studyTimer = true;
-            setStudyEntry(e);
-          }}
-        >
-          start timer
-        </CustomButton>
+        <>
+          <div className="bg-transparent h-[10vh]" />
+          <CustomButton
+            size="regular"
+            variant="study"
+            onClick={() => {
+              setRunningTimer(TimerViewState.RUNNING);
+              setDuration(duration);
+              const e = { ...studyEntry };
+              e.timer.startTime = Date.now();
+              e.timer.duration = duration;
+              e.studyTimer = true;
+              setStudyEntry(e);
+            }}
+          >
+            start timer
+          </CustomButton>
+        </>
       )}
 
       {runningTimer === TimerViewState.RUNNING && (
-        <CustomButton
-          size="regular"
-          variant="study-unfilled"
-          onClick={() => {
-            const s = { ...studyEntry };
-            s.timer.duration = Math.round(
-              (Date.now() - s.timer.startTime) / 1000
-            );
-            setRunningTimer(TimerViewState.START);
-            saveToDb(examPhaseId, s, true);
-          }}
-        >
-          cancel timer
-        </CustomButton>
+        <>
+          <div className="h-[10vh]">Yeah, keep going!</div>
+          <CustomButton
+            size="regular"
+            variant="study-unfilled"
+            onClick={() => {
+              const s = { ...studyEntry };
+              s.timer.duration = Math.round(
+                (Date.now() - s.timer.startTime) / 1000
+              );
+              setRunningTimer(TimerViewState.START);
+              saveToDb(examPhaseId, s, true);
+            }}
+          >
+            cancel timer
+          </CustomButton>
+        </>
       )}
 
       {runningTimer === TimerViewState.FINISHED && (
