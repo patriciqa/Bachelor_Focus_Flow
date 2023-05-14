@@ -11,7 +11,6 @@ import {
 import moment from "moment";
 import "moment/locale/de-ch";
 import { useEffect, useState } from "react";
-
 const WeekCalendar = ({
   activePhase,
   selectedDate,
@@ -53,28 +52,31 @@ const WeekCalendar = ({
   const renderHeader = () => {
     const dateFormat = "MMM yyyy";
     return (
-      <div className="flex flex-col w-full flex-middle">
-        <div>
-          <p> examphase {activePhase?.title}</p>
-          <p>{getDate()}</p>
-        </div>
-        <div className="flex flex-grow w-full text-center">
+      <div className="flex justify-between w-full pt-4 pb-6">
+        <div className="flex">
           {initialRenderComplete && (
             <FontAwesomeIcon icon={["fas", "calendar"]} />
           )}
-          <span>{moment(currentMonth).format(dateFormat)}</span>
+          <span className="pl-4 text-h24">
+            {moment(currentMonth).format(dateFormat)}
+          </span>
+        </div>
+        <div className="items-end justify-end text-right text-h16 text-darkGrey flex-nowrap">
+          <p> examphase {activePhase?.title}</p>
+          <p className="flex flex-nowrap">{getDate()}</p>
         </div>
       </div>
     );
   };
+
   const renderDays = () => {
-    const dateFormat = "ddd";
+    const d = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
     const days = [];
     let startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
     for (let i = 0; i < 7; i++) {
       days.push(
-        <div className="flex-1 text-center " key={i}>
-          {moment(addDays(startDate, i)).format(dateFormat)}
+        <div className="flex-1 text-center text-h16 " key={i}>
+          {d[i]}
         </div>
       );
     }
@@ -103,26 +105,32 @@ const WeekCalendar = ({
         const cloneDay = day;
         days.push(
           <div
-            className={`flex-1	text-center ${
-              isSameDay(day, new Date())
-                ? "today italic text-tahiti	"
-                : isSameDay(day, selectedDate)
-                ? "underline decoration-solid "
-                : "bg-white"
+            className={`flex-1	text-center h-9  ${
+              isSameDay(day, selectedDate)
+                ? "border-b-2 border-black "
+                : "bg-background"
             }`}
             key={i}
             onClick={() => {
               onDateClickHandle(cloneDay);
             }}
           >
-            <span className="number">{formattedDate}</span>
+            <div className="flex flex-col">
+              <span className="number">{formattedDate}</span>
+              {isSameDay(day, new Date()) && (
+                <span className="today leading-[10px] font-bold">.</span>
+              )}
+            </div>
           </div>
         );
         day = addDays(day, 1);
       }
 
       rows.push(
-        <div key="key" className="flex flex-row w-full">
+        <div
+          key="key"
+          className="flex flex-row w-full pt-2 font-bold leading-5 text-h24 "
+        >
           <div
             className="flex-1 text-center "
             onClick={() => changeWeekHandle("prev")}
@@ -148,7 +156,7 @@ const WeekCalendar = ({
   };
 
   return (
-    <div className="w-full my-9 calendar">
+    <div className=" my-5 calendar w-[90vw]">
       {renderHeader()}
       {renderDays()}
       {renderCells()}

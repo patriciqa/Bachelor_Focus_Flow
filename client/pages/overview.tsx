@@ -3,6 +3,7 @@
 import MoodChart from "@/component/charts/MoodChart";
 import WeekCalendar from "@/component/overview/WeekCalendar";
 import { getElement } from "@/db/Actions";
+import sToH from "@/hooks/SecondsToHours";
 import sToM from "@/hooks/SecondsToMinutes";
 import { Activity, ExamPhase, Mood, Reason } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -130,18 +131,22 @@ const Overview = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-screen">
+      <div className="flex flex-col items-center justify-center w-screen bg-background">
         <WeekCalendar
           activePhase={activePhase}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
 
-        <div className="flex justify-between w-full ">
-          <div className="bg-study">Study {sToM(studySummary)} min</div>
-          <div className="bg-break">Break: {sToM(breakSummary)} min</div>
-        </div>
-        <MoodChart entries={entries} />
+        {/* <div className="flex justify-between w-full ">
+          <div className="bg-study">Study {sToH(studySummary)} </div>
+          <div className="bg-break">Break: {sToH(breakSummary)} </div>
+        </div> */}
+        <MoodChart
+          entries={entries}
+          studyEntry={sToH(studySummary)}
+          breakEntry={sToH(breakSummary)}
+        />
         <div className="pb-[100px]">
           {entries !== undefined &&
             entries.map((entry: any) => (

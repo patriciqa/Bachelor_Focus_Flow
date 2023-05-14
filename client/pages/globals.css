@@ -6,5 +6,11 @@
   @font-face {
     font-family: "Sofia Pro";
     src: url("../public/fonts/SofiaProLight.ttf");
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: "Sofia Pro";
+    src: url("../public/fonts/SofiaProRegular.ttf");
+    font-weight: 700;
   }
 }

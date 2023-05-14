@@ -20,7 +20,15 @@ export const useIsServerSide = () => {
   return isServerSide;
 };
 
-export default function MoodChart({ entries }: { entries: any }) {
+export default function MoodChart({
+  entries,
+  studyEntry,
+  breakEntry,
+}: {
+  entries: any;
+  studyEntry: string;
+  breakEntry: string;
+}) {
   //   const YAxisIcon = ({ x, y, datum }) => (
   //     <image
   //       x={x - 10} // adjust position of icon relative to tick
@@ -160,7 +168,17 @@ export default function MoodChart({ entries }: { entries: any }) {
   const isServerSide = useIsServerSide();
   if (isServerSide) return null;
   return (
-    <div className="flex m-5">
+    <div className="flex flex-col p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[35vh] w-[95vw]">
+      <div className="flex flex-row items-center justify-center w-full ">
+        <div className="flex items-center px-4 py-4">
+          <div className="mr-2 text-h16 text-study">Study:</div>
+          <div className="font-bold text-h20 text-study">{studyEntry}</div>
+        </div>{" "}
+        <div className="flex items-center">
+          <div className="mr-2 text-h16 text-break">Break:</div>
+          <div className="font-bold text-h20 text-break">{breakEntry}</div>
+        </div>
+      </div>
       <VictoryChart>
         <VictoryScatter
           bubbleProperty={"30"}
@@ -211,11 +229,18 @@ export default function MoodChart({ entries }: { entries: any }) {
         />
         <VictoryAxis
           tickValues={allEntries().map((datum) => getXAxisValue(datum.x))}
-          tickValues={[0, 21600, 36000, 50400, 64800]} // set custom tick values
-          tickFormat={["", "6:00", "10:00", "14:00", "18:00"]} // set custom tick labels
+          tickValues={[21600, 36000, 50400, 64800]} // set custom tick values
+          tickFormat={["6:00", "10:00", "14:00", "18:00"]} // set custom tick labels
           style={{
             axis: { stroke: "transparent" },
             ticks: { stroke: "transparent" },
+            tickLabels: {
+              // this changed the color of my numbers to white
+              fill: "#C0C3C8",
+            },
+            axisLabel: {
+              fill: "pink",
+            },
           }}
         />
         <VictoryLabel
