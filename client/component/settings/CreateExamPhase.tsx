@@ -2,20 +2,23 @@ import { addElement } from "@/db/Actions";
 import { SettingComponent } from "@/types/Components";
 import { ExamPhase, PickedDate, WhichTimer } from "@/types/Timer";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import Calendar from "react-calendar";
 
 export default function CreateExamPhase({
   setShowComponent,
+  phases,
   setOpen,
   setWhichTimer,
 }: {
   setShowComponent?: (c: SettingComponent) => void;
+  phases?: ExamPhase[];
   setOpen?: (c: boolean) => void;
   setWhichTimer: (d: WhichTimer) => void;
 }) {
   const [showCalender, setShowCalender] = useState(false);
   const [date, setDate] = useState<PickedDate>();
+  const [disabledDates, setDisabledDates] = useState([new Date(1683842400000)]);
   const router = useRouter().route;
   const getDate = (): string => {
     let d = "";
@@ -30,24 +33,44 @@ export default function CreateExamPhase({
 
     return d;
   };
+  const dates: SetStateAction<Date[]> = [];
+
+  useEffect(() => {
+    phases?.map((phase) => {
+      if (phase.startDate !== undefined && phase.endDate) {
+        console.log(phase.startDate);
+        console.log(phase.endDate);
+        let currentDate = new Date(phase.startDate);
+
+        while (currentDate <= new Date(phase.endDate)) {
+          dates.push(new Date(currentDate));
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        dates;
+        console.log(new Date(phase.startDate));
+      }
+      setDisabledDates(dates);
+    });
+  }, []);
 
   const [examPhase, setExamPhase] = useState<ExamPhase>();
   return (
-    <div className="flex flex-col">
-      <div>Create new Exam Phase</div>
+    <div className="flex flex-col items-center justify-center">
+      <div className="font-bold text-h24"> create exam phase</div>
       <input
         type="text"
         id="name"
         name="name"
         required
-        className="bg-tahiti"
+        className=" border border-black w-[70vw] rounded h-9 mt-10"
         onChange={(i) => {
           console.log(i.target.value);
           const e = { ...examPhase };
           e.title = i.target.value;
-          // e.id = i.target.value;
           setExamPhase(e);
         }}
+        placeholder="Title..."
       />
       <button
         onClick={() => {
@@ -58,9 +81,30 @@ export default function CreateExamPhase({
           }
         }}
       >
-        select Date
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          onClick={() => {
+            if (showCalender) {
+              setShowCalender(false);
+            } else {
+              setShowCalender(true);
+            }
+          }}
+          className=" border border-black w-[70vw] rounded h-9 mt-10"
+          onChange={(i) => {
+            console.log(i.target.value);
+            const e = { ...examPhase };
+            e.title = i.target.value;
+            setExamPhase(e);
+          }}
+          placeholder={`${
+            getDate !== undefined ? getDate() : "dd.mm.yyyy - dd.mm.yyyy"
+          }`}
+        />
       </button>
-      <div>{getDate()}</div>
       {showCalender && (
         <Calendar
           onChange={(d: any) => {
@@ -94,7 +138,15 @@ export default function CreateExamPhase({
           next2Label={null}
           prev2Label={null}
           showNeighboringMonth={false}
-          // tileDisabled, load all examphases, nobound, upperbound, if in between => disable (some TS)
+          tileDisabled={({ date, view }) =>
+            view === "month" && // Block day tiles only
+            disabledDates.some(
+              (disabledDate) =>
+                date.getFullYear() === disabledDate.getFullYear() &&
+                date.getMonth() === disabledDate.getMonth() &&
+                date.getDate() === disabledDate.getDate()
+            )
+          }
         />
       )}
       <button

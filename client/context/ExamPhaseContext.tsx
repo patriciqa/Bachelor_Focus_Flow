@@ -1,23 +1,16 @@
-import React, {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 const ExamContext = createContext<{
-  examPhaseId: string;
-  setExamPhaseId: (d: string) => void;
-}>({ examPhaseId: "", setExamPhaseId: () => null });
+  examPhaseId: number;
+  setExamPhaseId: (d: number) => void;
+}>({ examPhaseId: -1, setExamPhaseId: () => null });
 
 export default function ExamContextProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [examPhaseId, setExamPhaseId] = useState("");
+  const [examPhaseId, setExamPhaseId] = useState(-1);
   return (
     <ExamContext.Provider value={{ examPhaseId, setExamPhaseId }}>
       {children}

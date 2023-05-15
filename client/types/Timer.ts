@@ -29,8 +29,8 @@ export interface TimerValues {
 
 export interface ExamPhase {
   id?: number;
-  startDate: number;
-  endDate: number;
+  startDate?: number;
+  endDate?: number;
   title?: string;
   studyEntries?: Study[];
   breakEntries?: Break[];

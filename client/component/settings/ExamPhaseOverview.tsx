@@ -71,6 +71,7 @@ export default function ExamPhaseOverview({
         component={
           <CreateExamPhase
             setOpen={setOpen}
+            phases={phases}
             setShowComponent={setShowComponent}
             setWhichTimer={setWhichTimer}
           />
