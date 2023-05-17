@@ -58,18 +58,29 @@ export default function TimerSlider({
   // }, []);
 
   // function showNotification() {
+  // if (Notification.permission == "granted") {
+  //   navigator.serviceWorker.getRegistration().then(function (reg) {
+  //     var options = {
+  //       body: "Here is a notification body!",
+  //     };
+  //     reg?.showNotification("Hello world!", options);
+  //   });
+  // }
   //   if (!("Notification" in window)) {
   //     alert("This browser does not support desktop notification");
   //   } else if (Notification.permission === "granted") {
   //     var notification = new Notification("Timer Expired", {
-  //       body: "Your timer has expired!",
+  //       body: "Your timer ",
   //     });
   //   } else if (Notification.permission !== "denied") {
   //     Notification.requestPermission().then(function (permission) {
   //       if (permission === "granted") {
   //         var notification = new Notification("Timer Expired", {
-  //           body: "Your timer has expired!",
+  //           body: "Your timer",
   //         });
+  //       } else {
+  //         //todo app doesnt word
+  //         //should happen in index.tsx
   //       }
   //     });
   //   }

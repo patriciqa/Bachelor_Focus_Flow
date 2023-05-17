@@ -16,3 +16,5 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+
+//service worker development just with https?

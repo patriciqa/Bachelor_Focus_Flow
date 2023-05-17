@@ -117,7 +117,7 @@ const Timer = ({
         {/* <Toggle /> */}
         <div
           className={
-            "flex justify-center w-full pt-20 px-14 pb-12	" +
+            "flex justify-center w-full pt-10 px-14 pb-12	" +
             (hideNavbar && "invisible")
           }
         >
