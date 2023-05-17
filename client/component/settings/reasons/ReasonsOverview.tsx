@@ -1,5 +1,6 @@
 import TextWithIcon from "@/component/icon/TextWithIcon";
 import CreateView from "@/component/timer/CreateView";
+import EditView from "@/component/timer/EditView";
 import { getElement } from "@/db/Actions";
 import { Reason } from "@/types/Timer";
 import { useEffect, useState } from "react";
@@ -9,6 +10,8 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
   const [studyReasons, setStudyReasons] = useState<Reason[]>();
   const reasons: Reason[] = [];
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [activeReason, setActiveReason] = useState<Reason>();
 
   const getPhases = async (): Promise<Reason[]> => {
     const a = (await getElement("reasons", "all").then((result) => {
@@ -37,12 +40,18 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
 
   return (
     <div>
-      <div>
+      <div className="flex flex-col">
         {studyReasons !== undefined &&
           studyReasons.map((p) => (
-            <div key={p.title}>
+            <button
+              onClick={() => {
+                setOpenEdit(true);
+                setActiveReason(p);
+              }}
+              key={p.title}
+            >
               <TextWithIcon icon={p.icon} text={p.title} />
-            </div>
+            </button>
           ))}
         <button onClick={() => setOpen(true)}>Create Reason </button>
         <ModalPage
@@ -52,7 +61,21 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
           component={
             <CreateView setOpen={setOpen} goodReason={good ? true : false} />
           }
-        />
+        />{" "}
+        {activeReason !== undefined && (
+          <ModalPage
+            isStudy={false}
+            open={openEdit}
+            setOpen={setOpenEdit}
+            component={
+              <EditView
+                setOpen={setOpenEdit}
+                goodReason={good ? true : false}
+                activeEntry={activeReason}
+              />
+            }
+          />
+        )}
       </div>
     </div>
   );

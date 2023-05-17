@@ -133,7 +133,7 @@ export default function Reasons({
                 className="pr-2 text-study"
                 icon={["fas", "plus"]}
               />
-              add new course
+              add new cause
             </button>
           </div>
         </div>

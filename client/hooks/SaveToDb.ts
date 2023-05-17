@@ -2,11 +2,11 @@ import { editElement, getElement } from "@/db/Actions";
 import { Break, ExamPhase, Study } from "@/types/Timer";
 
 export default function saveToDb(
-  examPhaseId: string,
+  examPhaseId: number,
   entry: Break | Study,
   isStudyEntry: boolean
 ) {
-  const currentPhase = getElement("examPhases", parseInt(examPhaseId));
+  const currentPhase = getElement("examPhases", examPhaseId);
   currentPhase.then((e: any) => {
     const updatedPhase: ExamPhase = { ...e };
     if (isStudyEntry) {
