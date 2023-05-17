@@ -14,23 +14,9 @@ export default function EditView({
   isBreak?: boolean;
   activeEntry: Reason | Activity;
 }) {
-  const [icon, seticon] = useState(activeEntry?.icon);
   const [newEntry, setNewEntry] = useState<Reason | Activity>(activeEntry);
-  const [activities, setActivities] = useState<Activity>({
-    title: "",
-    icon: "",
-    archived: false,
-  });
-
-  const [reasons, setReasons] = useState<Reason>({
-    title: "",
-    icon: "",
-    archived: false,
-    goodReason: false,
-  });
 
   const onIconChange = (icon: string) => {
-    seticon(icon);
     const a = { ...newEntry };
     a.icon = icon;
     setNewEntry(a);
@@ -73,7 +59,6 @@ export default function EditView({
         />
         <button
           onClick={() => {
-            console.log(activities);
             if (isBreak) {
               if (newEntry.id !== undefined) {
                 editElement("activities", newEntry.id, newEntry);

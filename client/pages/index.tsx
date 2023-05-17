@@ -30,14 +30,31 @@ const Timer = ({
     initDb();
     getElement("examPhases", "all").then(
       (result: any) => {
-        if (result.length === 0) {
-          setWhichTimer(WhichTimer.EXAMPHASE);
-        } else {
-          // setWhichTimer(whichTimer.STUDY);
-          const id = localStorage.getItem("examId");
-          if (id !== null) {
-            setExamPhaseId(id);
+        console.log(result);
+        const today = Math.floor(Date.now());
+        console.log(Math.floor(Date.now()));
+        console.log(result[0].startDate);
+        let current = true;
+        result.map((e: any) => {
+          if (result.length === 0 || today < e.startDate || e.endDate < today) {
+            // setWhichTimer(WhichTimer.EXAMPHASE);
+            current = false;
+          } else {
+            current = true;
+            // setWhichTimer(WhichTimer.STUDY);
+            let i = localStorage.getItem("examId");
+            localStorage.setItem("examId", e.id.toString());
+
+            if (i !== null) {
+              const id = parseInt(i);
+              if (id !== null) {
+                setExamPhaseId(id);
+              }
+            }
           }
+        });
+        if (!current) {
+          setWhichTimer(WhichTimer.EXAMPHASE);
         }
       },
       (error) => {

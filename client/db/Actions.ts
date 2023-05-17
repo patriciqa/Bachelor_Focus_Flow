@@ -36,9 +36,9 @@ export const addElement = (store: string, payload: object) => {
       request.onsuccess = function (event: any) {
         const db = event.target.result;
         console.log(db);
-        if (store === "examPhases") {
-          localStorage.setItem("examId", db.toString());
-        }
+        // if (store === "examPhases") {
+        //   localStorage.setItem("examId", db.toString());
+        // }
       };
     } else {
       console.error("couldn't  add element to database");

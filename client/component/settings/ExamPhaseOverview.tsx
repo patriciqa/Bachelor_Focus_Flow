@@ -1,9 +1,9 @@
-import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
 import { SettingComponent } from "@/types/Components";
 import { ExamPhase, WhichTimer } from "@/types/Timer";
 import { useEffect, useState } from "react";
 import CreateExamPhase from "./CreateExamPhase";
+import EditPhaseView from "./EditPhaseView";
 import ModalPage from "./reasons/ModalPage";
 
 export default function ExamPhaseOverview({
@@ -14,10 +14,11 @@ export default function ExamPhaseOverview({
   setWhichTimer: (d: WhichTimer) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [phases, setPhases] = useState<ExamPhase[]>();
-  const [examPhaseTitle, setExamPhaseTitle] = useState<string>();
+  const [examPhaseTitle, setExamPhaseTitle] = useState<string | null>();
+  const [activePhase, setActivePhase] = useState<ExamPhase>();
   const examphases: ExamPhase[] = [];
-  const { setExamPhaseId } = useExamPhaseContext();
 
   const getPhases = async (): Promise<ExamPhase[]> => {
     const a = (await getElement("examPhases", "all").then((result) => {
@@ -28,16 +29,25 @@ export default function ExamPhaseOverview({
 
   useEffect(() => {
     getPhases().then((phase: ExamPhase[]) => {
-      phase.forEach((p) => {
+      phase.forEach((p: any) => {
         examphases.push(p);
         setPhases(phase);
+        const today = Math.floor(Date.now());
+
+        if (p.id !== undefined && today > p.startDate && p.endDate > today) {
+          localStorage.setItem("examId", p.id.toString());
+        }
       });
     });
     const id = localStorage.getItem("examId");
-    if (id !== null) {
-      getElement("examPhases", parseInt(id)).then((result: any) => {
-        setExamPhaseTitle(result.title);
-      });
+    console.log(id);
+
+    if (id !== "") {
+      console.log(id);
+      if (id !== null)
+        getElement("examPhases", parseInt(id)).then((result: any) => {
+          setExamPhaseTitle(result.title);
+        });
     }
   }, [phases]); //todo renders too much
 
@@ -45,7 +55,7 @@ export default function ExamPhaseOverview({
     <div className="flex flex-col">
       <div className="bg-tahiti">
         active:
-        {examPhaseTitle}
+        {examPhaseTitle !== undefined ? examPhaseTitle : "no active exam phase"}
       </div>
       <div className="flex flex-col">
         {phases !== undefined &&
@@ -53,10 +63,20 @@ export default function ExamPhaseOverview({
             <button
               key={p.title}
               onClick={() => {
-                if (p.id !== undefined) {
-                  localStorage.setItem("examId", p.id.toString());
-                  setExamPhaseId(p.id);
+                const today = Math.floor(Date.now());
+                if (p.startDate !== undefined && p.endDate) {
+                  if (
+                    p.id !== undefined &&
+                    today > p.startDate &&
+                    p.endDate > today
+                  ) {
+                    // localStorage.setItem("examId", p.id.toString());
+                    // setExamPhaseId(p.id);
+                    setActivePhase(p);
+                  }
                 }
+
+                setEditOpen(true);
               }}
             >
               {p.title}
@@ -76,7 +96,17 @@ export default function ExamPhaseOverview({
             setWhichTimer={setWhichTimer}
           />
         }
-      />
+      />{" "}
+      {activePhase !== undefined && (
+        <ModalPage
+          isStudy={false}
+          open={editOpen}
+          setOpen={setEditOpen}
+          component={
+            <EditPhaseView setOpen={setEditOpen} activePhase={activePhase} />
+          }
+        />
+      )}
     </div>
   );
 }
