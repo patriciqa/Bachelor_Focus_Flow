@@ -63,19 +63,7 @@ export default function ExamPhaseOverview({
             <button
               key={p.title}
               onClick={() => {
-                const today = Math.floor(Date.now());
-                if (p.startDate !== undefined && p.endDate) {
-                  if (
-                    p.id !== undefined &&
-                    today > p.startDate &&
-                    p.endDate > today
-                  ) {
-                    // localStorage.setItem("examId", p.id.toString());
-                    // setExamPhaseId(p.id);
-                    setActivePhase(p);
-                  }
-                }
-
+                setActivePhase(p);
                 setEditOpen(true);
               }}
             >
