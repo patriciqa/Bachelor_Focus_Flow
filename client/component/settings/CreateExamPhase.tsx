@@ -59,6 +59,7 @@ export default function CreateExamPhase({
     <div className="flex flex-col items-center justify-center">
       <div className="font-bold text-h24"> create exam phase</div>
       <input
+        autoComplete="off"
         type="text"
         id="name"
         name="name"

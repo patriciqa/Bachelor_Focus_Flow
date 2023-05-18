@@ -1,16 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import { getElement } from "@/db/Actions";
-import { ExamPhase, Mood, Reason, Study } from "@/types/Timer";
+import { Activity, ExamPhase, Mood } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { includes } from "lodash";
 import { useEffect, useState } from "react";
 import { VictoryPie } from "victory";
 interface MoodCount {
   id?: number;
   mood?: number;
 }
-export default function PieChartStudy({
+export default function PieChartBreak({
   activePhase,
 }: {
   activePhase: ExamPhase;
@@ -19,46 +18,44 @@ export default function PieChartStudy({
   const [topThreeId, setTopThreeId] = useState<string[]>();
   const [badTopThree, setBadTopThree] = useState<number[]>();
   const [badTopThreeId, setBadTopThreeId] = useState<string[]>();
-  const [reasons, setReasons] = useState<Reason[]>();
+  const [activities, setActivities] = useState<Activity[]>();
 
   useEffect(() => {
-    getAllReasons();
+    getAllActivities();
   }, []);
 
   useEffect(() => {
     if (activePhase !== undefined) {
-      getGoodAndBadReasons(activePhase);
+      getGoodAndBadActivities(activePhase);
     }
   }, [activePhase]);
 
-  const getGoodAndBadReasons = (phase: ExamPhase) => {
+  const getGoodAndBadActivities = (phase: ExamPhase) => {
     let moodReason: [MoodCount] = [{}];
-    phase.studyEntries?.map((entry: Study) => {
-      entry.reasonIds?.map((reason) => {
-        let count;
-        switch (entry.mood) {
-          case Mood.GOOD: {
-            count = 2;
-            break;
-          }
-          case Mood.RATHER_GOOD: {
-            count = 1;
-            break;
-          }
-          case Mood.RATHER_BAD: {
-            count = -1;
-            break;
-          }
-          case Mood.BAD: {
-            count = -2;
-            break;
-          }
+    phase.breakEntries?.map((entry: Activity) => {
+      let count;
+      switch (entry.mood) {
+        case Mood.GOOD: {
+          count = 2;
+          break;
         }
+        case Mood.RATHER_GOOD: {
+          count = 1;
+          break;
+        }
+        case Mood.RATHER_BAD: {
+          count = -1;
+          break;
+        }
+        case Mood.BAD: {
+          count = -2;
+          break;
+        }
+      }
 
-        moodReason.push({ id: reason, mood: count });
-      });
+      moodReason.push({ id: entry.breakActivityId, mood: count });
     });
-    console.log("moodReason", moodReason);
+
     if (moodReason.length !== 1) {
       const summarize: { [key: number]: number } = moodReason.reduce(
         (acc: any, curr) => {
@@ -124,8 +121,8 @@ export default function PieChartStudy({
     let good = 0;
     let ratherGood = 0;
 
-    activePhase.studyEntries?.forEach((e) => {
-      if (includes(e.reasonIds, parseInt(id))) {
+    activePhase.breakEntries?.forEach((e) => {
+      if (e.breakActivityId === parseInt(id)) {
         console.log(e);
         if (e.mood === Mood.RATHER_GOOD) {
           ratherGood += 1;
@@ -142,8 +139,8 @@ export default function PieChartStudy({
     let bad = 0;
     let ratherBad = 0;
 
-    activePhase.studyEntries?.forEach((e) => {
-      if (includes(e.reasonIds, parseInt(id))) {
+    activePhase.breakEntries?.forEach((e) => {
+      if (e.breakActivityId === parseInt(id)) {
         console.log(e);
         if (e.mood === Mood.RATHER_BAD) {
           ratherBad += 1;
@@ -252,21 +249,19 @@ export default function PieChartStudy({
       setBadTopThreeId(badThree);
     }
   };
-  const getAllReasons = async () => {
-    const data: Reason[] = await getElement("reasons", "all");
-    setReasons(data);
+  const getAllActivities = async () => {
+    const data: Activity[] = await getElement("activities", "all");
+    setActivities(data);
   };
 
-  const getReason = (id: number): React.ReactElement => {
+  const getActivity = (id: number): React.ReactElement => {
     let entry = <div />;
-    reasons?.map((reason: Reason) => {
-      if (reason.id === id) {
+    activities?.map((b: Activity) => {
+      if (b.id === id) {
         entry = (
-          <div className="flex flex-row items-center" key={reason.id}>
-            {reason.icon !== undefined && (
-              <FontAwesomeIcon icon={reason.icon} />
-            )}
-            <div className="pl-2">{reason.title}</div>
+          <div className="flex flex-row items-center" key={b.id}>
+            {b.icon !== undefined && <FontAwesomeIcon icon={b.icon} />}
+            <div className="pl-2">{b.title}</div>
           </div>
         );
       }
@@ -290,7 +285,7 @@ export default function PieChartStudy({
                 fill: "transparent",
               },
             }}
-            colorScale={["#332CF2", "#7571F2", "#B5B3F5"]}
+            colorScale={["#307B45", "#4CB66A", "#96CDA5"]}
           />
         </div>
 
@@ -300,45 +295,45 @@ export default function PieChartStudy({
             <div className="basis-1/8">
               <FontAwesomeIcon
                 icon={["fas", "face-smile"]}
-                className={"text-study"}
+                className={"text-break"}
               />
             </div>
             <div className="basis-1/8">
               <FontAwesomeIcon
                 icon={["fas", "face-grin"]}
-                className={"text-study"}
+                className={"text-break"}
               />
             </div>
           </div>
           {topThreeId !== undefined &&
-            topThreeId.map((reason: string, index) => (
-              <div key={reason} className={"flex justify-around	"}>
+            topThreeId.map((activity: string, index) => (
+              <div key={activity} className={"flex justify-around	"}>
                 <div
                   className={
-                    (index === 0 && "text-studyChart1 basis-3/4 ") ||
-                    (index === 1 && "text-studyChart2 basis-3/4") ||
-                    (index === 2 && "text-studyChart3 basis-3/4	")
+                    (index === 0 && "text-breakChart1 basis-3/4 ") ||
+                    (index === 1 && "text-breakChart2 basis-3/4") ||
+                    (index === 2 && "text-breakChart3 basis-3/4	")
                   }
                 >
-                  {getReason(parseInt(reason.id))}
+                  {getActivity(parseInt(activity.id))}
                 </div>
                 <div
                   className={
-                    (index === 0 && "text-studyChart1 1/8") ||
-                    (index === 1 && "text-studyChart2 1/8") ||
-                    (index === 2 && "text-studyChart3  1/8")
+                    (index === 0 && "text-breakChart1 1/8") ||
+                    (index === 1 && "text-breakChart2 1/8") ||
+                    (index === 2 && "text-breakChart3  1/8")
                   }
                 >
-                  {reason.good}
+                  {activity.good}
                 </div>
                 <div
                   className={
-                    (index === 0 && "text-studyChart1 1/8") ||
-                    (index === 1 && "text-studyChart2 1/8") ||
-                    (index === 2 && "text-studyChart3 break-words 1/8")
+                    (index === 0 && "text-breakChart1 1/8") ||
+                    (index === 1 && "text-breakChart2 1/8") ||
+                    (index === 2 && "text-breakChart3 break-words 1/8")
                   }
                 >
-                  {reason.ratherGood}
+                  {activity.ratherGood}
                 </div>
               </div>
             ))}
@@ -353,7 +348,7 @@ export default function PieChartStudy({
             startAngle={0}
             endAngle={180}
             width={600}
-            colorScale={["#332CF2", "#7571F2", "#B5B3F5"]}
+            colorScale={["#307B45", "#4CB66A", "#96CDA5"]}
             style={{
               labels: {
                 fill: "transparent",
@@ -367,45 +362,45 @@ export default function PieChartStudy({
             <div className="basis-1/8">
               <FontAwesomeIcon
                 icon={["fas", "face-meh"]}
-                className={"text-study"}
+                className={"text-break"}
               />
             </div>
             <div className="basis-1/8">
               <FontAwesomeIcon
                 icon={["fas", "face-frown"]}
-                className={"text-study"}
+                className={"text-break"}
               />
             </div>
           </div>
           {badTopThreeId !== undefined &&
-            badTopThreeId.map((reason: string, index) => (
-              <div key={reason} className={"flex justify-around "}>
+            badTopThreeId.map((activity: string, index) => (
+              <div key={activity} className={"flex justify-around "}>
                 <div
                   className={
-                    (index === 0 && "text-studyChart1 basis-3/4") ||
-                    (index === 1 && "text-studyChart2 basis-3/4") ||
-                    (index === 2 && "text-studyChart3 break-words basis-3/4	")
+                    (index === 0 && "text-breakChart1 basis-3/4") ||
+                    (index === 1 && "text-breakChart2 basis-3/4") ||
+                    (index === 2 && "text-breakChart3 break-words basis-3/4	")
                   }
                 >
-                  {getReason(parseInt(reason.id))}
+                  {getActivity(parseInt(activity.id))}
                 </div>
                 <div
                   className={
-                    (index === 0 && "text-studyChart1 1/8") ||
-                    (index === 1 && "text-studyChart2 1/8") ||
-                    (index === 2 && "text-studyChart3 break-words 1/8")
+                    (index === 0 && "text-breakChart1 1/8") ||
+                    (index === 1 && "text-breakChart2 1/8") ||
+                    (index === 2 && "text-breakChart3 break-words 1/8")
                   }
                 >
-                  {reason.bad}
+                  {activity.bad}
                 </div>
                 <div
                   className={
-                    (index === 0 && "text-studyChart1 1/8") ||
-                    (index === 1 && "text-studyChart2 1/8") ||
-                    (index === 2 && "text-studyChart3 break-words 1/8")
+                    (index === 0 && "text-breakChart1 1/8") ||
+                    (index === 1 && "text-breakChart2 1/8") ||
+                    (index === 2 && "text-breakChart3 break-words 1/8")
                   }
                 >
-                  {reason.ratherBad}
+                  {activity.ratherBad}
                 </div>
               </div>
             ))}

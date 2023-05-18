@@ -42,10 +42,14 @@ module.exports = {
       "studyChart1": "#332CF2",
       "studyChart2": "#7571F2",
       "studyChart3": "#B5B3F5",
+      "breakChart1": "#307B45",
+      "breakChart2": "#4CB66A",
+      "breakChart3": "#96CDA5",
       'background': '#F9F9F9',
       'lightBlue': 'E5F0FF',
       "inactiveGrey": "#CFCFD9",
       "chartGrey": "#C0C3C8",
+      "pieGrey": "#828282",
 
 
 

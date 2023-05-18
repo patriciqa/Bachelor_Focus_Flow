@@ -1,3 +1,4 @@
+import PieChartBreak from "@/component/charts/PieChartBreak";
 import PieChartStudy from "@/component/charts/PieChartStudy";
 import { getElement } from "@/db/Actions";
 import { ExamPhase } from "@/types/Timer";
@@ -19,9 +20,10 @@ export default function Analytcs() {
       console.log("phase", phase);
       const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
       p.push(phase);
-      if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {
-        setActivePhase(phase);
-      }
+      if (phase.startDate && phase.endDate)
+        if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {
+          setActivePhase(phase);
+        }
     });
     setPhases(p);
     return data;
@@ -50,7 +52,7 @@ export default function Analytcs() {
   };
 
   return (
-    <div className="flex flex-col items-center p-5 bg-background">
+    <div className="flex flex-col items-center w-[100vw] p-5 bg-background">
       {activePhase !== undefined && (
         <>
           <div className="flex">
@@ -63,7 +65,9 @@ export default function Analytcs() {
               )}
             </div>
             <div>
-              <div>exam phase {activePhase?.title}</div>
+              <div className="font-bold text-h24">
+                exam phase {activePhase?.title}
+              </div>
               <div>
                 {moment(activePhase.startDate).format("L")} -{" "}
                 {moment(activePhase.endDate).format("L")}
@@ -78,8 +82,13 @@ export default function Analytcs() {
               )}
             </div>
           </div>
+          <div>mood influences while taking breaks</div>
           <div className="bg-white ">
             <PieChartStudy activePhase={activePhase} />
+          </div>
+          <div>mood influences while taking breaks</div>
+          <div className="bg-white ">
+            <PieChartBreak activePhase={activePhase} />
           </div>
         </>
       )}

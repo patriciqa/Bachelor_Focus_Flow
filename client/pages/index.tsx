@@ -29,10 +29,7 @@ const Timer = ({
   useEffect(() => {
     initDb();
     getElement("examPhases", "all").then((result: any) => {
-      console.log(result);
       const today = Math.floor(Date.now());
-      console.log(Math.floor(Date.now()));
-      console.log(result[0].startDate);
       let current = false;
       result.forEach((e: any) => {
         if (result.length === 0 || today < e.startDate || e.endDate < today) {
@@ -40,13 +37,8 @@ const Timer = ({
         }
 
         current = true;
-        const i = localStorage.getItem("examId");
         localStorage.setItem("examId", e.id.toString());
-
-        const id = parseInt(i || "");
-        if (!isNaN(id)) {
-          setExamPhaseId(id);
-        }
+        setExamPhaseId(e.id);
       });
 
       if (!current) {
