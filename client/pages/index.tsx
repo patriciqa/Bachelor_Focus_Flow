@@ -3,7 +3,7 @@ import CreatePhaseView from "@/component/timer/CreatePhaseView";
 import { StudyView } from "@/component/timer/study/StudyView";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
-import { getElement } from "@/db/Actions";
+import { addElement, getElement } from "@/db/Actions";
 import initDb from "@/db/InitDb";
 import { Break, Study, WhichTimer } from "@/types/Timer";
 import React, { useEffect } from "react";
@@ -46,41 +46,44 @@ const Timer = ({
       }
     });
   });
+  const hi = {
+    title: "example",
+    startDate: 1685138400000,
+    endDate: 1685570399999,
+    breakEntries: [
+      {
+        timer: { duration: 3, startTime: 1684414234506 },
+        studyTimer: false,
+        breakActivityId: 11,
+        mood: "rather bad",
+      },
+      {
+        timer: { duration: 3, startTime: 1684414234506 },
+        studyTimer: false,
+        breakActivityId: 7,
+        mood: "good",
+      },
+    ],
 
-  // const [settings, setSettings] = useState<Settings>({
-  //   reasons: [
-  //     {
-  //       title: "bad sleep",
-  //       icon: "sth",
-  //       statistic: 3,
-  //       goodReason: false,
-  //       archived: false,
-  //     },
-  //   ],
-  //   examPhases: [
-  //     {
-  //       startDate: 89898,
-  //       endDate: 89889,
-  //       title: "FS23",
-  //       studyEntries: [],
-  //       breakEntries: [],
-  //     },
-  //   ],
-  //   breakActivities: [
-  //     {
-  //       id: 8,
-  //       icon: "i",
-  //       archived: false,
-  //       title: "meditation",
-  //     },
-  //     {
-  //       id: 8,
-  //       icon: "i",
-  //       archived: false,
-  //       title: "yoga",
-  //     },
-  //   ],
-  // });
+    studyEntries: [
+      {
+        timer: { duration: 30, startTime: 1684414234506 },
+        studyTimer: true,
+        reasonIds: [10, 19, 7],
+        mood: "rather bad",
+      },
+      {
+        timer: { duration: 3, startTime: 1684414234506 },
+        studyTimer: true,
+        reasonIds: [7, 10, 20],
+        mood: "good",
+      },
+    ],
+  };
+
+  const addExample = () => {
+    addElement("examPhases", hi);
+  };
 
   const showPage = (): React.ReactElement => {
     let component;
@@ -116,6 +119,7 @@ const Timer = ({
     <div className="flex flex-col items-center h-screen rw-screen bg-background">
       <>
         {/* <Toggle /> */}
+        <button onClick={() => addExample()}>add element</button>
         <div
           className={
             "flex justify-center w-full pt-10 px-14 pb-12	" +

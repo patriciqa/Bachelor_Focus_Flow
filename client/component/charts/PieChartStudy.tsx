@@ -70,7 +70,6 @@ export default function PieChartStudy({
               acc[id] += mood;
             }
           }
-
           return acc;
         },
         {}
@@ -165,7 +164,6 @@ export default function PieChartStudy({
     if (positive) {
       let good = [0];
       let goodId = [""];
-      console.log(mutatedArray, "asdf");
       if (mutatedArray !== undefined) {
         for (let i = 0; i < 3; i++) {
           if (mutatedArray[i] !== undefined) {
