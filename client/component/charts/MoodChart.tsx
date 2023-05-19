@@ -29,36 +29,25 @@ export default function MoodChart({
   studyEntry: string;
   breakEntry: string;
 }) {
-  //   const YAxisIcon = ({ x, y, datum }) => (
-  //     <image
-  //       x={x - 10} // adjust position of icon relative to tick
-  //       y={y - 10}
-  //       width={20}
-  //       height={20}
-  //       xlinkHref={datum.iconUrl} // URL of image to display
-  //     />
-  //   );
-  //   const data = [
-  //     { x: 1, y: 1, iconUrl: "https://example.com/icon1.png" },
-  //     { x: 2, y: 2, iconUrl: "https://example.com/icon2.png" },
-  //     { x: 3, y: 3, iconUrl: "https://example.com/icon3.png" },
-  //     { x: 4, y: 4, iconUrl: "https://example.com/icon4.png" },
-  //   ];
+  const grin = "./image/mood-grin.svg";
+  const smile = "./image/mood-smile.svg";
+  const meh = "./image/mood-meh.svg";
+  const frown = "./image/mood-frown.svg";
 
-  const getText = (text: number): string => {
+  const getIcon = (text: number): string => {
     let moodText;
     switch (text) {
       case 1:
-        moodText = "bad";
+        moodText = frown;
         break;
       case 2:
-        moodText = "rather bad";
+        moodText = meh;
         break;
       case 3:
-        moodText = "rather good";
+        moodText = smile;
         break;
       case 4:
-        moodText = "good";
+        moodText = grin;
         break;
     }
     return moodText;
@@ -173,14 +162,16 @@ export default function MoodChart({
 
   const YAxisLabel = ({ x, y, text }) => (
     <g>
-      <text x={x} y={y} fontSize={10} textAnchor="end">
-        {getText(text)}
-      </text>
+      {/* <text x={x} y={y} fontSize={10} textAnchor="end" id={text}> */}
+      {/* {getText(text)} */}
+      <image x={x} y={y} href={getIcon(text)} width={20} height={20} />
+      {/* </text> */}
     </g>
   );
 
   const isServerSide = useIsServerSide();
   if (isServerSide) return null;
+
   return (
     <div className="flex flex-col p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[40vh] w-[95vw]">
       <div className="flex flex-row items-center justify-center w-full ">
@@ -193,6 +184,7 @@ export default function MoodChart({
           <div className="font-bold text-h20 text-break">{breakEntry}</div>
         </div>
       </div>
+
       <VictoryChart>
         <VictoryScatter
           bubbleProperty={"30"}
