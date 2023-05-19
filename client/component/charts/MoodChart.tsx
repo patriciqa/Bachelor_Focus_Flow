@@ -171,7 +171,21 @@ export default function MoodChart({
 
   const isServerSide = useIsServerSide();
   if (isServerSide) return null;
-
+  const areaStyle = {
+    data: {
+      fill: "steelblue", // Fill color of the area chart
+      fillOpacity: 0.7, // Opacity of the fill color
+      stroke: "black", // Color of the line around the area chart
+      strokeWidth: 2, // Width of the line
+    },
+    labels: {
+      fontSize: 12,
+      fill: "white", // Color of any labels within the chart
+    },
+    parent: {
+      border: "1px solid black", // Border style of the parent container
+    },
+  };
   return (
     <div className="flex flex-col p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[40vh] w-[95vw]">
       <div className="flex flex-row items-center justify-center w-full ">
@@ -184,84 +198,95 @@ export default function MoodChart({
           <div className="font-bold text-h20 text-break">{breakEntry}</div>
         </div>
       </div>
-
-      <VictoryChart>
-        <VictoryScatter
-          bubbleProperty={"30"}
-          data={allEntries()}
-          style={{
-            data: {
-              fill: ({ datum }) => colorScale(datum.z),
-              stroke: ({ datum }) => colorScale(datum.z),
-              strokeWidth: 10,
-            },
-          }}
-          events={[
-            {
-              target: "data",
-              eventHandlers: {
-                onClick: () => {
-                  return [
-                    {
-                      target: "data",
-                      mutation: (props) => {
-                        console.log(props.datum.id);
-                        const fill = props.style && props.style.fill;
-                        return fill === "red"
-                          ? null
-                          : { style: { fill: "red" } };
+      <div className="border-t-2 border-b-2 border-inactiveGrey">
+        <VictoryChart>
+          <VictoryScatter
+            bubbleProperty={"30"}
+            data={allEntries()}
+            style={{
+              data: {
+                fill: ({ datum }) => colorScale(datum.z),
+                stroke: ({ datum }) => colorScale(datum.z),
+                strokeWidth: 10,
+                zIndex: 10,
+              },
+            }}
+            events={[
+              {
+                target: "data",
+                eventHandlers: {
+                  onClick: () => {
+                    return [
+                      {
+                        target: "data",
+                        mutation: (props) => {
+                          console.log(props.datum.id);
+                          const fill = props.style && props.style.fill;
+                          return fill === "red"
+                            ? null
+                            : { style: { fill: "red" } };
+                        },
                       },
-                    },
-                  ];
+                    ];
+                  },
                 },
               },
-            },
-          ]}
-          // labels={({ datum }) => `x: ${datum.x}, y: ${datum.y}, z: ${datum.z}`}
-        />
-        <VictoryAxis
-          dependentAxis
-          tickValues={[1, 2, 3, 4]}
-          // tickLabelComponent={<YAxisIcon />}
-          tickLabelComponent={<YAxisLabel />}
-          style={{
-            axis: { stroke: "transparent" },
+            ]}
+            // labels={({ datum }) => `x: ${datum.x}, y: ${datum.y}, z: ${datum.z}`}
+          />
+          <VictoryAxis
+            dependentAxis
+            tickValues={[1, 2, 3, 4]}
+            // tickLabelComponent={<YAxisIcon />}
+            tickLabelComponent={<YAxisLabel />}
+            style={{
+              axis: { stroke: "transparent" },
 
-            tickLabels: {
-              fontSize: 5,
-              padding: 5,
-            },
-          }}
-        />
-        <VictoryAxis
-          tickValues={allEntries().map((datum) => getXAxisValue(datum.x))}
-          tickValues={[21600, 36000, 50400, 64800]} // set custom tick values
-          tickFormat={["6:00", "10:00", "14:00", "18:00"]} // set custom tick labels
-          style={{
-            axis: { stroke: "transparent" },
-            ticks: { stroke: "transparent" },
-            tickLabels: {
-              // this changed the color of my numbers to white
-              fill: "#C0C3C8",
-            },
-            axisLabel: {
-              fill: "pink",
-            },
-          }}
-        />
-        <VictoryLabel
-          x={50}
-          y={20}
-          textAnchor="middle"
-          style={{ fontSize: 16 }}
-        />
-        <VictoryLine
-          id="test"
-          key={useId}
-          instanceId={useId}
-          data={allEntries()}
-        />
-      </VictoryChart>
+              tickLabels: {
+                fontSize: 5,
+                padding: 5,
+              },
+            }}
+          />
+          <VictoryAxis
+            tickValues={allEntries().map((datum) => getXAxisValue(datum.x))}
+            tickValues={[21600, 36000, 50400, 64800]} // set custom tick values
+            tickFormat={["6:00", "10:00", "14:00", "18:00"]} // set custom tick labels
+            style={{
+              axis: { stroke: "transparent" },
+              ticks: { stroke: "transparent" },
+              tickLabels: {
+                // this changed the color of my numbers to white
+                fill: "#C0C3C8",
+              },
+              axisLabel: {
+                fill: "pink",
+              },
+            }}
+          />
+          <VictoryLabel
+            x={50}
+            y={20}
+            textAnchor="middle"
+            style={{ fontSize: 16 }}
+          />
+          <VictoryLine
+            id="test"
+            key={useId}
+            instanceId={useId}
+            data={allEntries()}
+            style={{
+              data: {
+                stroke: "white",
+                strokeWidth: 6,
+                filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))",
+                zIndex: 0,
+              },
+              parent: { border: "1px solid black" },
+            }}
+          />
+        </VictoryChart>
+      </div>
     </div>
   );
 }
