@@ -35,7 +35,7 @@ export const BreakView = ({
   const [showComponent, setShowComponent] = useState(
     BreakComponent.NO_COMPONENT
   );
-  const [duration, setDuration] = useState(3);
+  const [duration, setDuration] = useState(5);
 
   const showBreakPage = (): React.ReactElement => {
     let component;

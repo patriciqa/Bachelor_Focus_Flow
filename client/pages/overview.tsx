@@ -82,6 +82,7 @@ const Overview = () => {
         }
         setBreakSummary(totalBreakSeconds);
       });
+      console.log(totalBreakSeconds);
     }
     setEntries(sortBy(allE, "timer.startTime"));
   };

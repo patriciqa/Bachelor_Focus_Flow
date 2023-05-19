@@ -122,11 +122,12 @@ export const StudyView = ({
             size="regular"
             variant="study-unfilled"
             onClick={() => {
+              setRunningTimer(TimerViewState.START);
+
               const s = { ...studyEntry };
               s.timer.duration = Math.round(
                 (Date.now() - s.timer.startTime) / 1000
               );
-              setRunningTimer(TimerViewState.START);
               saveToDb(examPhaseId, s, true);
             }}
           >

@@ -1,5 +1,6 @@
 import { TimerViewState } from "@/types/Timer";
 import CircularSlider from "@fseehawer/react-circular-slider";
+import moment from "moment";
 import { useEffect, useState } from "react";
 export default function TimerSlider({
   isStudy,
@@ -94,7 +95,8 @@ export default function TimerSlider({
   useEffect(() => {
     if (runningTimer === TimerViewState.RUNNING) {
       setTimeout(() => {
-        if (duration === 0) {
+        if (duration === 1) {
+          setDuration(0);
           setRunningTimer(TimerViewState.FINISHED);
           return;
         }
@@ -116,6 +118,33 @@ export default function TimerSlider({
     }`;
   };
 
+  function getTime(m: number) {
+    const defaultMin = m || 5;
+    let startTime = moment().startOf("D");
+    let endTime = moment().startOf("day").add(5400000);
+    //Times
+    let allTimes = [];
+
+    //Loop over the times - only pushes time with 30 minutes interval
+    while (startTime < endTime) {
+      //Push times
+      allTimes.push(startTime.format("HH:mm:ss"));
+      startTime.add(defaultMin, "seconds");
+    }
+    return allTimes;
+  }
+
+  const timeArr = getTime(5);
+
+  function convertTimeToSeconds(time: any) {
+    var parts = time.split(":");
+    var hours = parseInt(parts[0]);
+    var minutes = parseInt(parts[1]);
+    var seconds = parseInt(parts[2]);
+    var totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    return totalSeconds;
+  }
+
   return (
     <>
       <div className="z-0 ">
@@ -133,7 +162,8 @@ export default function TimerSlider({
           <CircularSlider
             min={0}
             max={5400}
-            dataIndex={duration}
+            dataIndex={1}
+            // dataIndex={1} //default start maybw 25min?
             hideLabelValue
             labelBottom={true}
             knobColor={isStudy ? "#5A55F4" : "#48B065"}
@@ -141,20 +171,15 @@ export default function TimerSlider({
             progressColorFrom={isStudy ? "#5A55F4" : "#48B065"}
             progressColorTo={isStudy ? "#5A55F4" : "#48B065"}
             progressSize={20}
+            data={timeArr}
             trackColor="#eeeeee"
             trackSize={12}
-            onChange={(value: number) => {
-              setDuration(value);
+            knobDraggable={
+              runningTimer !== TimerViewState.RUNNING ? true : false
+            }
+            onChange={(value: any) => {
+              setDuration(convertTimeToSeconds(value));
             }}
-            // isDragging={(value: number) => {
-            //   console.log(value);
-            //   if (value) {
-            //     while (duration % 30 !== 0) {
-            //       duration++;
-            //     }
-            //     setDuration(duration);
-            //   }
-            // }}
           >
             <div></div>
           </CircularSlider>
