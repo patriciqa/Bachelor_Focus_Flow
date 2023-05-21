@@ -40,7 +40,7 @@ export default function Analytcs() {
   const getPreviewPhase = (prev: boolean) => {
     if (activePhase !== undefined && activePhase.id !== undefined) {
       let newId = 0;
-      let sorted = sortBy(phases, (p) => p.startDate);
+      const sorted = sortBy(phases, (p) => p.startDate);
 
       if (prev) {
         newId = activePhase.id - 1;

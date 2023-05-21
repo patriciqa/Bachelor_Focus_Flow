@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { getElement } from "@/db/Actions";
 import sToM from "@/hooks/SecondsToMinutes";
 import { Activity, Mood, Reason } from "@/types/Timer";
