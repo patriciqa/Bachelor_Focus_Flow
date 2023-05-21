@@ -24,10 +24,12 @@ export default function MoodChart({
   entries,
   studyEntry,
   breakEntry,
+  setJumpId,
 }: {
   entries: any;
   studyEntry: string;
   breakEntry: string;
+  setJumpId: (d: number) => void;
 }) {
   const grin = "./image/mood-grin.svg";
   const smile = "./image/mood-smile.svg";
@@ -162,30 +164,22 @@ export default function MoodChart({
 
   const YAxisLabel = ({ x, y, text }) => (
     <g>
-      {/* <text x={x} y={y} fontSize={10} textAnchor="end" id={text}> */}
-      {/* {getText(text)} */}
       <image x={x} y={y} href={getIcon(text)} width={20} height={20} />
-      {/* </text> */}
     </g>
   );
 
   const isServerSide = useIsServerSide();
   if (isServerSide) return null;
-  const areaStyle = {
-    data: {
-      fill: "steelblue", // Fill color of the area chart
-      fillOpacity: 0.7, // Opacity of the fill color
-      stroke: "black", // Color of the line around the area chart
-      strokeWidth: 2, // Width of the line
-    },
-    labels: {
-      fontSize: 12,
-      fill: "white", // Color of any labels within the chart
-    },
-    parent: {
-      border: "1px solid black", // Border style of the parent container
-    },
+
+  const scrollToDiv = (id: number) => {
+    const element = document.getElementById(id);
+    console.log(id);
+    console.log(element);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   };
+
   return (
     <div className="flex flex-col p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[40vh] w-[95vw]">
       <div className="flex flex-row items-center justify-center w-full ">
@@ -207,8 +201,8 @@ export default function MoodChart({
               data: {
                 fill: ({ datum }) => colorScale(datum.z),
                 stroke: ({ datum }) => colorScale(datum.z),
-                strokeWidth: 10,
-                zIndex: 10,
+                strokeWidth: 15,
+                zIndex: 100,
               },
             }}
             events={[
@@ -220,11 +214,11 @@ export default function MoodChart({
                       {
                         target: "data",
                         mutation: (props) => {
-                          console.log(props.datum.id);
+                          scrollToDiv(props.datum.id);
                           const fill = props.style && props.style.fill;
-                          return fill === "red"
-                            ? null
-                            : { style: { fill: "red" } };
+                          //   return fill === "red"
+                          //     ? null
+                          //     : { style: { fill: "red" } };
                         },
                       },
                     ];
@@ -237,11 +231,9 @@ export default function MoodChart({
           <VictoryAxis
             dependentAxis
             tickValues={[1, 2, 3, 4]}
-            // tickLabelComponent={<YAxisIcon />}
             tickLabelComponent={<YAxisLabel />}
             style={{
               axis: { stroke: "transparent" },
-
               tickLabels: {
                 fontSize: 5,
                 padding: 5,
@@ -258,9 +250,6 @@ export default function MoodChart({
               tickLabels: {
                 // this changed the color of my numbers to white
                 fill: "#C0C3C8",
-              },
-              axisLabel: {
-                fill: "pink",
               },
             }}
           />
