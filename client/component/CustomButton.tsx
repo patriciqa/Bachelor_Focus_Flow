@@ -31,13 +31,13 @@ const CustomButton = ({
         size === "regular" && "px-4 py-2",
         size === "small" && "px-2 py-2",
         variant === "study" &&
-          "  bg-study text-white flex w-5/6	 items-center p-4 justify-center h-[56px] text-h24 font-normal ",
+          "  bg-study text-white flex w-3/4	 items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "study-unfilled" &&
           "  bg-white text-study  flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break" &&
-          "  bg-break text-white flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
+          "  bg-break text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break-unfilled" &&
-          "  bg-white text-break border flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
+          "  bg-white text-break  flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "disabled" &&
           "  bg-inactiveGrey text-white flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal "
       )}

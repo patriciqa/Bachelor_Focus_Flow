@@ -34,8 +34,8 @@ export default function ActivitySelection({
   }); //todo renders too much
 
   return (
-    <div className="flex flex-col justify-center">
-      <div className="h-[50vh] relative py-4 w-[70vw]">
+    <div className="flex flex-col items-center justify-center">
+      <div className="h-[45vh] relative py-4 w-[70vw]">
         <div className="max-h-full overflow-auto">
           {activities !== undefined &&
             activities.map((activity) => (
@@ -63,7 +63,7 @@ export default function ActivitySelection({
             }}
             className={
               "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] border-inactiveGrey " +
-              (selected === null && "bg-inactiveGrey text-white")
+              (selected === null && "bg-break text-white")
             }
           >
             set no activity

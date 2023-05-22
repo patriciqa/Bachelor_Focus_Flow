@@ -4,9 +4,11 @@ import ModalPage from "@/component/settings/reasons/ModalPage";
 import TimerSlider from "@/component/TimerSlider";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
+import { getElement } from "@/db/Actions";
 import saveToDb from "@/hooks/SaveToDb";
 import { BreakComponent } from "@/types/Components";
-import { Break, TimerViewState, WhichTimer } from "@/types/Timer";
+import { Activity, Break, TimerViewState, WhichTimer } from "@/types/Timer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import MoodCheckIn from "../MoodCheckIn";
 import ActivitySelection from "./ActivitySelection";
@@ -78,13 +80,40 @@ export const BreakView = ({
         setHideNavbar(true);
     }
   }, [runningTimer]);
+  const [activity, setActivities] = useState<Activity>();
 
+  const getAllActivites = async () => {
+    if (selected) {
+      const data: Activity = await getElement("activities", selected);
+      setActivities(data);
+    }
+  };
+
+  useEffect(() => {
+    getAllActivites();
+  }, [selected]);
+
+  const getActivity = (): React.ReactElement => {
+    let entry = <div />;
+    if (activity !== undefined) {
+      entry = (
+        <div className="flex flex-row " key={activity.id}>
+          {activity.icon !== undefined && (
+            <FontAwesomeIcon icon={activity.icon} className="pr-4" />
+          )}
+          {activity.title}
+        </div>
+      );
+    }
+    console.log(activity);
+    return entry;
+  };
   return (
     <>
       {showTimer ? (
         <>
-          <div className="flex flex-col items-center justify-center h-[50vh] my-20 ">
-            <div className="h-[10vh]">Yeah, keep going!</div>
+          <div className="flex flex-col items-center justify-center h-[25vh] my-20 ">
+            {/* <div className="h-[10vh]">Yeah, keep going!</div> */}
 
             <TimerSlider
               isStudy={false}
@@ -97,76 +126,97 @@ export const BreakView = ({
 
           {runningTimer === TimerViewState.START && (
             <>
-              <div className="bg-transparent h-[10vh]" />
-              <CustomButton
-                variant="break"
-                onClick={() => {
-                  setRunningTimer(TimerViewState.RUNNING);
-                  setDuration(duration);
-                  const e = { ...breakEntryy };
-                  e.timer.startTime = Date.now();
-                  e.timer.duration = duration;
-                  e.studyTimer = false;
-                  e.breakActivityId = selected;
-                  setBreakEntryy(e);
-                }}
-              >
-                start timer
-              </CustomButton>
+              <div className="flex flex-col items-center justify-center">
+                {/* <div className="bg-transparent h-[30vh]" /> */}
+                <button
+                  className={
+                    "w-4/6 px-4 py-2 mb-2 border rounded-full border-break text-break"
+                  }
+                >
+                  {getActivity()}
+                </button>
+                <CustomButton
+                  variant="break"
+                  onClick={() => {
+                    setRunningTimer(TimerViewState.RUNNING);
+                    setDuration(duration);
+                    const e = { ...breakEntryy };
+                    e.timer.startTime = Date.now();
+                    e.timer.duration = duration;
+                    e.studyTimer = false;
+                    e.breakActivityId = selected;
+                    setBreakEntryy(e);
+                  }}
+                >
+                  start timer
+                </CustomButton>
+              </div>
             </>
           )}
 
           {runningTimer === TimerViewState.RUNNING && (
             <>
-              <div className="h-[10vh]"></div>
-              <CustomButton
-                variant="break-unfilled"
-                onClick={() => {
-                  const b = { ...breakEntryy };
-                  b.timer.duration = Math.round(
-                    (Date.now() - b.timer.startTime) / 1000
-                  );
-                  setRunningTimer(TimerViewState.START);
-                  saveToDb(examPhaseId, b, true);
-                  // setBreakEntryy(b);
-                }}
-              >
-                finish break session
-              </CustomButton>
+              <div className="flex flex-col items-center justify-center">
+                <button
+                  className={
+                    "w-4/6 px-4 py-2 mb-2 border rounded-full border-break bg-break text-white"
+                  }
+                >
+                  {getActivity()}
+                </button>
+                <CustomButton
+                  variant="break-unfilled"
+                  onClick={() => {
+                    const b = { ...breakEntryy };
+                    b.timer.duration = Math.round(
+                      (Date.now() - b.timer.startTime) / 1000
+                    );
+                    setRunningTimer(TimerViewState.START);
+                    saveToDb(examPhaseId, b, true);
+                    // setBreakEntryy(b);
+                  }}
+                >
+                  cancel timer
+                </CustomButton>
+              </div>
             </>
           )}
 
           {runningTimer === TimerViewState.FINISHED && (
             <>
-              <CustomButton
-                variant="break"
-                onClick={() => {
-                  setOpen(true);
-                  setShowComponent(BreakComponent.MOODCHECKIN);
-                  setRunningTimer(TimerViewState.START);
-                }}
-              >
-                finish break session
-              </CustomButton>
+              <div className="flex flex-col items-center justify-center">
+                <CustomButton
+                  variant="break"
+                  onClick={() => {
+                    setOpen(true);
+                    setShowComponent(BreakComponent.MOODCHECKIN);
+                    setRunningTimer(TimerViewState.START);
+                  }}
+                >
+                  finish break session
+                </CustomButton>
+              </div>
             </>
           )}
         </>
       ) : (
         <>
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center text-center ">
             What would you like to do <br /> in your break?
+            <p className="text-16 text-inactiveGrey">select 1 activity</p>
           </div>
-          <p className="text-16 text-inactiveGrey">select 1 activity</p>
           <ActivitySelection selected={selected} setSelected={setSelected} />
-          <CustomButton
-            variant="break"
-            onClick={() => {
-              setShowTimer(true);
-              setRunningTimer(TimerViewState.START);
-            }}
-          >
-            set timer
-          </CustomButton>
+          <div className="flex justify-center">
+            <CustomButton
+              variant="break"
+              onClick={() => {
+                setShowTimer(true);
+                setRunningTimer(TimerViewState.START);
+              }}
+            >
+              set timer
+            </CustomButton>
+          </div>
         </>
       )}
       {showComponent !== null && (

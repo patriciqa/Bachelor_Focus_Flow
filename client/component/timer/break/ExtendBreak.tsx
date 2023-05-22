@@ -18,7 +18,10 @@ export default function ExtendBreak({
 
   return (
     <div className="flex flex-col ">
-      <div>Need a longer break?</div>
+      <div>
+        Everyone feels down sometimes and that’s okay. Consider taking another
+        break and do something that makes you feel good.
+      </div>
       <button
         onClick={() => {
           setWhichTimer(WhichTimer.BREAK);
