@@ -281,7 +281,7 @@ export default function PieChartBreak({
       <div className="flex">
         <div className="-translate-x-1/2 ">
           <VictoryPie
-            innerRadius={110}
+            innerRadius={120}
             data={topThree}
             startAngle={0}
             endAngle={180}
@@ -324,7 +324,7 @@ export default function PieChartBreak({
                     (index === 2 && "text-breakChart3  1/8")
                   }
                 >
-                  {activity.good}
+                  {activity.good[0] !== 0 ? activity.good : ""}
                 </div>
                 <div
                   className={
@@ -333,7 +333,7 @@ export default function PieChartBreak({
                     (index === 2 && "text-breakChart3 break-words 1/8")
                   }
                 >
-                  {activity.ratherGood}
+                  {activity.ratherGood[0] !== 0 ? activity.ratherGood : ""}
                 </div>
               </div>
             ))}
@@ -343,7 +343,7 @@ export default function PieChartBreak({
       <div className="flex">
         <div className="-translate-x-1/2 ">
           <VictoryPie
-            innerRadius={110}
+            innerRadius={120}
             data={badTopThree}
             startAngle={0}
             endAngle={180}
@@ -385,7 +385,7 @@ export default function PieChartBreak({
                     (index === 2 && "text-breakChart3 break-words 1/8")
                   }
                 >
-                  {activity.bad}
+                  {activity.bad[0] !== 0 ? activity.bad : ""}
                 </div>
                 <div
                   className={
@@ -394,7 +394,7 @@ export default function PieChartBreak({
                     (index === 2 && "text-breakChart3 break-words 1/8")
                   }
                 >
-                  {activity.ratherBad}
+                  {activity.ratherBad[0] !== 0 ? activity.ratherBad : ""}
                 </div>
               </div>
             ))}

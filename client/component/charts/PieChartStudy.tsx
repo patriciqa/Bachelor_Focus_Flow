@@ -284,7 +284,7 @@ export default function PieChartStudy({
       <div className="flex">
         <div className="-translate-x-1/2 ">
           <VictoryPie
-            innerRadius={110}
+            innerRadius={120}
             data={topThree}
             startAngle={0}
             endAngle={180}
@@ -327,7 +327,7 @@ export default function PieChartStudy({
                     (index === 2 && "text-studyChart3  1/8")
                   }
                 >
-                  {reason.good}
+                  {reason.good[0] !== 0 ? reason.good : ""}
                 </div>
                 <div
                   className={
@@ -336,7 +336,7 @@ export default function PieChartStudy({
                     (index === 2 && "text-studyChart3 break-words 1/8")
                   }
                 >
-                  {reason.ratherGood}
+                  {reason.ratherGood[0] !== 0 ? reason.ratherGood : ""}
                 </div>
               </div>
             ))}
@@ -346,7 +346,7 @@ export default function PieChartStudy({
       <div className="flex">
         <div className="-translate-x-1/2 ">
           <VictoryPie
-            innerRadius={110}
+            innerRadius={120}
             data={badTopThree}
             startAngle={0}
             endAngle={180}
@@ -388,7 +388,7 @@ export default function PieChartStudy({
                     (index === 2 && "text-studyChart3 break-words 1/8")
                   }
                 >
-                  {reason.bad}
+                  {reason.bad[0] !== 0 ? reason.bad : ""}
                 </div>
                 <div
                   className={
@@ -397,7 +397,7 @@ export default function PieChartStudy({
                     (index === 2 && "text-studyChart3 break-words 1/8")
                   }
                 >
-                  {reason.ratherBad}
+                  {reason.ratherBad[0] !== 0 ? reason.ratherBad : ""}
                 </div>
               </div>
             ))}

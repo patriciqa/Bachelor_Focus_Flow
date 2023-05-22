@@ -76,7 +76,7 @@ export default function Analytcs() {
   };
 
   return (
-    <div className="flex flex-col items-center w-[100vw] p-5 bg-background">
+    <div className="flex flex-col  w-[100vw] p-5 bg-background">
       {activePhase !== undefined && (
         <>
           <div className="flex w-full">
@@ -110,12 +110,12 @@ export default function Analytcs() {
               </div>
             )}
           </div>
-          <div>mood influences while taking breaks</div>
-          <div className="bg-white ">
+          <div className="pt-6">mood influences while taking breaks</div>
+          <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded ">
             <PieChartStudy activePhase={activePhase} />
           </div>
-          <div>mood influences while taking breaks</div>
-          <div className="bg-white ">
+          <div className="pt-6">mood influences while taking breaks</div>
+          <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded ">
             <PieChartBreak activePhase={activePhase} />
           </div>
         </>
