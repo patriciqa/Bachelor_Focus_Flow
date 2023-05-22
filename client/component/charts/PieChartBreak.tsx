@@ -9,6 +9,12 @@ interface MoodCount {
   id?: number;
   mood?: number;
 }
+
+const grin = "./image/break-grin.svg";
+const smile = "./image/break-smile.svg";
+const meh = "./image/break-meh.svg";
+const frown = "./image/break-frown.svg";
+
 export default function PieChartBreak({
   activePhase,
 }: {
@@ -293,16 +299,10 @@ export default function PieChartBreak({
           <div className={"flex justify-around  "}>
             <div className={"basis-3/4"}></div>
             <div className="basis-1/8">
-              <FontAwesomeIcon
-                icon={["fas", "face-smile"]}
-                className={"text-break"}
-              />
+              <img src={smile} />
             </div>
             <div className="basis-1/8">
-              <FontAwesomeIcon
-                icon={["fas", "face-grin"]}
-                className={"text-break"}
-              />
+              <img src={grin} />
             </div>
           </div>
           {topThreeId !== undefined &&
@@ -360,16 +360,10 @@ export default function PieChartBreak({
           <div className={"flex justify-around "}>
             <div className={"basis-3/4"}></div>
             <div className="basis-1/8">
-              <FontAwesomeIcon
-                icon={["fas", "face-meh"]}
-                className={"text-break"}
-              />
+              <img src={meh} />
             </div>
             <div className="basis-1/8">
-              <FontAwesomeIcon
-                icon={["fas", "face-frown"]}
-                className={"text-break"}
-              />
+              <img src={frown} />
             </div>
           </div>
           {badTopThreeId !== undefined &&

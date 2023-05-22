@@ -10,6 +10,12 @@ interface MoodCount {
   id?: number;
   mood?: number;
 }
+
+const grin = "./image/study-grin.svg";
+const smile = "./image/study-smile.svg";
+const meh = "./image/study-meh.svg";
+const frown = "./image/study-frown.svg";
+
 export default function PieChartStudy({
   activePhase,
 }: {
@@ -296,16 +302,10 @@ export default function PieChartStudy({
           <div className={"flex justify-around  "}>
             <div className={"basis-3/4"}></div>
             <div className="basis-1/8">
-              <FontAwesomeIcon
-                icon={["fas", "face-smile"]}
-                className={"text-study"}
-              />
+              <img src={smile} />
             </div>
             <div className="basis-1/8">
-              <FontAwesomeIcon
-                icon={["fas", "face-grin"]}
-                className={"text-study"}
-              />
+              <img src={grin} />
             </div>
           </div>
           {topThreeId !== undefined &&
@@ -363,16 +363,10 @@ export default function PieChartStudy({
           <div className={"flex justify-around "}>
             <div className={"basis-3/4"}></div>
             <div className="basis-1/8">
-              <FontAwesomeIcon
-                icon={["fas", "face-meh"]}
-                className={"text-study"}
-              />
+              <img src={meh} />
             </div>
             <div className="basis-1/8">
-              <FontAwesomeIcon
-                icon={["fas", "face-frown"]}
-                className={"text-study"}
-              />
+              <img src={frown} />
             </div>
           </div>
           {badTopThreeId !== undefined &&

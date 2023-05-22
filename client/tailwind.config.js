@@ -35,7 +35,6 @@ module.exports = {
       "darkGrey": "#959494",
       "breakGreen": "#48B065",
       "studyBlue": "#5A55F4",
-      "gray3": "#828282",
       "opposite": "#48B065",
       "break": "#48B065",
       "study": "#5A55F4",
@@ -77,6 +76,7 @@ module.exports = {
         cxs: ['1rem', '1.6'], // 16px
         cxxs: ['0.875rem', '1.5'], // 14px
         h12: ['12px', '12px'],
+        h14: ['14px', '14px'],
         h16: ['16px', '16px'],
         h20: ['20px', '20px'],
         h24: ['24px', '24px'],

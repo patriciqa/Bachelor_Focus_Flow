@@ -8,6 +8,12 @@ import moment from "moment";
 import "moment/locale/de-ch";
 import { useEffect, useState } from "react";
 
+const grin = "./image/mood.grin.svg";
+const smile = "./image/mood.smile.svg";
+const question = "./image/skip.svg";
+const meh = "./image/mood.meh.svg";
+const frown = "./image/mood.frown.svg";
+
 export default function Analytcs() {
   const [phases, setPhases] = useState<ExamPhase[]>();
   const [activePhase, setActivePhase] = useState<ExamPhase>();

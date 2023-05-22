@@ -55,7 +55,7 @@ export default function EditPhaseView({
         required
         disabled
         value={getDate()}
-        className=" border border-black w-[70vw] rounded h-9 mt-10  text-gray3"
+        className=" border border-black w-[70vw] rounded h-9 mt-10  text-pieGrey"
         onChange={(i) => {
           console.log(i.target.value);
           const e = { ...examPhase };

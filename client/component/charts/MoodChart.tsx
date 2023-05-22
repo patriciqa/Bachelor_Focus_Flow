@@ -31,19 +31,24 @@ export default function MoodChart({
   breakEntry: string;
   setJumpId: (d: number) => void;
 }) {
-  const grin = "./image/mood-grin.svg";
-  const smile = "./image/mood-smile.svg";
-  const meh = "./image/mood-meh.svg";
-  const frown = "./image/mood-frown.svg";
+  const grin = "./image/mood.grin.svg";
+  const smile = "./image/mood.smile.svg";
+  const question = "./image/skip.svg";
+  const meh = "./image/mood.meh.svg";
+  const frown = "./image/mood.frown.svg";
 
   const getIcon = (text: number): string => {
     let moodText;
+    console.log(text);
     switch (text) {
-      case 1:
+      case 0:
         moodText = frown;
         break;
-      case 2:
+      case 1:
         moodText = meh;
+        break;
+      case 2:
+        moodText = question;
         break;
       case 3:
         moodText = smile;
@@ -84,11 +89,11 @@ export default function MoodChart({
       }
     }
 
-    newOb.map((e, index) => {
-      if (e.y === 0 && newOb[index - 1] !== undefined) {
-        newOb[index].y = newOb[index - 1].y;
-      }
-    });
+    // newOb.map((e, index) => {
+    //   if (e.y === 0 && newOb[index - 1] !== undefined) {
+    //     newOb[index].y = newOb[index - 1].y;
+    //   }
+    // });
     return newOb;
   };
 
@@ -131,12 +136,15 @@ export default function MoodChart({
       case Mood.RATHER_GOOD:
         moodNr = 3;
         break;
+
       case Mood.RATHER_BAD:
-        moodNr = 2;
-        break;
-      case Mood.BAD:
         moodNr = 1;
         break;
+      case Mood.BAD:
+        moodNr = 0;
+        break;
+      case undefined:
+        moodNr = 2;
     }
     return moodNr;
   };
@@ -164,7 +172,13 @@ export default function MoodChart({
 
   const YAxisLabel = ({ x, y, text }) => (
     <g>
-      <image x={x} y={y} href={getIcon(text)} width={20} height={20} />
+      <image
+        x={text === 2 ? x + 1 : x}
+        y={y}
+        href={getIcon(text)}
+        width={text === 2 ? 25 : 20}
+        height={text === 2 ? 25 : 20}
+      />
     </g>
   );
 
@@ -230,13 +244,13 @@ export default function MoodChart({
           />
           <VictoryAxis
             dependentAxis
-            tickValues={[1, 2, 3, 4]}
+            tickValues={[1, 2, 0, 3, 4]}
             tickLabelComponent={<YAxisLabel />}
             style={{
               axis: { stroke: "transparent" },
               tickLabels: {
                 fontSize: 5,
-                padding: 5,
+                padding: 35,
               },
             }}
           />
@@ -252,6 +266,7 @@ export default function MoodChart({
                 fill: "#C0C3C8",
               },
             }}
+            offsetY={30}
           />
           <VictoryLabel
             x={50}
@@ -259,6 +274,7 @@ export default function MoodChart({
             textAnchor="middle"
             style={{ fontSize: 16 }}
           />
+
           <VictoryLine
             id="test"
             key={useId}
@@ -275,6 +291,9 @@ export default function MoodChart({
             }}
           />
         </VictoryChart>
+        <div className="absolute pt-2 text-pieGrey text-h14">
+          *when you skipped the mood check-in
+        </div>
       </div>
     </div>
   );
