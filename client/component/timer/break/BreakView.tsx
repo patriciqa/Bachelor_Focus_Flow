@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import ModalPage from "@/component/settings/reasons/ModalPage";

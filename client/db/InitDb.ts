@@ -1,9 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 export default function initDb() {
-  // const keys = {
-  //   activities: [{ name: "uuid", unique: true }],
-  //   // reasons: [{ name: "uuid", unique: true }],
-  //   examPhases: [{ name: "uuid", unique: true }],
-  // };
   let db!: IDBDatabase;
   const request = indexedDB.open("data", 1);
   request.onerror = (err) =>

@@ -56,6 +56,7 @@ export default function EditView({
         <IconPicker
           value={newEntry.icon !== "" ? newEntry.icon : "fa fa-home"}
           onChange={onIconChange}
+          isBreak
         />
         <button
           onClick={() => {
