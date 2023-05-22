@@ -35,7 +35,7 @@ export default function ActivitySelection({
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="h-[50vh] relative py-4">
+      <div className="h-[50vh] relative py-4 w-[70vw]">
         <div className="max-h-full overflow-auto">
           {activities !== undefined &&
             activities.map((activity) => (

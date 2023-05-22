@@ -116,10 +116,10 @@ const Timer = ({
   };
 
   return (
-    <div className="flex flex-col items-center h-screen rw-screen bg-background">
+    <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
         {/* <Toggle /> */}
-        <button onClick={() => addExample()}>add element</button>
+        {/* <button onClick={() => addExample()}>add element</button> */}
         <div
           className={
             "flex justify-center w-full pt-10 px-14 pb-12	" +
@@ -145,7 +145,7 @@ const Timer = ({
             break
           </button>
         </div>
-        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[63vh] w-[90vw]">
+        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[63vh] w-11/12	">
           {showPage()}
         </div>
       </>

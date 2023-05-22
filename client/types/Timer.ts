@@ -8,6 +8,7 @@ export enum TimerViewState {
   START,
   RUNNING,
   FINISHED,
+  EXTEND,
 }
 
 export enum Mood {

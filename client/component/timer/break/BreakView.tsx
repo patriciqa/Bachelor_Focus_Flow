@@ -83,7 +83,9 @@ export const BreakView = ({
     <>
       {showTimer ? (
         <>
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center h-[50vh] my-20 ">
+            <div className="h-[10vh]">Yeah, keep going!</div>
+
             <TimerSlider
               isStudy={false}
               runningTimer={runningTimer}
@@ -94,43 +96,48 @@ export const BreakView = ({
           </div>
 
           {runningTimer === TimerViewState.START && (
-            <CustomButton
-              variant="break"
-              onClick={() => {
-                setRunningTimer(TimerViewState.RUNNING);
-                setDuration(duration);
-                const e = { ...breakEntryy };
-                e.timer.startTime = Date.now();
-                e.timer.duration = duration;
-                e.studyTimer = false;
-                e.breakActivityId = selected;
-                setBreakEntryy(e);
-              }}
-            >
-              start timer
-            </CustomButton>
+            <>
+              <div className="bg-transparent h-[10vh]" />
+              <CustomButton
+                variant="break"
+                onClick={() => {
+                  setRunningTimer(TimerViewState.RUNNING);
+                  setDuration(duration);
+                  const e = { ...breakEntryy };
+                  e.timer.startTime = Date.now();
+                  e.timer.duration = duration;
+                  e.studyTimer = false;
+                  e.breakActivityId = selected;
+                  setBreakEntryy(e);
+                }}
+              >
+                start timer
+              </CustomButton>
+            </>
           )}
 
           {runningTimer === TimerViewState.RUNNING && (
-            <CustomButton
-              variant="break-unfilled"
-              onClick={() => {
-                const b = { ...breakEntryy };
-                b.timer.duration = Math.round(
-                  (Date.now() - b.timer.startTime) / 1000
-                );
-                setRunningTimer(TimerViewState.START);
-                saveToDb(examPhaseId, b, true);
-                // setBreakEntryy(b);
-              }}
-            >
-              cancel timer
-            </CustomButton>
+            <>
+              <div className="h-[10vh]"></div>
+              <CustomButton
+                variant="break-unfilled"
+                onClick={() => {
+                  const b = { ...breakEntryy };
+                  b.timer.duration = Math.round(
+                    (Date.now() - b.timer.startTime) / 1000
+                  );
+                  setRunningTimer(TimerViewState.START);
+                  saveToDb(examPhaseId, b, true);
+                  // setBreakEntryy(b);
+                }}
+              >
+                finish break session
+              </CustomButton>
+            </>
           )}
 
           {runningTimer === TimerViewState.FINISHED && (
             <>
-              <div>Welcome back!</div>
               <CustomButton
                 variant="break"
                 onClick={() => {
@@ -139,14 +146,14 @@ export const BreakView = ({
                   setRunningTimer(TimerViewState.START);
                 }}
               >
-                finish
+                finish break session
               </CustomButton>
             </>
           )}
         </>
       ) : (
         <>
-          <div className="flex text-center text-24">
+          <div className="flex flex-col items-center justify-center">
             What would you like to do <br /> in your break?
           </div>
           <p className="text-16 text-inactiveGrey">select 1 activity</p>
