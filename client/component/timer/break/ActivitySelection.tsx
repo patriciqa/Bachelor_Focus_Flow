@@ -1,3 +1,4 @@
+import { ColorType } from "@/component/CancellButton";
 import ButtonList, { ButtonVariant } from "@/component/icon/ButtonList";
 import ModalPage from "@/component/settings/reasons/ModalPage";
 import { getElement } from "@/db/Actions";
@@ -82,6 +83,7 @@ export default function ActivitySelection({
         </div>
       </div>
       <ModalPage
+        colorType={ColorType.BREAK}
         open={open}
         setOpen={setOpen}
         component={<CreateView setOpen={setOpen} isBreak />}

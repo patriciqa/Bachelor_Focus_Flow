@@ -49,6 +49,7 @@ module.exports = {
       "inactiveGrey": "#CFCFD9",
       "chartGrey": "#C0C3C8",
       "pieGrey": "#828282",
+      "dark": "#333333",
 
 
 

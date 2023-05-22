@@ -1,3 +1,4 @@
+import { ColorType } from "@/component/CancellButton";
 import TextWithIcon from "@/component/icon/TextWithIcon";
 import CreateView from "@/component/timer/CreateView";
 import EditView from "@/component/timer/EditView";
@@ -56,14 +57,20 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
         <button onClick={() => setOpen(true)}>Create Reason </button>
         <ModalPage
           isStudy={false}
+          colorType={ColorType.STUDY}
           open={open}
           setOpen={setOpen}
           component={
-            <CreateView setOpen={setOpen} goodReason={good ? true : false} />
+            <CreateView
+              setOpen={setOpen}
+              isBreak={false}
+              goodReason={good ? true : false}
+            />
           }
         />{" "}
         {activeReason !== undefined && (
           <ModalPage
+            colorType={ColorType.STUDY}
             isStudy={false}
             open={openEdit}
             setOpen={setOpenEdit}

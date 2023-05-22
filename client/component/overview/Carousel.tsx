@@ -124,13 +124,11 @@ const HorizontalCarousel = ({
                         .format("HH:mm")}
                     </div>
                     <div className="flex flex-col ">
-                      {entry.reasonIds !== undefined &&
-                        entry.reasonIds !== null &&
-                        entry.reasonIds.map((reason: number) => (
-                          <div key={reason} className="flex items-center py-1">
-                            {getReason(reason)}
-                          </div>
-                        ))}
+                      {entry.reasonIds?.map((reason: number) => (
+                        <div key={reason} className="flex items-center py-1">
+                          {getReason(reason)}
+                        </div>
+                      ))}
                     </div>
                     <div className="flex">
                       {entry.breakActivityId !== undefined && (

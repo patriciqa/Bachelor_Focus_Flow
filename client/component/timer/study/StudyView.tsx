@@ -1,3 +1,4 @@
+import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import ModalPage from "@/component/settings/reasons/ModalPage";
 import TimerSlider from "@/component/TimerSlider";
@@ -159,6 +160,7 @@ export const StudyView = ({
       )}
       {showComponent !== null && (
         <ModalPage
+          colorType={ColorType.STUDY}
           isStudy
           open={open}
           setOpen={setOpen}

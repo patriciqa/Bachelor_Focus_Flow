@@ -2,6 +2,7 @@ import { getElement } from "@/db/Actions";
 import { SettingComponent } from "@/types/Components";
 import { ExamPhase, WhichTimer } from "@/types/Timer";
 import { useEffect, useState } from "react";
+import { ColorType } from "../CancellButton";
 import CreateExamPhase from "./CreateExamPhase";
 import EditPhaseView from "./EditPhaseView";
 import ModalPage from "./reasons/ModalPage";
@@ -73,6 +74,7 @@ export default function ExamPhaseOverview({
       </div>
       <button onClick={() => setOpen(true)}>Create Phase</button>
       <ModalPage
+        colorType={ColorType.NEUTRAL}
         isStudy={false}
         open={open}
         setOpen={setOpen}
@@ -87,6 +89,7 @@ export default function ExamPhaseOverview({
       />{" "}
       {activePhase !== undefined && (
         <ModalPage
+          colorType={ColorType.NEUTRAL}
           isStudy={false}
           open={editOpen}
           setOpen={setEditOpen}

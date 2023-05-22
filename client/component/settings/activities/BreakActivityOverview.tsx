@@ -1,3 +1,4 @@
+import { ColorType } from "@/component/CancellButton";
 import TextWithIcon from "@/component/icon/TextWithIcon";
 import CreateView from "@/component/timer/CreateView";
 import EditView from "@/component/timer/EditView";
@@ -47,13 +48,15 @@ export default function BreakActivityOverview() {
       </div>
       <button onClick={() => setOpen(true)}>Create Activity </button>
       <ModalPage
+        colorType={ColorType.BREAK}
         isStudy={false}
         open={open}
         setOpen={setOpen}
-        component={<CreateView setOpen={setOpen} isBreak />}
+        component={<CreateView setOpen={setOpen} isBreak={true} />}
       />{" "}
       {activeEntry !== undefined && (
         <ModalPage
+          colorType={ColorType.BREAK}
           isStudy={false}
           open={openEdit}
           setOpen={setOpenEdit}

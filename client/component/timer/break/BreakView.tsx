@@ -1,3 +1,4 @@
+import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import ModalPage from "@/component/settings/reasons/ModalPage";
 import TimerSlider from "@/component/TimerSlider";
@@ -163,6 +164,7 @@ export const BreakView = ({
       )}
       {showComponent !== null && (
         <ModalPage
+          colorType={ColorType.BREAK}
           isStudy={false}
           open={open}
           setOpen={setOpen}

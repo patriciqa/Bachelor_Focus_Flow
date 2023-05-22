@@ -1,17 +1,37 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+export enum ColorType {
+  STUDY,
+  BREAK,
+  NEUTRAL,
+}
 export default function CancelButton({
   setOpen,
-  isStudy,
+  colorType,
 }: {
   setOpen: (d: boolean) => void;
-  isStudy?: boolean;
+  colorType?: ColorType;
 }) {
+  const getColor = (color: ColorType): string => {
+    let c = "";
+    switch (color) {
+      case ColorType.STUDY:
+        c = "text-study";
+        break;
+      case ColorType.BREAK:
+        c = "text-break";
+        break;
+      case ColorType.NEUTRAL:
+        c = "text-dark";
+        break;
+    }
+    return c;
+  };
   return (
     <button className="flex justify-end p-5" onClick={() => setOpen(false)}>
       <FontAwesomeIcon
         icon={["fas", "xmark"]}
-        color={isStudy ? "#5A55F4" : "#48B065"}
+        className={colorType !== undefined ? getColor(colorType) : ""}
         size="2x"
       />
     </button>

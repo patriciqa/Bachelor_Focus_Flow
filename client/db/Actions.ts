@@ -27,10 +27,8 @@ export const addElement = (store: string, payload: object) => {
     if ([...db.objectStoreNames].find((name) => name === store)) {
       const transaction = db.transaction(store, "readwrite");
       const objectStore = transaction.objectStore(store);
-      console.log(objectStore.autoIncrement);
       const serialized = JSON.parse(JSON.stringify(payload));
       const request = objectStore.add(serialized);
-      console.log(request);
       request.onerror = () => console.error(request.error);
       transaction.oncomplete = () => db.close();
       request.onsuccess = function (event: any) {
@@ -74,20 +72,20 @@ export const editElement = <T>(
     };
   });
 };
-export const removeElement = (store: string, key: string) => {
-  const open = indexedDB.open("data");
-  open.onsuccess = () => {
-    let request: IDBRequest;
-    db = open.result;
-    if ([...db.objectStoreNames].find((name) => name === store)) {
-      const transaction = db.transaction(store, "readwrite");
-      const objectStore = transaction.objectStore(store);
-      if (key === "all") request = objectStore.clear();
-      else request = objectStore.delete(key);
-      request.onerror = () => console.error(request.error);
-      transaction.oncomplete = () => db.close();
-    } else {
-      indexedDB.deleteDatabase("data");
-    }
-  };
-};
+// export const removeElement = (store: string, key: string) => {
+//   const open = indexedDB.open("data");
+//   open.onsuccess = () => {
+//     let request: IDBRequest;
+//     db = open.result;
+//     if ([...db.objectStoreNames].find((name) => name === store)) {
+//       const transaction = db.transaction(store, "readwrite");
+//       const objectStore = transaction.objectStore(store);
+//       if (key === "all") request = objectStore.clear();
+//       else request = objectStore.delete(key);
+//       request.onerror = () => console.error(request.error);
+//       transaction.oncomplete = () => db.close();
+//     } else {
+//       indexedDB.deleteDatabase("data");
+//     }
+//   };
+// };

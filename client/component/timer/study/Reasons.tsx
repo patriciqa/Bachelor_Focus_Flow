@@ -1,3 +1,4 @@
+import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import ButtonList, { ButtonVariant } from "@/component/icon/ButtonList";
 import ModalPage from "@/component/settings/reasons/ModalPage";
@@ -118,7 +119,7 @@ export default function Reasons({
               }}
               className={
                 "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] border-inactiveGrey " +
-                (selected === null && "bg-inactiveGrey text-white")
+                (selected === null && "bg-study text-white")
               }
             >
               i don't know
@@ -150,14 +151,19 @@ export default function Reasons({
           setStudyEntry({ timer: { startTime: 0, duration: 0 } });
         }}
       >
-        complete
+        continue
       </CustomButton>
 
       <ModalPage
         open={open}
+        colorType={ColorType.STUDY}
         setOpen={setOpen}
         component={
-          <CreateView setOpen={setOpen} goodReason={good ? true : false} />
+          <CreateView
+            setOpen={setOpen}
+            isBreak={false}
+            goodReason={good ? true : false}
+          />
         }
       />
     </div>

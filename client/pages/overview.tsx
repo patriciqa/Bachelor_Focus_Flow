@@ -34,13 +34,12 @@ const Overview = () => {
   useEffect(() => {
     getData();
   }, [selectedDate]);
-
+  let totalStudySeconds = 0;
+  let totalBreakSeconds = 0;
   const calculateSummary = (
     phase: ExamPhase | undefined,
     choosenDate: number
   ): void => {
-    let totalStudySeconds = 0;
-    let totalBreakSeconds = 0;
     if (phase !== undefined) {
       phase.studyEntries?.map((e) => {
         const thatDay = new Date(e.timer.startTime).setHours(0, 0, 0, 0);

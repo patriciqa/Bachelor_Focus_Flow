@@ -1,3 +1,4 @@
+import { ColorType } from "@/component/CancellButton";
 import BreakActivityOverview from "@/component/settings/activities/BreakActivityOverview";
 import ModalPage from "@/component/settings/reasons/ModalPage";
 import ReasonsOverview from "@/component/settings/reasons/ReasonsOverview";
@@ -89,7 +90,12 @@ const Settings = ({
         Break activities
       </button>
       {showComponent !== SettingComponent.NO_COMPONENT && (
-        <ModalPage open={open} setOpen={setOpen} component={showPage()} />
+        <ModalPage
+          colorType={ColorType.NEUTRAL}
+          open={open}
+          setOpen={setOpen}
+          component={showPage()}
+        />
       )}
     </div>
   );
