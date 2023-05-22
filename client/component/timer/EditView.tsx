@@ -29,7 +29,7 @@ export default function EditView({
         <input
           type="text"
           id="name"
-          className="bg-white border-2 rounded-md border-darkGrey"
+          className="pl-2 bg-white border-2 rounded-md border-darkGrey"
           required
           value={newEntry.title}
           onChange={(i) => {

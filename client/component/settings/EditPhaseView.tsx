@@ -39,7 +39,7 @@ export default function EditPhaseView({
         name="name"
         required
         value={phase.title}
-        className=" border border-black w-[70vw] rounded h-9 mt-10"
+        className="pl-2 border border-black w-[70vw] rounded h-9 mt-10"
         onChange={(i) => {
           console.log(i.target.value);
           const e = { ...phase };
@@ -55,7 +55,7 @@ export default function EditPhaseView({
         required
         disabled
         value={getDate()}
-        className=" border border-black w-[70vw] rounded h-9 mt-10  text-pieGrey"
+        className="pl-2 border border-black w-[70vw] rounded h-9 mt-10  text-pieGrey"
         onChange={(i) => {
           console.log(i.target.value);
           const e = { ...examPhase };

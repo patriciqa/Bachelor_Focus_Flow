@@ -64,7 +64,7 @@ export default function CreateExamPhase({
         id="name"
         name="name"
         required
-        className=" border border-black w-[70vw] rounded h-9 mt-10"
+        className=" border  pl-2 border-black w-[70vw] rounded h-9 mt-10"
         onChange={(i) => {
           console.log(i.target.value);
           const e = { ...examPhase };
@@ -94,7 +94,7 @@ export default function CreateExamPhase({
               setShowCalender(true);
             }
           }}
-          className=" border border-black w-[70vw] rounded h-9 mt-10"
+          className="pl-2 border border-black w-[70vw] rounded h-9 mt-10"
           onChange={(i) => {
             console.log(i.target.value);
             const e = { ...examPhase };
