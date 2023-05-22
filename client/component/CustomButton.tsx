@@ -33,13 +33,13 @@ const CustomButton = ({
         variant === "study" &&
           "  bg-study text-white flex w-3/4	 items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "study-unfilled" &&
-          "  bg-white text-study  flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
+          "  bg-white text-study  flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break" &&
           "  bg-break text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break-unfilled" &&
-          "  bg-white text-break  flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
+          "  bg-white text-break  flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "disabled" &&
-          "  bg-inactiveGrey text-white flex w-5/6	items-center p-4 justify-center h-[56px] text-h24 font-normal "
+          "  bg-inactiveGrey text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal "
       )}
       {...props}
     >
