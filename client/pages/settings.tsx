@@ -1,9 +1,10 @@
 import { ColorType } from "@/component/CancellButton";
 import BreakActivityOverview from "@/component/settings/activities/BreakActivityOverview";
-import ModalPage from "@/component/settings/reasons/ModalPage";
+import PopPage from "@/component/settings/reasons/PopPage";
 import ReasonsOverview from "@/component/settings/reasons/ReasonsOverview";
 import { SettingComponent } from "@/types/Components";
 import { WhichTimer } from "@/types/Timer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import ExamPhaseOverview from "../component/settings/ExamPhaseOverview";
 
@@ -54,32 +55,63 @@ const Settings = ({
     }
     return component;
   };
+  const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+  useEffect(() => {
+    setInitialRenderComplete(true);
+  }, []);
   return (
-    <div className="flex flex-col items-center justify-center w-screen">
-      <div>Settings</div>
+    <div className="flex flex-col w-screen h-[100vh] bg-background p-4">
+      <div className="pt-10 text-chartGrey text-h16">
+        manage your exam phases
+      </div>
       <button
+        className="flex py-2 text-h20 "
         onClick={() => {
           setOpen(true);
           setShowComponent(SettingComponent.EXAMPHASE_OVERVIEW);
         }}
       >
-        Exam Phases
+        <div className="flex justify-between w-[90vw] py-2">
+          {initialRenderComplete && (
+            <>
+              <div> exam phases</div>
+              <FontAwesomeIcon icon={["fas", "arrow-right-long"]} size="xl" />
+            </>
+          )}
+        </div>
       </button>
+      <div className="pt-8 text-chartGrey text-h16">
+        edit your causes and activities list
+      </div>
       <button
         onClick={() => {
           setOpen(true);
           setShowComponent(SettingComponent.GOOD_REASONS);
         }}
       >
-        Good Reasons
-      </button>{" "}
+        <div className="flex justify-between w-[90vw] py-2">
+          {initialRenderComplete && (
+            <>
+              <div> positive study causes</div>
+              <FontAwesomeIcon icon={["fas", "arrow-right-long"]} size="xl" />
+            </>
+          )}
+        </div>
+      </button>
       <button
         onClick={() => {
           setOpen(true);
           setShowComponent(SettingComponent.BAD_REASONS);
         }}
       >
-        Bad Reasons
+        <div className="flex justify-between w-[90vw] py-2">
+          {initialRenderComplete && (
+            <>
+              <div> negative study causes</div>
+              <FontAwesomeIcon icon={["fas", "arrow-right-long"]} size="xl" />
+            </>
+          )}
+        </div>
       </button>{" "}
       <button
         onClick={() => {
@@ -87,10 +119,17 @@ const Settings = ({
           setShowComponent(SettingComponent.BREAK_ACTIVITIES);
         }}
       >
-        Break activities
+        <div className="flex justify-between w-[90vw] py-2">
+          {initialRenderComplete && (
+            <>
+              <div> break activities</div>
+              <FontAwesomeIcon icon={["fas", "arrow-right-long"]} size="xl" />
+            </>
+          )}
+        </div>
       </button>
       {showComponent !== SettingComponent.NO_COMPONENT && (
-        <ModalPage
+        <PopPage
           colorType={ColorType.NEUTRAL}
           open={open}
           setOpen={setOpen}

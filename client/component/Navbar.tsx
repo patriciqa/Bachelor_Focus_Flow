@@ -13,7 +13,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
   return (
     <>
       {!hideNavbar && (
-        <div className="fixed bottom-0 z-10 flex flex-col items-center justify-center w-screen ">
+        <div className=" shadow-[1px_-4px_16px_rgba(39,37,37,0.15)] fixed bottom-0 z-10 flex flex-col items-center justify-center w-screen h-15">
           <ul className="flex justify-center w-full">
             <li
               className={
@@ -24,8 +24,10 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 {initialRenderComplete && (
                   <FontAwesomeIcon
                     icon={["fas", "clock"]}
-                    color={router === "/" ? "#5A55F4" : "#CFCFD9"}
                     size="2x"
+                    className={
+                      router === "/" ? "text-dark" : "text-inactiveGrey"
+                    }
                   />
                 )}
               </Link>
@@ -40,8 +42,10 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 {initialRenderComplete && (
                   <FontAwesomeIcon
                     icon={["fas", "calendar"]}
-                    color={router === "/overview" ? "#5A55F4" : "#CFCFD9"}
                     size="2x"
+                    className={
+                      router === "/overview" ? "text-dark" : "text-inactiveGrey"
+                    }
                   />
                 )}
               </Link>
@@ -55,8 +59,12 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 {initialRenderComplete && (
                   <FontAwesomeIcon
                     icon={["fas", "chart-pie"]}
-                    color={router === "/analytics" ? "#5A55F4" : "#CFCFD9"}
                     size="2x"
+                    className={
+                      router === "/analytics"
+                        ? "text-dark"
+                        : "text-inactiveGrey"
+                    }
                   />
                 )}
               </Link>
@@ -70,7 +78,9 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 {initialRenderComplete && (
                   <FontAwesomeIcon
                     icon={["fas", "gear"]}
-                    color={router === "/settings" ? "#5A55F4" : "#CFCFD9"}
+                    className={
+                      router === "/settings" ? "text-dark" : "text-inactiveGrey"
+                    }
                     size="2x"
                   />
                 )}
