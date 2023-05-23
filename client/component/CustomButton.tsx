@@ -7,7 +7,8 @@ type buttonVariant =
   | "break"
   | "disabled"
   | "study-unfilled"
-  | "break-unfilled";
+  | "break-unfilled"
+  | "dark";
 type buttonSize = "regular" | "large" | "small";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -36,6 +37,8 @@ const CustomButton = ({
           "  bg-white text-study  flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break" &&
           "  bg-break text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
+        variant === "dark" &&
+          "  bg-dark text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break-unfilled" &&
           "  bg-white text-break  flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "disabled" &&

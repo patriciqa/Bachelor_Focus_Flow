@@ -11,7 +11,7 @@ export default function EditView({
 }: {
   setOpen: (d: boolean) => void;
   goodReason?: boolean;
-  isBreak?: boolean;
+  isBreak: boolean;
   activeEntry: Reason | Activity;
 }) {
   const [newEntry, setNewEntry] = useState<Reason | Activity>(activeEntry);
@@ -56,7 +56,7 @@ export default function EditView({
         <IconPicker
           value={newEntry.icon !== "" ? newEntry.icon : "fa fa-home"}
           onChange={onIconChange}
-          isBreak
+          isBreak={isBreak}
         />
         <button
           onClick={() => {

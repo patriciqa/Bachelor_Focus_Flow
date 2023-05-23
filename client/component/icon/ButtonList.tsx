@@ -109,7 +109,6 @@ export default function ButtonList({
           (selected === null && "text-inactiveGrey")
         }
       >
-        {" "}
         {text}
       </div>
     </button>

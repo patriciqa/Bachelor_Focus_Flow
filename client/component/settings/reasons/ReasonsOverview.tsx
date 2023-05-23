@@ -1,9 +1,12 @@
 import { ColorType } from "@/component/CancellButton";
+import CustomButton from "@/component/CustomButton";
+import { ButtonVariant } from "@/component/icon/ButtonList";
 import TextWithIcon from "@/component/icon/TextWithIcon";
 import CreateView from "@/component/timer/CreateView";
 import EditView from "@/component/timer/EditView";
 import { getElement } from "@/db/Actions";
 import { Reason } from "@/types/Timer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import ModalPage from "./ModalPage";
 
@@ -13,7 +16,10 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [activeReason, setActiveReason] = useState<Reason>();
-
+  const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+  useEffect(() => {
+    setInitialRenderComplete(true);
+  }, []);
   const getPhases = async (): Promise<Reason[]> => {
     const a = (await getElement("reasons", "all").then((result) => {
       return result;
@@ -41,7 +47,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
 
   return (
     <div>
-      <div className="flex flex-col">
+      <div className="flex flex-col p-4">
         {studyReasons !== undefined &&
           studyReasons.map((p) => (
             <button
@@ -49,12 +55,33 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                 setOpenEdit(true);
                 setActiveReason(p);
               }}
-              key={p.title}
+              className="flex justify-between w-[90vw] py-1"
             >
-              <TextWithIcon icon={p.icon} text={p.title} />
+              {initialRenderComplete && (
+                <>
+                  <TextWithIcon
+                    variant={ButtonVariant.STUDY}
+                    icon={p.icon}
+                    text={p.title}
+                  />
+                  <FontAwesomeIcon
+                    icon={["fas", "ellipsis-vertical"]}
+                    size="xl"
+                  />
+                </>
+              )}
             </button>
           ))}
-        <button onClick={() => setOpen(true)}>Create Reason </button>
+        <div className="flex items-end justify-center ">
+          <CustomButton
+            variant="dark"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            add cause
+          </CustomButton>
+        </div>
         <ModalPage
           isStudy={false}
           colorType={ColorType.STUDY}
@@ -76,6 +103,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
             setOpen={setOpenEdit}
             component={
               <EditView
+                isBreak={false}
                 setOpen={setOpenEdit}
                 goodReason={good ? true : false}
                 activeEntry={activeReason}

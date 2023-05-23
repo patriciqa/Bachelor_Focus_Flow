@@ -13,7 +13,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
   return (
     <>
       {!hideNavbar && (
-        <div className=" shadow-[1px_-4px_16px_rgba(39,37,37,0.15)] fixed bottom-0 z-10 flex flex-col items-center justify-center w-screen h-15">
+        <div className=" shadow-[1px_-4px_16px_rgba(39,37,37,0.15)] fixed bottom-0 z-20 flex flex-col items-center justify-center w-screen h-[10vh]">
           <ul className="flex justify-center w-full">
             <li
               className={
