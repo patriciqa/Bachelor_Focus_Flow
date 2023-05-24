@@ -1,6 +1,0 @@
-# compiled output
-/dist
-/node_modules
-
-# app databases
-data/
