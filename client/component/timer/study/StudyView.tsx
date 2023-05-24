@@ -137,7 +137,6 @@ export const StudyView = ({
         <>
           <div className="bg-transparent h-[10vh]" />
           <CustomButton
-            size="regular"
             variant="study"
             onClick={() => {
               setRunningTimer(TimerViewState.RUNNING);
@@ -157,7 +156,6 @@ export const StudyView = ({
         <>
           <div className="h-[10vh]"></div>
           <CustomButton
-            size="regular"
             variant="study-unfilled"
             onClick={() => {
               setRunningTimer(TimerViewState.START);
@@ -177,7 +175,6 @@ export const StudyView = ({
         <>
           <div className="h-[10vh]"></div>
           <CustomButton
-            size="regular"
             variant="study-unfilled"
             onClick={() => {
               setRunningTimer(TimerViewState.START);
@@ -215,7 +212,6 @@ export const StudyView = ({
             extend by {extend / 60} mins
           </button>
           <CustomButton
-            size="regular"
             variant={extend === 0 ? "study" : "study-unfilled"}
             onClick={() => {
               setOpen(true);

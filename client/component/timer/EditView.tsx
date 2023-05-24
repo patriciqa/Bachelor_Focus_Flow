@@ -82,7 +82,6 @@ export default function EditView({
         />
         <div className="pt-20">
           <CustomButton
-            size="regular"
             variant={isBreak ? "break" : "study"}
             onClick={() => {
               if (isBreak) {

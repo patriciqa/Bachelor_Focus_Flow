@@ -1,6 +1,7 @@
 import { getElement } from "@/db/Actions";
 import sToM from "@/hooks/SecondsToMinutes";
 import { Activity, Mood, Reason } from "@/types/Timer";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -51,7 +52,7 @@ export default function Tag({ entry }: { entry: any }) {
           >
             <div className="pr-2">
               {reason.icon !== undefined && (
-                <FontAwesomeIcon icon={reason.icon} />
+                <FontAwesomeIcon icon={reason.icon as IconProp} />
               )}
             </div>
 
@@ -74,7 +75,7 @@ export default function Tag({ entry }: { entry: any }) {
           >
             <div className="pr-2">
               {activity.icon !== undefined && (
-                <FontAwesomeIcon icon={activity.icon} />
+                <FontAwesomeIcon icon={activity.icon as IconProp} />
               )}
             </div>
             {activity.title}
