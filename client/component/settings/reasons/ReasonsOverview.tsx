@@ -47,7 +47,8 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
 
   return (
     <div>
-      <div className="flex flex-col p-4">
+      <div className="flex flex-col p-6">
+        <div className="text-chartGrey text-h14">edit or create new causes</div>
         {studyReasons !== undefined &&
           studyReasons.map((p) => (
             <button
@@ -55,7 +56,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                 setOpenEdit(true);
                 setActiveReason(p);
               }}
-              className="flex justify-between w-[90vw] py-1"
+              className="flex justify-between w-[90vw] py-2"
             >
               {initialRenderComplete && (
                 <>
@@ -67,6 +68,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                   <FontAwesomeIcon
                     icon={["fas", "ellipsis-vertical"]}
                     size="xl"
+                    className="pr-4"
                   />
                 </>
               )}

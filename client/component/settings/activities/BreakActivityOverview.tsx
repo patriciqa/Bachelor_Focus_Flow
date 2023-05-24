@@ -37,16 +37,18 @@ export default function BreakActivityOverview() {
 
   return (
     <div>
-      <div className="flex flex-col justify-center p-4">
+      <div className="flex flex-col justify-center p-6 overflow-scroll">
+        <div className="text-chartGrey text-h14">
+          edit or create new activites
+        </div>
         {activities !== undefined &&
-          // eslint-disable-next-line react/jsx-key
           activities.map((c) => (
             <button
               onClick={() => {
                 setOpenEdit(true);
                 setActiveEntry(c);
               }}
-              className="flex justify-between w-[90vw] py-1"
+              className="flex justify-between w-[90vw] py-2 "
             >
               {initialRenderComplete && (
                 <>
@@ -58,6 +60,7 @@ export default function BreakActivityOverview() {
                   <FontAwesomeIcon
                     icon={["fas", "ellipsis-vertical"]}
                     size="xl"
+                    className="pr-4"
                   />
                 </>
               )}

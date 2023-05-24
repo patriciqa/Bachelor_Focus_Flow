@@ -2,6 +2,7 @@ import IconPicker from "@/component/icon/IconPicker";
 import { editElement } from "@/db/Actions";
 import { Activity, Reason } from "@/types/Timer";
 import { useState } from "react";
+import CustomButton from "../CustomButton";
 
 export default function EditView({
   setOpen,
@@ -15,23 +16,44 @@ export default function EditView({
   activeEntry: Reason | Activity;
 }) {
   const [newEntry, setNewEntry] = useState<Reason | Activity>(activeEntry);
-
   const onIconChange = (icon: string) => {
     const a = { ...newEntry };
     a.icon = icon;
     setNewEntry(a);
   };
 
+  const input = document.getElementById("myInput") as HTMLInputElement;
+  const countSpan = document.getElementById("count");
+  if (input !== null && countSpan !== null) {
+    input.addEventListener("input", function () {
+      const remainingChars = input.maxLength - input.value.length;
+      countSpan.textContent = input.value.length.toString();
+    });
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center">
-        <div>add new break activity</div>
+        {!isBreak && goodReason && (
+          <div className="pt-12 pb-12 ">add positive cause</div>
+        )}
+        {!isBreak && !goodReason && <div>add negative cause</div>}
+        {isBreak && <div>add break activity</div>}
+        <p
+          className="flex justify-end w-4/5 text-chartGrey text-h16"
+          id="characterCount"
+        >
+          <span id="count">0</span>/32
+        </p>
+
         <input
           type="text"
-          id="name"
-          className="pl-2 bg-white border-2 rounded-md border-darkGrey"
-          required
+          id="myInput"
           value={newEntry.title}
+          maxLength={32}
+          className="w-4/5 h-10 pl-2 mb-12 bg-white border-2 rounded-md border-chartGrey"
+          required
+          placeholder={isBreak ? "activity..." : "cause..."}
           onChange={(i) => {
             if (isBreak) {
               const a = { ...newEntry };
@@ -58,22 +80,26 @@ export default function EditView({
           onChange={onIconChange}
           isBreak={isBreak}
         />
-        <button
-          onClick={() => {
-            if (isBreak) {
-              if (newEntry.id !== undefined) {
-                editElement("activities", newEntry.id, newEntry);
+        <div className="pt-20">
+          <CustomButton
+            size="regular"
+            variant={isBreak ? "break" : "study"}
+            onClick={() => {
+              if (isBreak) {
+                if (newEntry.id !== undefined) {
+                  editElement("activities", newEntry.id, newEntry);
+                }
+              } else {
+                if (newEntry.id !== undefined) {
+                  editElement("reasons", newEntry.id, newEntry);
+                }
               }
-            } else {
-              if (newEntry.id !== undefined) {
-                editElement("reasons", newEntry.id, newEntry);
-              }
-            }
-            setOpen(false);
-          }}
-        >
-          {isBreak ? "save activity" : " save reason"}
-        </button>
+              setOpen(false);
+            }}
+          >
+            {isBreak ? "save activity" : " save reason"}{" "}
+          </CustomButton>
+        </div>
       </div>
     </>
   );

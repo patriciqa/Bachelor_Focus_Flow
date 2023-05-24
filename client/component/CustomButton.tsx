@@ -28,9 +28,9 @@ const CustomButton = ({
     <button
       className={clsx(
         "h-fit w-fit rounded   transition-all",
-        size === "large" && "px-5 py-3",
-        size === "regular" && "px-4 py-2",
-        size === "small" && "px-2 py-2",
+        // size === "large" && "px-5 py-3",
+        // size === "regular" && "px-4 py-2",
+        // size === "small" && "px-2 py-2",
         variant === "study" &&
           "  bg-study text-white flex w-3/4	 items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "study-unfilled" &&
@@ -38,11 +38,11 @@ const CustomButton = ({
         variant === "break" &&
           "  bg-break text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "dark" &&
-          "  bg-dark text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
+          "  bg-dark text-white flex w-[80vw]	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "break-unfilled" &&
           "  bg-white text-break  flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal ",
         variant === "disabled" &&
-          "  bg-inactiveGrey text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal "
+          "  bg-inactiveGre text-white flex w-3/4	items-center p-4 justify-center h-[56px] text-h24 font-normal "
       )}
       {...props}
     >
