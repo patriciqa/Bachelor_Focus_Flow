@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import MoodCheckIn from "../MoodCheckIn";
 import ActivitySelection from "./ActivitySelection";
-import ExtendBreak from "./ExtendBreak";
+import BreakSummary from "./BreakSummary";
 
 export const BreakView = ({
   whichTimer,
@@ -42,6 +42,7 @@ export const BreakView = ({
   );
   const [duration, setDuration] = useState(5);
 
+  console.log(selected);
   const showBreakPage = (): React.ReactElement => {
     let component;
     switch (showComponent) {
@@ -58,8 +59,9 @@ export const BreakView = ({
         break;
       case BreakComponent.EXTEND_BREAK:
         component = (
-          <ExtendBreak
+          <BreakSummary
             breakEntryy={breakEntryy}
+            setBreakEntryy={setBreakEntryy}
             whichTimer={whichTimer}
             setWhichTimer={setWhichTimer}
             setShowComponent={setShowComponent}
@@ -67,7 +69,8 @@ export const BreakView = ({
         );
         break;
       default:
-        component = <div />;
+        setShowComponent(null);
+        component = null;
     }
     return component;
   };
@@ -116,7 +119,15 @@ export const BreakView = ({
         <>
           <div className="flex flex-col items-center justify-center h-[25vh] my-20 ">
             {/* <div className="h-[10vh]">Yeah, keep going!</div> */}
-
+            {runningTimer === TimerViewState.RUNNING && (
+              <div className="h-[10vh] mb-8">Enjoy your break.</div>
+            )}{" "}
+            {runningTimer === TimerViewState.START && (
+              <div className="h-[10vh] mb-8" />
+            )}
+            {runningTimer === TimerViewState.FINISHED && (
+              <div className="h-[10vh] mb-8">Welcome back!</div>
+            )}
             <TimerSlider
               isStudy={false}
               runningTimer={runningTimer}
@@ -203,14 +214,16 @@ export const BreakView = ({
         </>
       ) : (
         <>
-          <div className="flex flex-col items-center justify-center text-center ">
+          <div className="flex flex-col items-center justify-center pt-4 text-center text-h24 ">
             What would you like to do <br /> in your break?
-            <p className="text-16 text-inactiveGrey">select 1 activity</p>
+            <p className="pt-2 text-h14 text-inactiveGrey">select 1 activity</p>
           </div>
           <ActivitySelection selected={selected} setSelected={setSelected} />
           <div className="flex justify-center">
             <CustomButton
-              variant="break"
+              variant={
+                selected === null || selected !== -1 ? "break" : "disabled"
+              }
               onClick={() => {
                 setShowTimer(true);
                 setRunningTimer(TimerViewState.START);

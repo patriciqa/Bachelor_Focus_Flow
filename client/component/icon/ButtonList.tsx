@@ -78,7 +78,7 @@ export default function ButtonList({
     <button
       onClick={whenClicked}
       className={
-        "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px]  w-[80vw] " +
+        "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] h-12 " +
         getBorderColor() +
         " " +
         getBackground()

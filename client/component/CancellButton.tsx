@@ -31,7 +31,8 @@ export default function CancelButton({
     <button className="flex justify-end p-5" onClick={() => setOpen(false)}>
       <FontAwesomeIcon
         icon={["fas", "xmark"]}
-        className={colorType !== undefined ? getColor(colorType) : ""}
+        // className={colorType !== undefined ? getColor(colorType) : ""}
+        className="text-dark"
         size="2x"
       />
     </button>

@@ -64,7 +64,7 @@ const Overview = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-screen bg-background">
+      <div className="flex flex-col items-center  w-screen h-[100vh] bg-background">
         <WeekCalendar
           activePhase={activePhase}
           selectedDate={selectedDate}

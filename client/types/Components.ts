@@ -3,6 +3,7 @@ export enum StudyComponent {
   MOODCHECKIN,
   GOOD_REASON,
   BAD_REASON,
+  STUDY_SUMMARY,
 }
 
 export enum BreakComponent {

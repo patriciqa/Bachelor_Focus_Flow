@@ -11,6 +11,7 @@ import { Study, TimerViewState, WhichTimer } from "@/types/Timer";
 import React, { useEffect, useState } from "react";
 import MoodCheckIn from "../MoodCheckIn";
 import Reasons from "./Reasons";
+import StudySummary from "./StudySummary";
 
 export const StudyView = ({
   setWhichTimer,
@@ -70,6 +71,16 @@ export const StudyView = ({
           />
         );
         break;
+      case StudyComponent.STUDY_SUMMARY:
+        component = (
+          <StudySummary
+            studyEntry={studyEntry}
+            setStudyEntry={setStudyEntry}
+            setWhichTimer={setWhichTimer}
+            // setShowComponent={setShowComponent}
+          />
+        );
+        break;
       default:
         component = <div />;
     }
@@ -88,7 +99,7 @@ export const StudyView = ({
   }, [runningTimer]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-[50vh] my-10 ">
+    <div className="flex flex-col items-center justify-center h-[50vh] my-10 relative">
       {runningTimer === TimerViewState.RUNNING && (
         <div className="h-[10vh] mb-8">Yeah, keep going!</div>
       )}{" "}
@@ -195,9 +206,10 @@ export const StudyView = ({
               }
             }}
             className={
-              "text-chartGrey h-[56px] mb-2 " +
-              (extend !== 0 &&
-                " bg-study rounded text-white flex w-5/6 items-center p-4 justify-center text-h24 font-normal")
+              " h-[56px] p-4 m-2 rounded  flex w-5/6 items-center  justify-center text-h24 font-normal " +
+              (extend !== 0
+                ? " bg-study rounded text-white "
+                : "text-chartGrey bg-white")
             }
           >
             extend by {extend / 60} mins

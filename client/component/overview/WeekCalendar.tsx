@@ -62,7 +62,7 @@ const WeekCalendar = ({
           </span>
         </div>
         <div className="items-end justify-end text-right text-h16 text-darkGrey flex-nowrap">
-          <p> examphase {activePhase?.title}</p>
+          <p> {activePhase?.title}</p>
           <p className="flex flex-nowrap">{getDate()}</p>
         </div>
       </div>

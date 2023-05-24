@@ -1,12 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { getElement } from "@/db/Actions";
-import sToM from "@/hooks/SecondsToMinutes";
 import { Activity, Mood, Reason } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
 import { useEffect, useState } from "react";
-
+import Tag from "./Tag";
 const HorizontalCarousel = ({
   entries,
   selectedDate,
@@ -98,7 +96,8 @@ const HorizontalCarousel = ({
         {entries !== undefined &&
           entries.map((entry: any) => (
             <div key={entry.timer.startTime}>
-              <button
+              <Tag entry={entry} />
+              {/* <button
                 id={entry.timer.startTime}
                 className={
                   "flex-none carousel-item snap-center m-3  py-4  h-[25vh] flex flex-col  rounded w-[80vw] text-white " +
@@ -141,7 +140,7 @@ const HorizontalCarousel = ({
                     </div>
                   </div>
                 </div>
-              </button>
+              </button> */}
             </div>
           ))}
       </div>

@@ -1,10 +1,10 @@
 import MoodIcon from "@/component/icon/MoodIcon";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
-import saveToDb from "@/hooks/SaveToDb";
 import sToM from "@/hooks/SecondsToMinutes";
 import { BreakComponent, StudyComponent } from "@/types/Components";
 import { Break, Mood, Study, WhichTimer } from "@/types/Timer";
-import CustomButton from "../CustomButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CustomButton, { buttonVariant } from "../CustomButton";
 
 export default function MoodCheckIn({
   isStudy,
@@ -22,18 +22,34 @@ export default function MoodCheckIn({
   setStudyShowComponent?: (p: StudyComponent) => void;
 }) {
   const { examPhaseId } = useExamPhaseContext();
-
+  const getVariant = (): buttonVariant => {
+    if (entry.mood === undefined) {
+      return "disabled";
+    } else {
+      if (isStudy) {
+        return "study";
+      } else {
+        return "break";
+      }
+    }
+  };
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="relative flex flex-col items-center h-full">
       {isStudy ? (
         <>
-          <div>study - {sToM(entry.timer.duration)} min </div>
-          <div className="text-center">How did your studying go?</div>
+          <div className="mb-6 text-h16 text-pieGrey pt-[10vh]">
+            <FontAwesomeIcon icon={["fas", "clock"]} className="text-pieGrey" />{" "}
+            study {sToM(entry.timer.duration)}min
+          </div>
+          <div className="text-center pb-14">How did your studying go?</div>
         </>
       ) : (
         <>
-          <div>break - {sToM(entry.timer.duration)} min </div>
-          <div className="text-center">
+          <div className="mb-6 text-h16 text-pieGrey pt-[10vh]">
+            <FontAwesomeIcon icon={["fas", "clock"]} className="text-pieGrey" />{" "}
+            break {sToM(entry.timer.duration)}min
+          </div>
+          <div className="text-center pb-14">
             How do you feel after <br /> this break?
           </div>
         </>
@@ -45,46 +61,47 @@ export default function MoodCheckIn({
           setEntry={setEntry}
         />{" "}
       </div>
-      <div>{entry.mood}</div>
-      <CustomButton
-        size="regular"
-        variant={isStudy ? "study" : "break"}
-        onClick={() => {
-          switch (entry.mood) {
-            case Mood.GOOD:
-            case Mood.RATHER_GOOD:
-              if (isStudy) {
-                if (setStudyShowComponent) {
-                  setStudyShowComponent(StudyComponent.GOOD_REASON);
+      <div className="text-h36 pt-[5vh]">{entry.mood}</div>
+      <div className="absolute bottom-[8vh]">
+        <CustomButton
+          variant={getVariant() as buttonVariant}
+          onClick={() => {
+            switch (entry.mood) {
+              case Mood.GOOD:
+              case Mood.RATHER_GOOD:
+                if (isStudy) {
+                  if (setStudyShowComponent) {
+                    setStudyShowComponent(StudyComponent.GOOD_REASON);
+                  }
+                } else {
+                  if (setShowComponent) {
+                    setShowComponent(BreakComponent.EXTEND_BREAK);
+                  }
                 }
-              } else {
-                if (setShowComponent) {
-                  setShowComponent(BreakComponent.NO_COMPONENT);
-                  saveToDb(examPhaseId, entry, false);
-                  setWhichTimer(WhichTimer.STUDY);
-                  setEntry({ timer: { startTime: 0, duration: 0 } });
-                }
-              }
 
-              break;
-            case Mood.BAD:
-            case Mood.RATHER_BAD:
-              if (isStudy) {
-                if (setStudyShowComponent) {
-                  setStudyShowComponent(StudyComponent.BAD_REASON);
+                break;
+              case Mood.BAD:
+              case Mood.RATHER_BAD:
+                if (isStudy) {
+                  if (setStudyShowComponent) {
+                    setStudyShowComponent(StudyComponent.BAD_REASON);
+                  }
+                  console.log("study");
+                } else {
+                  if (setShowComponent) {
+                    setShowComponent(BreakComponent.EXTEND_BREAK);
+                  }
                 }
-                console.log("study");
-              } else {
-                if (setShowComponent) {
-                  setShowComponent(BreakComponent.EXTEND_BREAK);
-                }
-              }
-              break;
-          }
-        }}
-      >
-        continue
-      </CustomButton>
+                break;
+            }
+            if (setShowComponent) {
+              setShowComponent(BreakComponent.EXTEND_BREAK);
+            }
+          }}
+        >
+          continue
+        </CustomButton>
+      </div>
     </div>
   );
 }

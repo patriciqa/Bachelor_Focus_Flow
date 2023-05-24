@@ -4,10 +4,9 @@ import ButtonList, { ButtonVariant } from "@/component/icon/ButtonList";
 import ModalPage from "@/component/settings/reasons/ModalPage";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
-import saveToDb from "@/hooks/SaveToDb";
 import sToM from "@/hooks/SecondsToMinutes";
 import { StudyComponent } from "@/types/Components";
-import { Reason, Study, WhichTimer } from "@/types/Timer";
+import { Mood, Reason, Study, WhichTimer } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { includes } from "lodash";
 import { SetStateAction, useEffect, useState } from "react";
@@ -59,23 +58,38 @@ export default function Reasons({
     const s = { ...studyEntry };
     s.reasonIds = selected;
     setStudyEntry(s);
+    console.log(selected);
   }, [selected]);
 
+  const getText = (): string => {
+    let text = "";
+    switch (studyEntry.mood) {
+      case Mood.GOOD:
+        text = "Why did it go good?";
+        break;
+      case Mood.RATHER_GOOD:
+        text = "Why did it go rather good?";
+        break;
+      case Mood.RATHER_BAD:
+        text = "Why did it go rather bad?";
+        break;
+      case Mood.BAD:
+        text = "Why did it go bad?";
+        break;
+    }
+    return text;
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center">
-      {good ? (
-        <>
-          <div>study {sToM(studyEntry.timer.duration)}min</div>
-          <div>Great! Why did it go well?</div>
-        </>
-      ) : (
-        <>
-          <div>study {sToM(studyEntry.timer.duration)}min</div>
-          <div>Why did it go bad?</div>
-        </>
-      )}
+    <div className="relative flex flex-col items-center h-full">
+      <div className="mb-6 text-h16 text-pieGrey">
+        <FontAwesomeIcon icon={["fas", "clock"]} className="text-pieGrey" />{" "}
+        study {sToM(studyEntry.timer.duration)}min
+      </div>
+      <div>{getText()}</div>
+      <div className="pt-2 text-h14 text-chartGrey">select up to 3 causes</div>
       <div className="flex flex-col justify-center">
-        <div className="h-[50vh] relative py-4 w-[70vw]">
+        <div className="h-[52vh] relative py-4 w-[70vw]">
           <div className="max-h-full overflow-auto">
             {reasons !== undefined &&
               reasons.map((reason) => (
@@ -96,10 +110,14 @@ export default function Reasons({
                             (e) => e !== reason.id
                           );
                         } else {
-                          if (selected !== null) {
+                          if (selected !== null && selected.length < 3) {
                             selectedReasons = [...selected];
                             if (reason.id !== undefined) {
                               selectedReasons.push(reason.id);
+                            }
+                          } else {
+                            if (selected !== null) {
+                              selectedReasons = [...selected];
                             }
                           }
                         }
@@ -139,21 +157,21 @@ export default function Reasons({
           </div>
         </div>
       </div>
-      <CustomButton
-        size="regular"
-        variant={
-          selected !== null && selected.length >= 1 ? "study" : "disabled"
-        }
-        onClick={() => {
-          saveToDb(examPhaseId, studyEntry, true);
-          setShowComponent(StudyComponent.NO_COMPONENT);
-          setWhichTimer(WhichTimer.BREAK);
-          setStudyEntry({ timer: { startTime: 0, duration: 0 } });
-        }}
-      >
-        continue
-      </CustomButton>
-
+      <div className="absolute bottom-[8vh]">
+        <CustomButton
+          variant={
+            selected === null || selected.length >= 1 ? "study" : "disabled"
+          }
+          onClick={() => {
+            // saveToDb(examPhaseId, studyEntry, true);
+            setShowComponent(StudyComponent.STUDY_SUMMARY);
+            // setWhichTimer(WhichTimer.BREAK);
+            // setStudyEntry({ timer: { startTime: 0, duration: 0 } });
+          }}
+        >
+          continue
+        </CustomButton>
+      </div>
       <ModalPage
         open={open}
         colorType={ColorType.STUDY}

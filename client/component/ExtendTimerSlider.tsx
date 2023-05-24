@@ -115,7 +115,7 @@ export default function ExtendTimerSlider({
         )}
       </div>
       <div className="absolute">
-        <div className="z-10 flex items-center content-center justify-center w-20 h-20 pb-4 text-4xl ">
+        <div className="z-10 flex items-center content-center justify-center w-20 h-20 pb-12 text-4xl ">
           {toMinutesSeconds(extend)}
         </div>
       </div>

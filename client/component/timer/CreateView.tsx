@@ -93,7 +93,6 @@ export default function CreateView({
         <IconPicker value={icon} onChange={onIconChange} isBreak={isBreak} />
         <div className="pt-20">
           <CustomButton
-            size="regular"
             variant={isBreak ? "break" : "study"}
             onClick={() => {
               console.log(activities);
