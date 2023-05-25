@@ -53,22 +53,21 @@ export default function ExamPhaseOverview({
     console.log(id);
 
     if (id !== "") {
-      console.log(id);
       if (id !== null)
         getElement("examPhases", parseInt(id)).then((result: any) => {
           setExamPhaseTitle(result);
         });
     }
-  }, [phases]); //todo renders too much
+  }, [open, editOpen]);
 
   return (
-    <div className="flex flex-col h-full p-4 ">
-      <div className={"flex justify-center w-full pt-10 px-14 pb-12	"}>
+    <div className="flex flex-col h-full p-4 overflow-scroll">
+      <div className={"flex justify-center w-full pt-6 px-14 pb-12	"}>
         <button
           onClick={() => setActive(true)}
           className={
             "w-1/2 rounded-l-lg text-white p-2  bg-inactiveGrey " +
-            (active && "bg-dark rounded  ")
+            (active && "bg-darkbB rounded  ")
           }
         >
           active
@@ -77,7 +76,7 @@ export default function ExamPhaseOverview({
           onClick={() => setActive(false)}
           className={
             "w-1/2 rounded-r-lg text-white p-2  bg-inactiveGrey " +
-            (!active && "bg-dark rounded  ")
+            (!active && "bg-darkbB rounded  ")
           }
         >
           archive
@@ -149,7 +148,7 @@ export default function ExamPhaseOverview({
           </div>
         </div>
       )}
-      <div className="flex items-end justify-center h-full pb-16">
+      <div className="flex items-end justify-center h-full pt-2 pb-16">
         <CustomButton
           variant="dark"
           onClick={() => {

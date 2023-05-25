@@ -23,6 +23,7 @@ const CustomButton = ({
 }: Props) => {
   return (
     <button
+      disabled={variant === "disabled" ? true : false}
       className={clsx(
         "h-fit w-fit rounded   transition-all",
         variant === "study" &&

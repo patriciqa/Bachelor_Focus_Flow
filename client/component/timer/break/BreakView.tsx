@@ -99,14 +99,14 @@ export const BreakView = ({
   }, [selected]);
 
   const getActivity = (): React.ReactElement => {
-    let entry = <div />;
+    let entry = undefined;
     if (activity !== undefined) {
       entry = (
-        <div className="flex flex-row " key={activity.id}>
+        <div className="flex flex-row items-center " key={activity.id}>
           {activity.icon !== undefined && (
             <FontAwesomeIcon icon={activity.icon} className="pr-4" />
           )}
-          {activity.title}
+          <p className="text-dark">{activity.title}</p>
         </div>
       );
     }
@@ -143,10 +143,12 @@ export const BreakView = ({
                 {/* <div className="bg-transparent h-[30vh]" /> */}
                 <button
                   className={
-                    "w-4/6 px-4 py-2 mb-2 border rounded-full border-break text-break"
+                    "w-4/6 px-4 py-2 mb-2 border rounded-full border-break text-dark"
                   }
                 >
-                  {getActivity()}
+                  {getActivity() !== undefined
+                    ? getActivity()
+                    : "no activity selected"}
                 </button>
                 <CustomButton
                   variant="break"
@@ -175,7 +177,9 @@ export const BreakView = ({
                     "w-4/6 px-4 py-2 mb-2 border rounded-full border-break bg-break text-white"
                   }
                 >
-                  {getActivity()}
+                  {getActivity() !== undefined
+                    ? getActivity()
+                    : "no activity selected"}
                 </button>
                 <CustomButton
                   variant="break-unfilled"

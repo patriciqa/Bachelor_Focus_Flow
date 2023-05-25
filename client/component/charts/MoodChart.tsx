@@ -195,7 +195,7 @@ export default function MoodChart({
   };
 
   return (
-    <div className="flex flex-col p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[40vh] w-[95vw]">
+    <div className="flex flex-col p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded pb-7  w-[95vw]">
       <div className="flex flex-row items-center justify-center w-full ">
         <div className="flex items-center px-4 py-4">
           <div className="mr-2 text-h16 text-study">Study:</div>
@@ -284,8 +284,9 @@ export default function MoodChart({
               data: {
                 stroke: "white",
                 strokeWidth: 6,
-                filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))",
+                filter: "drop-shadow(8 2px 4px rgba(0, 0, 0, 0.3))",
                 zIndex: 0,
+                border: "black",
               },
               parent: { border: "1px solid black" },
             }}

@@ -7,13 +7,25 @@
   background: white;
   margin-top: 10vh;
   position: absolute;
+  border: 1px solid #828282;
+  border-radius: 8px;
+  padding: 0.5rem;
+  z-index: 10;
 }
 
 .react-calendar__navigation__label__labelText {
   font-family: Sofia Pro;
   font-size: 24px;
   font-weight: bold;
+  /* padding-top: 1rem; */
 }
+.react-calendar__navigation__label {
+  padding-top: 0.5rem;
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+}
+
 .react-calendar--doubleView {
   width: 700px;
 }
@@ -29,6 +41,8 @@
 .react-calendar *,
 .react-calendar *:before,
 .react-calendar *:after {
+  font-family: Sofia Pro;
+  font-weight: bold;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -54,42 +68,23 @@
 }
 .react-calendar__navigation {
   display: flex;
-  height: 44px;
   margin-bottom: 1em;
 }
 .react-calendar__navigation button {
-  min-width: 44px;
   background: none;
+  width: 20vw;
 }
 
-.react-calendar__navigation__prev-button::before {
-  content: url(/client/public/images/ic-chevron_left.svg);
-  color: transparent;
-  background-color: white;
-  width: 15px;
-  height: 15px;
-  border: none;
-}
 .react-calendar__navigation__prev-button {
   content: url(/client/public/images/ic-chevron_left.svg);
-}
-
-.react-calendar__navigation__next-button::before {
-  content: url(/client/public/images/ic-chevron_right.svg);
-  width: 50px;
-  height: 50px;
+  transform: scale(2);
 }
 
 .react-calendar__navigation__next-button {
   content: url(/client/public/images/ic-chevron_left.svg);
-  width: 50px;
-  height: 50px;
+  transform: scale(2);
 }
 
-.react-calendar__navigation button:enabled:hover,
-.react-calendar__navigation button:enabled:focus {
-  background-color: #e6e6e6;
-}
 .react-calendar__month-view__weekdays {
   text-align: center;
   text-transform: uppercase;
@@ -99,17 +94,19 @@
 .react-calendar__month-view__weekdays__weekday {
   overflow: hidden;
   flex-grow: 0;
-  font-family: HKGrotesk;
   font-size: 0.875rem;
   font-weight: normal;
-  color: #6f6e6e;
-  padding-bottom: 1rem;
+  color: #333333;
+  padding-bottom: 0.5rem;
+  font-family: Sofia Pro;
 }
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75em;
+  font-family: Sofia Pro;
+
   font-weight: bold;
 }
 
@@ -120,7 +117,6 @@ abbr {
 .react-calendar__month-view__days__day {
   overflow: hidden;
   flex-grow: 0;
-  font-family: HKGrotesk;
   font-size: 0.875rem;
   font-weight: normal;
   color: #6f6e6e;
@@ -152,12 +148,16 @@ abbr {
   color: #313030;
 }
 
-.react-calendar__tile--rangeEnd,
+.react-calendar__tile--rangeEnd {
+  background: #828282;
+  border-radius: 0px 6px 6px 0px;
+  color: white;
+}
 .react-calendar__tile--rangeStart {
-  border-radius: 50%;
-  background-color: white;
-  box-shadow: 0 0 5px 0 rgba(103, 94, 159);
   z-index: 1;
+  background: #828282;
+  color: white;
+  border-radius: 6px 0px 0px 6px;
 }
 
 react-calendar__tile[disabled] {

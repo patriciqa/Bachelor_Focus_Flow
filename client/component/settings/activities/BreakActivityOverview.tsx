@@ -36,8 +36,7 @@ export default function BreakActivityOverview() {
   });
 
   return (
-    <div>
-      <div className="flex flex-col justify-center p-6 overflow-scroll">
+      <div className="flex flex-col w-full p-6 overflow-y-scroll">
         <div className="text-chartGrey text-h14">
           edit or create new activites
         </div>
@@ -48,7 +47,7 @@ export default function BreakActivityOverview() {
                 setOpenEdit(true);
                 setActiveEntry(c);
               }}
-              className="flex justify-between w-[90vw] py-2 "
+              className="flex justify-between py-2 "
             >
               {initialRenderComplete && (
                 <>
@@ -66,7 +65,6 @@ export default function BreakActivityOverview() {
               )}
             </button>
           ))}
-      </div>
       <div className="flex items-end justify-center ">
         <CustomButton
           variant="dark"

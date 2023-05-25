@@ -32,7 +32,7 @@ export default function StudySummary({
           onClick={() => {
             setWhichTimer(WhichTimer.BREAK);
             // setShowComponent(BreakComponent.NO_COMPONENT);
-            saveToDb(examPhaseId, studyEntry, false);
+            saveToDb(examPhaseId, studyEntry, true);
             setStudyEntry({ timer: { startTime: 0, duration: 0 } });
             // setWhichTimer(WhichTimer.BREAK);
             // setShowComponent(BreakComponent.NO_COMPONENT);

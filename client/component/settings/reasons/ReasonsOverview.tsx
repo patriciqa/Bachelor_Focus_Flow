@@ -46,74 +46,72 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
   }, [studyReasons]);
 
   return (
-    <div>
-      <div className="flex flex-col p-6">
-        <div className="text-chartGrey text-h14">edit or create new causes</div>
-        {studyReasons !== undefined &&
-          studyReasons.map((p) => (
-            <button
-              onClick={() => {
-                setOpenEdit(true);
-                setActiveReason(p);
-              }}
-              className="flex justify-between w-[90vw] py-2"
-            >
-              {initialRenderComplete && (
-                <>
-                  <TextWithIcon
-                    variant={ButtonVariant.STUDY}
-                    icon={p.icon}
-                    text={p.title}
-                  />
-                  <FontAwesomeIcon
-                    icon={["fas", "ellipsis-vertical"]}
-                    size="xl"
-                    className="pr-4"
-                  />
-                </>
-              )}
-            </button>
-          ))}
-        <div className="flex items-end justify-center ">
-          <CustomButton
-            variant="dark"
+    <div className="flex flex-col w-full p-6 overflow-y-scroll">
+      <div className="text-chartGrey text-h14">edit or create new causes</div>
+      {studyReasons !== undefined &&
+        studyReasons.map((p) => (
+          <button
             onClick={() => {
-              setOpen(true);
+              setOpenEdit(true);
+              setActiveReason(p);
             }}
+            className="flex justify-between py-2"
           >
-            add cause
-          </CustomButton>
-        </div>
+            {initialRenderComplete && (
+              <>
+                <TextWithIcon
+                  variant={ButtonVariant.STUDY}
+                  icon={p.icon}
+                  text={p.title}
+                />
+                <FontAwesomeIcon
+                  icon={["fas", "ellipsis-vertical"]}
+                  size="xl"
+                  className="pr-4"
+                />
+              </>
+            )}
+          </button>
+        ))}
+      <div className="flex items-end justify-center ">
+        <CustomButton
+          variant="dark"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          add cause
+        </CustomButton>
+      </div>
+      <ModalPage
+        isStudy={false}
+        colorType={ColorType.STUDY}
+        open={open}
+        setOpen={setOpen}
+        component={
+          <CreateView
+            setOpen={setOpen}
+            isBreak={false}
+            goodReason={good ? true : false}
+          />
+        }
+      />
+      {activeReason !== undefined && (
         <ModalPage
-          isStudy={false}
           colorType={ColorType.STUDY}
-          open={open}
-          setOpen={setOpen}
+          isStudy={false}
+          open={openEdit}
+          setOpen={setOpenEdit}
           component={
-            <CreateView
-              setOpen={setOpen}
+            <EditView
               isBreak={false}
+              setOpen={setOpenEdit}
               goodReason={good ? true : false}
+              activeEntry={activeReason}
             />
           }
-        />{" "}
-        {activeReason !== undefined && (
-          <ModalPage
-            colorType={ColorType.STUDY}
-            isStudy={false}
-            open={openEdit}
-            setOpen={setOpenEdit}
-            component={
-              <EditView
-                isBreak={false}
-                setOpen={setOpenEdit}
-                goodReason={good ? true : false}
-                activeEntry={activeReason}
-              />
-            }
-          />
-        )}
-      </div>
+        />
+      )}
     </div>
   );
 }

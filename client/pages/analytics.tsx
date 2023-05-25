@@ -1,5 +1,5 @@
-import PieChartBreak from "@/component/charts/PieChartBreak";
-import PieChartStudy from "@/component/charts/PieChartStudy";
+import PieChartBoosters from "@/component/charts/PieChartBoosters";
+import PieChartDowners from "@/component/charts/PieChartDowners";
 import { getElement } from "@/db/Actions";
 import { ExamPhase } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -79,22 +79,22 @@ export default function Analytcs() {
     <div className="flex flex-col  w-[100vw] p-5 bg-background">
       {activePhase !== undefined && (
         <>
-          <div className="flex w-full">
+          <div className="flex w-full pt-12">
             {!hidePrevArrow && (
               <div
-                className="flex-1 text-center "
+                className="flex-1 pt-1 text-center "
                 onClick={() => getPreviewPhase(true)}
               >
                 {initialRenderComplete && (
-                  <FontAwesomeIcon icon={["fas", "chevron-left"]} />
+                  <FontAwesomeIcon icon={["fas", "chevron-left"]} size="xl" />
                 )}
               </div>
             )}
-            <div>
-              <div className="font-bold text-h24">
-                exam phase {activePhase?.title}
+            <div className="flex flex-col items-center justify-center">
+              <div className="pb-1 font-bold text-h24 ">
+                {activePhase?.title}
               </div>
-              <div>
+              <div className="text-pieGrey text-h16 ">
                 {moment(activePhase.startDate).format("L")} -{" "}
                 {moment(activePhase.endDate).format("L")}
               </div>
@@ -105,18 +105,30 @@ export default function Analytcs() {
                 onClick={() => getPreviewPhase(false)}
               >
                 {initialRenderComplete && (
-                  <FontAwesomeIcon icon={["fas", "chevron-right"]} />
+                  <FontAwesomeIcon icon={["fas", "chevron-right"]} size="xl" />
                 )}
               </div>
             )}
           </div>
-          <div className="pt-6">mood influences while taking breaks</div>
-          <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded ">
-            <PieChartStudy activePhase={activePhase} />
+          <div className="pt-6 pb-1 ">
+            your top mood boosters
+            <FontAwesomeIcon
+              className="ml-2"
+              icon={["fas", "arrow-trend-up"]}
+            />
           </div>
-          <div className="pt-6">mood influences while taking breaks</div>
-          <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded ">
-            <PieChartBreak activePhase={activePhase} />
+          <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded">
+            <PieChartBoosters activePhase={activePhase} />
+          </div>
+          <div className="pt-6 pb-1">
+            your top mood downers
+            <FontAwesomeIcon
+              className="ml-2"
+              icon={["fas", "arrow-trend-down"]}
+            />
+          </div>
+          <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded  mb-20 ">
+            <PieChartDowners activePhase={activePhase} />
           </div>
         </>
       )}

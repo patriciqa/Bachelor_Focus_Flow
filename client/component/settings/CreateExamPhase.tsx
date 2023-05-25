@@ -4,6 +4,7 @@ import { ExamPhase, PickedDate, WhichTimer } from "@/types/Timer";
 import { useRouter } from "next/router";
 import { SetStateAction, useEffect, useState } from "react";
 import Calendar from "react-calendar";
+import CustomButton, { buttonVariant } from "../CustomButton";
 
 export default function CreateExamPhase({
   setShowComponent,
@@ -25,10 +26,15 @@ export default function CreateExamPhase({
     if (date) {
       const fromDay = new Date(date.from).getDate();
       const fromMonth = new Date(date.from).getMonth() + 1;
+      const fromYear = new Date(date.from).getFullYear();
       const toDay = new Date(date.to).getDate();
       const toMonth = new Date(date.to).getMonth() + 1;
       const toYear = new Date(date.to).getFullYear();
-      d = `${fromDay}.${fromMonth} - ${toDay}.${toMonth}.${toYear}`;
+      d = `${fromDay < 10 ? `0${fromDay}` : fromDay}.${
+        fromMonth < 10 ? `0${fromMonth}` : fromMonth
+      }.${fromYear} - ${toDay < 10 ? `0${toDay}` : toDay}.${
+        toMonth < 10 ? `0${toMonth}` : toMonth
+      }.${toYear}`;
     }
 
     return d;
@@ -55,25 +61,55 @@ export default function CreateExamPhase({
   }, []);
 
   const [examPhase, setExamPhase] = useState<ExamPhase>();
+  const input = document.getElementById("myInput") as HTMLInputElement;
+  const countSpan = document.getElementById("count");
+  if (input !== null && countSpan !== null) {
+    input.addEventListener("input", function () {
+      const remainingChars = input.maxLength - input.value.length;
+      countSpan.textContent = input.value.length.toString();
+    });
+  }
+
+  const checkValidity = (): string => {
+    console.log(examPhase);
+    if (examPhase?.title === undefined || examPhase.title === "") {
+      return "disabled";
+    } else if (
+      examPhase?.startDate === undefined ||
+      examPhase?.endDate === undefined
+    ) {
+      return "disabled";
+    } else {
+      return "dark";
+    }
+  };
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="font-bold text-h24"> create exam phase</div>
+    <div className="relative flex flex-col items-center h-full">
+      <div className=" text-h24 pt-[10vh] mb-12"> create exam phase</div>
+      <p
+        className="flex justify-end w-4/5 text-chartGrey text-h16"
+        id="characterCount"
+      >
+        <span id="count">0</span>/20
+      </p>
       <input
+        maxLength={20}
         autoComplete="off"
         type="text"
         id="name"
         name="name"
         required
-        className=" border  pl-2 border-black w-[70vw] rounded h-9 mt-10"
+        className="w-4/5 h-10 pl-2 border border-black rounded border-chartGrey "
         onChange={(i) => {
           console.log(i.target.value);
           const e = { ...examPhase };
           e.title = i.target.value;
           setExamPhase(e);
         }}
-        placeholder="Title..."
+        placeholder="title..."
       />
       <button
+        className="flex items-center w-4/5 h-10 pl-2 mt-6 border border-black rounded border-chartGrey text-tahiti"
         onClick={() => {
           if (showCalender) {
             setShowCalender(false);
@@ -84,9 +120,9 @@ export default function CreateExamPhase({
       >
         <input
           type="text"
-          id="name"
-          name="name"
+          // id="name"
           required
+          className={"w-full text-dark"}
           onClick={() => {
             if (showCalender) {
               setShowCalender(false);
@@ -94,16 +130,14 @@ export default function CreateExamPhase({
               setShowCalender(true);
             }
           }}
-          className="pl-2 border border-black w-[70vw] rounded h-9 mt-10"
           onChange={(i) => {
             console.log(i.target.value);
             const e = { ...examPhase };
             e.title = i.target.value;
             setExamPhase(e);
           }}
-          placeholder={`${
-            getDate !== undefined ? getDate() : "dd.mm.yyyy - dd.mm.yyyy"
-          }`}
+          value={getDate()}
+          placeholder={"dd.mm.yyyy - dd.mm.yyyy"}
         />
       </button>
       {showCalender && (
@@ -132,9 +166,9 @@ export default function CreateExamPhase({
           }}
           value={[new Date(Date.now()), new Date(new Date(Date.now() + 1))]}
           selectRange={true}
-          allowPartialRange={true}
+          // allowPartialRange={true}
           formatShortWeekday={(_locale, value) =>
-            ["S", "M", "D", "M", "D", "F", "S"][value.getDay()]
+            ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"][value.getDay()]
           }
           next2Label={null}
           prev2Label={null}
@@ -150,30 +184,34 @@ export default function CreateExamPhase({
           }
         />
       )}
-      <button
-        onClick={() => {
-          if (examPhase !== undefined) {
-            console.log(examPhase);
-            addElement("examPhases", examPhase);
-            if (setOpen !== undefined) {
-              setOpen(false);
+      <div className="absolute bottom-0 flex items-end justify-center pb-16">
+        <CustomButton
+          variant={checkValidity() as buttonVariant}
+          className=""
+          onClick={() => {
+            if (examPhase !== undefined) {
+              console.log(examPhase);
+              addElement("examPhases", examPhase);
+              if (setOpen !== undefined) {
+                setOpen(false);
+              }
             }
-          }
-          if (router === "/settings" && setShowComponent !== undefined) {
-            setShowComponent(SettingComponent.EXAMPHASE_OVERVIEW);
-            if (setOpen !== undefined) {
-              setOpen(false);
+            if (router === "/settings" && setShowComponent !== undefined) {
+              setShowComponent(SettingComponent.EXAMPHASE_OVERVIEW);
+              if (setOpen !== undefined) {
+                setOpen(false);
+              }
+            } else {
+              if (setOpen !== undefined) {
+                setOpen(false);
+                setWhichTimer(WhichTimer.STUDY);
+              }
             }
-          } else {
-            if (setOpen !== undefined) {
-              setOpen(false);
-              setWhichTimer(WhichTimer.STUDY);
-            }
-          }
-        }}
-      >
-        Save
-      </button>
+          }}
+        >
+          create
+        </CustomButton>
+      </div>
     </div>
   );
 }
