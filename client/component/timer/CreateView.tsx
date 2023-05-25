@@ -53,7 +53,7 @@ export default function CreateView({
     <>
       <div className="flex flex-col items-center justify-center">
         {!isBreak && goodReason && (
-          <div className="pt-12 pb-12 ">add positive cause</div>
+          <div className="pt-8 pb-8 ">add positive cause</div>
         )}
         {!isBreak && !goodReason && <div>add negative cause</div>}
         {isBreak && <div>add break activity</div>}
@@ -91,7 +91,7 @@ export default function CreateView({
           }}
         />
         <IconPicker value={icon} onChange={onIconChange} isBreak={isBreak} />
-        <div className="pt-20">
+        <div className="pt-14">
           <CustomButton
             variant={isBreak ? "break" : "study"}
             onClick={() => {
