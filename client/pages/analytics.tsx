@@ -76,7 +76,7 @@ export default function Analytcs() {
   };
 
   return (
-    <div className="flex flex-col  w-[100vw] p-5 bg-background">
+    <div className="flex flex-col  w-[100vw] p-5 bg-background h-[100vh]">
       {activePhase !== undefined && (
         <>
           <div className="flex w-full pt-12">
@@ -111,7 +111,7 @@ export default function Analytcs() {
             )}
           </div>
           <div className="pt-6 pb-1 ">
-            your top mood boosters
+            your most selected mood boosters
             <FontAwesomeIcon
               className="ml-2"
               icon={["fas", "arrow-trend-up"]}
@@ -121,7 +121,7 @@ export default function Analytcs() {
             <PieChartBoosters activePhase={activePhase} />
           </div>
           <div className="pt-6 pb-1">
-            your top mood downers
+            your most selected mood downers
             <FontAwesomeIcon
               className="ml-2"
               icon={["fas", "arrow-trend-down"]}

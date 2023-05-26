@@ -367,26 +367,34 @@ export default function PieChartDowners({
 
   return (
     <div className="">
-      <div className="pt-3 pl-3 font-bold text-h14 text-chartGrey">
-        while studying
-      </div>
-      <div className="flex">
-        <StudyChart
-          good={false}
-          badTopThree={badTopThree}
-          badTopThreeId={badTopThreeId}
-        />
-      </div>
-      <div className="pt-3 pl-3 font-bold text-h14 text-chartGrey">
-        while taking breaks
-      </div>
-      <div className="flex">
-        <BreakChart
-          good={false}
-          badTopThree={badTopThreeBreak}
-          badTopThreeId={badTopThreeIdBreak}
-        />
-      </div>
+      {badTopThree === null && badTopThreeBreak === null ? (
+        <div className="flex justify-center  shadow-[1px_4px_16px_rgba(39,37,37,0.15)] font-bold text-h14 items-center h-[12vh] text-pieGrey">
+          no data available
+        </div>
+      ) : (
+        <>
+          <div className="pt-3 pl-3 font-bold text-h14 text-chartGrey">
+            while studying
+          </div>
+          <div className="flex">
+            <StudyChart
+              good={false}
+              badTopThree={badTopThree}
+              badTopThreeId={badTopThreeId}
+            />
+          </div>
+          <div className="pt-3 pl-3 font-bold text-h14 text-chartGrey">
+            while taking breaks
+          </div>
+          <div className="flex">
+            <BreakChart
+              good={false}
+              badTopThree={badTopThreeBreak}
+              badTopThreeId={badTopThreeIdBreak}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
