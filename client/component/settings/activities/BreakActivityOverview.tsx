@@ -42,8 +42,8 @@ export default function BreakActivityOverview() {
         <button
           onClick={() => setActive(true)}
           className={
-            "w-1/2 rounded-l-lg text-white p-2  bg-inactiveGrey " +
-            (active && "bg-active rounded  ")
+            "w-1/2 rounded-l-lg text-white p-2  " +
+            (active ? "bg-dark rounded  " : "bg-inactiveGrey")
           }
         >
           active
@@ -51,14 +51,14 @@ export default function BreakActivityOverview() {
         <button
           onClick={() => setActive(false)}
           className={
-            "w-1/2 rounded-r-lg text-white p-2  bg-inactiveGrey " +
-            (!active && "bg-active rounded  ")
+            "w-1/2 rounded-r-lg text-white p-2 " +
+            (!active ? "bg-dark rounded  " : "bg-inactiveGrey")
           }
         >
           archive
         </button>
       </div>
-      <div className="text-chartGrey text-h14">
+      <div className="text-left text-chartGrey text-h14">
         {active
           ? "edit, archive or create new activities"
           : "archived activities won’t be shown in the list anymore"}

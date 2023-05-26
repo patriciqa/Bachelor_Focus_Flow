@@ -60,7 +60,7 @@ const Settings = ({
     setInitialRenderComplete(true);
   }, []);
   return (
-    <div className="flex flex-col w-screen h-[100vh] bg-background p-4">
+    <div className="flex flex-col w-screen h-[100vh]  bg-background p-4">
       <div className="pt-10 text-chartGrey text-h16">
         manage your exam phases
       </div>

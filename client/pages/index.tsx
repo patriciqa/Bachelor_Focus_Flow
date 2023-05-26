@@ -118,7 +118,6 @@ const Timer = ({
   return (
     <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
-        {/* <Toggle /> */}
         {/* <button onClick={() => addExample()}>add element</button> */}
         <div
           className={
@@ -129,8 +128,10 @@ const Timer = ({
           <button
             onClick={() => setWhichTimer(WhichTimer.STUDY)}
             className={
-              "w-1/2 rounded-l-lg text-white p-2  bg-inactiveGrey " +
-              (whichTimer === WhichTimer.STUDY && "bg-study rounded  ")
+              "w-1/2 rounded-l-lg text-white p-2  " +
+              (whichTimer === WhichTimer.STUDY
+                ? "bg-study rounded  "
+                : "bg-inactiveGrey")
             }
           >
             study
@@ -138,8 +139,10 @@ const Timer = ({
           <button
             onClick={() => setWhichTimer(WhichTimer.BREAK)}
             className={
-              "w-1/2 rounded-r-lg text-white p-2  bg-inactiveGrey " +
-              (whichTimer === WhichTimer.BREAK && "bg-opposite rounded  ")
+              "w-1/2 rounded-r-lg text-white p-2  " +
+              (whichTimer === WhichTimer.BREAK
+                ? "bg-break rounded  "
+                : "bg-inactiveGrey")
             }
           >
             break

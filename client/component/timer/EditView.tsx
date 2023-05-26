@@ -87,10 +87,11 @@ export default function EditView({
                 const a = { ...newEntry };
                 a.archived = false;
                 setNewEntry(a);
+                console.log(a);
               }}
               className={
-                "w-1/2 rounded-l-lg text-white p-2  bg-inactiveGrey " +
-                (!newEntry.archived && "bg-active rounded  ")
+                "w-1/2 rounded-l-lg text-white p-2  " +
+                (!newEntry.archived ? "bg-dark rounded  " : "bg-inactiveGrey")
               }
             >
               active
@@ -102,8 +103,8 @@ export default function EditView({
                 setNewEntry(a);
               }}
               className={
-                "w-1/2 rounded-r-lg text-white p-2  bg-inactiveGrey " +
-                (newEntry.archived && "bg-active rounded  ")
+                "w-1/2 rounded-r-lg text-white p-2  " +
+                (newEntry.archived ? "bg-dark rounded  " : "bg-inactiveGrey")
               }
             >
               archive

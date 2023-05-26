@@ -48,13 +48,13 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
   }, [studyReasons]);
 
   return (
-    <div className="flex flex-col w-full px-6 overflow-y-scroll">
+    <div className="z-10 flex flex-col w-full px-6 overflow-y-scroll">
       <div className={"flex justify-center w-full px-14 pb-6	"}>
         <button
           onClick={() => setActive(true)}
           className={
-            "w-1/2 rounded-l-lg text-white p-2  bg-inactiveGrey " +
-            (active && "bg-active rounded  ")
+            "w-1/2  rounded-l-lg text-white p-2   " +
+            (active ? "bg-dark rounded  " : "bg-inactiveGrey")
           }
         >
           active
@@ -62,14 +62,14 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
         <button
           onClick={() => setActive(false)}
           className={
-            "w-1/2 rounded-r-lg text-white p-2  bg-inactiveGrey " +
-            (!active && "bg-active rounded  ")
+            "w-1/2 rounded-r-lg text-white p-2 " +
+            (!active ? "bg-dark rounded  " : "bg-inactiveGrey")
           }
         >
           archive
         </button>
       </div>
-      <div className="text-chartGrey text-h14">
+      <div className="text-left text-chartGrey text-h14">
         {active
           ? "edit, archive or create new causes"
           : "archived causes won’t be shown in the list anymore"}
