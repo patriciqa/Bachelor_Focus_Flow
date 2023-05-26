@@ -40,20 +40,22 @@ export default function ActivitySelection({
           {activities !== undefined &&
             activities.map((activity) => (
               <>
-                <ButtonList
-                  text={activity.title}
-                  icon={activity.icon}
-                  reason={activity}
-                  selected={selected}
-                  whenClicked={() => {
-                    let selectedActivity = -1;
-                    if (activity.id !== undefined) {
-                      selectedActivity = activity.id;
-                    }
-                    setSelected(selectedActivity);
-                  }}
-                  buttonVariant={ButtonVariant.BREAK}
-                />
+                {!activity.archived && (
+                  <ButtonList
+                    text={activity.title}
+                    icon={activity.icon}
+                    reason={activity}
+                    selected={selected}
+                    whenClicked={() => {
+                      let selectedActivity = -1;
+                      if (activity.id !== undefined) {
+                        selectedActivity = activity.id;
+                      }
+                      setSelected(selectedActivity);
+                    }}
+                    buttonVariant={ButtonVariant.BREAK}
+                  />
+                )}
               </>
             ))}
           <button

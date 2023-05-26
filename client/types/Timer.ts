@@ -47,7 +47,7 @@ export interface Activity {
   id?: number;
   title: string;
   icon: string;
-  archived: false;
+  archived: boolean;
 }
 export interface Reason extends Activity {
   goodReason: boolean | null;

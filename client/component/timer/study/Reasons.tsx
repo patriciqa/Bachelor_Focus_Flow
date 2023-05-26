@@ -94,40 +94,43 @@ export default function Reasons({
             {reasons !== undefined &&
               reasons.map((reason) => (
                 <>
-                  <ButtonList
-                    reason={reason}
-                    selected={selected}
-                    whenClicked={() => {
-                      let selectedReasons: SetStateAction<number[] | null> = [];
-                      if (reason.id !== undefined) {
-                        if (selected === undefined) {
-                          selectedReasons = [reason.id];
-                        } else if (
-                          includes(selected, reason.id) &&
-                          selected !== null
-                        ) {
-                          selectedReasons = selected.filter(
-                            (e) => e !== reason.id
-                          );
-                        } else {
-                          if (selected !== null && selected.length < 3) {
-                            selectedReasons = [...selected];
-                            if (reason.id !== undefined) {
-                              selectedReasons.push(reason.id);
-                            }
+                  {!reason.archived && (
+                    <ButtonList
+                      reason={reason}
+                      selected={selected}
+                      whenClicked={() => {
+                        let selectedReasons: SetStateAction<number[] | null> =
+                          [];
+                        if (reason.id !== undefined) {
+                          if (selected === undefined) {
+                            selectedReasons = [reason.id];
+                          } else if (
+                            includes(selected, reason.id) &&
+                            selected !== null
+                          ) {
+                            selectedReasons = selected.filter(
+                              (e) => e !== reason.id
+                            );
                           } else {
-                            if (selected !== null) {
+                            if (selected !== null && selected.length < 3) {
                               selectedReasons = [...selected];
+                              if (reason.id !== undefined) {
+                                selectedReasons.push(reason.id);
+                              }
+                            } else {
+                              if (selected !== null) {
+                                selectedReasons = [...selected];
+                              }
                             }
                           }
+                          setSelected(selectedReasons);
                         }
-                        setSelected(selectedReasons);
-                      }
-                    }}
-                    icon={reason.icon !== "" ? reason.icon : undefined}
-                    text={reason.title}
-                    buttonVariant={ButtonVariant.STUDY}
-                  />
+                      }}
+                      icon={reason.icon !== "" ? reason.icon : undefined}
+                      text={reason.title}
+                      buttonVariant={ButtonVariant.STUDY}
+                    />
+                  )}
                 </>
               ))}
             <button

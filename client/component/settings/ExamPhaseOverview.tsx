@@ -67,7 +67,7 @@ export default function ExamPhaseOverview({
           onClick={() => setActive(true)}
           className={
             "w-1/2 rounded-l-lg text-white p-2  bg-inactiveGrey " +
-            (active && "bg-darkbB rounded  ")
+            (active && "bg-[#333333] rounded  ")
           }
         >
           active
@@ -76,7 +76,7 @@ export default function ExamPhaseOverview({
           onClick={() => setActive(false)}
           className={
             "w-1/2 rounded-r-lg text-white p-2  bg-inactiveGrey " +
-            (!active && "bg-darkbB rounded  ")
+            (!active && "bg-[#333333] rounded  ")
           }
         >
           archive

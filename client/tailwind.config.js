@@ -31,7 +31,6 @@ module.exports = {
 
       'bubble-gum': '#ff77e9',
       'bermuda': '#78dcca',
-      "darkbB": "#333333",
 
       "darkGrey": "#959494",
       "breakGreen": "#48B065",
@@ -51,6 +50,7 @@ module.exports = {
       "chartGrey": "#C0C3C8",
       "pieGrey": "#828282",
       "dark": "#333333",
+      "active": "#333333",
 
 
 
