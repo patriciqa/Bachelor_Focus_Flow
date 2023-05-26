@@ -37,7 +37,7 @@ export default function BreakActivityOverview() {
   });
 
   return (
-    <div className="flex flex-col w-full px-6 overflow-y-scroll">
+    <div className="flex flex-col w-full px-6 ">
       <div className={"flex justify-center w-full px-14 pb-6	"}>
         <button
           onClick={() => setActive(true)}
@@ -58,72 +58,74 @@ export default function BreakActivityOverview() {
           archive
         </button>
       </div>
-      <div className="text-left text-chartGrey text-h14">
-        {active
-          ? "edit, archive or create new activities"
-          : "archived activities won’t be shown in the list anymore"}
+      <div className="h-[65vh] relative max-h-full w-full py-4 overflow-auto  ">
+        <div className="text-left text-chartGrey text-h14">
+          {active
+            ? "edit, archive or create new activities"
+            : "archived activities won’t be shown in the list anymore"}
+        </div>
+        {activities !== undefined &&
+          activities.map((c) => (
+            <>
+              {active ? (
+                <>
+                  {c.archived === false && (
+                    <button
+                      onClick={() => {
+                        setOpenEdit(true);
+                        setActiveEntry(c);
+                      }}
+                      className="flex justify-between w-full py-2 "
+                    >
+                      {initialRenderComplete && (
+                        <>
+                          <TextWithIcon
+                            variant={ButtonVariant.BREAK}
+                            icon={c.icon}
+                            text={c.title}
+                          />
+                          <FontAwesomeIcon
+                            icon={["fas", "ellipsis-vertical"]}
+                            size="xl"
+                            className="pr-4"
+                          />
+                        </>
+                      )}
+                    </button>
+                  )}
+                </>
+              ) : (
+                <>
+                  {c.archived === true && (
+                    <button
+                      onClick={() => {
+                        setOpenEdit(true);
+                        setActiveEntry(c);
+                      }}
+                      className="flex justify-between w-full py-2 "
+                    >
+                      {initialRenderComplete && (
+                        <>
+                          <TextWithIcon
+                            variant={ButtonVariant.BREAK}
+                            icon={c.icon}
+                            text={c.title}
+                          />
+                          <FontAwesomeIcon
+                            icon={["fas", "ellipsis-vertical"]}
+                            size="xl"
+                            className="pr-4"
+                          />
+                        </>
+                      )}
+                    </button>
+                  )}
+                </>
+              )}
+            </>
+          ))}
       </div>
-      {activities !== undefined &&
-        activities.map((c) => (
-          <>
-            {active ? (
-              <>
-                {c.archived === false && (
-                  <button
-                    onClick={() => {
-                      setOpenEdit(true);
-                      setActiveEntry(c);
-                    }}
-                    className="flex justify-between py-2 "
-                  >
-                    {initialRenderComplete && (
-                      <>
-                        <TextWithIcon
-                          variant={ButtonVariant.BREAK}
-                          icon={c.icon}
-                          text={c.title}
-                        />
-                        <FontAwesomeIcon
-                          icon={["fas", "ellipsis-vertical"]}
-                          size="xl"
-                          className="pr-4"
-                        />
-                      </>
-                    )}
-                  </button>
-                )}
-              </>
-            ) : (
-              <>
-                {c.archived === true && (
-                  <button
-                    onClick={() => {
-                      setOpenEdit(true);
-                      setActiveEntry(c);
-                    }}
-                    className="flex justify-between py-2 "
-                  >
-                    {initialRenderComplete && (
-                      <>
-                        <TextWithIcon
-                          variant={ButtonVariant.BREAK}
-                          icon={c.icon}
-                          text={c.title}
-                        />
-                        <FontAwesomeIcon
-                          icon={["fas", "ellipsis-vertical"]}
-                          size="xl"
-                          className="pr-4"
-                        />
-                      </>
-                    )}
-                  </button>
-                )}
-              </>
-            )}
-          </>
-        ))}
-      <div className="flex items-end justify-center ">
+      <div className="absolute flex items-end justify-center bottom-10 ">
         {active && (
           <CustomButton
             variant="dark"
