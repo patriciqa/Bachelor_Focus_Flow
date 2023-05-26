@@ -13,7 +13,7 @@ interface MoodCount {
 export default function PieChartBoosters({
   activePhase,
 }: {
-  activePhase: ExamPhase;
+  activePhase: ExamPhase | null;
 }) {
   const [topThree, setTopThree] = useState<number[]>();
   const [topThreeId, setTopThreeId] = useState<string[]>();

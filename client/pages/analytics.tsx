@@ -1,5 +1,6 @@
 import PieChartBoosters from "@/component/charts/PieChartBoosters";
 import PieChartDowners from "@/component/charts/PieChartDowners";
+import CreatePhaseView from "@/component/timer/CreatePhaseView";
 import { getElement } from "@/db/Actions";
 import { ExamPhase } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,12 +8,6 @@ import { sortBy } from "lodash";
 import moment from "moment";
 import "moment/locale/de-ch";
 import { useEffect, useState } from "react";
-
-const grin = "./image/mood.grin.svg";
-const smile = "./image/mood.smile.svg";
-const question = "./image/skip.svg";
-const meh = "./image/mood.meh.svg";
-const frown = "./image/mood.frown.svg";
 
 export default function Analytcs() {
   const [phases, setPhases] = useState<ExamPhase[]>();
@@ -26,7 +21,6 @@ export default function Analytcs() {
     const p: ExamPhase[] = [];
     const data: ExamPhase[] = await getElement("examPhases", "all");
     data.map((phase) => {
-      console.log("phase", phase);
       const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
       p.push(phase);
       if (phase.startDate && phase.endDate)
@@ -76,62 +70,74 @@ export default function Analytcs() {
   };
 
   return (
-    <div className="flex flex-col  w-[100vw] p-5 bg-background h-[100vh]">
-      {activePhase !== undefined && (
-        <>
-          <div className="flex w-full pt-12">
-            {!hidePrevArrow && (
-              <div
-                className="flex-1 pt-1 text-center "
-                onClick={() => getPreviewPhase(true)}
-              >
-                {initialRenderComplete && (
-                  <FontAwesomeIcon icon={["fas", "chevron-left"]} size="xl" />
+    <>
+      {phases?.length === 0 ? (
+        <CreatePhaseView />
+      ) : (
+        <div className="flex flex-col  w-[100vw] p-5 bg-background h-[100vh]">
+          {activePhase !== undefined && (
+            <>
+              <div className="flex w-full pt-12">
+                {!hidePrevArrow && (
+                  <div
+                    className="flex-1 pt-1 text-center "
+                    onClick={() => getPreviewPhase(true)}
+                  >
+                    {initialRenderComplete && (
+                      <FontAwesomeIcon
+                        icon={["fas", "chevron-left"]}
+                        size="xl"
+                      />
+                    )}
+                  </div>
+                )}
+                <div className="flex flex-col items-center justify-center">
+                  <div className="pb-1 font-bold text-h24 ">
+                    {activePhase?.title}
+                  </div>
+                  <div className="text-pieGrey text-h16 ">
+                    {moment(activePhase.startDate).format("L")} -{" "}
+                    {moment(activePhase.endDate).format("L")}
+                  </div>
+                </div>
+                {!hideNextArrow && (
+                  <div
+                    className="flex-1 text-center "
+                    onClick={() => getPreviewPhase(false)}
+                  >
+                    {initialRenderComplete && (
+                      <FontAwesomeIcon
+                        icon={["fas", "chevron-right"]}
+                        size="xl"
+                      />
+                    )}
+                  </div>
                 )}
               </div>
-            )}
-            <div className="flex flex-col items-center justify-center">
-              <div className="pb-1 font-bold text-h24 ">
-                {activePhase?.title}
+              <div className="pt-6 pb-1 ">
+                your most selected mood boosters
+                <FontAwesomeIcon
+                  className="ml-2"
+                  icon={["fas", "arrow-trend-up"]}
+                />
               </div>
-              <div className="text-pieGrey text-h16 ">
-                {moment(activePhase.startDate).format("L")} -{" "}
-                {moment(activePhase.endDate).format("L")}
+              <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded">
+                <PieChartBoosters activePhase={activePhase} />
               </div>
-            </div>
-            {!hideNextArrow && (
-              <div
-                className="flex-1 text-center "
-                onClick={() => getPreviewPhase(false)}
-              >
-                {initialRenderComplete && (
-                  <FontAwesomeIcon icon={["fas", "chevron-right"]} size="xl" />
-                )}
+              <div className="pt-6 pb-1">
+                your most selected mood downers
+                <FontAwesomeIcon
+                  className="ml-2"
+                  icon={["fas", "arrow-trend-down"]}
+                />
               </div>
-            )}
-          </div>
-          <div className="pt-6 pb-1 ">
-            your most selected mood boosters
-            <FontAwesomeIcon
-              className="ml-2"
-              icon={["fas", "arrow-trend-up"]}
-            />
-          </div>
-          <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded">
-            <PieChartBoosters activePhase={activePhase} />
-          </div>
-          <div className="pt-6 pb-1">
-            your most selected mood downers
-            <FontAwesomeIcon
-              className="ml-2"
-              icon={["fas", "arrow-trend-down"]}
-            />
-          </div>
-          <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded  mb-20 ">
-            <PieChartDowners activePhase={activePhase} />
-          </div>
-        </>
+              <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded  mb-20 ">
+                <PieChartDowners activePhase={activePhase} />
+              </div>
+            </>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }

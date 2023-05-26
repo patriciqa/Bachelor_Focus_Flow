@@ -15,7 +15,7 @@ export default function CreateExamPhase({
   setShowComponent?: (c: SettingComponent) => void;
   phases?: ExamPhase[];
   setOpen?: (c: boolean) => void;
-  setWhichTimer: (d: WhichTimer) => void;
+  setWhichTimer?: (d: WhichTimer) => void;
 }) {
   const [showCalender, setShowCalender] = useState(false);
   const [date, setDate] = useState<PickedDate>();
@@ -204,7 +204,10 @@ export default function CreateExamPhase({
             } else {
               if (setOpen !== undefined) {
                 setOpen(false);
-                setWhichTimer(WhichTimer.STUDY);
+                if(setWhichTimer!== undefined){
+                  setWhichTimer(WhichTimer.STUDY);
+
+                }
               }
             }
           }}

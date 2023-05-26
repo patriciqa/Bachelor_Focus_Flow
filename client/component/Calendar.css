@@ -139,8 +139,7 @@ abbr {
 }
 
 .react-calendar__tile--now {
-  /* color: #675e9f; */
-  color: #7da5da;
+  color: #5a55f4;
 }
 
 .react-calendar__tile--active {
@@ -158,9 +157,4 @@ abbr {
   background: #828282;
   color: white;
   border-radius: 6px 0px 0px 6px;
-}
-
-react-calendar__tile[disabled] {
-  background-color: pink;
-  color: pink;
 }

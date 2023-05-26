@@ -66,8 +66,8 @@ export default function ExamPhaseOverview({
         <button
           onClick={() => setActive(true)}
           className={
-            "w-1/2 rounded-l-lg text-white p-2  bg-inactiveGrey " +
-            (active && "bg-[#333333] rounded  ")
+            "w-1/2 rounded-l-lg text-white p-2  " +
+            (active ? "bg-[#333333] rounded  " : "bg-inactiveGrey ")
           }
         >
           active
@@ -75,8 +75,8 @@ export default function ExamPhaseOverview({
         <button
           onClick={() => setActive(false)}
           className={
-            "w-1/2 rounded-r-lg text-white p-2  bg-inactiveGrey " +
-            (!active && "bg-[#333333] rounded  ")
+            "w-1/2 rounded-r-lg text-white p-2 " +
+            (!active ? "bg-[#333333] rounded  " : " bg-inactiveGrey")
           }
         >
           archive
@@ -100,12 +100,19 @@ export default function ExamPhaseOverview({
                   : "no active exam phase"}
 
                 <br />
-                <div className="mt-1 font-normal text-h14 text-chartGrey">
-                  {moment(examPhaseTitle?.startDate).format("L")} -{" "}
-                  {moment(examPhaseTitle?.endDate).format("L")}
-                </div>
+                {examPhaseTitle !== undefined && (
+                  <div className="mt-1 font-normal text-h14 text-chartGrey">
+                    {moment(examPhaseTitle?.startDate).format("L")} -{" "}
+                    {moment(examPhaseTitle?.endDate).format("L")}
+                  </div>
+                )}
               </div>
-              <FontAwesomeIcon icon={["fas", "ellipsis-vertical"]} size="xl" />
+              {examPhaseTitle !== undefined && (
+                <FontAwesomeIcon
+                  icon={["fas", "ellipsis-vertical"]}
+                  size="xl"
+                />
+              )}
             </>
           )}
         </button>

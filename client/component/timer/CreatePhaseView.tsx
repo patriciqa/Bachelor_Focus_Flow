@@ -2,26 +2,31 @@ import CreateExamPhase from "@/component/settings/CreateExamPhase";
 import { WhichTimer } from "@/types/Timer";
 import { useState } from "react";
 import { ColorType } from "../CancellButton";
+import CustomButton from "../CustomButton";
 import ModalPage from "../settings/reasons/ModalPage";
 
 export default function CreatePhaseView({
   setWhichTimer,
 }: {
-  setWhichTimer: (d: WhichTimer) => void;
+  setWhichTimer?: (d: WhichTimer) => void;
 }) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <div className="flex flex-col justify-center">
-        <p>Start a new exam phase to track your data.</p>
-        <button
+      <div className="h-[100vh] bg-white/30 top-0  z-10 pb-20 left-0 fixed w-[100vw] items-center flex-col flex justify-center text-center p-5  backdrop-blur ">
+        Create a new exam phase.
+        <div className="w-3/4 py-2 text-center text-h16 text-pieGrey">
+          This step is needed to manage your tracked data.
+        </div>
+        <CustomButton
+          variant="dark"
           onClick={() => {
             setOpen(true);
           }}
         >
-          Create exam phase
-        </button>
+          create exam phase
+        </CustomButton>
         <ModalPage
           colorType={ColorType.NEUTRAL}
           open={open}

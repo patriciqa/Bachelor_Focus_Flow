@@ -3,6 +3,7 @@
 import MoodChart from "@/component/charts/MoodChart";
 import HorizontalCarousel from "@/component/overview/Carousel";
 import WeekCalendar from "@/component/overview/WeekCalendar";
+import CreatePhaseView from "@/component/timer/CreatePhaseView";
 import { getElement } from "@/db/Actions";
 import sToH from "@/hooks/SecondsToHours";
 import { ExamPhase } from "@/types/Timer";
@@ -18,10 +19,12 @@ const Overview = () => {
   const [activePhase, setActivePhase] = useState<ExamPhase>();
   const [jumpId, setJumpId] = useState<number>();
   const allE: any = [];
+  const [phases, setPhases] = useState<ExamPhase[]>();
 
   const getData = async (): Promise<ExamPhase[]> => {
     const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
     const data: ExamPhase[] = await getElement("examPhases", "all");
+    setPhases(data);
     data.map((phase) => {
       if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {
         setActivePhase(phase);
@@ -65,6 +68,7 @@ const Overview = () => {
 
   return (
     <>
+      {phases?.length === 0 && <CreatePhaseView />}
       <div className="flex flex-col items-center  w-screen h-[100vh] bg-background mb-20">
         <WeekCalendar
           activePhase={activePhase}
