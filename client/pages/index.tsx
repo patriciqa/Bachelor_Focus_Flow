@@ -11,15 +11,15 @@ import React, { useEffect } from "react";
 const Timer = ({
   studyEntry,
   setStudyEntry,
-  breakEntryy,
-  setBreakEntryy,
+  breakEntry,
+  setbreakEntry,
   whichTimer,
   setWhichTimer,
 }: {
   studyEntry: Study;
   setStudyEntry: (s: Study) => void;
-  breakEntryy: Break;
-  setBreakEntryy: (s: Break) => void;
+  breakEntry: Break;
+  setbreakEntry: (s: Break) => void;
   whichTimer: WhichTimer;
   setWhichTimer: (s: WhichTimer) => void;
 }) => {
@@ -105,8 +105,8 @@ const Timer = ({
           <BreakView
             whichTimer={whichTimer}
             setWhichTimer={setWhichTimer}
-            breakEntryy={breakEntryy}
-            setBreakEntryy={setBreakEntryy}
+            breakEntry={breakEntry}
+            setbreakEntry={setbreakEntry}
           />
         );
         break;
@@ -130,7 +130,7 @@ const Timer = ({
   return (
     <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
-        <button onClick={() => addExample()}>add element</button>
+        {/* <button onClick={() => addExample()}>add element</button> */}
         <div
           className={
             "flex justify-center w-full pt-10 px-14 pb-12	" +

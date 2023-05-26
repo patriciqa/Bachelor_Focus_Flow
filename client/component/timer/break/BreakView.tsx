@@ -19,13 +19,13 @@ import BreakSummary from "./BreakSummary";
 export const BreakView = ({
   whichTimer,
   setWhichTimer,
-  breakEntryy,
-  setBreakEntryy,
+  breakEntry,
+  setbreakEntry,
 }: {
   whichTimer: WhichTimer;
   setWhichTimer: (d: WhichTimer) => void;
-  breakEntryy: Break;
-  setBreakEntryy: (s: Break) => void;
+  breakEntry: Break;
+  setbreakEntry: (s: Break) => void;
 }) => {
   const [open, setOpen] = useState(false);
   const [showTimer, setShowTimer] = useState(false);
@@ -51,8 +51,8 @@ export const BreakView = ({
           <MoodCheckIn
             isStudy={false}
             setWhichTimer={setWhichTimer}
-            entry={breakEntryy}
-            setEntry={setBreakEntryy}
+            entry={breakEntry}
+            setEntry={setbreakEntry}
             setShowComponent={setShowComponent}
           />
         );
@@ -60,8 +60,8 @@ export const BreakView = ({
       case BreakComponent.EXTEND_BREAK:
         component = (
           <BreakSummary
-            breakEntryy={breakEntryy}
-            setBreakEntryy={setBreakEntryy}
+            breakEntry={breakEntry}
+            setbreakEntry={setbreakEntry}
             whichTimer={whichTimer}
             setWhichTimer={setWhichTimer}
             setShowComponent={setShowComponent}
@@ -156,12 +156,12 @@ export const BreakView = ({
                   onClick={() => {
                     setRunningTimer(TimerViewState.RUNNING);
                     setDuration(duration);
-                    const e = { ...breakEntryy };
+                    const e = { ...breakEntry };
                     e.timer.startTime = Date.now();
                     e.timer.duration = duration;
                     e.studyTimer = false;
                     e.breakActivityId = selected;
-                    setBreakEntryy(e);
+                    setbreakEntry(e);
                   }}
                 >
                   start timer
@@ -185,13 +185,13 @@ export const BreakView = ({
                 <CustomButton
                   variant="break-unfilled"
                   onClick={() => {
-                    const b = { ...breakEntryy };
+                    const b = { ...breakEntry };
                     b.timer.duration = Math.round(
                       (Date.now() - b.timer.startTime) / 1000
                     );
                     setRunningTimer(TimerViewState.START);
                     saveToDb(examPhaseId, b, true);
-                    // setBreakEntryy(b);
+                    // setbreakEntry(b);
                   }}
                 >
                   cancel timer

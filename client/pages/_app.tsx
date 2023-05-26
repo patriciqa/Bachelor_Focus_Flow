@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [studyEntry, setStudyEntry] = useState<Study>({
     timer: { duration: 0, startTime: 0 },
   });
-  const [breakEntryy, setBreakEntryy] = useState<Break>({
+  const [breakEntry, setbreakEntry] = useState<Break>({
     timer: { duration: 0, startTime: 0 },
   });
   const [whichTimer, setWhichTimer] = useState<WhichTimer>(WhichTimer.STUDY);
@@ -32,8 +32,8 @@ export default function App({ Component, pageProps }: AppProps) {
             {...pageProps}
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}
-            breakEntryy={breakEntryy}
-            setBreakEntryy={setBreakEntryy}
+            breakEntry={breakEntry}
+            setbreakEntry={setbreakEntry}
             whichTimer={whichTimer}
             setWhichTimer={setWhichTimer}
           />
