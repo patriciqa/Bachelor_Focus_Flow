@@ -54,13 +54,19 @@ const Timer = ({
       {
         timer: { duration: 3, startTime: 1684414234506 },
         studyTimer: false,
-        breakActivityId: 11,
+        breakActivityId: 1,
         mood: "rather bad",
       },
       {
         timer: { duration: 3, startTime: 1684414234506 },
         studyTimer: false,
-        breakActivityId: 7,
+        breakActivityId: 2,
+        mood: "good",
+      },
+      {
+        timer: { duration: 3, startTime: 1684414234600 },
+        studyTimer: false,
+        breakActivityId: 2,
         mood: "good",
       },
     ],
@@ -69,14 +75,20 @@ const Timer = ({
       {
         timer: { duration: 30, startTime: 1684414234506 },
         studyTimer: true,
-        reasonIds: [10, 19, 7],
+        reasonIds: [1, 2, 6],
         mood: "rather bad",
       },
       {
         timer: { duration: 3, startTime: 1684414234506 },
         studyTimer: true,
-        reasonIds: [7, 10, 20],
+        reasonIds: [2, 4, 5],
         mood: "good",
+      },
+      {
+        timer: { duration: 3, startTime: 1684414234506 },
+        studyTimer: true,
+        reasonIds: [1, 3, 2],
+        mood: "rather good",
       },
     ],
   };
@@ -118,7 +130,7 @@ const Timer = ({
   return (
     <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
-        {/* <button onClick={() => addExample()}>add element</button> */}
+        <button onClick={() => addExample()}>add element</button>
         <div
           className={
             "flex justify-center w-full pt-10 px-14 pb-12	" +

@@ -10,12 +10,6 @@ interface MoodCount {
   id?: number;
   mood?: number;
 }
-
-const grin = "./image/grin.svg";
-const smile = "./image/smile.svg";
-const meh = "./image/meh.svg";
-const frown = "./image/frown.svg";
-
 export default function PieChartBoosters({
   activePhase,
 }: {
@@ -33,6 +27,10 @@ export default function PieChartBoosters({
   }, [activePhase]);
 
   const getGoodAndBadReasons = (phase: ExamPhase) => {
+    setTopThree(null);
+    setTopThreeId([]);
+    setTopThreeBreak(null);
+    setTopThreeBreakId([]);
     let moodReason: [MoodCount] = [{}];
     phase.studyEntries?.map((entry: Study) => {
       entry.reasonIds?.map((reason) => {
@@ -217,7 +215,7 @@ export default function PieChartBoosters({
           break;
         }
       }
-
+      console.log(count);
       moodReason.push({ id: entry.breakActivityId, mood: count });
     });
 

@@ -34,6 +34,10 @@ export default function PieChartDowners({
   }, [activePhase]);
 
   const getGoodAndBadReasons = (phase: ExamPhase) => {
+    setBadTopThree(null);
+    setBadTopThreeId([]);
+    setBadTopThreeBreak(null);
+    setBadTopThreeIdBreak([]);
     let moodReason: [MoodCount] = [{}];
     phase.studyEntries?.map((entry: Study) => {
       entry.reasonIds?.map((reason) => {
