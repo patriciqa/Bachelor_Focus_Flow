@@ -71,6 +71,7 @@ export const BreakView = ({
       default:
         setShowComponent(null);
         component = null;
+        setShowTimer(false);
     }
     return component;
   };
@@ -208,6 +209,7 @@ export const BreakView = ({
                     setOpen(true);
                     setShowComponent(BreakComponent.MOODCHECKIN);
                     setRunningTimer(TimerViewState.START);
+                    setSelected(-1);
                   }}
                 >
                   finish break session

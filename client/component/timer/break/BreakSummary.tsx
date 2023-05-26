@@ -29,8 +29,9 @@ export default function BreakSummary({
   return (
     <div className="relative flex flex-col items-center h-full pt-20 ">
       <div className="w-[80vw] text-h14 text-pieGrey pb-4">
-        Everyone feels down sometimes and that’s okay. Consider taking another
-        break and do something that makes you feel good.
+        {breakEntryy.mood === Mood.GOOD || breakEntryy.mood === Mood.RATHER_GOOD
+          ? "Cool! Now let’s get back to studying."
+          : "Everyone feels down sometimes and that’s okay. Consider taking another break and do something that makes you feel good."}
       </div>
       <div className="flex justify-center">
         <Tag entry={breakEntryy} />
@@ -43,11 +44,9 @@ export default function BreakSummary({
               setWhichTimer(WhichTimer.BREAK);
               setShowComponent(BreakComponent.NO_COMPONENT);
               saveToDb(examPhaseId, breakEntryy, false);
-              setBreakEntryy({ timer: { startTime: 0, duration: 0 } });
-              // setWhichTimer(WhichTimer.BREAK);
-              // setShowComponent(BreakComponent.NO_COMPONENT);
-              // saveToDb(examPhaseId, breakEntryy, false);
-              // setBreakEntryy({ timer: { startTime: 0, duration: 0 } });
+              setBreakEntryy({
+                timer: { startTime: 5, duration: 0 },
+              });
             }}
           >
             take another break

@@ -15,9 +15,22 @@ export default function Tag({ entry }: { entry: any }) {
     getAllActivites();
   }, []);
 
+  const nonSelected = (): string | null => {
+    if (entry.reasonIds === undefined && entry.studyTimer === true) {
+      return "no cause selected";
+    } else if (
+      (entry.breakActivityId === undefined ||
+        entry.breakActivityId === -1 ||
+        entry.breakActivityId === null) &&
+      entry.studyTimer === false
+    ) {
+      return "no activity selected";
+    }
+    return null;
+  };
+
   function getIcon(mood: Mood): React.ReactElement {
     let icon;
-    console.log(mood);
     switch (mood) {
       case Mood.BAD:
         icon = <FontAwesomeIcon icon={["fas", "face-frown"]} size="xl" />;
@@ -125,7 +138,7 @@ export default function Tag({ entry }: { entry: any }) {
               {entry.reasonIds?.map((reason: number) => (
                 <div
                   key={reason}
-                  className="flex items-center py-1 mx-1 text-left text-h14 "
+                  className="flex items-center py-1 pt-2 mx-1 text-left text-h14 "
                 >
                   {getReason(reason)}
                 </div>
@@ -134,12 +147,21 @@ export default function Tag({ entry }: { entry: any }) {
             <div className="flex flex-wrap">
               {entry.breakActivityId !== undefined && (
                 <>
-                  <div className="flex items-center py-1 pt-3 mx-1 text-left text-h14 ">
+                  <div className="flex items-center py-1 pt-2 mx-1 text-left text-h14 ">
                     {getActivity(entry.breakActivityId)}
                   </div>
                 </>
               )}
-            </div>
+            </div>{" "}
+            {nonSelected() !== null && (
+              <div className="flex flex-wrap">
+                <>
+                  <div className="flex items-center py-1 pt-2 mx-1 text-left text-white text-opacity-75 text-h14 ">
+                    {nonSelected()}
+                  </div>
+                </>
+              </div>
+            )}
           </div>
         </div>
       </button>

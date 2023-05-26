@@ -88,43 +88,11 @@ export default function MoodChart({
         newOb.push({ x: xAxis[i], y: yAxis[i], z: zAxis[i], id: id[i] });
       }
     }
-
-    // newOb.map((e, index) => {
-    //   if (e.y === 0 && newOb[index - 1] !== undefined) {
-    //     newOb[index].y = newOb[index - 1].y;
-    //   }
-    // });
     return newOb;
   };
 
   useEffect(() => {
     allEntries();
-    // const a = [...allEntries()];
-    // if (allEntries() !== []) {
-    //   allEntries().map((e, index) => {
-    //     if (e.y === 0) {
-    //       a[index].y = a[index - 1].y;
-    //     }
-    //   });
-    // setEditedEntry(a);
-    // }
-    // const now = new Date();
-    // const startOfDay = new Date(
-    //   now.getFullYear(),
-    //   now.getMonth(),
-    //   now.getDate()
-    // );
-    // const sixAM = new Date(
-    //   now.getFullYear(),
-    //   now.getMonth(),
-    //   now.getDate(),
-    //   21
-    // );
-    // const secondsSinceStartOfDay = Math.floor(
-    //   (sixAM.getTime() - startOfDay.getTime()) / 1000
-    // );
-
-    // console.log("18", secondsSinceStartOfDay);
   }, [allEntries]);
 
   const getMood = (mood: string): number => {
@@ -157,7 +125,7 @@ export default function MoodChart({
     }
   };
 
-  const getXAxisValue = (value) => {
+  const getXAxisValue = (value: number) => {
     const date = new Date(value * 1000);
     const startOfDay = new Date(
       date.getFullYear(),
@@ -208,40 +176,6 @@ export default function MoodChart({
       </div>
       <div className="border-t-2 border-b-2 border-inactiveGrey">
         <VictoryChart>
-          <VictoryScatter
-            bubbleProperty={"30"}
-            data={allEntries()}
-            style={{
-              data: {
-                fill: ({ datum }) => colorScale(datum.z),
-                stroke: ({ datum }) => colorScale(datum.z),
-                strokeWidth: 15,
-                zIndex: 100,
-              },
-            }}
-            events={[
-              {
-                target: "data",
-                eventHandlers: {
-                  onClick: () => {
-                    return [
-                      {
-                        target: "data",
-                        mutation: (props) => {
-                          scrollToDiv(props.datum.id);
-                          const fill = props.style && props.style.fill;
-                          //   return fill === "red"
-                          //     ? null
-                          //     : { style: { fill: "red" } };
-                        },
-                      },
-                    ];
-                  },
-                },
-              },
-            ]}
-            // labels={({ datum }) => `x: ${datum.x}, y: ${datum.y}, z: ${datum.z}`}
-          />
           <VictoryAxis
             dependentAxis
             tickValues={[1, 2, 0, 3, 4]}
@@ -282,14 +216,47 @@ export default function MoodChart({
             data={allEntries()}
             style={{
               data: {
-                stroke: "white",
-                strokeWidth: 6,
-                filter: "drop-shadow(8 2px 4px rgba(0, 0, 0, 0.3))",
-                zIndex: 0,
-                border: "black",
+                stroke: "black",
+                opacity: 0.3,
+                strokeWidth: 3,
               },
-              parent: { border: "1px solid black" },
             }}
+          />
+          <VictoryScatter
+            bubbleProperty={"30"}
+            data={allEntries()}
+            size={10} // Set size based on the y-value of each data point
+            style={{
+              data: {
+                fill: ({ datum }) => colorScale(datum.z),
+                // stroke: ({ datum }) => colorScale(datum.z),
+                strokeWidth: 15,
+                zIndex: 100,
+                position: "relative",
+              },
+            }}
+            events={[
+              {
+                target: "data",
+                eventHandlers: {
+                  onClick: () => {
+                    return [
+                      {
+                        target: "data",
+                        mutation: (props) => {
+                          scrollToDiv(props.datum.id);
+                          const fill = props.style && props.style.fill;
+                          //   return fill === "red"
+                          //     ? null
+                          //     : { style: { fill: "red" } };
+                        },
+                      },
+                    ];
+                  },
+                },
+              },
+            ]}
+            // labels={({ datum }) => `x: ${datum.x}, y: ${datum.y}, z: ${datum.z}`}
           />
         </VictoryChart>
         <div className="absolute pt-2 text-pieGrey text-h14">
