@@ -44,9 +44,6 @@ export default function Tag({ entry }: { entry: any }) {
       case Mood.GOOD:
         icon = <FontAwesomeIcon icon={["fas", "face-grin"]} size="xl" />;
         break;
-      case Mood.GOOD:
-        icon = <FontAwesomeIcon icon={["fas", "face-grin"]} size="xl" />;
-        break;
       case undefined:
         icon = <FontAwesomeIcon icon={["fas", "circle-question"]} size="xl" />;
         break;
@@ -64,9 +61,10 @@ export default function Tag({ entry }: { entry: any }) {
             key={reason.id}
           >
             <div className="pr-2">
-              {reason.icon !== undefined && (
-                <FontAwesomeIcon icon={reason.icon as IconProp} />
-              )}
+              {reason.icon !== undefined ||
+                (reason.icon !== "" && (
+                  <FontAwesomeIcon icon={reason.icon as IconProp} />
+                ))}
             </div>
 
             {reason.title}

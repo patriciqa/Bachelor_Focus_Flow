@@ -2,7 +2,7 @@ import IconPicker from "@/component/icon/IconPicker";
 import { addElement } from "@/db/Actions";
 import { Activity, Reason } from "@/types/Timer";
 import { useState } from "react";
-import CustomButton from "../CustomButton";
+import CustomButton, { buttonVariant } from "../CustomButton";
 
 export default function CreateView({
   setOpen,
@@ -13,16 +13,16 @@ export default function CreateView({
   goodReason?: boolean;
   isBreak: boolean;
 }) {
-  const [icon, seticon] = useState("fa fa-home");
+  const [icon, seticon] = useState("fa fa-star");
   const [activities, setActivities] = useState<Activity>({
     title: "",
-    icon: "",
+    icon: "fa-star",
     archived: false,
   });
 
   const [reasons, setReasons] = useState<Reason>({
     title: "",
-    icon: "",
+    icon: "fa-star",
     archived: false,
     goodReason: false,
   });
@@ -39,6 +39,19 @@ export default function CreateView({
       a.icon = icon;
       setReasons(a);
     }
+  };
+
+  const getVariant = (): string => {
+    if (isBreak) {
+      if (activities.title! === "" || activities.icon === "") {
+        return "disabled";
+      }
+    } else {
+      if (reasons.title === "" || reasons.icon === "") {
+        return "disabled";
+      }
+    }
+    return "dark";
   };
   const input = document.getElementById("myInput") as HTMLInputElement;
   const countSpan = document.getElementById("count");
@@ -93,7 +106,7 @@ export default function CreateView({
         <IconPicker value={icon} onChange={onIconChange} isBreak={isBreak} />
         <div className="pt-14">
           <CustomButton
-            variant={isBreak ? "break" : "study"}
+            variant={getVariant() as buttonVariant}
             onClick={() => {
               console.log(activities);
               if (isBreak) {

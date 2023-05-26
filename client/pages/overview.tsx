@@ -57,10 +57,11 @@ const Overview = () => {
         }
         setBreakSummary(totalBreakSeconds);
       });
-      console.log(totalBreakSeconds);
     }
     setEntries(sortBy(allE, "timer.startTime"));
   };
+  console.log(studySummary);
+  console.log(breakSummary);
 
   return (
     <>
@@ -70,12 +71,19 @@ const Overview = () => {
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
-        <MoodChart
-          entries={entries}
-          studyEntry={sToH(studySummary)}
-          breakEntry={sToH(breakSummary)}
-          setJumpId={setJumpId}
-        />
+        <div className="relative">
+          <MoodChart
+            entries={entries}
+            studyEntry={studySummary !== 0 ? sToH(studySummary) : null}
+            breakEntry={breakSummary !== 0 ? sToH(breakSummary) : null}
+            setJumpId={setJumpId}
+          />
+          {studySummary === 0 && breakSummary === 0 && (
+            <div className="absolute w-full text-center text-pieGrey text-h16 bottom-28 ">
+              no data available
+            </div>
+          )}
+        </div>
         <HorizontalCarousel
           entries={entries}
           selectedDate={selectedDate}

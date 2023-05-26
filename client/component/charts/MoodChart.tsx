@@ -27,8 +27,8 @@ export default function MoodChart({
   setJumpId,
 }: {
   entries: any;
-  studyEntry: string;
-  breakEntry: string;
+  studyEntry: string | null;
+  breakEntry: string | null;
   setJumpId: (d: number) => void;
 }) {
   const grin = "./image/mood.grin.svg";
@@ -39,7 +39,6 @@ export default function MoodChart({
 
   const getIcon = (text: number): string => {
     let moodText;
-    console.log(text);
     switch (text) {
       case 0:
         moodText = frown;
@@ -167,11 +166,15 @@ export default function MoodChart({
       <div className="flex flex-row items-center justify-center w-full ">
         <div className="flex items-center px-4 py-4">
           <div className="mr-2 text-h16 text-study">Study:</div>
-          <div className="font-bold text-h20 text-study">{studyEntry}</div>
+          <div className="font-bold text-h20 text-study">
+            {studyEntry !== null ? studyEntry : "-"}
+          </div>
         </div>{" "}
         <div className="flex items-center">
           <div className="mr-2 text-h16 text-break">Break:</div>
-          <div className="font-bold text-h20 text-break">{breakEntry}</div>
+          <div className="font-bold text-h20 text-break">
+            {breakEntry !== null ? breakEntry : "-"}
+          </div>
         </div>
       </div>
       <div className="border-t-2 border-b-2 border-inactiveGrey">

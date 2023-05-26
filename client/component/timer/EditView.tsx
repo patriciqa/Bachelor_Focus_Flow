@@ -2,7 +2,7 @@ import IconPicker from "@/component/icon/IconPicker";
 import { editElement } from "@/db/Actions";
 import { Activity, Reason } from "@/types/Timer";
 import { useState } from "react";
-import CustomButton from "../CustomButton";
+import CustomButton, { buttonVariant } from "../CustomButton";
 
 export default function EditView({
   setOpen,
@@ -30,7 +30,13 @@ export default function EditView({
       countSpan.textContent = input.value.length.toString();
     });
   }
-
+  const getVariant = (): string => {
+    if (newEntry.title !== "" && newEntry.icon !== "") {
+      return "dark";
+    } else {
+      return "disabled";
+    }
+  };
   return (
     <>
       <div className="flex flex-col items-center justify-center">
@@ -76,7 +82,7 @@ export default function EditView({
           }}
         />
         <IconPicker
-          value={newEntry.icon !== "" ? newEntry.icon : "fa fa-home"}
+          value={newEntry.icon !== "" ? newEntry.icon : "fa fa-star"}
           onChange={onIconChange}
           isBreak={isBreak}
         />
@@ -118,7 +124,7 @@ export default function EditView({
         </div>
         <div className="pt-4">
           <CustomButton
-            variant={isBreak ? "break" : "study"}
+            variant={getVariant() as buttonVariant}
             onClick={() => {
               if (isBreak) {
                 if (newEntry.id !== undefined) {
