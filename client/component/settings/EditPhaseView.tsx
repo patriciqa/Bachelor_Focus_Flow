@@ -2,6 +2,7 @@ import { editElement } from "@/db/Actions";
 import { ExamPhase, PickedDate } from "@/types/Timer";
 import { useRouter } from "next/router";
 import { SetStateAction, useState } from "react";
+import CustomButton from "../CustomButton";
 
 export default function EditPhaseView({
   setOpen,
@@ -67,20 +68,23 @@ export default function EditPhaseView({
         }`}
       />
 
-      <button
-        onClick={() => {
-          if (phase.id !== undefined) {
-            console.log(examPhase);
-            editElement("examPhases", phase.id, phase);
-            // addElement("examPhases", examPhase);
-            if (setOpen !== undefined) {
-              setOpen(false);
+      <div className="absolute flex items-end justify-center bottom-10 ">
+        <CustomButton
+          variant="dark"
+          onClick={() => {
+            if (phase.id !== undefined) {
+              console.log(examPhase);
+              editElement("examPhases", phase.id, phase);
+              // addElement("examPhases", examPhase);
+              if (setOpen !== undefined) {
+                setOpen(false);
+              }
             }
-          }
-        }}
-      >
-        Save
-      </button>
+          }}
+        >
+          save
+        </CustomButton>
+      </div>
     </div>
   );
 }

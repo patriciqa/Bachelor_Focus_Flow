@@ -155,15 +155,17 @@ export default function ExamPhaseOverview({
           </div>
         </div>
       )}
-      <div className="flex items-end justify-center h-full pt-2 pb-16">
-        <CustomButton
-          variant="dark"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          create exam phase
-        </CustomButton>
+      <div className="absolute flex items-end justify-center bottom-10 ">
+        {active && (
+          <CustomButton
+            variant="dark"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            create exam phase
+          </CustomButton>
+        )}
       </div>
       <ModalPage
         colorType={ColorType.NEUTRAL}
