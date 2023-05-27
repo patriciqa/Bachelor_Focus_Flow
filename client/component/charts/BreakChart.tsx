@@ -50,6 +50,16 @@ export default function BreakChart({
     return entry;
   };
 
+  const showActivity = (id: string) => {
+    if (id === "null" || id === undefined) {
+      console.log(id);
+
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   return (
     <div className="flex">
       {good ? (
@@ -85,7 +95,13 @@ export default function BreakChart({
                           "text-breakChart3 py-1  text-h16 basis-[70%]	"))
                     }
                   >
-                    {getActivity(parseInt(activity.id))}
+                    {showActivity(activity.id) ? (
+                      <p> {getActivity(parseInt(activity.id))}</p>
+                    ) : (
+                      <div className="font-bold text-chartGrey text-h14">
+                        no additional data available
+                      </div>
+                    )}
                   </div>
                   <div
                     className={
@@ -149,7 +165,13 @@ export default function BreakChart({
                           "text-breakChart3 py-1  text-h16 basis-[70%]	"))
                     }
                   >
-                    {getActivity(parseInt(activity.id))}
+                    {showActivity(activity.id) ? (
+                      <p> {getActivity(parseInt(activity.id))}</p>
+                    ) : (
+                      <div className="font-bold text-chartGrey text-h14">
+                        no additional data available
+                      </div>
+                    )}
                   </div>
                   <div
                     className={

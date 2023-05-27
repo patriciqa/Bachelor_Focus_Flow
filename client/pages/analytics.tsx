@@ -74,7 +74,7 @@ export default function Analytcs() {
       {phases?.length === 0 ? (
         <CreatePhaseView />
       ) : (
-        <div className="flex flex-col  w-[100vw] p-5 bg-background h-[100vh]">
+        <div className="flex flex-col  w-[100vw] p-5 bg-background h-[100vh] mb-[20vh]">
           {activePhase !== undefined && (
             <>
               <div className="flex w-full pt-12">
@@ -131,7 +131,7 @@ export default function Analytcs() {
                   icon={["fas", "arrow-trend-down"]}
                 />
               </div>
-              <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded  mb-20 ">
+              <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded ">
                 <PieChartDowners activePhase={activePhase} />
               </div>
             </>

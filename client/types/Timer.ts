@@ -64,5 +64,7 @@ export interface Study extends Entry {
 }
 
 export interface Break extends Entry {
+  ratherGood: any;
+  good: any;
   breakActivityId?: number | null;
 }
