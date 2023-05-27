@@ -14,3 +14,14 @@
     font-weight: 700;
   }
 }
+/* Disables pinch zoom on mobile web */
+@media (max-width: 768px) {
+  html,
+  body {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -ms-touch-action: pan-y;
+  }
+}
