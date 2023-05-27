@@ -361,7 +361,7 @@ export default function PieChartDowners({
   };
 
   return (
-    <>
+    <div className="pb-6">
       {badTopThree === null && badTopThreeBreak === null ? (
         <div className="flex justify-center  shadow-[1px_4px_16px_rgba(39,37,37,0.15)] font-bold text-h14 items-center h-[12vh] text-pieGrey">
           no data available
@@ -390,6 +390,6 @@ export default function PieChartDowners({
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

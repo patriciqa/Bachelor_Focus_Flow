@@ -50,6 +50,8 @@ export default function StudyChart({
     return entry;
   };
   const showReason = (id: string) => {
+    console.log(id);
+
     if (id === "null" || id === undefined) {
       console.log(id);
 

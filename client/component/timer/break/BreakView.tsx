@@ -204,7 +204,7 @@ export const BreakView = ({
 
           {runningTimer === TimerViewState.FINISHED && (
             <>
-              <div className="flex flex-col items-center justify-center">
+              <div className="absolute flex flex-col items-center justify-center w-full bottom-10">
                 <CustomButton
                   variant="break"
                   onClick={() => {
