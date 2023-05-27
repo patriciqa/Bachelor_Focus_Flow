@@ -49,6 +49,15 @@ export default function StudyChart({
     });
     return entry;
   };
+  const showReason = (id: string) => {
+    if (id === "null" || id === undefined) {
+      console.log(id);
+
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   return (
     <div className="flex">
@@ -93,7 +102,13 @@ export default function StudyChart({
                           "text-studyChart3 py-1  text-h16 basis-[70%]	"))
                     }
                   >
-                    {getReason(parseInt(reason.id))}
+                    {showReason(reason.id) ? (
+                      <p> {getReason(parseInt(reason.id))}</p>
+                    ) : (
+                      <div className="font-bold text-chartGrey text-h14">
+                        no additional data available
+                      </div>
+                    )}
                   </div>
                   <div
                     className={
@@ -166,7 +181,13 @@ export default function StudyChart({
                           "text-studyChart3 py-1  text-h16 basis-[70%]	"))
                     }
                   >
-                    {getReason(parseInt(reason.id))}
+                    {showReason(reason.id) ? (
+                      <p> {getReason(parseInt(reason.id))}</p>
+                    ) : (
+                      <div className="font-bold text-chartGrey text-h14">
+                        no additional data available
+                      </div>
+                    )}
                   </div>
                   <div
                     className={

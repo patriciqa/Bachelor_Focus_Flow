@@ -35,7 +35,6 @@ export interface ExamPhase {
   title?: string;
   studyEntries?: Study[];
   breakEntries?: Break[];
-  archived?: boolean;
 }
 
 export interface Timer {
