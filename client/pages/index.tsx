@@ -5,7 +5,9 @@ import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
 import { addElement, getElement } from "@/db/Actions";
 import initDb from "@/db/InitDb";
+import sToM from "@/hooks/SecondsToMinutes";
 import { Break, Study, WhichTimer } from "@/types/Timer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 
 const Timer = ({
@@ -127,39 +129,79 @@ const Timer = ({
     return component;
   };
 
+  const getTime = (study: boolean) => {
+    if (study) {
+      return (
+        <div className="flex p-2 px-14 text-h16 text-study">
+          <FontAwesomeIcon
+            icon={["fas", "clock"]}
+            className="pr-2 text-study"
+          />
+          study: {sToM(studyEntry.timer.duration)}min
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex p-2 px-14 text-h16 text-break">
+          <FontAwesomeIcon
+            icon={["fas", "clock"]}
+            className="pr-2 text-break"
+          />
+          <p>break: {sToM(breakEntry.timer.duration)}min</p>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
         {/* <button onClick={() => addExample()}>add element</button> */}
         <div
           className={
-            "flex justify-center w-full pt-10 px-14 pb-7	" +
-            (hideNavbar && "invisible")
+            "flex justify-center w-full pt-10 px-14 pb-7 p-2	"
+            // (hideNavbar && "invisible")
           }
         >
-          <button
-            onClick={() => setWhichTimer(WhichTimer.STUDY)}
-            className={
-              "w-1/2 rounded-l-lg text-white p-2  " +
-              (whichTimer === WhichTimer.STUDY
-                ? "bg-study rounded  "
-                : "bg-inactiveGrey")
-            }
-          >
-            study
-          </button>
-          <button
-            onClick={() => setWhichTimer(WhichTimer.BREAK)}
-            className={
-              "w-1/2 rounded-r-lg text-white p-2  " +
-              (whichTimer === WhichTimer.BREAK
-                ? "bg-break rounded  "
-                : "bg-inactiveGrey")
-            }
-          >
-            break
-          </button>
-        </div>
+          {hideNavbar ? (
+            <button
+              onClick={() => setWhichTimer(WhichTimer.STUDY)}
+              className={
+                " " +
+                (whichTimer === WhichTimer.STUDY
+                  ? "text-study  "
+                  : "text-break")
+              }
+            >
+              {whichTimer === WhichTimer.STUDY ? getTime(true) : getTime(false)}
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={() => setWhichTimer(WhichTimer.STUDY)}
+                className={
+                  "w-1/2 rounded-l-lg text-white p-2  " +
+                  (whichTimer === WhichTimer.STUDY
+                    ? "bg-study rounded  "
+                    : "bg-inactiveGrey")
+                }
+              >
+                study
+              </button>
+              <button
+                onClick={() => setWhichTimer(WhichTimer.BREAK)}
+                className={
+                  "w-1/2 rounded-r-lg text-white p-2  " +
+                  (whichTimer === WhichTimer.BREAK
+                    ? "bg-break rounded  "
+                    : "bg-inactiveGrey")
+                }
+              >
+                break
+              </button>
+            </>
+          )}
+        </div>{" "}
         <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] relative bg-white rounded h-[66vh] w-11/12	">
           {showPage()}
         </div>
