@@ -146,19 +146,9 @@ export default function TimerSlider({
   }
 
   return (
-    <>
-      <div className="z-0 ">
-        {/* <div>
-          <button onClick={showNotification}>Show Notification</button>
-          <button onClick={stopTimer}>Stop Timer</button>
-          <button onClick={startTimer}>Start Timer</button>
-          {isRunning ? (
-            <button onClick={stopTimer}>Stop Timer</button>
-          ) : (
-            <button onClick={startTimer}>Start Timer</button>
-          )}
-        </div> */}
-        {initialRenderComplete && (
+    <div className="flex items-center justify-center scale-[0.9]">
+      {initialRenderComplete && (
+        <div className="">
           <CircularSlider
             min={0}
             max={5400}
@@ -183,13 +173,13 @@ export default function TimerSlider({
           >
             <div></div>
           </CircularSlider>
-        )}
-      </div>
+        </div>
+      )}
       <div className="absolute">
         <div className="z-10 flex items-center content-center justify-center w-20 h-20 pb-4 text-4xl ">
           {toMinutesSeconds(duration)}
         </div>
       </div>
-    </>
+    </div>
   );
 }

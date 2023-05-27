@@ -36,7 +36,7 @@ export default function BreakSummary({
       <div className="flex justify-center">
         <Tag entry={breakEntry} />
       </div>
-      <div className="absolute flex flex-col items-center justify-end bottom-5 ">
+      <div className="absolute flex flex-col items-center justify-end bottom-10 ">
         {showBreakButton() && (
           <CustomButton
             variant="break"

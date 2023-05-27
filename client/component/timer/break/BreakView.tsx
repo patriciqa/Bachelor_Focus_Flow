@@ -121,13 +121,15 @@ export const BreakView = ({
           <div className="flex flex-col items-center justify-center h-[25vh] my-20 ">
             {/* <div className="h-[10vh]">Yeah, keep going!</div> */}
             {runningTimer === TimerViewState.RUNNING && (
-              <div className="h-[10vh] mb-8">Enjoy your break.</div>
+              <div className="my-[2vh] ">Enjoy your break.</div>
             )}{" "}
             {runningTimer === TimerViewState.START && (
-              <div className="h-[10vh] mb-8" />
+              <div className="my-[2vh]">
+                <br></br>
+              </div>
             )}
             {runningTimer === TimerViewState.FINISHED && (
-              <div className="h-[10vh] mb-8">Welcome back!</div>
+              <div className="my-[2vh]">Welcome back!</div>
             )}
             <TimerSlider
               isStudy={false}
@@ -140,11 +142,11 @@ export const BreakView = ({
 
           {runningTimer === TimerViewState.START && (
             <>
-              <div className="flex flex-col items-center justify-center">
+              <div className="absolute flex flex-col items-center justify-center w-full bottom-2">
                 {/* <div className="bg-transparent h-[30vh]" /> */}
                 <button
                   className={
-                    "w-4/6 px-4 py-2 mb-2 border rounded-full border-break text-dark"
+                    "w-5/6 px-4 py-2 mb-2 border rounded-full border-break text-dark"
                   }
                 >
                   {getActivity() !== undefined
@@ -172,10 +174,10 @@ export const BreakView = ({
 
           {runningTimer === TimerViewState.RUNNING && (
             <>
-              <div className="flex flex-col items-center justify-center">
+              <div className="absolute flex flex-col items-center justify-center w-full bottom-2">
                 <button
                   className={
-                    "w-4/6 px-4 py-2 mb-2 border rounded-full border-break bg-break text-white"
+                    "w-4/6 px-4 py-2 mb-2 border rounded-full flex border-break bg-break text-white"
                   }
                 >
                   {getActivity() !== undefined
@@ -225,7 +227,7 @@ export const BreakView = ({
             <p className="pt-2 text-h14 text-inactiveGrey">select 1 activity</p>
           </div>
           <ActivitySelection selected={selected} setSelected={setSelected} />
-          <div className="flex justify-center">
+          <div className="absolute flex justify-center w-full bottom-2 ">
             <CustomButton
               variant={
                 selected === null || selected !== -1 ? "break" : "disabled"

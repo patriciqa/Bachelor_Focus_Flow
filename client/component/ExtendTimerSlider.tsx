@@ -75,8 +75,8 @@ export default function ExtendTimerSlider({
   }
 
   return (
-    <>
-      <div className="z-0 ">
+    <div className="flex items-center justify-center scale-[0.9]">
+      <div className="">
         {/* <div>
           <button onClick={showNotification}>Show Notification</button>
           <button onClick={stopTimer}>Stop Timer</button>
@@ -88,37 +88,39 @@ export default function ExtendTimerSlider({
           )}
         </div> */}
         {initialRenderComplete && (
-          <CircularSlider
-            min={0}
-            max={1200}
-            dataIndex={0}
-            // dataIndex={1} //default start maybw 25min?
-            hideLabelValue
-            labelBottom={true}
-            knobColor={isStudy ? "#5A55F4" : "#48B065"}
-            knobSize={runningTimer === TimerViewState.START ? 60 : undefined}
-            progressColorFrom={isStudy ? "#5A55F4" : "#48B065"}
-            progressColorTo={isStudy ? "#5A55F4" : "#48B065"}
-            progressSize={20}
-            data={timeArr}
-            trackColor="#eeeeee"
-            trackSize={12}
-            knobDraggable={
-              runningTimer !== TimerViewState.RUNNING ? true : false
-            }
-            onChange={(value: any) => {
-              setExtend(convertTimeToSeconds(value));
-            }}
-          >
-            <div></div>
-          </CircularSlider>
+          <div className="">
+            <CircularSlider
+              min={0}
+              max={1200}
+              dataIndex={0}
+              // dataIndex={1} //default start maybw 25min?
+              hideLabelValue
+              labelBottom={true}
+              knobColor={isStudy ? "#5A55F4" : "#48B065"}
+              knobSize={runningTimer === TimerViewState.START ? 60 : undefined}
+              progressColorFrom={isStudy ? "#5A55F4" : "#48B065"}
+              progressColorTo={isStudy ? "#5A55F4" : "#48B065"}
+              progressSize={20}
+              data={timeArr}
+              trackColor="#eeeeee"
+              trackSize={12}
+              knobDraggable={
+                runningTimer !== TimerViewState.RUNNING ? true : false
+              }
+              onChange={(value: any) => {
+                setExtend(convertTimeToSeconds(value));
+              }}
+            >
+              <div></div>
+            </CircularSlider>
+          </div>
         )}
       </div>
       <div className="absolute">
-        <div className="z-10 flex items-center content-center justify-center w-20 h-20 pb-12 text-4xl ">
+        <div className="z-10 flex items-center content-center justify-center w-20 h-20 text-4xl ">
           {toMinutesSeconds(extend)}
         </div>
       </div>
-    </>
+    </div>
   );
 }

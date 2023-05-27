@@ -99,31 +99,35 @@ export const StudyView = ({
   }, [runningTimer]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-[50vh] my-10 relative">
+    <div className="flex flex-col items-center justify-center ">
       {runningTimer === TimerViewState.RUNNING && (
-        <div className="h-[10vh] mb-8">Yeah, keep going!</div>
+        <div className=" my-[2vh]   ">Yeah, keep going!</div>
       )}{" "}
       {runningTimer === TimerViewState.EXTEND && (
-        <div className="h-[10vh] mb-8">Yeah, keep going!</div>
+        <div className=" my-[2vh] ">Yeah, keep going!</div>
       )}{" "}
       {runningTimer === TimerViewState.START && (
-        <div className="h-[10vh] mb-8" />
+        <div className="my-[2vh]">
+          <br></br>
+        </div>
       )}
       {runningTimer === TimerViewState.FINISHED && (
-        <div className="h-[10vh] mb-8 text-h16">
+        <div className="flex flex-col mt-2 ml-1 mr-1 text-h16">
           In the flow? Slide to extend the timer. <br />{" "}
           <p className="pt-1 text-h14 text-chartGrey">(max. 20 minutes)</p>
         </div>
       )}
       {runningTimer === TimerViewState.START ||
       runningTimer === TimerViewState.RUNNING ? (
-        <TimerSlider
-          isStudy
-          runningTimer={runningTimer}
-          setRunningTimer={setRunningTimer}
-          duration={duration}
-          setDuration={setDuration}
-        />
+        <>
+          <TimerSlider
+            isStudy
+            runningTimer={runningTimer}
+            setRunningTimer={setRunningTimer}
+            duration={duration}
+            setDuration={setDuration}
+          />
+        </>
       ) : (
         <ExtendTimerSlider
           isStudy
@@ -134,8 +138,7 @@ export const StudyView = ({
         />
       )}
       {runningTimer === TimerViewState.START && (
-        <>
-          <div className="bg-transparent h-[10vh]" />
+        <div className="absolute bottom-10">
           <CustomButton
             variant="study"
             onClick={() => {
@@ -150,30 +153,30 @@ export const StudyView = ({
           >
             start timer
           </CustomButton>
-        </>
+        </div>
       )}
       {runningTimer === TimerViewState.RUNNING && (
         <>
-          <div className="h-[10vh]"></div>
-          <CustomButton
-            variant="study-unfilled"
-            onClick={() => {
-              setRunningTimer(TimerViewState.START);
+          <div className="absolute bottom-10">
+            <CustomButton
+              variant="study-unfilled"
+              onClick={() => {
+                setRunningTimer(TimerViewState.START);
 
-              const s = { ...studyEntry };
-              s.timer.duration = Math.round(
-                (Date.now() - s.timer.startTime) / 1000
-              );
-              saveToDb(examPhaseId, s, true);
-            }}
-          >
-            cancel timer
-          </CustomButton>
+                const s = { ...studyEntry };
+                s.timer.duration = Math.round(
+                  (Date.now() - s.timer.startTime) / 1000
+                );
+                saveToDb(examPhaseId, s, true);
+              }}
+            >
+              cancel timer
+            </CustomButton>
+          </div>
         </>
       )}
       {runningTimer === TimerViewState.EXTEND && (
         <>
-          <div className="h-[10vh]"></div>
           <CustomButton
             variant="study-unfilled"
             onClick={() => {
@@ -191,7 +194,7 @@ export const StudyView = ({
         </>
       )}
       {runningTimer === TimerViewState.FINISHED && (
-        <>
+        <div className="absolute flex flex-col bottom-3">
           <button
             onClick={() => {
               const e = { ...studyEntry };
@@ -203,7 +206,7 @@ export const StudyView = ({
               }
             }}
             className={
-              " h-[56px] p-4 m-2 rounded  flex w-5/6 items-center  justify-center text-h24 font-normal " +
+              " h-[8vh] p-4  rounded  flex w-full items-center justify-center text-h24 font-normal " +
               (extend !== 0
                 ? " bg-study rounded text-white "
                 : "text-chartGrey bg-white")
@@ -221,7 +224,7 @@ export const StudyView = ({
           >
             finish study session
           </CustomButton>
-        </>
+        </div>
       )}
       {showComponent !== null && (
         <ModalPage

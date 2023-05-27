@@ -133,7 +133,7 @@ const Timer = ({
         {/* <button onClick={() => addExample()}>add element</button> */}
         <div
           className={
-            "flex justify-center w-full pt-10 px-14 pb-12	" +
+            "flex justify-center w-full pt-10 px-14 pb-7	" +
             (hideNavbar && "invisible")
           }
         >
@@ -160,7 +160,7 @@ const Timer = ({
             break
           </button>
         </div>
-        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded h-[63vh] w-11/12	">
+        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] relative bg-white rounded h-[66vh] w-11/12	">
           {showPage()}
         </div>
       </>

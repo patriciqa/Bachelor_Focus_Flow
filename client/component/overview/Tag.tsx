@@ -61,10 +61,9 @@ export default function Tag({ entry }: { entry: any }) {
             key={reason.id}
           >
             <div className="pr-2">
-              {reason.icon !== undefined ||
-                (reason.icon !== "" && (
-                  <FontAwesomeIcon icon={reason.icon as IconProp} />
-                ))}
+              {reason.icon !== undefined && (
+                <FontAwesomeIcon icon={reason.icon as IconProp} />
+              )}
             </div>
 
             {reason.title}

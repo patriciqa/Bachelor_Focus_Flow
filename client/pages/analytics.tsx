@@ -74,7 +74,7 @@ export default function Analytcs() {
       {phases?.length === 0 ? (
         <CreatePhaseView />
       ) : (
-        <div className="flex flex-col  w-[100vw] p-5 bg-background h-[100vh] mb-[20vh]">
+        <div className="flex flex-col  w-[100vw] p-5 bg-background  pb-[20vh]">
           {activePhase !== undefined && (
             <>
               <div className="flex w-full pt-12">

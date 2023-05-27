@@ -11,11 +11,6 @@ interface MoodCount {
   mood?: number;
 }
 
-const grin = "./image/break-grin.svg";
-const smile = "./image/break-smile.svg";
-const meh = "./image/break-meh.svg";
-const frown = "./image/break-frown.svg";
-
 export default function PieChartDowners({
   activePhase,
 }: {
@@ -366,7 +361,7 @@ export default function PieChartDowners({
   };
 
   return (
-    <div className="">
+    <>
       {badTopThree === null && badTopThreeBreak === null ? (
         <div className="flex justify-center  shadow-[1px_4px_16px_rgba(39,37,37,0.15)] font-bold text-h14 items-center h-[12vh] text-pieGrey">
           no data available
@@ -395,6 +390,6 @@ export default function PieChartDowners({
           </div>
         </>
       )}
-    </div>
+    </>
   );
 }

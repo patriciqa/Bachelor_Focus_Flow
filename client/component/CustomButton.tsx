@@ -25,7 +25,7 @@ const CustomButton = ({
     <button
       disabled={variant === "disabled" ? true : false}
       className={clsx(
-        " rounded w-[80vw] flex items-center p-4  h-[56px] justify-center text-h24 font-normal",
+        " rounded w-[80vw] flex items-center p-4  h-[8vh] justify-center text-h24 font-normal",
         variant === "study" && "  bg-study text-white ",
         variant === "study-unfilled" && "  bg-white text-study  ",
         variant === "break" && "  bg-break text-white ",
