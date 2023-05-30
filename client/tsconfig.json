@@ -16,8 +16,7 @@
     "incremental": true,
     "paths": {
       "@/*": ["./*"]
-    },
-    "types": ["vitest/globals"]
+    }
   },
   "include": [
     "next-env.d.ts",
