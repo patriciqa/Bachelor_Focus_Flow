@@ -25,11 +25,13 @@ export default function MoodChart({
   studyEntry,
   breakEntry,
   setJumpId,
+  visibleComponentId,
 }: {
   entries: any;
   studyEntry: string | null;
   breakEntry: string | null;
   setJumpId: (d: number) => void;
+  visibleComponentId: number;
 }) {
   const grin = "./image/mood.grin.svg";
   const smile = "./image/mood.smile.svg";
@@ -58,6 +60,7 @@ export default function MoodChart({
     }
     return moodText;
   };
+  console.log(visibleComponentId);
 
   const allEntries = (): [] => {
     const newOb = [];
@@ -116,11 +119,19 @@ export default function MoodChart({
     return moodNr;
   };
 
-  const colorScale = (value) => {
+  const colorScale = (value, id) => {
     if (value === true) {
-      return "#5A55F4";
+      if (id === parseInt(visibleComponentId)) {
+        return "#5A55F4";
+      } else {
+        return "rgba(90, 85, 244, 0.15)";
+      }
     } else {
-      return "#48B065";
+      if (id === parseInt(visibleComponentId)) {
+        return "#48B065";
+      } else {
+        return "rgba(72, 176, 101, 0.3)";
+      }
     }
   };
 
@@ -155,7 +166,10 @@ export default function MoodChart({
   const scrollToDiv = (id: number) => {
     const element = document.getElementById(id);
     console.log(id);
-    console.log(element);
+    console.log("active", element);
+    console.log("self", parseInt(visibleComponentId));
+    console.log("hihi", visibleComponentId);
+
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -231,8 +245,9 @@ export default function MoodChart({
             size={10} // Set size based on the y-value of each data point
             style={{
               data: {
-                fill: ({ datum }) => colorScale(datum.z),
-                // stroke: ({ datum }) => colorScale(datum.z),
+                fill: ({ datum }) => colorScale(datum.z, datum.id),
+                // fill: ({ datum }) =>
+                //   datum.id === parseInt(visibleComponentId) ? "red" : "pink",
                 strokeWidth: 15,
                 zIndex: 100,
                 position: "relative",
@@ -259,7 +274,7 @@ export default function MoodChart({
                 },
               },
             ]}
-            // labels={({ datum }) => `x: ${datum.x}, y: ${datum.y}, z: ${datum.z}`}
+            // labels={({ datum }) => ` ${datum.id}`}
           />
         </VictoryChart>
         <div className="absolute pt-2 text-pieGrey text-h14">

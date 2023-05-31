@@ -20,6 +20,7 @@ const Overview = () => {
   const [jumpId, setJumpId] = useState<number>();
   const allE: any = [];
   const [phases, setPhases] = useState<ExamPhase[]>();
+  const [visibleComponentId, setVisibleComponentId] = useState(null);
 
   const getData = async (): Promise<ExamPhase[]> => {
     const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
@@ -63,8 +64,6 @@ const Overview = () => {
     }
     setEntries(sortBy(allE, "timer.startTime"));
   };
-  console.log(studySummary);
-  console.log(breakSummary);
 
   return (
     <>
@@ -77,6 +76,7 @@ const Overview = () => {
         />
         <div className="relative">
           <MoodChart
+            visibleComponentId={visibleComponentId}
             entries={entries}
             studyEntry={studySummary !== 0 ? sToH(studySummary) : null}
             breakEntry={breakSummary !== 0 ? sToH(breakSummary) : null}
@@ -90,8 +90,7 @@ const Overview = () => {
         </div>
         <HorizontalCarousel
           entries={entries}
-          selectedDate={selectedDate}
-          jumpId={jumpId}
+          setVisibleComponentId={setVisibleComponentId}
         />
       </div>
     </>

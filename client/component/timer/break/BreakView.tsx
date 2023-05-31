@@ -42,7 +42,6 @@ export const BreakView = ({
   );
   const [duration, setDuration] = useState(5);
 
-  console.log(selected);
   const showBreakPage = (): React.ReactElement => {
     let component;
     switch (showComponent) {
@@ -111,7 +110,6 @@ export const BreakView = ({
         </div>
       );
     }
-    console.log(activity);
     return entry;
   };
   return (
