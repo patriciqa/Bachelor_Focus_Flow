@@ -46,7 +46,7 @@ module.exports = {
       "breakChart2": "#4CB66A",
       "breakChart3": "#96CDA5",
       'background': '#F9F9F9',
-      'lightBlue': 'E5F0FF',
+      'lightBlue': '#E5F0FF',
       "inactiveGrey": "#CFCFD9",
       "chartGrey": "#C0C3C8",
       "pieGrey": "#828282",

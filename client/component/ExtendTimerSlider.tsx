@@ -102,7 +102,7 @@ export default function ExtendTimerSlider({
               progressColorTo={isStudy ? "#5A55F4" : "#48B065"}
               progressSize={20}
               data={timeArr}
-              trackColor="#eeeeee"
+              trackColor="#E5F0FF"
               trackSize={12}
               knobDraggable={
                 runningTimer !== TimerViewState.RUNNING ? true : false

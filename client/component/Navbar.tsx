@@ -13,8 +13,8 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
   return (
     <>
       {!hideNavbar && (
-        <div className=" shadow-[1px_-4px_16px_rgba(39,37,37,0.15)] fixed bottom-0 z-20 flex flex-col items-center justify-center w-screen h-[10vh]">
-          <ul className="flex justify-center w-full">
+        <div className=" shadow-[1px_-4px_16px_rgba(39,37,37,0.15)] fixed bottom-0 z-20 flex flex-col items-center justify-center w-screen  h-[10vh]">
+          <ul className="fixed bottom-0 flex justify-center w-full ">
             <li
               className={
                 "w-full  p-5 align-center  justify-center flex bg-white"
@@ -24,7 +24,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 {initialRenderComplete && (
                   <FontAwesomeIcon
                     icon={["fas", "clock"]}
-                    size="2x"
+                    size="xl"
                     className={
                       router === "/" ? "text-dark" : "text-inactiveGrey"
                     }
@@ -42,7 +42,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 {initialRenderComplete && (
                   <FontAwesomeIcon
                     icon={["fas", "calendar"]}
-                    size="2x"
+                    size="xl"
                     className={
                       router === "/overview" ? "text-dark" : "text-inactiveGrey"
                     }
@@ -59,7 +59,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 {initialRenderComplete && (
                   <FontAwesomeIcon
                     icon={["fas", "chart-pie"]}
-                    size="2x"
+                    size="xl"
                     className={
                       router === "/analytics"
                         ? "text-dark"
@@ -81,7 +81,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                     className={
                       router === "/settings" ? "text-dark" : "text-inactiveGrey"
                     }
-                    size="2x"
+                    size="xl"
                   />
                 )}
               </Link>
