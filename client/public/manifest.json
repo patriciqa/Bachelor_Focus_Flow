@@ -5,5 +5,22 @@
     "scope": "/",
     "start_url": "/",
     "name": "StudyTool",
-    "short_name": "StudyTool"
+    "short_name": "StudyTool",
+    "icons": [
+        {
+            "src": "/image/mono-logo.png",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "/image/mono-logo.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/image/mono-logo.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
 }
