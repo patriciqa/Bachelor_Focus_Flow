@@ -1,7 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-nocheck
-import { Activity, ExamPhase, Mood } from "@/types/Timer";
-import { includes } from "lodash";
+import { ExamPhase, Mood, Study } from "@/types/Timer";
+import { filter, includes } from "lodash";
 import { useEffect, useState } from "react";
 import BreakChart from "./BreakChart";
 import StudyChart from "./StudyChart";
@@ -9,6 +7,7 @@ import StudyChart from "./StudyChart";
 interface MoodCount {
   id?: number;
   mood?: number;
+  good?: boolean;
 }
 
 export default function PieChartDowners({
@@ -29,39 +28,46 @@ export default function PieChartDowners({
   }, [activePhase]);
 
   const getGoodAndBadReasons = (phase: ExamPhase) => {
-    setBadTopThree(null);
+    setBadTopThree(undefined);
     setBadTopThreeId([]);
-    setBadTopThreeBreak(null);
+    setBadTopThreeBreak(undefined);
     setBadTopThreeIdBreak([]);
     let moodReason: [MoodCount] = [{}];
     phase.studyEntries?.map((entry: Study) => {
       entry.reasonIds?.map((reason) => {
         let count;
+        let good;
         switch (entry.mood) {
           case Mood.GOOD: {
             count = 2;
+            good = true;
             break;
           }
           case Mood.RATHER_GOOD: {
             count = 1;
+            good = true;
+
             break;
           }
           case Mood.RATHER_BAD: {
             count = -1;
+            good = false;
             break;
           }
           case Mood.BAD: {
             count = -2;
+            good = false;
             break;
           }
         }
 
-        moodReason.push({ id: reason, mood: count });
+        moodReason.push({ id: reason, mood: count, good: good });
       });
     });
-    // console.log("moodReason", moodReason);
+    let good = filter(moodReason, (e) => !e.good);
+    console.log("goodg", good);
     if (moodReason.length !== 1) {
-      const summarize: { [key: number]: number } = moodReason.reduce(
+      const summarize: { [key: number]: number } = good.reduce(
         (acc: any, curr) => {
           const { id, mood } = curr;
           if (id !== undefined) {
@@ -75,58 +81,24 @@ export default function PieChartDowners({
         },
         {}
       );
-      // console.log("result", summarize);
-
       const createdArray = Object.entries(summarize).map(([key, value]) => ({
         [key]: value,
       }));
-      getTopThree(createdArray);
-    }
-  };
-
-  const getTopThree = (
-    createdArray: {
-      [x: string]: number;
-    }[]
-  ) => {
-    const ascArray = sortArrayDependingOnMood(true, createdArray);
-    setThree(true, ascArray);
-    const descArray = sortArrayDependingOnMood(false, createdArray);
-    setThree(false, descArray);
-  };
-
-  const sortArrayDependingOnMood = (
-    asc: boolean,
-    array: {
-      [x: string]: number;
-    }[]
-  ): {
-    [x: string]: number;
-  }[] => {
-    let sortedArray;
-    if (asc) {
-      sortedArray = array.sort((a, b) => {
-        const aValue = Object.values(a)[0];
-        const bValue = Object.values(b)[0];
-        return bValue - aValue;
-      });
-    } else {
-      sortedArray = array.sort((a, b) => {
+      const sortedArray = createdArray.sort((a, b) => {
         const aValue = Object.values(a)[0];
         const bValue = Object.values(b)[0];
         return aValue - bValue;
       });
+      setThree(false, sortedArray);
     }
-    return sortedArray;
   };
 
-  const countBadMood = (id) => {
+  const countBadMood = (id: string) => {
     let bad = 0;
     let ratherBad = 0;
 
     activePhase.studyEntries?.forEach((e) => {
       if (includes(e.reasonIds, parseInt(id))) {
-        // console.log(e);
         if (e.mood === Mood.RATHER_BAD) {
           ratherBad += 1;
         } else {
@@ -167,7 +139,10 @@ export default function PieChartDowners({
         }
       }
 
-      let badThree = [];
+      console.log("badd", bad);
+      console.log("badd", badId);
+
+      let badThree: any = [];
 
       if (badId?.length >= 1) {
         const [id1, id2, id3] = badId;
@@ -201,7 +176,7 @@ export default function PieChartDowners({
 
   const getGoodAndBadActivities = (phase: ExamPhase) => {
     let moodReason: [MoodCount] = [{}];
-    phase.breakEntries?.map((entry: Activity) => {
+    phase.breakEntries?.map((entry) => {
       let count;
       switch (entry.mood) {
         case Mood.GOOD: {
@@ -221,8 +196,9 @@ export default function PieChartDowners({
           break;
         }
       }
-
-      moodReason.push({ id: entry.breakActivityId, mood: count });
+      if (entry.breakActivityId) {
+        moodReason.push({ id: entry.breakActivityId, mood: count });
+      }
     });
 
     if (moodReason.length !== 1) {
@@ -241,8 +217,6 @@ export default function PieChartDowners({
         },
         {}
       );
-      // console.log("result", summarize);
-
       const createdArray = Object.entries(summarize).map(([key, value]) => ({
         [key]: value,
       }));
@@ -278,15 +252,15 @@ export default function PieChartDowners({
       });
     } else {
       sortedArray = array.sort((a, b) => {
-        const aValue = Object.values(a)[0];
-        const bValue = Object.values(b)[0];
+        const aValue: any = Object.values(a)[0];
+        const bValue: any = Object.values(b)[0];
         return aValue - bValue;
       });
     }
     return sortedArray;
   };
 
-  const countBadMoodBreak = (id) => {
+  const countBadMoodBreak = (id: string) => {
     let bad = 0;
     let ratherBad = 0;
 
@@ -333,7 +307,7 @@ export default function PieChartDowners({
         }
       }
 
-      let badThree = [];
+      let badThree: any = [];
 
       if (badId?.length >= 1) {
         const [id1, id2, id3] = badId;
@@ -353,8 +327,6 @@ export default function PieChartDowners({
         });
       }
       const badToPositive = bad.map((num) => Math.abs(num));
-      setBadTopThree(badToPositive);
-      setBadTopThreeId(badThree);
       setBadTopThreeBreak(badToPositive);
       setBadTopThreeIdBreak(badThree);
     }

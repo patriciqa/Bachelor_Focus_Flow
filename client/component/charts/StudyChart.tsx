@@ -34,6 +34,7 @@ export default function StudyChart({
   };
 
   const getReason = (id: number): React.ReactElement => {
+    console.log("idd", id);
     let entry = <div />;
     reasons?.map((reason: Reason) => {
       if (reason.id === id) {
@@ -50,8 +51,6 @@ export default function StudyChart({
     return entry;
   };
   const showReason = (id: string) => {
-    console.log(id);
-
     if (id === "null" || id === undefined) {
       console.log(id);
 
@@ -123,7 +122,7 @@ export default function StudyChart({
                           "text-studyChart3   py-1 justify-center flex text-h16 basis-[15%]"))
                     }
                   >
-                    {reason.good[0] !== 0 ? reason.good : ""}
+                    {reason.ratherGood[0] !== 0 ? reason.ratherGood : ""}
                   </div>
                   <div
                     className={
@@ -136,7 +135,7 @@ export default function StudyChart({
                           "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
                     }
                   >
-                    {reason.ratherGood[0] !== 0 ? reason.ratherGood : ""}
+                    {reason.good[0] !== 0 ? reason.good : ""}
                   </div>
                 </div>
               ))}
@@ -184,7 +183,7 @@ export default function StudyChart({
                     }
                   >
                     {showReason(reason.id) ? (
-                      <p> {getReason(parseInt(reason.id))}</p>
+                      <p>{getReason(parseInt(reason.id))}</p>
                     ) : (
                       <div className="font-bold text-chartGrey text-h14">
                         no additional data available
@@ -202,7 +201,7 @@ export default function StudyChart({
                           "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
                     }
                   >
-                    {reason.bad[0] !== 0 ? reason.bad : ""}
+                    {reason.ratherBad[0] !== 0 ? reason.ratherBad : ""}
                   </div>
                   <div
                     className={
@@ -215,7 +214,7 @@ export default function StudyChart({
                           "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
                     }
                   >
-                    {reason.ratherBad[0] !== 0 ? reason.ratherBad : ""}
+                    {reason.bad[0] !== 0 ? reason.bad : ""}
                   </div>
                 </div>
               ))}

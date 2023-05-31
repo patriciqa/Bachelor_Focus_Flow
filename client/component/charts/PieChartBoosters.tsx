@@ -57,7 +57,6 @@ export default function PieChartBoosters({
         moodReason.push({ id: reason, mood: count });
       });
     });
-    console.log("moodReason", moodReason);
     if (moodReason.length !== 1) {
       const summarize: { [key: number]: number } = moodReason.reduce(
         (acc: any, curr) => {
@@ -73,8 +72,6 @@ export default function PieChartBoosters({
         },
         {}
       );
-      console.log("result", summarize);
-
       const createdArray = Object.entries(summarize).map(([key, value]) => ({
         [key]: value,
       }));

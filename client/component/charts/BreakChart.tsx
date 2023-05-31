@@ -114,7 +114,7 @@ export default function BreakChart({
                           "text-breakChart3   py-1 justify-center flex text-h16 basis-[15%]"))
                     }
                   >
-                    {activity.good[0] !== 0 ? activity.good : ""}
+                    {activity.ratherGood[0] !== 0 ? activity.ratherGood : ""}
                   </div>
                   <div
                     className={
@@ -127,7 +127,7 @@ export default function BreakChart({
                           "text-breakChart3   py-1 justify-center flex text-h16 basis-[15%]"))
                     }
                   >
-                    {activity.ratherGood[0] !== 0 ? activity.ratherGood : ""}
+                    {activity.good[0] !== 0 ? activity.good : ""}
                   </div>
                 </div>
               ))}
@@ -184,8 +184,9 @@ export default function BreakChart({
                           "text-breakChart3   py-1 justify-center flex text-h16 basis-[15%]"))
                     }
                   >
-                    {activity.bad[0] !== 0 ? activity.bad : ""}
+                    {activity.ratherBad[0] !== 0 ? activity.ratherBad : ""}
                   </div>
+
                   <div
                     className={
                       "" +
@@ -197,7 +198,7 @@ export default function BreakChart({
                           "text-breakChart3   py-1 justify-center flex text-h16 basis-[15%]"))
                     }
                   >
-                    {activity.ratherBad[0] !== 0 ? activity.ratherBad : ""}
+                    {activity.bad[0] !== 0 ? activity.bad : ""}
                   </div>
                 </div>
               ))}
