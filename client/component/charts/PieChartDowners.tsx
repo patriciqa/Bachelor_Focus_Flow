@@ -15,10 +15,10 @@ export default function PieChartDowners({
 }: {
   activePhase: ExamPhase;
 }) {
-  const [badTopThree, setBadTopThree] = useState<number[]>();
+  const [badTopThree, setBadTopThree] = useState<number[] | null>();
   const [badTopThreeId, setBadTopThreeId] = useState<string[]>();
 
-  const [badTopThreeBreak, setBadTopThreeBreak] = useState<number[]>();
+  const [badTopThreeBreak, setBadTopThreeBreak] = useState<number[] | null>();
   const [badTopThreeIdBreak, setBadTopThreeIdBreak] = useState<string[]>();
 
   useEffect(() => {
@@ -28,9 +28,9 @@ export default function PieChartDowners({
   }, [activePhase]);
 
   const getGoodAndBadReasons = (phase: ExamPhase) => {
-    setBadTopThree(undefined);
+    setBadTopThree(null);
     setBadTopThreeId([]);
-    setBadTopThreeBreak(undefined);
+    setBadTopThreeBreak(null);
     setBadTopThreeIdBreak([]);
     let moodReason: [MoodCount] = [{}];
     phase.studyEntries?.map((entry: Study) => {
@@ -65,7 +65,6 @@ export default function PieChartDowners({
       });
     });
     let good = filter(moodReason, (e) => !e.good);
-    console.log("goodg", good);
     if (moodReason.length !== 1) {
       const summarize: { [key: number]: number } = good.reduce(
         (acc: any, curr) => {
@@ -139,9 +138,6 @@ export default function PieChartDowners({
         }
       }
 
-      console.log("badd", bad);
-      console.log("badd", badId);
-
       let badThree: any = [];
 
       if (badId?.length >= 1) {
@@ -160,7 +156,6 @@ export default function PieChartDowners({
             ratherBad: [result.ratherBad],
           });
         });
-        // console.log(badThree);
       }
       const badToPositive = bad.map((num) => Math.abs(num));
       setBadTopThree(badToPositive);
@@ -266,7 +261,6 @@ export default function PieChartDowners({
 
     activePhase.breakEntries?.forEach((e) => {
       if (e.breakActivityId === parseInt(id)) {
-        console.log(e);
         if (e.mood === Mood.RATHER_BAD) {
           ratherBad += 1;
         } else {
@@ -333,7 +327,7 @@ export default function PieChartDowners({
   };
 
   return (
-    <div className="pb-6">
+    <div className="">
       {badTopThree === null && badTopThreeBreak === null ? (
         <div className="flex justify-center  shadow-[1px_4px_16px_rgba(39,37,37,0.15)] font-bold text-h14 items-center h-[12vh] text-pieGrey">
           no data available
@@ -346,7 +340,7 @@ export default function PieChartDowners({
           <div className="flex">
             <StudyChart
               good={false}
-              badTopThree={badTopThree}
+              badTopThree={badTopThree !== null ? badTopThree : undefined}
               badTopThreeId={badTopThreeId}
             />
           </div>
@@ -356,7 +350,9 @@ export default function PieChartDowners({
           <div className="flex">
             <BreakChart
               good={false}
-              badTopThree={badTopThreeBreak}
+              badTopThree={
+                badTopThreeBreak !== null ? badTopThreeBreak : undefined
+              }
               badTopThreeId={badTopThreeIdBreak}
             />
           </div>

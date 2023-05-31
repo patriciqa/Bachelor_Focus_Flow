@@ -18,7 +18,7 @@ export default function StudyChart({
   topThreeId,
 }: {
   good: boolean;
-  topThree?: number[];
+  topThree?: number[] | undefined;
   topThreeId?: string[];
   badTopThree?: number[];
   badTopThreeId?: string[];

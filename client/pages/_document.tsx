@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <body>
+      <body className="bg-background">
         <Main />
         <NextScript />
       </body>
