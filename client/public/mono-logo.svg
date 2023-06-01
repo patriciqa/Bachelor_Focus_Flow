@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_2" data-name="Ebene 2" xmlns="http://www.w3.org/2000/svg" width="179" height="179" viewBox="0 0 179 179">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #48b065;
+      }
+
+      .cls-3 {
+        fill: #5a55f4;
+      }
+    </style>
+  </defs>
+  <g id="Ebene_1-2" data-name="Ebene 1">
+    <g id="mono-logo">
+      <rect class="cls-1" width="179" height="179"/>
+      <path id="blue_o" data-name="blue o" class="cls-3" d="m97,52c0,20.99-17.01,38-38,38s-38-17.01-38-38S38.01,14,59,14s38,17.01,38,38Zm-38-22c-12.15,0-22,9.85-22,22s9.85,22,22,22,22-9.85,22-22-9.85-22-22-22Z"/>
+      <path id="green_o" data-name="green o" class="cls-2" d="m158,126c0,20.99-17.01,38-38,38s-38-17.01-38-38,17.01-38,38-38,38,17.01,38,38Zm-38-22c-12.15,0-22,9.85-22,22s9.85,22,22,22,22-9.85,22-22-9.85-22-22-22Z"/>
+    </g>
+  </g>
+</svg>
