@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "StudyTool",
-    "short_name": "StudyTool",
+    "name": "Focus Flow",
+    "short_name": "Focus Flow",
     "icons": [
         {
             "src": "/mono-logo.png",
