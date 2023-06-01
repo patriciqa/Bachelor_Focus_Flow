@@ -26,6 +26,8 @@ export default function Analytcs() {
       if (phase.startDate && phase.endDate)
         if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {
           setActivePhase(phase);
+        } else {
+          setActivePhase(phase);
         }
     });
     setPhases(p);
