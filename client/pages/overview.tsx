@@ -17,7 +17,6 @@ const Overview = () => {
   const [breakSummary, setBreakSummary] = useState(0);
   const [entries, setEntries] = useState<any>([]);
   const [activePhase, setActivePhase] = useState<ExamPhase>();
-  const [jumpId, setJumpId] = useState<number>();
   const allE: any = [];
   const [phases, setPhases] = useState<ExamPhase[]>();
   const [visibleComponentId, setVisibleComponentId] = useState(null);
@@ -68,26 +67,23 @@ const Overview = () => {
   return (
     <>
       {phases?.length === 0 && <CreatePhaseView />}
-      <div className="flex flex-col items-center  w-screen h-[100vh] bg-background mb-20">
+      <div className="flex flex-col items-center  w-screen h-[100vh]  bg-background mb-20">
         <WeekCalendar
           activePhase={activePhase}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
-        <div className="relative">
-          <MoodChart
-            visibleComponentId={visibleComponentId}
-            entries={entries}
-            studyEntry={studySummary !== 0 ? sToH(studySummary) : null}
-            breakEntry={breakSummary !== 0 ? sToH(breakSummary) : null}
-            setJumpId={setJumpId}
-          />
-          {studySummary === 0 && breakSummary === 0 && (
-            <div className="absolute w-full text-center text-pieGrey text-h16 bottom-28 ">
-              no data available
-            </div>
-          )}
-        </div>
+        <MoodChart
+          visibleComponentId={visibleComponentId}
+          entries={entries}
+          studyEntry={studySummary !== 0 ? sToH(studySummary) : null}
+          breakEntry={breakSummary !== 0 ? sToH(breakSummary) : null}
+        />
+        {studySummary === 0 && breakSummary === 0 && (
+          <div className="absolute w-full text-center text-pieGrey text-h16 bottom-28 ">
+            no data available
+          </div>
+        )}
         <HorizontalCarousel
           entries={entries}
           setVisibleComponentId={setVisibleComponentId}

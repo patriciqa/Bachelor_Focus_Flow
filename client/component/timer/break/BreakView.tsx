@@ -225,7 +225,7 @@ export const BreakView = ({
             <p className="pt-2 text-h14 text-inactiveGrey">select 1 activity</p>
           </div>
           <ActivitySelection selected={selected} setSelected={setSelected} />
-          <div className="absolute flex justify-center w-full bottom-2 ">
+          <div className="absolute flex justify-center w-full bottom-10 ">
             <CustomButton
               variant={
                 selected === null || selected !== -1 ? "break" : "disabled"

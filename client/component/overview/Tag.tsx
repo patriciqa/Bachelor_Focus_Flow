@@ -110,56 +110,54 @@ export default function Tag({ entry }: { entry: any }) {
       <button
         id={entry.timer.startTime}
         className={
-          "flex-none carousel-item snap-center m-3  py-4  flex flex-col  rounded w-[80vw] text-white " +
+          "flex justify-center  carousel-item snap-center m-3  py-4    rounded w-[80vw] md:w-[50vw] text-white " +
           (entry.studyTimer === true ? "bg-study " : "bg-break ")
         }
       >
-        <div className="flex justify-center">
-          <div className="flex flex-col items-center w-[25vw]">
-            <div>{getIcon(entry.mood)}</div>
-            <div className="flex items-center justify-center w-4 pt-2 text-center text-h14">
-              {entry.mood}
-            </div>
+        <div className="flex flex-col items-center w-1/4 ">
+          <div>{getIcon(entry.mood)}</div>
+          <div className="flex items-center justify-center w-4 pt-3 text-center text-h14">
+            {entry.mood}
           </div>
-          <div>
-            <div className="font-bold text-left text-h24">
-              {sToM(entry.timer.duration)} min
-            </div>
-            <div className="flex text-h14">
-              {moment(new Date(entry.timer.startTime)).format("HH:mm ")}-
-              {moment(new Date(entry.timer.startTime))
-                .add(entry.timer.duration)
-                .format("HH:mm")}
-            </div>
-            <div className="flex flex-wrap ">
-              {entry.reasonIds?.map((reason: number) => (
-                <div
-                  key={reason}
-                  className="flex items-center py-1 pt-2 mx-1 text-left text-h14 "
-                >
-                  {getReason(reason)}
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap">
-              {entry.breakActivityId !== undefined && (
-                <>
-                  <div className="flex items-center py-1 pt-2 mx-1 text-left text-h14 ">
-                    {getActivity(entry.breakActivityId)}
-                  </div>
-                </>
-              )}
-            </div>{" "}
-            {nonSelected() !== null && (
-              <div className="flex flex-wrap">
-                <>
-                  <div className="flex items-center py-1 pt-2 mx-1 text-left text-white text-opacity-75 text-h14 ">
-                    {nonSelected()}
-                  </div>
-                </>
+        </div>
+        <div className="flex flex-col w-3/4">
+          <div className="font-bold text-left text-h24">
+            {sToM(entry.timer.duration)} min
+          </div>
+          <div className="flex text-h14">
+            {moment(new Date(entry.timer.startTime)).format("HH:mm ")}-
+            {moment(new Date(entry.timer.startTime))
+              .add(entry.timer.duration)
+              .format("HH:mm")}
+          </div>
+          <div className="flex flex-wrap pt-5 ">
+            {entry.reasonIds?.map((reason: number) => (
+              <div
+                key={reason}
+                className="flex items-center pt-2 mx-1 text-left py-2s text-h14 "
+              >
+                {getReason(reason)}
               </div>
-            )}
+            ))}
           </div>
+          <div className="flex flex-wrap">
+            {entry.breakActivityId !== undefined && (
+              <>
+                <div className="flex items-center py-1 pt-2 mx-1 text-left text-h14 ">
+                  {getActivity(entry.breakActivityId)}
+                </div>
+              </>
+            )}
+          </div>{" "}
+          {nonSelected() !== null && (
+            <div className="flex flex-wrap">
+              <>
+                <div className="flex items-center py-1 pt-2 mx-1 text-left text-white text-opacity-75 text-h14 ">
+                  {nonSelected()}
+                </div>
+              </>
+            </div>
+          )}
         </div>
       </button>
     </div>

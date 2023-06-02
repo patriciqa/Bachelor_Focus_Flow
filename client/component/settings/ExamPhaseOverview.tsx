@@ -79,7 +79,7 @@ export default function ExamPhaseOverview({
             (!active ? "bg-[#333333] rounded  " : " bg-inactiveGrey")
           }
         >
-          archive
+          other
         </button>
       </div>
       {active ? (

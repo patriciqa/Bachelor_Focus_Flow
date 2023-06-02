@@ -24,13 +24,11 @@ export default function MoodChart({
   entries,
   studyEntry,
   breakEntry,
-  setJumpId,
   visibleComponentId,
 }: {
   entries: any;
   studyEntry: string | null;
   breakEntry: string | null;
-  setJumpId: (d: number) => void;
   visibleComponentId: number;
 }) {
   const grin = "./image/mood.grin.svg";
@@ -176,7 +174,7 @@ export default function MoodChart({
   };
 
   return (
-    <div className="flex flex-col p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded pb-7  w-[95vw]">
+    <div className="flex flex-col md:w-[50vw]  p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded pb-7  w-[95vw]">
       <div className="flex flex-row items-center justify-center w-full ">
         <div className="flex items-center px-4 py-4">
           <div className="mr-2 text-h16 text-study">Study:</div>

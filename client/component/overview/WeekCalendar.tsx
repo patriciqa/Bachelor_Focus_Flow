@@ -6,7 +6,7 @@ import {
   isSameDay,
   lastDayOfWeek,
   startOfWeek,
-  subWeeks,
+  subWeeks
 } from "date-fns";
 import moment from "moment";
 import "moment/locale/de-ch";
@@ -156,7 +156,7 @@ const WeekCalendar = ({
   };
 
   return (
-    <div className=" my-5 calendar w-[90vw]">
+    <div className=" my-5 calendar w-[90vw] md:w-[50vw]">
       {renderHeader()}
       {renderDays()}
       {renderCells()}

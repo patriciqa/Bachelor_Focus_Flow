@@ -78,7 +78,7 @@ export default function ButtonList({
     <button
       onClick={whenClicked}
       className={
-        "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] h-10 " +
+        "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] h-12 " +
         getBorderColor() +
         " " +
         getBackground()
@@ -105,7 +105,7 @@ export default function ButtonList({
       </div>
       <div
         className={
-          "grow-[5] flex items-left " +
+          "grow-[5] flex items-left text-left leading-5	 " +
           (selected === null && "text-inactiveGrey")
         }
       >
