@@ -73,17 +73,18 @@ const Overview = () => {
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
+        {studySummary === 0 && breakSummary === 0 && (
+          <div className="absolute w-full text-center top-[49vh] text-pieGrey text-h16 ">
+            no data available
+          </div>
+        )}
         <MoodChart
           visibleComponentId={visibleComponentId}
           entries={entries}
           studyEntry={studySummary !== 0 ? sToH(studySummary) : null}
           breakEntry={breakSummary !== 0 ? sToH(breakSummary) : null}
         />
-        {studySummary === 0 && breakSummary === 0 && (
-          <div className="absolute w-full text-center text-pieGrey text-h16 bottom-28 ">
-            no data available
-          </div>
-        )}
+
         <HorizontalCarousel
           entries={entries}
           setVisibleComponentId={setVisibleComponentId}
