@@ -84,7 +84,7 @@ export default function ButtonList({
         getBackground()
       }
     >
-      <div className="grow-[1] pr-3">
+      <div className="basis-[15%] pr-3">
         {icon !== undefined && (
           <>
             {icon !== "" ? (
