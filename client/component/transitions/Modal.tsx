@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export function Modal({ onClose, children }: { onClose: any; children: any }) {
   return (
     <Dialog className="fixed inset-0 z-20" onClose={onClose} open={true}>
-      <div className="flex flex-col justify-center h-full px-1 pt-10 text-center sm:block sm:p-0">
+      <div className="flex flex-col justify-center h-full pt-10 text-center sm:block sm:p-0">
         <Dialog.Overlay
           as={motion.div}
           initial={{ opacity: 0 }}
