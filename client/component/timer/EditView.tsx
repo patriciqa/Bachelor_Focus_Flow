@@ -49,7 +49,7 @@ export default function EditView({
           className="flex justify-end w-4/5 text-chartGrey text-h16"
           id="characterCount"
         >
-          <span id="count">0</span>/32
+          <span id="count">{activeEntry.title.length}</span>/32
         </p>
 
         <input

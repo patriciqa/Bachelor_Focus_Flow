@@ -57,7 +57,6 @@ export default function CreateView({
   const countSpan = document.getElementById("count");
   if (input !== null && countSpan !== null) {
     input.addEventListener("input", function () {
-      const remainingChars = input.maxLength - input.value.length;
       countSpan.textContent = input.value.length.toString();
     });
   }

@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 export default function Analytcs() {
   const [phases, setPhases] = useState<ExamPhase[]>();
   const [activePhase, setActivePhase] = useState<ExamPhase>();
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate] = useState(new Date());
   const [hidePrevArrow, setHidePrevArrow] = useState(false);
   const [hideNextArrow, setHideNextArrow] = useState(false);
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
@@ -23,13 +23,15 @@ export default function Analytcs() {
     data.map((phase) => {
       const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
       p.push(phase);
-      if (phase.startDate && phase.endDate)
+      if (phase.startDate && phase.endDate) {
         if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {
           setActivePhase(phase);
-        } else {
-          setActivePhase(phase);
         }
+      }
     });
+    if (activePhase === undefined) {
+      setActivePhase(p[p.length - 1]);
+    }
     setPhases(p);
     return data;
   };

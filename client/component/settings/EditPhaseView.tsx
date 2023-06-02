@@ -1,7 +1,7 @@
 import { editElement } from "@/db/Actions";
 import { ExamPhase, PickedDate } from "@/types/Timer";
 import { useRouter } from "next/router";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import CustomButton from "../CustomButton";
 
 export default function EditPhaseView({
@@ -28,35 +28,50 @@ export default function EditPhaseView({
 
     return d;
   };
-  const dates: SetStateAction<Date[]> = [];
 
   const [examPhase, setExamPhase] = useState<ExamPhase>();
+
+  const input = document.getElementById("myInput") as HTMLInputElement;
+  const countSpan = document.getElementById("count");
+  if (input !== null && countSpan !== null) {
+    input.addEventListener("input", function () {
+      console;
+      countSpan.textContent = input.value.length.toString();
+    });
+  }
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="font-bold text-h24"> edit exam phase</div>
+    <div className="relative flex flex-col items-center h-full">
+      <div className=" text-h24 pt-[10vh] mb-12"> edit exam phase</div>
+      <p
+        className="flex justify-end w-4/5 text-chartGrey text-h16"
+        id="characterCount"
+      >
+        <span id="count">{activePhase.title?.length}</span>/20
+      </p>
       <input
+        maxLength={20}
+        autoComplete="off"
         type="text"
-        id="name"
+        id="myInput"
         name="name"
         required
         value={phase.title}
-        className="pl-2 border border-black w-[70vw] rounded h-9 mt-10"
+        className="w-4/5 h-10 pl-2 border border-black rounded border-chartGrey "
         onChange={(i) => {
           console.log(i.target.value);
           const e = { ...phase };
           e.title = i.target.value;
           setPhase(e);
         }}
-        placeholder="Title..."
+        placeholder="title..."
       />
       <input
-        type="text"
         id="name"
         name="name"
         required
         disabled
         value={getDate()}
-        className="pl-2 border border-black w-[70vw] rounded h-9 mt-10  text-pieGrey"
+        className="w-4/5 h-10 pl-2 mt-5 border border-black rounded border-chartGrey bg-inactiveGrey "
         onChange={(i) => {
           console.log(i.target.value);
           const e = { ...examPhase };

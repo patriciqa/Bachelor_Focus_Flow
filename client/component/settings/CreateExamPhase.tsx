@@ -65,7 +65,7 @@ export default function CreateExamPhase({
   const countSpan = document.getElementById("count");
   if (input !== null && countSpan !== null) {
     input.addEventListener("input", function () {
-      const remainingChars = input.maxLength - input.value.length;
+      console;
       countSpan.textContent = input.value.length.toString();
     });
   }
@@ -96,7 +96,7 @@ export default function CreateExamPhase({
         maxLength={20}
         autoComplete="off"
         type="text"
-        id="name"
+        id="myInput"
         name="name"
         required
         className="w-4/5 h-10 pl-2 border border-black rounded border-chartGrey "
@@ -119,7 +119,6 @@ export default function CreateExamPhase({
         }}
       >
         <input
-          type="text"
           // id="name"
           required
           className={"w-full text-dark"}
@@ -204,9 +203,8 @@ export default function CreateExamPhase({
             } else {
               if (setOpen !== undefined) {
                 setOpen(false);
-                if(setWhichTimer!== undefined){
+                if (setWhichTimer !== undefined) {
                   setWhichTimer(WhichTimer.STUDY);
-
                 }
               }
             }
