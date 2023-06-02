@@ -132,7 +132,7 @@ const Timer = ({
   const getTime = (study: boolean) => {
     if (study) {
       return (
-        <div className="flex p-2 px-14 text-h16 text-study">
+        <div className="flex w-full p-2 text-h24 text-study">
           <FontAwesomeIcon
             icon={["fas", "clock"]}
             className="pr-2 text-study"
@@ -142,7 +142,7 @@ const Timer = ({
       );
     } else {
       return (
-        <div className="flex p-2 px-14 text-h16 text-break">
+        <div className="flex p-2 text-h24 text-break">
           <FontAwesomeIcon
             icon={["fas", "clock"]}
             className="pr-2 text-break"

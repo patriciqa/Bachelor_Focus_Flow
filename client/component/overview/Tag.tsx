@@ -110,7 +110,7 @@ export default function Tag({ entry }: { entry: any }) {
       <button
         id={entry.timer.startTime}
         className={
-          "flex justify-center h-full carousel-item snap-center m-3  py-4    rounded w-[80vw] md:w-[50vw] text-white " +
+          "flex justify-center carousel-item snap-center m-3  py-4    rounded w-[80vw] md:w-[50vw] text-white " +
           (entry.studyTimer === true ? "bg-study " : "bg-break ")
         }
       >
