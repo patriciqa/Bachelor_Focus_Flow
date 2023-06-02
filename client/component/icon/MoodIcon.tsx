@@ -25,7 +25,7 @@ export default function MoodIcon({
     <>
       <button
         className={
-          "p-2 rounded-md m-2 " +
+          "p-2 rounded-md m-3 " +
           (entry.mood === Mood.BAD ? color : "bg-inactiveGrey")
         }
         onClick={() => {
@@ -38,7 +38,7 @@ export default function MoodIcon({
       </button>
       <button
         className={
-          "p-2 rounded-md m-2 " +
+          "p-2 rounded-md m-3 " +
           (entry.mood === Mood.RATHER_BAD ? color : "bg-inactiveGrey")
         }
         onClick={() => {
@@ -51,7 +51,7 @@ export default function MoodIcon({
       </button>
       <button
         className={
-          "p-2 rounded-md m-2 " +
+          "p-2 rounded-md m-3 " +
           (entry.mood === Mood.RATHER_GOOD ? color : "bg-inactiveGrey")
         }
         onClick={() => {
@@ -64,7 +64,7 @@ export default function MoodIcon({
       </button>{" "}
       <button
         className={
-          "p-2 rounded-md  m-2 " +
+          "p-2 rounded-md  m-3 " +
           (entry.mood === Mood.GOOD ? color : "bg-inactiveGrey")
         }
         onClick={() => {
