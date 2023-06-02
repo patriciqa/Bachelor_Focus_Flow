@@ -15,9 +15,9 @@ export default function MoodIcon({
 
   useEffect(() => {
     if (!isStudy) {
-      setColor("bg-breakGreen");
+      setColor("bg-break");
     } else {
-      setColor("bg-studyBlue");
+      setColor("bg-study");
     }
   });
 

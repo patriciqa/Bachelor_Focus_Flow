@@ -70,7 +70,7 @@ const IconPicker = ({
               size="4x"
               icon={value}
               className={" " + (isBreak ? "text-break" : "text-study")}
-              color="#48B065"
+              color="#5AB874"
             />
           </a>
         </div>

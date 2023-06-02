@@ -122,15 +122,15 @@ export default function MoodChart({
   const colorScale = (value, id) => {
     if (value === true) {
       if (id === parseInt(visibleComponentId)) {
-        return "#5A55F4";
+        return "#6A65F5";
       } else {
-        return "rgba(90, 85, 244, 0.15)";
+        return "rgba(106, 101, 245, 0.15)";
       }
     } else {
       if (id === parseInt(visibleComponentId)) {
-        return "#48B065";
+        return "#5AB874";
       } else {
-        return "rgba(72, 176, 101, 0.3)";
+        return "rgba(90, 184, 116, 0.3)";
       }
     }
   };

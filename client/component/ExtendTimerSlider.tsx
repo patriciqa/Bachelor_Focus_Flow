@@ -96,10 +96,10 @@ export default function ExtendTimerSlider({
               // dataIndex={1} //default start maybw 25min?
               hideLabelValue
               labelBottom={true}
-              knobColor={isStudy ? "#5A55F4" : "#48B065"}
+              knobColor={isStudy ? "#6A65F5" : "#5AB874"}
               knobSize={runningTimer === TimerViewState.START ? 60 : undefined}
-              progressColorFrom={isStudy ? "#5A55F4" : "#48B065"}
-              progressColorTo={isStudy ? "#5A55F4" : "#48B065"}
+              progressColorFrom={isStudy ? "#6A65F5" : "#5AB874"}
+              progressColorTo={isStudy ? "#6A65F5" : "#5AB874"}
               progressSize={20}
               data={timeArr}
               trackColor="#E5F0FF"
