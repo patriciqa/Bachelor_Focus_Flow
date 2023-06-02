@@ -20,6 +20,7 @@
     "date-fns": "^2.30.0",
     "eslint-config-next": "13.2.4",
     "framer-motion": "^10.12.4",
+    "howler": "^2.2.3",
     "intersection-observer": "^0.12.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
@@ -29,8 +30,10 @@
     "react": "18.2.0",
     "react-calendar": "^4.2.1",
     "react-dom": "18.2.0",
+    "react-howler": "^5.2.0",
     "react-intersection-observer": "^9.4.3",
     "typescript": "5.0.2",
+    "use-sound": "^4.0.1",
     "victory": "^36.6.10"
   },
   "devDependencies": {

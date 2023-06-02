@@ -157,12 +157,7 @@ const Timer = ({
     <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
         {/* <button onClick={() => addExample()}>add element</button> */}
-        <div
-          className={
-            "flex justify-center w-full pt-10 px-14 pb-7 p-2	"
-            // (hideNavbar && "invisible")
-          }
-        >
+        <div className={"flex justify-center w-full pt-10 px-14 pb-7 p-2	"}>
           {hideNavbar ? (
             <button
               onClick={() => setWhichTimer(WhichTimer.STUDY)}

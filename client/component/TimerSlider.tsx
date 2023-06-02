@@ -2,6 +2,8 @@ import { TimerViewState } from "@/types/Timer";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import moment from "moment";
 import { useEffect, useState } from "react";
+import useSound from "use-sound";
+
 export default function TimerSlider({
   isStudy,
   runningTimer,
@@ -15,77 +17,7 @@ export default function TimerSlider({
   duration: number;
   setDuration: (d: number) => void;
 }) {
-  // const [timerDuration, setTimerDuration] = useState(2000);
-  // const [isRunning, setIsRunning] = useState(true);
-  // const [notificationSent, setNotificationSent] = useState(false);
-
-  // const workerRef = useRef<Worker>();
-
-  // useEffect(() => {
-  //   workerRef.current = new Worker(new URL("../worker.ts", import.meta.url));
-  //   workerRef.current.onmessage = (event: MessageEvent) =>
-  //     alert(`WebWorker Response => ${event.data.type}`);
-  //   return () => {
-  //     workerRef.current?.terminate();
-  //   };
-  // }, []);
-
-  // const startTimer = () => {
-  //   setIsRunning(true);
-  //   console.log("start", timerDuration);
-  //   workerRef.current?.postMessage({ type: "start", duration: timerDuration });
-  // };
-
-  // const stopTimer = () => {
-  //   setIsRunning(false);
-  //   workerRef.current?.postMessage({ type: "stop" });
-  // };
-
-  // useEffect(() => {
-  //   workerRef.current?.addEventListener("message", (event: MessageEvent) => {
-  //     if (event.data.type === "timerExpired") {
-  //       setNotificationSent(true);
-  //       console.log("noti");
-  //       new Notification("Timer Expired", {
-  //         body: "Your timer has expired!",
-  //       });
-  //     }
-  //   });
-  //   return () => {
-  //     workerRef.current?.removeEventListener("message", () =>
-  //       console.log("ji")
-  //     );
-  //   };
-  // }, []);
-
-  // function showNotification() {
-  // if (Notification.permission == "granted") {
-  //   navigator.serviceWorker.getRegistration().then(function (reg) {
-  //     var options = {
-  //       body: "Here is a notification body!",
-  //     };
-  //     reg?.showNotification("Hello world!", options);
-  //   });
-  // }
-  //   if (!("Notification" in window)) {
-  //     alert("This browser does not support desktop notification");
-  //   } else if (Notification.permission === "granted") {
-  //     var notification = new Notification("Timer Expired", {
-  //       body: "Your timer ",
-  //     });
-  //   } else if (Notification.permission !== "denied") {
-  //     Notification.requestPermission().then(function (permission) {
-  //       if (permission === "granted") {
-  //         var notification = new Notification("Timer Expired", {
-  //           body: "Your timer",
-  //         });
-  //       } else {
-  //         //todo app doesnt word
-  //         //should happen in index.tsx
-  //       }
-  //     });
-  //   }
-  // }
+  const [playActive] = useSound("/notification_sound.mp3", { volume: 1 });
 
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
   useEffect(() => {
@@ -97,7 +29,9 @@ export default function TimerSlider({
       setTimeout(() => {
         if (duration === 1) {
           setDuration(0);
+          playActive();
           setRunningTimer(TimerViewState.FINISHED);
+
           return;
         }
 
@@ -121,7 +55,7 @@ export default function TimerSlider({
   function getTime(m: number) {
     const defaultMin = m || 5;
     let startTime = moment().startOf("D");
-    let endTime = moment().startOf("day").add(5400000);
+    let endTime = moment().startOf("day").add(3600000);
     //Times
     let allTimes = [];
 
@@ -147,11 +81,13 @@ export default function TimerSlider({
 
   return (
     <div className="flex items-center justify-center scale-[0.9]">
+      {/* <button onClick={() => playActive()}>Click Me</button> */}
+
       {initialRenderComplete && (
         <div className="">
           <CircularSlider
             min={0}
-            max={5400}
+            max={3600}
             dataIndex={1}
             // dataIndex={1} //default start maybw 25min?
             hideLabelValue
