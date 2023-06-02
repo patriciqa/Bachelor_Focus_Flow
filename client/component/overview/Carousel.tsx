@@ -38,11 +38,9 @@ const HorizontalCarousel = ({
     };
   });
   return (
-    <div className="w-full pb-[12vh] overflow-x-auto overflow-y-hidden horizontal-carousel snap-x snap-mandatory ">
+    <div className="w-full overflow-x-auto overflow-y-hidden horizontal-carousel snap-x snap-mandatory ">
       <div ref={carouselRef} className="flex carousel-container">
-        <div className="flex w-[10vw] bg-transparent invisible ">
-          placeholder
-        </div>
+        <div className="flex invisible bg-transparent ">placeholder</div>
 
         {entries?.map((entry: any) => (
           <div key={entry.timer.startTime} id={entry.timer.startTime}>

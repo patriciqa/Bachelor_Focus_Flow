@@ -67,7 +67,7 @@ const Overview = () => {
   return (
     <>
       {phases?.length === 0 && <CreatePhaseView />}
-      <div className="flex flex-col items-center  w-screen h-[100vh]  bg-background mb-20">
+      <div className="flex flex-col items-center w-screen mb-20 bg-background">
         <WeekCalendar
           activePhase={activePhase}
           selectedDate={selectedDate}
