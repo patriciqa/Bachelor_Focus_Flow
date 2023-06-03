@@ -177,14 +177,14 @@ export default function MoodChart({
     <div className="flex flex-col md:w-[50vw]  p-2 shadow-[1px_4px_16px_rgba(39,37,37,0.15)] bg-white rounded pb-7  w-[95vw]">
       <div className="flex flex-row items-center justify-center w-full ">
         <div className="flex items-center px-4 py-4">
-          <div className="mr-2 text-h16 text-study">Study:</div>
-          <div className="font-bold text-h20 text-study">
+          <div className="mr-2 text-h16 text-study">study:</div>
+          <div className="font-semibold text-h20 text-study">
             {studyEntry !== null ? studyEntry : "-"}
           </div>
         </div>{" "}
         <div className="flex items-center">
-          <div className="mr-2 text-h16 text-break">Break:</div>
-          <div className="font-bold text-h20 text-break">
+          <div className="mr-2 text-h16 text-break">break:</div>
+          <div className="font-semibold text-h20 text-break">
             {breakEntry !== null ? breakEntry : "-"}
           </div>
         </div>
@@ -275,7 +275,7 @@ export default function MoodChart({
             // labels={({ datum }) => ` ${datum.id}`}
           />
         </VictoryChart>
-        <div className="absolute pt-2 text-pieGrey text-h14">
+        <div className="absolute pt-2 text-chartGrey text-h14">
           *when you skipped the mood check-in
         </div>
       </div>

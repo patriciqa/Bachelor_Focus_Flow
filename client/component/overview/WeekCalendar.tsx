@@ -6,7 +6,7 @@ import {
   isSameDay,
   lastDayOfWeek,
   startOfWeek,
-  subWeeks
+  subWeeks,
 } from "date-fns";
 import moment from "moment";
 import "moment/locale/de-ch";
@@ -61,7 +61,7 @@ const WeekCalendar = ({
             {moment(currentMonth).format(dateFormat)}
           </span>
         </div>
-        <div className="items-end justify-end text-right text-h16 text-darkGrey flex-nowrap">
+        <div className="items-end justify-end text-right font-meium text-h16 text-chartGrey flex-nowrap">
           <p> {activePhase?.title}</p>
           <p className="flex flex-nowrap">{getDate()}</p>
         </div>
@@ -72,7 +72,6 @@ const WeekCalendar = ({
   const renderDays = () => {
     const d = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
     const days = [];
-    let startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
     for (let i = 0; i < 7; i++) {
       days.push(
         <div className="flex-1 text-center text-h16 " key={i}>
@@ -129,7 +128,7 @@ const WeekCalendar = ({
       rows.push(
         <div
           key="key"
-          className="flex flex-row w-full pt-2 font-bold leading-5 text-h24 "
+          className="flex flex-row w-full pt-2 leading-5 font- text-h24 "
         >
           <div
             className="flex-1 text-center "

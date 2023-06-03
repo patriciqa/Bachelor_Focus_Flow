@@ -82,12 +82,12 @@ export default function Reasons({
 
   return (
     <div className="relative flex flex-col items-center h-full">
-      <div className="mb-6 text-h16 text-pieGrey">
+      <div className="mb-6 font-light text-h16 text-pieGrey">
         <FontAwesomeIcon icon={["fas", "clock"]} className="text-pieGrey" />{" "}
         study {sToM(studyEntry.timer.duration)}min
       </div>
       <div>{getText()}</div>
-      <div className="pt-2 text-h14 text-chartGrey">select up to 3 causes</div>
+      <div className="pt-2 text-h16 text-chartGrey">select up to 3 causes</div>
       <div className="flex flex-col justify-center">
         <div className="h-[52vh] relative py-4 w-[70vw]">
           <div className="max-h-full overflow-auto">

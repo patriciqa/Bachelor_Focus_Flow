@@ -37,15 +37,18 @@ export default function MoodCheckIn({
     <div className="relative flex flex-col items-center h-full">
       {isStudy ? (
         <>
-          <div className="mb-6 text-h16 text-pieGrey pt-[10vh]">
-            <FontAwesomeIcon icon={["fas", "clock"]} className="text-pieGrey" />{" "}
+          <div className="mb-6 text-h16 font-light text-pieGrey pt-[10vh]">
+            <FontAwesomeIcon
+              icon={["fas", "clock"]}
+              className=" text-pieGrey"
+            />{" "}
             study {sToM(entry.timer.duration)}min
           </div>
           <div className="text-center pb-14">How did your studying go?</div>
         </>
       ) : (
         <>
-          <div className="mb-6 text-h16 text-pieGrey pt-[10vh]">
+          <div className="mb-6 text-h16 font-light text-pieGrey pt-[10vh]">
             <FontAwesomeIcon icon={["fas", "clock"]} className="text-pieGrey" />{" "}
             break {sToM(entry.timer.duration)}min
           </div>

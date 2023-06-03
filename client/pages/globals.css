@@ -1,18 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://use.typekit.net/jvr0joe.css");
 @layer base {
-  @font-face {
-    font-family: "Sofia Pro";
-    src: url("../public/fonts/SofiaProLight.ttf");
-    font-weight: 400;
-  }
-  @font-face {
-    font-family: "Sofia Pro";
-    src: url("../public/fonts/SofiaProRegular.ttf");
-    font-weight: 700;
-  }
 }
 /* Disables pinch zoom on mobile web */
 @media (max-width: 768px) {
@@ -23,5 +13,7 @@
     -webkit-user-select: none;
     -webkit-touch-callout: none;
     -ms-touch-action: pan-y;
+    font-family: "sofia-pro";
+    font-weight: 400;
   }
 }

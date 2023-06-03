@@ -112,7 +112,7 @@ export default function TimerSlider({
         </div>
       )}
       <div className="absolute">
-        <div className="z-10 flex items-center content-center justify-center w-20 h-20 pb-4 text-4xl ">
+        <div className="z-10 flex items-center content-center justify-center w-20 h-20 pb-4 text-[36px] ">
           {toMinutesSeconds(duration)}
         </div>
       </div>

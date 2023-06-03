@@ -104,7 +104,10 @@ export const BreakView = ({
       entry = (
         <div className="flex flex-row items-center " key={activity.id}>
           {activity.icon !== undefined && (
-            <FontAwesomeIcon icon={activity.icon} className="pr-4" />
+            <FontAwesomeIcon
+              icon={activity.icon}
+              className={"pr-4" + " text-break"}
+            />
           )}
           <p className="text-dark">{activity.title}</p>
         </div>
@@ -222,7 +225,7 @@ export const BreakView = ({
         <>
           <div className="flex flex-col items-center justify-center pt-4 text-center text-h24 ">
             What would you like to do <br /> in your break?
-            <p className="pt-2 text-h14 text-inactiveGrey">select 1 activity</p>
+            <p className="pt-2 text-h16 text-chartGrey">select 1 activity</p>
           </div>
           <ActivitySelection selected={selected} setSelected={setSelected} />
           <div className="absolute flex justify-center w-full bottom-10 ">

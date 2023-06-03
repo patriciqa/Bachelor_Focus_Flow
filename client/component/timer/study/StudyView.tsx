@@ -114,7 +114,9 @@ export const StudyView = ({
       {runningTimer === TimerViewState.FINISHED && (
         <div className="flex flex-col mt-2 ml-1 mr-1 text-h16">
           In the flow? Slide to extend the timer. <br />{" "}
-          <p className="pt-1 text-h14 text-chartGrey">(max. 20 minutes)</p>
+          <p className="pt-1 font-medium text-h14 text-chartGrey">
+            (max. 20 minutes)
+          </p>
         </div>
       )}
       {runningTimer === TimerViewState.START ||
@@ -209,7 +211,7 @@ export const StudyView = ({
               " h-[8vh] p-4  rounded  flex w-full items-center justify-center text-h24 font-normal " +
               (extend !== 0
                 ? " bg-study rounded text-white "
-                : "text-chartGrey bg-white")
+                : "text-inactiveGrey bg-white")
             }
           >
             extend by {extend / 60} mins

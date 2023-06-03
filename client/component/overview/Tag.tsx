@@ -57,7 +57,7 @@ export default function Tag({ entry }: { entry: any }) {
       if (reason.id === id) {
         entry = (
           <div
-            className="flex flex-row items-center border border-white rounded-[32px] py-1 px-2"
+            className="flex flex-row items-center font-medium border border-white rounded-[32px] py-1 px-2"
             key={reason.id}
           >
             <div className="pr-2">
@@ -80,7 +80,7 @@ export default function Tag({ entry }: { entry: any }) {
       if (activity.id === id) {
         entry = (
           <div
-            className="flex flex-row items-center border border-white rounded-[32px] py-1 px-2"
+            className="flex flex-row font-medium items-center border border-white rounded-[32px] py-1 px-2"
             key={activity.id}
           >
             <div className="pr-2">
@@ -116,12 +116,12 @@ export default function Tag({ entry }: { entry: any }) {
       >
         <div className="flex flex-col items-center w-1/4 ">
           <div>{getIcon(entry.mood)}</div>
-          <div className="flex items-center justify-center w-4 pt-3 text-center text-h14">
+          <div className="flex items-center justify-center w-4 pt-3 font-medium text-center text-h14">
             {entry.mood}
           </div>
         </div>
         <div className="flex flex-col w-3/4">
-          <div className="font-bold text-left text-h24">
+          <div className="pb-1 font-medium text-left text-h24">
             {sToM(entry.timer.duration)} min
           </div>
           <div className="flex text-h14">

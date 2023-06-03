@@ -105,7 +105,7 @@ export default function ButtonList({
       </div>
       <div
         className={
-          "grow-[5] flex items-left text-left leading-5	 " +
+          "grow-[5] flex items-left text-left text-h20 leading-5	 " +
           (selected === null && "text-inactiveGrey")
         }
       >

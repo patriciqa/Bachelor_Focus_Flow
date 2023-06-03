@@ -15,9 +15,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    // fontFamily: {
-    //   sofiaPro: ['Sofia Pro', 'sans-serif'],
-    // },
+    extend: {
+      fontFamily: {
+        sofiaPro: ["sofia-pro", "sans-serif"],
+      }
+    },
+    fontFamily: {
+      sofiaPro: ["sofia-pro", "sans-serif"],
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -56,8 +61,12 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["Sofia Pro", ...defaultTheme.fontFamily.sans],
+        'nunito': ['nunito', 'sans-serif'],
+        'MyFont': ['"My Font"', 'serif'] // Ensure fonts with spaces have " " surrounding it.
       },
+      // fontFamily: {
+      //   sans: ["Sofia Pro", ...defaultTheme.fontFamily.sans],
+      // },
       // fontFamily: {
       //   sofiaPro: ['Sofia Pro', 'sans-serif'],
       //   // fontFamily: {

@@ -170,7 +170,7 @@ const IconPicker = ({
           </div>
         )}
       </div>
-      <div className="pt-2 text-chartGrey">select icon</div>
+      <div className="pt-2 text-h20 text-chartGrey">select icon</div>
     </>
   );
 };

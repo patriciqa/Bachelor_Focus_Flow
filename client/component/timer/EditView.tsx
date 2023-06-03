@@ -57,7 +57,7 @@ export default function EditView({
           id="myInput"
           value={newEntry.title}
           maxLength={32}
-          className="w-4/5 h-10 pl-2 mb-12 bg-white border-2 rounded-md border-chartGrey"
+          className="w-4/5 h-10 pl-2 mb-12 bg-white border-2 rounded-md font- border-chartGrey"
           required
           placeholder={isBreak ? "activity..." : "cause..."}
           onChange={(i) => {
