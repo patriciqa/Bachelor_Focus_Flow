@@ -2,6 +2,7 @@ import { TimerViewState } from "@/types/Timer";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import moment from "moment";
 import { useEffect, useState } from "react";
+import useSound from "use-sound";
 
 export default function ExtendTimerSlider({
   isStudy,
@@ -125,7 +126,4 @@ export default function ExtendTimerSlider({
       </div>
     </div>
   );
-}
-function useSound(arg0: string, arg1: { volume: number }): [any] {
-  throw new Error("Function not implemented.");
 }

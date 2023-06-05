@@ -71,13 +71,13 @@ export default function ActivitySelection({
             set no activity
           </button>
           <button
-            className="flex items-center justify-center w-full my-6 text-break"
+            className="flex items-center justify-center w-full pb-4 my-6 text-break"
             onClick={() => {
               setOpen(true);
             }}
           >
             <FontAwesomeIcon
-              className="pr-2 text-break"
+              className="pr-2 text-break "
               icon={["fas", "plus"]}
             />
             add new activity

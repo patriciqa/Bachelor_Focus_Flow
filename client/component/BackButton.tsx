@@ -28,11 +28,14 @@ export default function BackButton({
     return c;
   };
   return (
-    <button className="flex justify-start p-5" onClick={() => setOpen(false)}>
+    <button
+      className="flex justify-start pl-5 pt-9"
+      onClick={() => setOpen(false)}
+    >
       <FontAwesomeIcon
         icon={["fas", "arrow-left-long"]}
-        className={colorType !== undefined ? getColor(colorType) : ""}
-        size="2x"
+        className={colorType !== undefined ? getColor(colorType) + "mt-4" : ""}
+        size="xl"
       />
     </button>
   );

@@ -61,13 +61,13 @@ export default function ExamPhaseOverview({
   }, [open, editOpen]);
 
   return (
-    <div className="flex flex-col h-full p-4 overflow-scroll">
-      <div className={"flex justify-center w-full pt-6 px-14 pb-12	"}>
+    <div className="flex flex-col items-center w-full h-[100vh] px-6">
+      <div className="relative h-[58px] w-[70%] flex justify-center items-center mb-2 bg-chartGrey rounded-2xl">
         <button
           onClick={() => setActive(true)}
           className={
-            "w-1/2 rounded-l-lg text-white p-2  " +
-            (active ? "bg-[#333333] rounded  " : "bg-inactiveGrey ")
+            "w-[52%] rounded-2xl left-0  absolute text-white  h-[60px] font-medium  " +
+            (active ? "bg-dark rounded  z-10 " : "bg-chartGrey")
           }
         >
           active
@@ -75,86 +75,88 @@ export default function ExamPhaseOverview({
         <button
           onClick={() => setActive(false)}
           className={
-            "w-1/2 rounded-r-lg text-white p-2 " +
-            (!active ? "bg-[#333333] rounded  " : " bg-inactiveGrey")
+            "w-[52%] rounded-2xl right-0  absolute text-white  h-[60px] font-medium  " +
+            (!active && "bg-dark rounded  z-10 ")
           }
         >
-          other
+          archive
         </button>
       </div>
-      {active ? (
-        <button
-          onClick={() => {
-            if (examPhaseTitle !== null) {
-              setActivePhase(examPhaseTitle);
-              setEditOpen(true);
-            }
-          }}
-          className="flex justify-between w-[90vw] py-2"
-        >
-          {initialRenderComplete && (
-            <>
-              <div className="flex flex-col items-start font-bold text-h24">
-                {examPhaseTitle?.title !== undefined
-                  ? examPhaseTitle?.title
-                  : "no active exam phase"}
+      <div className="h-[65%] relative w-full py-4 overflow-auto mb-4 ">
+        {active ? (
+          <button
+            onClick={() => {
+              if (examPhaseTitle !== null) {
+                setActivePhase(examPhaseTitle);
+                setEditOpen(true);
+              }
+            }}
+            className="flex justify-between w-[90vw] py-2"
+          >
+            {initialRenderComplete && (
+              <>
+                <div className="flex flex-col items-start font-bold text-h24">
+                  {examPhaseTitle?.title !== undefined
+                    ? examPhaseTitle?.title
+                    : "no active exam phase"}
 
-                <br />
-                {examPhaseTitle !== undefined && (
-                  <div className="mt-1 font-normal text-h14 text-chartGrey">
-                    {moment(examPhaseTitle?.startDate).format("L")} -{" "}
-                    {moment(examPhaseTitle?.endDate).format("L")}
-                  </div>
-                )}
-              </div>
-              {examPhaseTitle !== undefined && (
-                <FontAwesomeIcon
-                  icon={["fas", "ellipsis-vertical"]}
-                  size="xl"
-                />
-              )}
-            </>
-          )}
-        </button>
-      ) : (
-        <div>
-          <div>
-            {phases !== undefined &&
-              phases.map((p) => (
-                <div>
-                  {p?.title !== examPhaseTitle?.title && (
-                    <button
-                      onClick={() => {
-                        if (p !== null) {
-                          setActivePhase(p);
-                          setEditOpen(true);
-                        }
-                      }}
-                      className="flex justify-between w-[90vw] py-2"
-                    >
-                      {initialRenderComplete && (
-                        <>
-                          <div className="flex flex-col items-start font-bold text-h24">
-                            {p?.title}
-                            <br />
-                            <div className="mt-1 font-normal text-h14 text-chartGrey">
-                              {moment(p?.startDate).format("L")} -{" "}
-                              {moment(p?.endDate).format("L")}
-                            </div>
-                          </div>
-                          <FontAwesomeIcon
-                            icon={["fas", "ellipsis-vertical"]}
-                            size="xl"
-                          />
-                        </>
-                      )}
-                    </button>
+                  <br />
+                  {examPhaseTitle !== undefined && (
+                    <div className="mt-1 font-normal text-h14 text-chartGrey">
+                      {moment(examPhaseTitle?.startDate).format("L")} -{" "}
+                      {moment(examPhaseTitle?.endDate).format("L")}
+                    </div>
                   )}
                 </div>
-              ))}
+                {examPhaseTitle !== undefined && (
+                  <FontAwesomeIcon
+                    icon={["fas", "ellipsis-vertical"]}
+                    size="xl"
+                  />
+                )}
+              </>
+            )}
+          </button>
+        ) : (
+          <div>
+            <div>
+              {phases !== undefined &&
+                phases.map((p) => (
+                  <div>
+                    {p?.title !== examPhaseTitle?.title && (
+                      <button
+                        onClick={() => {
+                          if (p !== null) {
+                            setActivePhase(p);
+                            setEditOpen(true);
+                          }
+                        }}
+                        className="flex justify-between w-[90vw] py-2"
+                      >
+                        {initialRenderComplete && (
+                          <>
+                            <div className="flex flex-col items-start font-bold text-h24">
+                              {p?.title}
+                              <br />
+                              <div className="mt-1 font-normal text-h14 text-chartGrey">
+                                {moment(p?.startDate).format("L")} -{" "}
+                                {moment(p?.endDate).format("L")}
+                              </div>
+                            </div>
+                            <FontAwesomeIcon
+                              icon={["fas", "ellipsis-vertical"]}
+                              size="xl"
+                            />
+                          </>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
       <div className="absolute flex items-end justify-center bottom-10 ">
         {active && (
           <CustomButton

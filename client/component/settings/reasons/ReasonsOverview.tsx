@@ -48,13 +48,13 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
   }, [studyReasons]);
 
   return (
-    <div className="flex flex-col w-full px-6 ">
-      <div className={"flex justify-center w-full px-14 pb-6	"}>
+    <div className="flex flex-col items-center w-full h-full px-6">
+      <div className="relative mb-2 h-[58px] w-[70%] flex justify-center items-center bg-chartGrey rounded-2xl">
         <button
           onClick={() => setActive(true)}
           className={
-            "w-1/2 rounded-l-lg text-white p-2  " +
-            (active ? "bg-dark rounded  " : "bg-inactiveGrey")
+            "w-[52%] rounded-2xl left-0  absolute text-white  h-[60px] font-medium  " +
+            (active && "bg-dark rounded  z-10 ")
           }
         >
           active
@@ -62,14 +62,14 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
         <button
           onClick={() => setActive(false)}
           className={
-            "w-1/2 rounded-r-lg text-white p-2 " +
-            (!active ? "bg-dark rounded  " : "bg-inactiveGrey")
+            "w-[52%] rounded-2xl right-0  absolute text-white  h-[60px] font-medium  " +
+            (!active && "bg-dark rounded  z-10 ")
           }
         >
           archive
         </button>
       </div>
-      <div className="h-[65vh] relative max-h-full w-full py-4 overflow-auto  ">
+      <div className="h-[65%] relative w-full py-4 overflow-auto mb-4 ">
         <div className="text-left text-chartGrey text-h14">
           {active
             ? "edit, archive or create new causes"
@@ -137,7 +137,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
           ))}
       </div>
 
-      <div className="absolute flex items-end justify-center bottom-10 ">
+      <div className="absolute flex items-end justify-center bottom-[3%] ">
         {active && (
           <CustomButton
             variant="dark"

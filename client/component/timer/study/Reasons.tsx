@@ -146,7 +146,7 @@ export default function Reasons({
               i don't know
             </button>
             <button
-              className="flex items-center justify-center w-full my-6 text-study"
+              className="flex items-center justify-center w-full pb-4 my-6 text-study"
               onClick={() => {
                 setOpen(true);
               }}
