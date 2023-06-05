@@ -172,14 +172,13 @@ const Timer = ({
             </button>
           ) : (
             <>
-              <div className="relative h-[56px] w-full">
+              <div className="relative h-[58px] w-full flex justify-center items-center bg-chartGrey rounded-2xl">
                 <button
                   onClick={() => setWhichTimer(WhichTimer.STUDY)}
                   className={
-                    "w-1/2 rounded-2xl left-2 absolute text-white p-2 h-[60px] font-medium  " +
-                    (whichTimer === WhichTimer.STUDY
-                      ? "bg-study rounded z-10  "
-                      : "bg-chartGrey")
+                    "w-[52%] rounded-2xl left-0  absolute text-white  h-[60px] font-medium  " +
+                    (whichTimer === WhichTimer.STUDY &&
+                      "bg-study rounded z-10  ")
                   }
                 >
                   study
@@ -187,10 +186,8 @@ const Timer = ({
                 <button
                   onClick={() => setWhichTimer(WhichTimer.BREAK)}
                   className={
-                    "w-1/2 rounded-2xl right-2 absolute text-white h-[60px] font-medium " +
-                    (whichTimer === WhichTimer.BREAK
-                      ? "bg-break rounded  "
-                      : "bg-chartGrey")
+                    "w-[52%] rounded-2xl right-0 absolute items-center justify-center flex text-white h-[60px] font-medium " +
+                    (whichTimer === WhichTimer.BREAK && "bg-break rounded  ")
                   }
                 >
                   break

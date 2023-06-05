@@ -136,6 +136,7 @@ export default function CreateExamPhase({
             setExamPhase(e);
           }}
           value={getDate()}
+          disabled
           placeholder={"dd.mm.yyyy - dd.mm.yyyy"}
         />
       </button>

@@ -20,12 +20,14 @@ export default function ExtendTimerSlider({
   useEffect(() => {
     setInitialRenderComplete(true);
   }, []);
+  const [playActive] = useSound("/notification_sound.mp3", { volume: 1 });
 
   useEffect(() => {
     if (runningTimer === TimerViewState.EXTEND) {
       setTimeout(() => {
         if (extend === 1) {
           setExtend(0);
+          playActive();
           setRunningTimer(TimerViewState.FINISHED);
           return;
         }
@@ -123,4 +125,7 @@ export default function ExtendTimerSlider({
       </div>
     </div>
   );
+}
+function useSound(arg0: string, arg1: { volume: number }): [any] {
+  throw new Error("Function not implemented.");
 }

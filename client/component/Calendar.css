@@ -14,10 +14,8 @@
 }
 
 .react-calendar__navigation__label__labelText {
-  font-family: Sofia Pro;
   font-size: 24px;
   font-weight: bold;
-  /* padding-top: 1rem; */
 }
 .react-calendar__navigation__label {
   padding-top: 0.5rem;
@@ -41,7 +39,6 @@
 .react-calendar *,
 .react-calendar *:before,
 .react-calendar *:after {
-  font-family: Sofia Pro;
   font-weight: bold;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -50,17 +47,14 @@
 .react-calendar button {
   margin: 0;
   border: 0;
-  /* outline: none; */
 }
 .react-calendar button:disabled {
   color: #c0c3c8;
-  /* outline: none; */
 }
 
 .react-calendar__tile--rangeEnd button {
   margin: 0;
   border: 0;
-  /* outline: none; */
   border: 2px #7da5da solid;
 }
 .react-calendar button:enabled:hover {
@@ -98,15 +92,12 @@
   font-weight: normal;
   color: #333333;
   padding-bottom: 0.5rem;
-  font-family: Sofia Pro;
 }
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75em;
-  font-family: Sofia Pro;
-
   font-weight: bold;
 }
 
