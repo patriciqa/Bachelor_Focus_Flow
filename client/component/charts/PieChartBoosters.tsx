@@ -305,19 +305,31 @@ export default function PieChartBoosters({
           <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while studying{" "}
           </div>
-          <StudyChart
-            good={true}
-            topThree={topThreeReasons !== null ? topThreeReasons : undefined}
-            topThreeId={topThreeReasonsId}
-          />
+          {topThreeReasons === null ? (
+            <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
+              no data available
+            </div>
+          ) : (
+            <StudyChart
+              good={true}
+              topThree={topThreeReasons !== null ? topThreeReasons : undefined}
+              topThreeId={topThreeReasonsId}
+            />
+          )}
           <div className="pt-8 pl-3 font-medium text-h14 text-chartGrey">
             while taking breaks
           </div>
-          <BreakChart
-            good={true}
-            topThree={topThreeBreak !== null ? topThreeBreak : undefined}
-            topThreeId={topThreeBreakId}
-          />
+          {topThreeBreak === null ? (
+            <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
+              no data available
+            </div>
+          ) : (
+            <BreakChart
+              good={true}
+              topThree={topThreeBreak !== null ? topThreeBreak : undefined}
+              topThreeId={topThreeBreakId}
+            />
+          )}
         </>
       )}
     </div>
