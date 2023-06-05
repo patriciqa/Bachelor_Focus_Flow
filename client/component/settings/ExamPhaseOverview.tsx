@@ -79,7 +79,7 @@ export default function ExamPhaseOverview({
             (!active && "bg-dark rounded  z-10 ")
           }
         >
-          archive
+          inactive
         </button>
       </div>
       <div className="h-[65%] relative w-full py-4 overflow-auto mb-4 ">
