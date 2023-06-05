@@ -98,7 +98,7 @@ export default function BreakChart({
                     {showActivity(activity.id) ? (
                       <p> {getActivity(parseInt(activity.id))}</p>
                     ) : (
-                      <div className="font-bold text-chartGrey text-h14">
+                      <div className="font-medium text-chartGrey text-h14">
                         no additional data available
                       </div>
                     )}
@@ -168,7 +168,7 @@ export default function BreakChart({
                     {showActivity(activity.id) ? (
                       <p> {getActivity(parseInt(activity.id))}</p>
                     ) : (
-                      <div className="font-bold text-chartGrey text-h14">
+                      <div className="font-medium text-chartGrey text-h14">
                         no additional data available
                       </div>
                     )}

@@ -302,7 +302,7 @@ export default function PieChartBoosters({
         </div>
       ) : (
         <>
-          <div className="pt-3 pl-3 font-bold text-h14 text-chartGrey">
+          <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while studying{" "}
           </div>
           <StudyChart
@@ -310,8 +310,8 @@ export default function PieChartBoosters({
             topThree={topThreeReasons !== null ? topThreeReasons : undefined}
             topThreeId={topThreeReasonsId}
           />
-          <div className="pt-8 pl-3 font-bold text-h14 text-chartGrey">
-            whilte taking breaks
+          <div className="pt-8 pl-3 font-medium text-h14 text-chartGrey">
+            while taking breaks
           </div>
           <BreakChart
             good={true}

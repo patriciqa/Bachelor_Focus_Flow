@@ -99,7 +99,7 @@ export default function Analytcs() {
                   <div className="pb-1 font-semibold text-h24 ">
                     {activePhase?.title}
                   </div>
-                  <div className="text-pieGrey text-h16 ">
+                  <div className="font-light text-pieGrey text-h16 ">
                     {moment(activePhase.startDate).format("L")} -{" "}
                     {moment(activePhase.endDate).format("L")}
                   </div>

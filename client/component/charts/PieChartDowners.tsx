@@ -334,7 +334,7 @@ export default function PieChartDowners({
         </div>
       ) : (
         <>
-          <div className="pt-3 pl-3 font-bold text-h14 text-chartGrey">
+          <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while studying
           </div>
           <div className="flex">
@@ -344,7 +344,7 @@ export default function PieChartDowners({
               badTopThreeId={badTopThreeId}
             />
           </div>
-          <div className="pt-3 pl-3 font-bold text-h14 text-chartGrey">
+          <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while taking breaks
           </div>
           <div className="flex">
