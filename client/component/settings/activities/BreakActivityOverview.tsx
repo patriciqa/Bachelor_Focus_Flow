@@ -4,9 +4,10 @@ import { ButtonVariant } from "@/component/icon/ButtonList";
 import TextWithIcon from "@/component/icon/TextWithIcon";
 import CreateView from "@/component/timer/CreateView";
 import EditView from "@/component/timer/EditView";
-import { getElement } from "@/db/Actions";
+import { editElement, getElement } from "@/db/Actions";
 import { Activity } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Menu, Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import ModalPage from "../reasons/ModalPage";
 
@@ -70,55 +71,163 @@ export default function BreakActivityOverview() {
               {active ? (
                 <>
                   {c.archived === false && (
-                    <button
-                      onClick={() => {
-                        setOpenEdit(true);
-                        setActiveEntry(c);
-                      }}
-                      className="flex justify-between w-full py-2 "
-                    >
-                      {initialRenderComplete && (
+                    <Menu>
+                      {({ open }) => (
                         <>
-                          <TextWithIcon
-                            variant={ButtonVariant.BREAK}
-                            icon={c.icon}
-                            text={c.title}
-                          />
-                          <FontAwesomeIcon
-                            icon={["fas", "ellipsis-vertical"]}
-                            size="xl"
-                            className="pr-4"
-                          />
+                          <Menu.Button className="flex w-full py-2 font-medium">
+                            <button
+                              onClick={() => {
+                                setActiveEntry(c);
+                              }}
+                              className="flex justify-between w-full text-left "
+                            >
+                              {initialRenderComplete && (
+                                <>
+                                  <TextWithIcon
+                                    variant={ButtonVariant.BREAK}
+                                    icon={c.icon}
+                                    text={c.title}
+                                  />
+                                  <FontAwesomeIcon
+                                    icon={["fas", "ellipsis-vertical"]}
+                                    size="xl"
+                                    className={"pr-4 " + (open && "invisible")}
+                                  />{" "}
+                                </>
+                              )}
+                            </button>
+                          </Menu.Button>
+                          <Transition
+                            show={open}
+                            enter="transition duration-100 ease-out"
+                            enterFrom="transform scale-95 opacity-0"
+                            enterTo="transform scale-100 opacity-100"
+                            leave="transition duration-75 ease-out"
+                            leaveFrom="transform scale-100 opacity-100"
+                            leaveTo="transform scale-95 opacity-0"
+                          >
+                            <Menu.Items
+                              static
+                              className="absolute right-0 z-10 w-40 mt-2 bg-white border rounded shadow-lg border-break "
+                            >
+                              <div className="py-1">
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <button
+                                      onClick={() => {
+                                        setOpenEdit(true);
+                                        // setActiveReason(p);
+                                      }}
+                                      className={`block px-4 py-2 text-left w-full`}
+                                    >
+                                      edit
+                                    </button>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <button
+                                      onClick={() => {
+                                        const a = { ...c };
+                                        a.archived = true;
+                                        setActiveEntry(a);
+                                        if (c.id !== undefined) {
+                                          editElement("activities", c.id, a);
+                                        }
+                                      }}
+                                      className={`w-full block text-left px-4 py-2 `}
+                                    >
+                                      archive
+                                    </button>
+                                  )}
+                                </Menu.Item>
+                              </div>
+                            </Menu.Items>
+                          </Transition>
                         </>
                       )}
-                    </button>
+                    </Menu>
                   )}
                 </>
               ) : (
                 <>
                   {c.archived === true && (
-                    <button
-                      onClick={() => {
-                        setOpenEdit(true);
-                        setActiveEntry(c);
-                      }}
-                      className="flex justify-between w-full py-2 "
-                    >
-                      {initialRenderComplete && (
+                    <Menu>
+                      {({ open }) => (
                         <>
-                          <TextWithIcon
-                            variant={ButtonVariant.BREAK}
-                            icon={c.icon}
-                            text={c.title}
-                          />
-                          <FontAwesomeIcon
-                            icon={["fas", "ellipsis-vertical"]}
-                            size="xl"
-                            className="pr-4"
-                          />
+                          <Menu.Button className="flex w-full py-2 font-medium">
+                            <button
+                              onClick={() => {
+                                setActiveEntry(c);
+                              }}
+                              className="flex justify-between w-full text-left "
+                            >
+                              {initialRenderComplete && (
+                                <>
+                                  <TextWithIcon
+                                    variant={ButtonVariant.BREAK}
+                                    icon={c.icon}
+                                    text={c.title}
+                                  />
+                                  <FontAwesomeIcon
+                                    icon={["fas", "ellipsis-vertical"]}
+                                    size="xl"
+                                    className={"pr-4 " + (open && "invisible")}
+                                  />{" "}
+                                </>
+                              )}
+                            </button>
+                          </Menu.Button>
+                          <Transition
+                            show={open}
+                            enter="transition duration-100 ease-out"
+                            enterFrom="transform scale-95 opacity-0"
+                            enterTo="transform scale-100 opacity-100"
+                            leave="transition duration-75 ease-out"
+                            leaveFrom="transform scale-100 opacity-100"
+                            leaveTo="transform scale-95 opacity-0"
+                          >
+                            <Menu.Items
+                              static
+                              className="absolute right-0 z-10 w-40 mt-2 bg-white border rounded shadow-lg border-break "
+                            >
+                              <div className="py-1">
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <button
+                                      onClick={() => {
+                                        setOpenEdit(true);
+                                        // setActiveReason(p);
+                                      }}
+                                      className={`block px-4 py-2 text-left w-full`}
+                                    >
+                                      edit
+                                    </button>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <button
+                                      onClick={() => {
+                                        const a = { ...c };
+                                        a.archived = false;
+                                        setActiveEntry(a);
+                                        if (c.id !== undefined) {
+                                          editElement("activities", c.id, a);
+                                        }
+                                      }}
+                                      className={`w-full block text-left px-4 py-2 `}
+                                    >
+                                      active
+                                    </button>
+                                  )}
+                                </Menu.Item>
+                              </div>
+                            </Menu.Items>
+                          </Transition>
                         </>
                       )}
-                    </button>
+                    </Menu>
                   )}
                 </>
               )}

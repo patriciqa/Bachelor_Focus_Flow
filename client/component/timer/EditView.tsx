@@ -86,42 +86,7 @@ export default function EditView({
           onChange={onIconChange}
           isBreak={isBreak}
         />
-        <div className={"flex justify-center w-full pt-2 px-14 pb-2	"}>
-          <div>
-            <button
-              onClick={() => {
-                const a = { ...newEntry };
-                a.archived = false;
-                setNewEntry(a);
-                console.log(a);
-              }}
-              className={
-                "w-1/2 rounded-l-lg text-white p-2  " +
-                (!newEntry.archived ? "bg-dark rounded  " : "bg-inactiveGrey")
-              }
-            >
-              active
-            </button>
-            <button
-              onClick={() => {
-                const a = { ...newEntry };
-                a.archived = true;
-                setNewEntry(a);
-              }}
-              className={
-                "w-1/2 rounded-r-lg text-white p-2  " +
-                (newEntry.archived ? "bg-dark rounded  " : "bg-inactiveGrey")
-              }
-            >
-              archive
-            </button>
-            <div className="mt-2 text-left text-chartGrey text-h14">
-              {`*archived ${
-                isBreak ? "activities" : "causes"
-              } won’t be shown in the list anymore`}
-            </div>
-          </div>
-        </div>
+
         <div className="absolute flex items-end justify-center bottom-[5%] ">
           <CustomButton
             variant={getVariant() as buttonVariant}
