@@ -86,7 +86,6 @@ export default function EditView({
           onChange={onIconChange}
           isBreak={isBreak}
         />
-
         <div className="absolute flex items-end justify-center bottom-[5%] ">
           <CustomButton
             variant={getVariant() as buttonVariant}
