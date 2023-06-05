@@ -53,7 +53,7 @@ const IconPicker = ({
     <>
       <div
         className={
-          "w-28 h-28 border rounded  flex items-center justify-center  " +
+          "w-24 h-24 border rounded  flex items-center justify-center  " +
           (isBreak ? "border-break" : "border-study")
         }
       >

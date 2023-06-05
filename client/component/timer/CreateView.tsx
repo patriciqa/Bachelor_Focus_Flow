@@ -105,7 +105,7 @@ export default function CreateView({
           }}
         />
         <IconPicker value={icon} onChange={onIconChange} isBreak={isBreak} />
-        <div className="pt-14">
+        <div className="pt-10">
           <CustomButton
             variant={getVariant() as buttonVariant}
             onClick={() => {

@@ -44,7 +44,7 @@ export default function MoodCheckIn({
             />{" "}
             study {sToM(entry.timer.duration)}min
           </div>
-          <div className="text-center pb-14">How did your studying go?</div>
+          <div className="text-center pb-[10%]">How did your studying go?</div>
         </>
       ) : (
         <>
@@ -65,7 +65,7 @@ export default function MoodCheckIn({
         />{" "}
       </div>
       <div className="text-h36 pt-[5vh]">{entry.mood}</div>
-      <div className="absolute bottom-[8vh]">
+      <div className="absolute bottom-[5%]">
         <CustomButton
           variant={getVariant() as buttonVariant}
           onClick={() => {

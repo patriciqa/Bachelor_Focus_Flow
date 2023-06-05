@@ -198,6 +198,7 @@ export const StudyView = ({
       {runningTimer === TimerViewState.FINISHED && (
         <div className="absolute flex flex-col bottom-3">
           <button
+            disabled={extend === 0}
             onClick={() => {
               const e = { ...studyEntry };
               if (extend !== undefined) {
