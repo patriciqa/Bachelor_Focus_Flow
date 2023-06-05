@@ -91,11 +91,11 @@ export default function ExamPhaseOverview({
                 setEditOpen(true);
               }
             }}
-            className="flex justify-between w-[90vw] py-2"
+            className="flex justify-between w-[85vw] py-2"
           >
             {initialRenderComplete && (
               <>
-                <div className="flex flex-col items-start font-bold text-h24">
+                <div className="flex flex-col items-start font-medium text-h24">
                   {examPhaseTitle?.title !== undefined
                     ? examPhaseTitle?.title
                     : "no active exam phase"}
@@ -131,11 +131,11 @@ export default function ExamPhaseOverview({
                             setEditOpen(true);
                           }
                         }}
-                        className="flex justify-between w-[90vw] py-2"
+                        className="flex justify-between w-[85vw] py-2"
                       >
                         {initialRenderComplete && (
                           <>
-                            <div className="flex flex-col items-start font-bold text-h24">
+                            <div className="flex flex-col items-start font-medium text-h24">
                               {p?.title}
                               <br />
                               <div className="mt-1 font-normal text-h14 text-chartGrey">

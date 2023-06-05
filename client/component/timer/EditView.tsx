@@ -39,7 +39,7 @@ export default function EditView({
   };
   return (
     <>
-      <div className="flex flex-col items-center justify-center">
+      <div className="relative flex flex-col items-center h-full">
         {!isBreak && goodReason && (
           <div className="pt-8 pb-8">add positive cause</div>
         )}
@@ -122,7 +122,7 @@ export default function EditView({
             </div>
           </div>
         </div>
-        <div className="pt-4">
+        <div className="absolute flex items-end justify-center bottom-[5%] ">
           <CustomButton
             variant={getVariant() as buttonVariant}
             onClick={() => {
