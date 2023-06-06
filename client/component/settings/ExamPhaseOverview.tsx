@@ -65,7 +65,7 @@ export default function ExamPhaseOverview({
           onClick={() => setActive(true)}
           className={
             "w-[52%] rounded-2xl left-0  absolute text-white  h-[60px] font-medium  " +
-            (active ? "bg-dark rounded  z-10 " : "bg-chartGrey")
+            (active && "bg-dark rounded  z-10 ")
           }
         >
           active

@@ -15,8 +15,6 @@ export default function sToM(totalSeconds: number): string {
     if (seconds === 0) {
         return `${minutes}min`;
     }
-    console.log(minutes)
-
     return `${`${minutes}`}min ${seconds < 10 ? `0${seconds}` : seconds
         }s `;
 }

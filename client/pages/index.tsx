@@ -49,47 +49,83 @@ const Timer = ({
     });
   });
   const hi = {
-    title: "example",
-    startDate: 1685138400000,
-    endDate: 1685570399999,
+    title: "FS23",
+    startDate: 1686038409000,
+    endDate: 1688139082000,
     breakEntries: [
       {
-        timer: { duration: 3, startTime: 1684414234506 },
+        timer: { duration: 300, startTime: 1686038409000 }, //6.6 10am
         studyTimer: false,
-        breakActivityId: 1,
+        breakActivityId: 7,
         mood: "rather bad",
       },
       {
-        timer: { duration: 3, startTime: 1684414234506 },
+        timer: { duration: 600, startTime: 1686039900000 }, //10.25
         studyTimer: false,
-        breakActivityId: 2,
+        breakActivityId: 3,
         mood: "good",
       },
       {
-        timer: { duration: 3, startTime: 1684414234600 },
+        timer: { duration: 300, startTime: 1684414234600 },
         studyTimer: false,
-        breakActivityId: 2,
-        mood: "good",
+        breakActivityId: 8,
+        mood: null,
+      },
+      {
+        timer: { duration: 300, startTime: 1686058560000 }, //6.6 15.36
+        studyTimer: false,
+        breakActivityId: 7,
+        mood: "rather bad",
+      },
+      {
+        timer: { duration: 600, startTime: 1686060480000 }, //16.08
+        studyTimer: false,
+        breakActivityId: 1,
+        mood: "rather good",
+      },
+      {
+        timer: { duration: 300, startTime: 1684414234600 },
+        studyTimer: false,
+        breakActivityId: 9,
+        mood: "bad",
       },
     ],
 
     studyEntries: [
       {
-        timer: { duration: 30, startTime: 1684414234506 },
+        timer: { duration: 3600, startTime: 1686034809000 }, //6.6. 9am
         studyTimer: true,
-        reasonIds: [1, 2, 6],
+        reasonIds: [1, 2, 3],
         mood: "rather bad",
       },
       {
-        timer: { duration: 3, startTime: 1684414234506 },
+        timer: { duration: 1200, startTime: 1686038700000 }, //6.6. 10.05am
         studyTimer: true,
-        reasonIds: [2, 4, 5],
+        reasonIds: [9, 1, 12],
         mood: "good",
       },
       {
-        timer: { duration: 3, startTime: 1684414234506 },
+        timer: { duration: 3600, startTime: 1686040560000 }, //6.6 10.36
         studyTimer: true,
-        reasonIds: [1, 3, 2],
+        reasonIds: [2, 1, 6],
+        mood: "rather bad",
+      },
+      {
+        timer: { duration: 3600, startTime: 1686054960000 }, //6.6. 2pm
+        studyTimer: true,
+        reasonIds: [4, 2, 5],
+        mood: "bad",
+      },
+      {
+        timer: { duration: 1200, startTime: 1686059220000 }, //6.6. 15.47am
+        studyTimer: true,
+        reasonIds: [8, 12, 13],
+        mood: "good",
+      },
+      {
+        timer: { duration: 3600, startTime: 1686061800000 }, //6.6 16.30
+        studyTimer: true,
+        reasonIds: [13, 10],
         mood: "rather good",
       },
     ],
@@ -156,7 +192,7 @@ const Timer = ({
   return (
     <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
-        {/* <button onClick={() => addExample()}>add element</button> */}
+        <button onClick={() => addExample()}>add element</button>
         <div className={"flex justify-center w-full pt-10 px-14 pb-7 p-2	"}>
           {hideNavbar ? (
             <button

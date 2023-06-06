@@ -9,7 +9,12 @@ export default function sToH(totalSeconds: number): string {
         return `${seconds} s`;
     }
     if (hours === 0) {
+        if (seconds === 0) {
+            return `${minutes}min `;
+
+        }
         return `${minutes}min ${seconds}s`;
     }
+
     return `${hours !== 0 ? `${hours}h` : ""} ${minutes}min`;
 }

@@ -56,6 +56,15 @@ export default function StudyChart({
       return true;
     }
   };
+  const checkIfEmpty = (val: number[] | undefined | null) => {
+    if (val !== null && val !== undefined && val[0] === 0) {
+      return true;
+    }
+    if (val === undefined || val === null || val === [0]) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <div className="flex">
@@ -64,7 +73,7 @@ export default function StudyChart({
           <div className="pt-[2vh] -translate-x-1/2 ">
             <VictoryPie
               innerRadius={110}
-              data={topThree}
+              data={checkIfEmpty(topThree) ? [0] : topThree}
               startAngle={0}
               endAngle={180}
               width={1200}
@@ -86,56 +95,63 @@ export default function StudyChart({
                 <img className="h-[px]" src={grin} />
               </div>
             </div>
-            {topThreeId !== undefined &&
-              topThreeId.map((reason: any, index) => (
-                <div key={reason} className={"flex "}>
-                  <div
-                    className={
-                      "" +
-                      ((index === 0 &&
-                        "text-studyChart1 py-1 text-h16 basis-[70%]") ||
-                        (index === 1 &&
-                          "text-studyChart2  py-1 text-h16 basis-[70%]") ||
-                        (index === 2 &&
-                          "text-studyChart3 py-1  text-h16 basis-[70%]	"))
-                    }
-                  >
-                    {showReason(reason.id) || index === 1 ? (
-                      <p> {getReason(parseInt(reason.id))}</p>
-                    ) : (
-                      <div className="font-medium text-chartGrey text-h14">
-                        no additional data available
-                      </div>
-                    )}
+            {checkIfEmpty(topThree) ? (
+              <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
+                no data available
+              </div>
+            ) : (
+              <>
+                {topThreeId?.map((reason: any, index) => (
+                  <div key={reason} className={"flex "}>
+                    <div
+                      className={
+                        "" +
+                        ((index === 0 &&
+                          "text-studyChart1 py-1 text-h16 basis-[70%]") ||
+                          (index === 1 &&
+                            "text-studyChart2  py-1 text-h16 basis-[70%]") ||
+                          (index === 2 &&
+                            "text-studyChart3 py-1  text-h16 basis-[70%]	"))
+                      }
+                    >
+                      {showReason(reason.id) || index === 1 ? (
+                        <p> {getReason(parseInt(reason.id))}</p>
+                      ) : (
+                        <div className="font-medium text-chartGrey text-h14">
+                          no additional data available
+                        </div>
+                      )}
+                    </div>
+                    <div
+                      className={
+                        "" +
+                        ((index === 0 &&
+                          "text-studyChart1 py-1 justify-center flex text-h16 basis-[15%]") ||
+                          (index === 1 &&
+                            "text-studyChart2 py-1 justify-center flex text-h16 basis-[15%]") ||
+                          (index === 2 &&
+                            "text-studyChart3   py-1 justify-center flex text-h16 basis-[15%]"))
+                      }
+                    >
+                      {reason.ratherGood[0] !== 0 ? reason.ratherGood : ""}
+                    </div>
+                    <div
+                      className={
+                        "" +
+                        ((index === 0 &&
+                          "text-studyChart1 py-1  justify-center flex text-h16 basis-[15%]") ||
+                          (index === 1 &&
+                            "text-studyChart2 py-1 justify-center flex text-h16 basis-[15%]") ||
+                          (index === 2 &&
+                            "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
+                      }
+                    >
+                      {reason.good[0] !== 0 ? reason.good : ""}
+                    </div>
                   </div>
-                  <div
-                    className={
-                      "" +
-                      ((index === 0 &&
-                        "text-studyChart1 py-1 justify-center flex text-h16 basis-[15%]") ||
-                        (index === 1 &&
-                          "text-studyChart2 py-1 justify-center flex text-h16 basis-[15%]") ||
-                        (index === 2 &&
-                          "text-studyChart3   py-1 justify-center flex text-h16 basis-[15%]"))
-                    }
-                  >
-                    {reason.ratherGood[0] !== 0 ? reason.ratherGood : ""}
-                  </div>
-                  <div
-                    className={
-                      "" +
-                      ((index === 0 &&
-                        "text-studyChart1 py-1  justify-center flex text-h16 basis-[15%]") ||
-                        (index === 1 &&
-                          "text-studyChart2 py-1 justify-center flex text-h16 basis-[15%]") ||
-                        (index === 2 &&
-                          "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
-                    }
-                  >
-                    {reason.good[0] !== 0 ? reason.good : ""}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </>
+            )}
           </div>
         </>
       ) : (
@@ -143,7 +159,7 @@ export default function StudyChart({
           <div className="pt-[2vh] -translate-x-1/2 ">
             <VictoryPie
               innerRadius={110}
-              data={badTopThree}
+              data={checkIfEmpty(badTopThree) ? [0] : badTopThree}
               startAngle={0}
               endAngle={180}
               width={1200}
@@ -165,56 +181,66 @@ export default function StudyChart({
                 <img className="h-[26px]" src={frown} />
               </div>
             </div>
-            {badTopThreeId !== undefined &&
-              badTopThreeId.map((reason: any, index) => (
-                <div key={reason} className={"flex justify-around "}>
-                  <div
-                    className={
-                      "" +
-                      ((index === 0 &&
-                        "text-studyChart1 py-1 text-h16 basis-[70%]") ||
-                        (index === 1 &&
-                          "text-studyChart2  py-1 text-h16 basis-[70%]") ||
-                        (index === 2 &&
-                          "text-studyChart3 py-1  text-h16 basis-[70%]	"))
-                    }
-                  >
-                    {showReason(reason.id) || index === 1 ? (
-                      <p>{getReason(parseInt(reason.id))}</p>
-                    ) : (
-                      <div className="font-medium text-chartGrey text-h14">
-                        no additional data available
+
+            {checkIfEmpty(badTopThree) ? (
+              <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
+                no data available
+              </div>
+            ) : (
+              <>
+                {badTopThreeId?.map((reason: any, index: number) => (
+                  <>
+                    <div key={reason} className={"flex justify-around "}>
+                      <div
+                        className={
+                          "" +
+                          ((index === 0 &&
+                            "text-studyChart1 py-1 text-h16 basis-[70%]") ||
+                            (index === 1 &&
+                              "text-studyChart2  py-1 text-h16 basis-[70%]") ||
+                            (index === 2 &&
+                              "text-studyChart3 py-1  text-h16 basis-[70%]	"))
+                        }
+                      >
+                        {showReason(reason.id) || index === 1 ? (
+                          <p>{getReason(parseInt(reason.id))}</p>
+                        ) : (
+                          <div className="font-medium text-chartGrey text-h14">
+                            no additional data available
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  <div
-                    className={
-                      "" +
-                      ((index === 0 &&
-                        "text-studyChart1 py-1  justify-center flex text-h16 basis-[15%]") ||
-                        (index === 1 &&
-                          "text-studyChart2 py-1 justify-center flex text-h16 basis-[15%]") ||
-                        (index === 2 &&
-                          "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
-                    }
-                  >
-                    {reason.ratherBad[0] !== 0 ? reason.ratherBad : ""}
-                  </div>
-                  <div
-                    className={
-                      "" +
-                      ((index === 0 &&
-                        "text-studyChart1 py-1  justify-center flex text-h16 basis-[15%]") ||
-                        (index === 1 &&
-                          "text-studyChart2 py-1 justify-center flex text-h16 basis-[15%]") ||
-                        (index === 2 &&
-                          "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
-                    }
-                  >
-                    {reason.bad[0] !== 0 ? reason.bad : ""}
-                  </div>
-                </div>
-              ))}
+                      <div
+                        className={
+                          "" +
+                          ((index === 0 &&
+                            "text-studyChart1 py-1  justify-center flex text-h16 basis-[15%]") ||
+                            (index === 1 &&
+                              "text-studyChart2 py-1 justify-center flex text-h16 basis-[15%]") ||
+                            (index === 2 &&
+                              "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
+                        }
+                      >
+                        {reason.ratherBad[0] !== 0 ? reason.ratherBad : ""}
+                      </div>
+                      <div
+                        className={
+                          "" +
+                          ((index === 0 &&
+                            "text-studyChart1 py-1  justify-center flex text-h16 basis-[15%]") ||
+                            (index === 1 &&
+                              "text-studyChart2 py-1 justify-center flex text-h16 basis-[15%]") ||
+                            (index === 2 &&
+                              "text-studyChart3  py-1  justify-center flex text-h16 basis-[15%]"))
+                        }
+                      >
+                        {reason.bad[0] !== 0 ? reason.bad : ""}
+                      </div>
+                    </div>
+                  </>
+                ))}
+              </>
+            )}
           </div>
         </>
       )}

@@ -293,15 +293,6 @@ export default function PieChartBoosters({
     return count;
   };
 
-  const checkIfEmpty = (val: number[] | undefined | null) => {
-    if (val !== null && val !== undefined && val[0] === 0) {
-      return true;
-    }
-    if (val === undefined || val === null) {
-      return true;
-    }
-    return false;
-  };
   const empty = (): boolean => {
     if (
       (topThreeReasons === null && topThreeBreak === null) ||
@@ -314,9 +305,9 @@ export default function PieChartBoosters({
   };
 
   return (
-    <div className="pb-5">
+    <div className="pb-6">
       {empty() ? (
-        <div className="flex justify-center    text-h14 items-center h-[12vh] text-pieGrey">
+        <div className="flex justify-center  text-h14 items-center h-[12vh] text-pieGrey">
           no data available
         </div>
       ) : (
@@ -324,32 +315,19 @@ export default function PieChartBoosters({
           <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while studying{" "}
           </div>
-
-          {checkIfEmpty(topThreeReasons) ? (
-            <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
-              no data available
-            </div>
-          ) : (
-            <StudyChart
-              good={true}
-              topThree={topThreeReasons !== null ? topThreeReasons : undefined}
-              topThreeId={topThreeReasonsId}
-            />
-          )}
+          <StudyChart
+            good={true}
+            topThree={topThreeReasons !== null ? topThreeReasons : undefined}
+            topThreeId={topThreeReasonsId}
+          />{" "}
           <div className="pt-8 pl-3 font-medium text-h14 text-chartGrey">
             while taking breaks
           </div>
-          {checkIfEmpty(topThreeBreak) ? (
-            <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
-              no data available
-            </div>
-          ) : (
-            <BreakChart
-              good={true}
-              topThree={topThreeBreak !== null ? topThreeBreak : undefined}
-              topThreeId={topThreeBreakId}
-            />
-          )}
+          <BreakChart
+            good={true}
+            topThree={topThreeBreak !== null ? topThreeBreak : undefined}
+            topThreeId={topThreeBreakId}
+          />
         </>
       )}
     </div>

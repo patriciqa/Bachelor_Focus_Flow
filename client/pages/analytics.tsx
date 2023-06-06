@@ -94,7 +94,7 @@ export default function Analytcs() {
         <div className="flex flex-col  w-[100vw] p-5 bg-background  pb-[20vh]">
           {activePhase !== undefined && (
             <>
-              <div className="flex w-full pt-12">
+              <div className="flex w-full pt-8">
                 <div
                   className="flex-1 pt-1 text-center "
                   onClick={() => getPreviewPhase(true)}
@@ -133,7 +133,7 @@ export default function Analytcs() {
                   )}
                 </div>
               </div>
-              <div className="pt-6 pb-1 text-h20 ">
+              <div className="pt-6 mb-4 text-h20 ">
                 your most selected mood boosters
                 <FontAwesomeIcon
                   className="ml-2"

@@ -327,16 +327,6 @@ export default function PieChartDowners({
     }
   };
 
-  const checkIfEmpty = (val: number[] | undefined | null) => {
-    if (val !== null && val !== undefined && val[0] === 0) {
-      return true;
-    }
-    if (val === undefined || val === null || val === [0]) {
-      return true;
-    }
-    return false;
-  };
-
   const empty = (): boolean => {
     if (
       (badTopThree === null && badTopThreeBreak === null) ||
@@ -359,35 +349,23 @@ export default function PieChartDowners({
           <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while studying
           </div>
-          {checkIfEmpty(badTopThree) ? (
-            <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
-              no data available
-            </div>
-          ) : (
-            <div className="flex">
-              <StudyChart
-                good={false}
-                badTopThree={badTopThree !== null ? badTopThree : undefined}
-                badTopThreeId={badTopThreeId}
-              />
-            </div>
-          )}
+          <div className="flex">
+            <StudyChart
+              good={false}
+              badTopThree={badTopThree !== null ? badTopThree : undefined}
+              badTopThreeId={badTopThreeId}
+            />
+          </div>
           <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while taking breaks
           </div>
-          {checkIfEmpty(badTopThreeBreak) ? (
-            <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
-              no data available
-            </div>
-          ) : (
-            <BreakChart
-              good={false}
-              badTopThree={
-                badTopThreeBreak !== null ? badTopThreeBreak : undefined
-              }
-              badTopThreeId={badTopThreeIdBreak}
-            />
-          )}
+          <BreakChart
+            good={false}
+            badTopThree={
+              badTopThreeBreak !== null ? badTopThreeBreak : undefined
+            }
+            badTopThreeId={badTopThreeIdBreak}
+          />
         </>
       )}
     </div>
