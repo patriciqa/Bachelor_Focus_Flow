@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
 import React, { useState } from "react";
 
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Icons } from "../../types/Icons";
 
@@ -38,7 +36,7 @@ const IconPicker = ({
     }
   };
   //select icon
-  const selectIcon = (icon: string) => {
+  const selectIcon = (icon: string | undefined) => {
     onChange(icon);
     setIsOpen(false);
   };
@@ -88,7 +86,6 @@ const IconPicker = ({
                   justifyContent: "space-between",
                 }}
               >
-                {/* <form className="nosubmit"> */}
                 <input
                   className={
                     " pl-2 w-1/2 h-8 mt-3 mb-3 ml-2 border rounded nosubmit border-chartGrey " +
@@ -99,8 +96,6 @@ const IconPicker = ({
                   onChange={onSearch}
                   placeholder="search..."
                 />
-
-                {/* </form> */}
                 <div className="mr-6 text-h16">
                   <a
                     className="m-1"
@@ -123,23 +118,12 @@ const IconPicker = ({
                       e.preventDefault();
                       nextPage();
                     }}
-                    // style={{ marginLeft: "8px" }}
                   >
                     <FontAwesomeIcon
                       icon={["fas", "chevron-right"]}
                       className={isBreak ? "text-break" : "text-study"}
                     />
                   </a>
-                  {/* <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setIsOpen(false);
-                    }}
-                    // style={{ marginLeft: "8px" }}
-                  >
-                    <FontAwesomeIcon icon={["fas", "close"]} />
-                  </a> */}
                 </div>
               </div>
               <div className="bg-white">
@@ -154,7 +138,7 @@ const IconPicker = ({
                       >
                         <div className="w-5 m-1 bg-white ">
                           <FontAwesomeIcon
-                            icon={icon.title}
+                            icon={icon.title as IconProp}
                             size="lg"
                             className={
                               isBreak ? "text-break" : "text-study bg-white"

@@ -5,11 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { VictoryPie } from "victory";
 
-const grin = "./image/study-grin.svg";
-const smile = "./image/study-smile.svg";
-const meh = "./image/study-meh.svg";
-const frown = "./image/study-frown.svg";
-
 export default function BreakChart({
   good,
   topThree,

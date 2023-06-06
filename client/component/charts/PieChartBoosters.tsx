@@ -313,7 +313,7 @@ export default function PieChartBoosters({
       ) : (
         <>
           <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
-            while studying{" "}
+            while studying
           </div>
           <StudyChart
             good={true}
