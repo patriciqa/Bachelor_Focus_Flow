@@ -56,10 +56,8 @@ export default function TimerSlider({
     const defaultMin = m || 5;
     let startTime = moment().startOf("D");
     let endTime = moment().startOf("day").add(3600000);
-    //Times
     let allTimes = [];
 
-    //Loop over the times - only pushes time with 30 minutes interval
     while (startTime < endTime) {
       //Push times
       allTimes.push(startTime.format("HH:mm:ss"));
@@ -81,15 +79,12 @@ export default function TimerSlider({
 
   return (
     <div className="flex items-center justify-center scale-[0.9]">
-      {/* <button onClick={() => playActive()}>Click Me</button> */}
-
       {initialRenderComplete && (
         <div className="">
           <CircularSlider
             min={0}
             max={3600}
             dataIndex={1}
-            // dataIndex={1} //default start maybw 25min?
             hideLabelValue
             labelBottom={true}
             knobColor={isStudy ? "#6A65F5" : "#5AB874"}

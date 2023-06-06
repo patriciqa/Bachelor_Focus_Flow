@@ -7,15 +7,13 @@ import { Mood, Study, WhichTimer } from "@/types/Timer";
 export default function StudySummary({
   studyEntry,
   setStudyEntry,
-  // setShowComponent,
   setWhichTimer,
 }: {
   studyEntry: Study;
   setStudyEntry: (d: Study) => void;
-  // setShowComponent: (d: BreakComponent) => void;
   setWhichTimer: (p: WhichTimer) => void;
 }) {
-  const { examPhaseId, setExamPhaseId } = useExamPhaseContext();
+  const { examPhaseId } = useExamPhaseContext();
 
   return (
     <div className="relative flex flex-col items-center h-full pt-20 ">

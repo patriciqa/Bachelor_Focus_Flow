@@ -1,4 +1,3 @@
-import { ColorType } from "@/component/CancellButton";
 import BreakActivityOverview from "@/component/settings/activities/BreakActivityOverview";
 import PopPage from "@/component/settings/reasons/PopPage";
 import ReasonsOverview from "@/component/settings/reasons/ReasonsOverview";
@@ -129,12 +128,7 @@ const Settings = ({
         </div>
       </button>
       {showComponent !== SettingComponent.NO_COMPONENT && (
-        <PopPage
-          colorType={ColorType.NEUTRAL}
-          open={open}
-          setOpen={setOpen}
-          component={showPage()}
-        />
+        <PopPage open={open} setOpen={setOpen} component={showPage()} />
       )}
     </div>
   );

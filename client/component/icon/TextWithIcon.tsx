@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ButtonVariant } from "./ButtonList";
@@ -26,7 +25,9 @@ export default function TextWithIcon({
   };
   return (
     <div className="flex flex-row items-center justify-center">
-      {icon !== "" && <FontAwesomeIcon icon={icon} className={getColor()} />}
+      {icon !== "" && (
+        <FontAwesomeIcon icon={icon as IconProp} className={getColor()} />
+      )}
       <div className="px-3"> {text}</div>
     </div>
   );

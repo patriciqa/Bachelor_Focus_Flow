@@ -1,7 +1,6 @@
 import CreateExamPhase from "@/component/settings/CreateExamPhase";
 import { WhichTimer } from "@/types/Timer";
 import { useState } from "react";
-import { ColorType } from "../CancellButton";
 import CustomButton from "../CustomButton";
 import ModalPage from "../settings/reasons/ModalPage";
 
@@ -28,7 +27,6 @@ export default function CreatePhaseView({
           create exam phase
         </CustomButton>
         <ModalPage
-          colorType={ColorType.NEUTRAL}
           open={open}
           setOpen={setOpen}
           component={

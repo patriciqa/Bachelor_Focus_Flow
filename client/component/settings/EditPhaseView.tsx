@@ -1,6 +1,5 @@
 import { editElement } from "@/db/Actions";
-import { ExamPhase, PickedDate } from "@/types/Timer";
-import { useRouter } from "next/router";
+import { ExamPhase } from "@/types/Timer";
 import { useState } from "react";
 import CustomButton from "../CustomButton";
 
@@ -11,9 +10,7 @@ export default function EditPhaseView({
   setOpen?: (c: boolean) => void;
   activePhase: ExamPhase;
 }) {
-  const [date, setDate] = useState<PickedDate>();
   const [phase, setPhase] = useState<ExamPhase>(activePhase);
-  const router = useRouter().route;
 
   const getDate = (): string => {
     let d = "";
@@ -86,7 +83,6 @@ export default function EditPhaseView({
           onClick={() => {
             if (phase.id !== undefined) {
               editElement("examPhases", phase.id, phase);
-              // addElement("examPhases", examPhase);
               if (setOpen !== undefined) {
                 setOpen(false);
               }

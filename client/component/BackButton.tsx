@@ -5,6 +5,7 @@ export enum ColorType {
   BREAK,
   NEUTRAL,
 }
+
 export default function BackButton({
   setOpen,
   colorType,

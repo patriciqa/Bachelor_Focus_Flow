@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import "moment/locale/de-ch";
 import { useEffect, useState } from "react";
-import { ColorType } from "../CancellButton";
 import CustomButton from "../CustomButton";
 import CreateExamPhase from "./CreateExamPhase";
 import EditPhaseView from "./EditPhaseView";
@@ -168,8 +167,6 @@ export default function ExamPhaseOverview({
         )}
       </div>
       <ModalPage
-        colorType={ColorType.NEUTRAL}
-        isStudy={false}
         open={open}
         setOpen={setOpen}
         component={
@@ -180,11 +177,9 @@ export default function ExamPhaseOverview({
             setWhichTimer={setWhichTimer}
           />
         }
-      />{" "}
+      />
       {activePhase !== undefined && (
         <ModalPage
-          colorType={ColorType.NEUTRAL}
-          isStudy={false}
           open={editOpen}
           setOpen={setEditOpen}
           component={

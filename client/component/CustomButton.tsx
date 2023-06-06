@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import clsx from "clsx";
 import { type ButtonHTMLAttributes, type ReactNode } from "react";
 

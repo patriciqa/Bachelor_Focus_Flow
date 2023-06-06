@@ -102,7 +102,7 @@ export default function CreateExamPhase({
         placeholder="title..."
       />
       <button
-        className="flex items-center w-4/5 h-10 pl-2 mt-6 border border-black rounded border-chartGrey text-tahiti"
+        className="flex items-center w-4/5 h-10 pl-2 mt-6 border border-black rounded border-chartGrey"
         onClick={() => {
           if (showCalender) {
             setShowCalender(false);
@@ -112,7 +112,6 @@ export default function CreateExamPhase({
         }}
       >
         <input
-          // id="name"
           required
           className={"w-full  disabled:text-[#000000]"}
           onClick={() => {

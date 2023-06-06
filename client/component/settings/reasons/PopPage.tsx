@@ -1,5 +1,4 @@
-import BackButton from "@/component/BackButton";
-import { ColorType } from "@/component/CancellButton";
+import BackButton, { ColorType } from "@/component/BackButton";
 import { Pop } from "@/component/transitions/Pop";
 import { AnimatePresence } from "framer-motion";
 

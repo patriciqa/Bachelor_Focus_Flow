@@ -18,7 +18,7 @@ export default function BreakSummary({
   whichTimer: WhichTimer;
   setWhichTimer: (p: WhichTimer) => void;
 }) {
-  const { examPhaseId, setExamPhaseId } = useExamPhaseContext();
+  const { examPhaseId } = useExamPhaseContext();
 
   const showBreakButton = (): boolean => {
     if (breakEntry.mood === Mood.BAD || breakEntry.mood === Mood.RATHER_BAD) {

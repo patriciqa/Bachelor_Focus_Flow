@@ -21,7 +21,7 @@ export default function Analytcs() {
     const p: ExamPhase[] = [];
     const data: ExamPhase[] = await getElement("examPhases", "all");
     data.map((phase) => {
-      const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
+      const choosenDate = selectedDate.setHours(0, 0, 0, 0);
       p.push(phase);
       if (phase.startDate && phase.endDate) {
         if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {

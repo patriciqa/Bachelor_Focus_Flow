@@ -1,4 +1,3 @@
-import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import { ButtonVariant } from "@/component/icon/ButtonList";
 import TextWithIcon from "@/component/icon/TextWithIcon";
@@ -64,8 +63,8 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
         <button
           onClick={() => setActive(false)}
           className={
-            "w-[52%] rounded-2xl right-0  absolute text-white  h-[60px] font-medium  " +
-            (!active && "bg-dark rounded  z-10 ")
+            "w-[52%] rounded-2xl right-0 absolute text-white h-[60px] font-medium  " +
+            (!active && "bg-dark rounded z-10 ")
           }
         >
           inactive
@@ -260,8 +259,6 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
         )}
       </div>
       <ModalPage
-        isStudy={false}
-        colorType={ColorType.STUDY}
         open={open}
         setOpen={setOpen}
         component={
@@ -274,8 +271,6 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
       />
       {activeReason !== undefined && (
         <ModalPage
-          colorType={ColorType.STUDY}
-          isStudy={false}
           open={openEdit}
           setOpen={setOpenEdit}
           component={

@@ -65,7 +65,7 @@ const IconPicker = ({
           >
             <FontAwesomeIcon
               size="4x"
-              icon={value}
+              icon={value as IconProp}
               className={" " + (isBreak ? "text-break" : "text-study")}
               color="#5AB874"
             />

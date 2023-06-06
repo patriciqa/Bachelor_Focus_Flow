@@ -1,4 +1,3 @@
-import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import ExtendTimerSlider from "@/component/ExtendTimerSlider";
 import ModalPage from "@/component/settings/reasons/ModalPage";
@@ -42,7 +41,6 @@ export const StudyView = ({
         component = (
           <MoodCheckIn
             isStudy={true}
-            setWhichTimer={setWhichTimer}
             entry={studyEntry}
             setEntry={setStudyEntry}
             setStudyShowComponent={setShowComponent}
@@ -53,7 +51,6 @@ export const StudyView = ({
         component = (
           <Reasons
             good
-            setWhichTimer={setWhichTimer}
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}
             setShowComponent={setShowComponent}
@@ -64,7 +61,6 @@ export const StudyView = ({
         component = (
           <Reasons
             good={false}
-            setWhichTimer={setWhichTimer}
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}
             setShowComponent={setShowComponent}
@@ -77,7 +73,6 @@ export const StudyView = ({
             studyEntry={studyEntry}
             setStudyEntry={setStudyEntry}
             setWhichTimer={setWhichTimer}
-            // setShowComponent={setShowComponent}
           />
         );
         break;
@@ -229,13 +224,7 @@ export const StudyView = ({
         </div>
       )}
       {showComponent !== null && (
-        <ModalPage
-          colorType={ColorType.STUDY}
-          isStudy
-          open={open}
-          setOpen={setOpen}
-          component={whichTimer()}
-        />
+        <ModalPage open={open} setOpen={setOpen} component={whichTimer()} />
       )}
     </div>
   );

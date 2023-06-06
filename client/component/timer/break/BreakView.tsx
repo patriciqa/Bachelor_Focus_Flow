@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import ModalPage from "@/component/settings/reasons/ModalPage";
 import TimerSlider from "@/component/TimerSlider";
@@ -10,6 +8,7 @@ import { getElement } from "@/db/Actions";
 import saveToDb from "@/hooks/SaveToDb";
 import { BreakComponent } from "@/types/Components";
 import { Activity, Break, TimerViewState, WhichTimer } from "@/types/Timer";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import MoodCheckIn from "../MoodCheckIn";
@@ -38,7 +37,7 @@ export const BreakView = ({
   const { setHideNavbar } = useNavbarContext();
   const [selected, setSelected] = useState<number | null>(-1);
 
-  const [showComponent, setShowComponent] = useState(
+  const [showComponent, setShowComponent] = useState<BreakComponent | null>(
     BreakComponent.NO_COMPONENT
   );
   const [duration, setDuration] = useState(5);
@@ -50,7 +49,6 @@ export const BreakView = ({
         component = (
           <MoodCheckIn
             isStudy={false}
-            setWhichTimer={setWhichTimer}
             entry={breakEntry}
             setEntry={setbreakEntry}
             setShowComponent={setShowComponent}
@@ -100,14 +98,14 @@ export const BreakView = ({
     getAllActivites();
   }, [selected]);
 
-  const getActivity = (black: boolean): React.ReactElement => {
+  const getActivity = (black: boolean): React.ReactElement | undefined => {
     let entry = undefined;
     if (activity !== undefined) {
       entry = (
         <div className="flex flex-row items-center " key={activity.id}>
           {activity.icon !== undefined && (
             <FontAwesomeIcon
-              icon={activity.icon}
+              icon={activity.icon as IconProp}
               className={"pr-4 " + (black ? "text-white" : "text-break")}
             />
           )}
@@ -251,13 +249,7 @@ export const BreakView = ({
         </>
       )}
       {showComponent !== null && (
-        <ModalPage
-          colorType={ColorType.BREAK}
-          isStudy={false}
-          open={open}
-          setOpen={setOpen}
-          component={showBreakPage()}
-        />
+        <ModalPage open={open} setOpen={setOpen} component={showBreakPage()} />
       )}
     </>
   );

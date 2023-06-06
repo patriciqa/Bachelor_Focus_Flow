@@ -2,20 +2,18 @@ import MoodIcon from "@/component/icon/MoodIcon";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import sToM from "@/hooks/SecondsToMinutes";
 import { BreakComponent, StudyComponent } from "@/types/Components";
-import { Break, Mood, Study, WhichTimer } from "@/types/Timer";
+import { Break, Mood, Study } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomButton, { buttonVariant } from "../CustomButton";
 
 export default function MoodCheckIn({
   isStudy,
-  setWhichTimer,
   entry: entry,
   setEntry,
   setShowComponent,
   setStudyShowComponent,
 }: {
   isStudy: boolean;
-  setWhichTimer: (d: WhichTimer) => void;
   entry: Break | Study;
   setEntry: (s: Break | Study) => void;
   setShowComponent?: (p: BreakComponent) => void;

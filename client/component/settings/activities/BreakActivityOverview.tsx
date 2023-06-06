@@ -1,4 +1,3 @@
-import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import { ButtonVariant } from "@/component/icon/ButtonList";
 import TextWithIcon from "@/component/icon/TextWithIcon";
@@ -197,7 +196,6 @@ export default function BreakActivityOverview() {
                                     <button
                                       onClick={() => {
                                         setOpenEdit(true);
-                                        // setActiveReason(p);
                                       }}
                                       className={`block px-4 py-2 text-left w-full`}
                                     >
@@ -247,16 +245,12 @@ export default function BreakActivityOverview() {
         )}
       </div>
       <ModalPage
-        colorType={ColorType.BREAK}
-        isStudy={false}
         open={open}
         setOpen={setOpen}
         component={<CreateView setOpen={setOpen} isBreak={true} />}
-      />{" "}
+      />
       {activeEntry !== undefined && (
         <ModalPage
-          colorType={ColorType.BREAK}
-          isStudy={false}
           open={openEdit}
           setOpen={setOpenEdit}
           component={

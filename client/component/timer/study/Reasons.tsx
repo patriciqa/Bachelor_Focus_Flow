@@ -1,12 +1,10 @@
-import { ColorType } from "@/component/CancellButton";
 import CustomButton from "@/component/CustomButton";
 import ButtonList, { ButtonVariant } from "@/component/icon/ButtonList";
 import ModalPage from "@/component/settings/reasons/ModalPage";
-import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { getElement } from "@/db/Actions";
 import sToM from "@/hooks/SecondsToMinutes";
 import { StudyComponent } from "@/types/Components";
-import { Mood, Reason, Study, WhichTimer } from "@/types/Timer";
+import { Mood, Reason, Study } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { includes } from "lodash";
 import { SetStateAction, useEffect, useState } from "react";
@@ -14,18 +12,15 @@ import CreateView from "../CreateView";
 
 export default function Reasons({
   good,
-  setWhichTimer,
   setShowComponent,
   studyEntry,
   setStudyEntry,
 }: {
   good: boolean;
-  setWhichTimer: (d: WhichTimer) => void;
   setShowComponent: (p: StudyComponent) => void;
   studyEntry: Study;
   setStudyEntry: (s: Study) => void;
 }) {
-  const { examPhaseId } = useExamPhaseContext();
   const [open, setOpen] = useState(false);
   const [reasons, setReasons] = useState<Reason[]>();
   const selectedReason: Reason[] = [];
@@ -164,10 +159,7 @@ export default function Reasons({
             selected === null || selected.length >= 1 ? "study" : "disabled"
           }
           onClick={() => {
-            // saveToDb(examPhaseId, studyEntry, true);
             setShowComponent(StudyComponent.STUDY_SUMMARY);
-            // setWhichTimer(WhichTimer.BREAK);
-            // setStudyEntry({ timer: { startTime: 0, duration: 0 } });
           }}
         >
           continue
@@ -175,7 +167,6 @@ export default function Reasons({
       </div>
       <ModalPage
         open={open}
-        colorType={ColorType.STUDY}
         setOpen={setOpen}
         component={
           <CreateView
