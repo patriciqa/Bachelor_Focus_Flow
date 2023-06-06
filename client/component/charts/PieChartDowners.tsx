@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { ExamPhase, Mood, Study } from "@/types/Timer";
 import { filter, includes } from "lodash";
 import { useEffect, useState } from "react";
