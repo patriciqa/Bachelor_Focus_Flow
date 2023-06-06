@@ -111,7 +111,7 @@ const Settings = ({
             </>
           )}
         </div>
-      </button>{" "}
+      </button>
       <button
         onClick={() => {
           setOpen(true);

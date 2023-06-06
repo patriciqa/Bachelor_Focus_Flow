@@ -319,7 +319,7 @@ export default function PieChartBoosters({
             good={true}
             topThree={topThreeReasons !== null ? topThreeReasons : undefined}
             topThreeId={topThreeReasonsId}
-          />{" "}
+          />
           <div className="pt-8 pl-3 font-medium text-h14 text-chartGrey">
             while taking breaks
           </div>

@@ -124,7 +124,7 @@ export const BreakView = ({
             {/* <div className="h-[10vh]">Yeah, keep going!</div> */}
             {runningTimer === TimerViewState.RUNNING && (
               <div className="my-[2vh] ">Enjoy your break.</div>
-            )}{" "}
+            )}
             {runningTimer === TimerViewState.START && (
               <div className="my-[2vh]">
                 <br></br>

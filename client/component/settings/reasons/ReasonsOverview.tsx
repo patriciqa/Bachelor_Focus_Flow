@@ -103,7 +103,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                                     icon={["fas", "ellipsis-vertical"]}
                                     size="xl"
                                     className={"pr-4 " + (open && "invisible")}
-                                  />{" "}
+                                  />
                                 </>
                               )}
                             </button>
@@ -184,7 +184,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                                     icon={["fas", "ellipsis-vertical"]}
                                     size="xl"
                                     className={"pr-4 " + (open && "invisible")}
-                                  />{" "}
+                                  />
                                 </>
                               )}
                             </button>

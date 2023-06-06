@@ -100,7 +100,7 @@ export default function EditView({
               setOpen(false);
             }}
           >
-            {isBreak ? "save activity" : " save reason"}{" "}
+            {isBreak ? "save activity" : " save reason"}
           </CustomButton>
         </div>
       </div>

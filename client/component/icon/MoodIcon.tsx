@@ -61,7 +61,7 @@ export default function MoodIcon({
         }}
       >
         <FontAwesomeIcon icon={["fas", "face-smile"]} color="white" size="2x" />
-      </button>{" "}
+      </button>
       <button
         className={
           "p-2 rounded-md  m-3 " +

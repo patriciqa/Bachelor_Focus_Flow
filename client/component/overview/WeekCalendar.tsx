@@ -148,7 +148,7 @@ const WeekCalendar = ({
           >
             {initialRenderComplete && (
               <FontAwesomeIcon icon={["fas", "chevron-right"]} />
-            )}{" "}
+            )}
           </div>
         </div>
       );

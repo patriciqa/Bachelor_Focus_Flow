@@ -193,7 +193,7 @@ export default function MoodChart({
           <div className="font-semibold text-h20 text-study">
             {studyEntry !== null ? studyEntry : "-"}
           </div>
-        </div>{" "}
+        </div>
         <div className="flex items-center">
           <div className="mr-2 text-h16 text-break">break:</div>
           <div className="font-semibold text-h20 text-break">

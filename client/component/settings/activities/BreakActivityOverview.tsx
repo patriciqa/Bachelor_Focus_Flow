@@ -91,7 +91,7 @@ export default function BreakActivityOverview() {
                                     icon={["fas", "ellipsis-vertical"]}
                                     size="xl"
                                     className={"pr-4 " + (open && "invisible")}
-                                  />{" "}
+                                  />
                                 </>
                               )}
                             </button>
@@ -172,7 +172,7 @@ export default function BreakActivityOverview() {
                                     icon={["fas", "ellipsis-vertical"]}
                                     size="xl"
                                     className={"pr-4 " + (open && "invisible")}
-                                  />{" "}
+                                  />
                                 </>
                               )}
                             </button>

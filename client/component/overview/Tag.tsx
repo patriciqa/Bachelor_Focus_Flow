@@ -149,7 +149,7 @@ export default function Tag({ entry }: { entry: any }) {
                 </div>
               </>
             )}
-          </div>{" "}
+          </div>
           {nonSelected() !== null && (
             <div className="flex flex-wrap">
               <>
