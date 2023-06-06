@@ -26,12 +26,11 @@ export default function ActivitySelection({
   useEffect(() => {
     getData().then((c) => {
       c.map((a) => {
-        // console.log(a);
         activityArray.push(a);
         setActivities(activityArray);
       });
     });
-  }); //todo renders too much
+  });
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -61,7 +60,6 @@ export default function ActivitySelection({
           <button
             onClick={() => {
               setSelected(null);
-              console.log(selected);
             }}
             className={
               "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] border-inactiveGrey " +

@@ -68,8 +68,6 @@ export default function EditView({
               setNewEntry(a);
             } else {
               const a: any = { ...newEntry };
-              console.log(typeof a);
-
               a.title = i.target.value;
               a.archived = false;
               if (goodReason === true) {

@@ -41,7 +41,6 @@ const IconPicker = ({
   const selectIcon = (icon: string) => {
     onChange(icon);
     setIsOpen(false);
-    console.log(icon);
   };
   //on search
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -72,7 +72,6 @@ export const BreakView = ({
         setShowComponent(null);
         component = null;
         setShowTimer(false);
-        console.log("HI");
     }
     return component;
   };
@@ -116,8 +115,6 @@ export const BreakView = ({
         </div>
       );
     }
-    console.log(activity);
-
     return entry;
   };
 

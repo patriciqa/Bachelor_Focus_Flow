@@ -68,7 +68,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
             (!active && "bg-dark rounded  z-10 ")
           }
         >
-          archive
+          inactive
         </button>
       </div>
       <div className="h-[65%] relative w-full py-4 overflow-auto mb-4 ">
@@ -89,9 +89,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                           <Menu.Button className="flex w-full py-2 font-medium">
                             <button
                               onClick={() => {
-                                // setOpenEdit(true);
                                 setActiveReason(p);
-                                // setOpenModal(true);
                               }}
                               className="flex justify-between w-full text-left "
                             >
@@ -130,7 +128,6 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                                     <button
                                       onClick={() => {
                                         setOpenEdit(true);
-                                        // setActiveReason(p);
                                         setOpenModal(true);
                                       }}
                                       className={`block px-4 py-2 text-left w-full`}
@@ -146,14 +143,13 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                                         const a = { ...p };
                                         a.archived = true;
                                         setActiveReason(a);
-                                        console.log(a);
                                         if (p.id !== undefined) {
                                           editElement("reasons", p.id, a);
                                         }
                                       }}
                                       className={`w-full block text-left px-4 py-2 `}
                                     >
-                                      archive
+                                      set to inactive
                                     </button>
                                   )}
                                 </Menu.Item>
@@ -228,14 +224,13 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
                                         const a = { ...p };
                                         a.archived = false;
                                         setActiveReason(a);
-                                        console.log(a);
                                         if (p.id !== undefined) {
                                           editElement("reasons", p.id, a);
                                         }
                                       }}
                                       className={`w-full block text-left px-4 py-2 `}
                                     >
-                                      active
+                                      set to active
                                     </button>
                                   )}
                                 </Menu.Item>

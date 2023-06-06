@@ -35,7 +35,6 @@ export default function EditPhaseView({
   const countSpan = document.getElementById("count");
   if (input !== null && countSpan !== null) {
     input.addEventListener("input", function () {
-      console;
       countSpan.textContent = input.value.length.toString();
     });
   }
@@ -58,7 +57,6 @@ export default function EditPhaseView({
         value={phase.title}
         className="w-4/5 h-10 pl-2 border border-black rounded border-chartGrey "
         onChange={(i) => {
-          console.log(i.target.value);
           const e = { ...phase };
           e.title = i.target.value;
           setPhase(e);
@@ -73,7 +71,6 @@ export default function EditPhaseView({
         value={getDate()}
         className="w-4/5 h-10 pl-2 mt-5 border border-black rounded border-chartGrey bg-inactiveGrey "
         onChange={(i) => {
-          console.log(i.target.value);
           const e = { ...examPhase };
           e.title = i.target.value;
           setExamPhase(e);
@@ -88,7 +85,6 @@ export default function EditPhaseView({
           variant="dark"
           onClick={() => {
             if (phase.id !== undefined) {
-              console.log(examPhase);
               editElement("examPhases", phase.id, phase);
               // addElement("examPhases", examPhase);
               if (setOpen !== undefined) {

@@ -264,7 +264,6 @@ export default function PieChartBoosters({
             ratherGood: [result.ratherGood],
           });
         });
-        console.log(topThree);
       }
       setTopThreeBreak(good);
       setTopThreeBreakId(topThree);
@@ -301,8 +300,6 @@ export default function PieChartBoosters({
     return false;
   };
   const empty = (): boolean => {
-    console.log("hi", topThreeReasons);
-    console.log("du", topThreeBreak);
     if (
       (topThreeReasons === null && topThreeBreak === null) ||
       topThreeReasons === undefined ||
@@ -339,7 +336,6 @@ export default function PieChartBoosters({
           <div className="pt-8 pl-3 font-medium text-h14 text-chartGrey">
             while taking breaks
           </div>
-          {console.log("hey,", topThreeBreak)}
           {checkIfEmpty(topThreeBreak) ? (
             <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
               no data available

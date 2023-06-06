@@ -50,8 +50,6 @@ export default function ExamPhaseOverview({
       });
     });
     const id = localStorage.getItem("examId");
-    console.log(id);
-
     if (id !== "") {
       if (id !== null)
         getElement("examPhases", parseInt(id)).then((result: any) => {

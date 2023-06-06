@@ -56,7 +56,7 @@ export default function BreakActivityOverview() {
             (!active && "bg-dark rounded  z-10 ")
           }
         >
-          archive
+          inactive
         </button>
       </div>
       <div className="h-[65%] relative w-full py-4 overflow-auto mb-4 ">
@@ -137,7 +137,7 @@ export default function BreakActivityOverview() {
                                       }}
                                       className={`w-full block text-left px-4 py-2 `}
                                     >
-                                      archive
+                                      set to inactive
                                     </button>
                                   )}
                                 </Menu.Item>
@@ -218,7 +218,7 @@ export default function BreakActivityOverview() {
                                       }}
                                       className={`w-full block text-left px-4 py-2 `}
                                     >
-                                      active
+                                      set to active
                                     </button>
                                   )}
                                 </Menu.Item>

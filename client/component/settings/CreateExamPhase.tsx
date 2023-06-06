@@ -44,17 +44,13 @@ export default function CreateExamPhase({
   useEffect(() => {
     phases?.map((phase) => {
       if (phase.startDate !== undefined && phase.endDate) {
-        console.log(phase.startDate);
-        console.log(phase.endDate);
         let currentDate = new Date(phase.startDate);
 
         while (currentDate <= new Date(phase.endDate)) {
           dates.push(new Date(currentDate));
           currentDate.setDate(currentDate.getDate() + 1);
         }
-
         dates;
-        console.log(new Date(phase.startDate));
       }
       setDisabledDates(dates);
     });
@@ -65,13 +61,11 @@ export default function CreateExamPhase({
   const countSpan = document.getElementById("count");
   if (input !== null && countSpan !== null) {
     input.addEventListener("input", function () {
-      console;
       countSpan.textContent = input.value.length.toString();
     });
   }
 
   const checkValidity = (): string => {
-    console.log(examPhase);
     if (examPhase?.title === undefined || examPhase.title === "") {
       return "disabled";
     } else if (
@@ -101,7 +95,6 @@ export default function CreateExamPhase({
         required
         className="w-4/5 h-10 pl-2 border border-black rounded border-chartGrey "
         onChange={(i) => {
-          console.log(i.target.value);
           const e = { ...examPhase };
           e.title = i.target.value;
           setExamPhase(e);
@@ -130,7 +123,6 @@ export default function CreateExamPhase({
             }
           }}
           onChange={(i) => {
-            console.log(i.target.value);
             const e = { ...examPhase };
             e.title = i.target.value;
             setExamPhase(e);
@@ -152,7 +144,6 @@ export default function CreateExamPhase({
               const e = { ...examPhase };
               e.startDate = d[0].getTime();
               e.endDate = d[1].getTime();
-              console.log(examPhase);
               setExamPhase(e);
             } else {
               const s = d[0];
@@ -162,11 +153,9 @@ export default function CreateExamPhase({
                 to: d[0].getTime(),
               });
             }
-            console.log(date);
           }}
           value={[new Date(Date.now()), new Date(new Date(Date.now() + 1))]}
           selectRange={true}
-          // allowPartialRange={true}
           formatShortWeekday={(_locale, value) =>
             ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"][value.getDay()]
           }
@@ -190,7 +179,6 @@ export default function CreateExamPhase({
           className=""
           onClick={() => {
             if (examPhase !== undefined) {
-              console.log(examPhase);
               addElement("examPhases", examPhase);
               if (setOpen !== undefined) {
                 setOpen(false);

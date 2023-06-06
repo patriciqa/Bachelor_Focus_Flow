@@ -89,7 +89,6 @@ export default function MoodCheckIn({
                   if (setStudyShowComponent) {
                     setStudyShowComponent(StudyComponent.BAD_REASON);
                   }
-                  console.log("study");
                 } else {
                   if (setShowComponent) {
                     setShowComponent(BreakComponent.BREAK_SUMMARY);

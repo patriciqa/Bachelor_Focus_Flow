@@ -109,7 +109,6 @@ export default function CreateView({
           <CustomButton
             variant={getVariant() as buttonVariant}
             onClick={() => {
-              console.log(activities);
               if (isBreak) {
                 addElement("activities", activities);
               } else {

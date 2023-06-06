@@ -34,7 +34,6 @@ export default function StudyChart({
   };
 
   const getReason = (id: number): React.ReactElement => {
-    console.log("idd", id);
     let entry = <div />;
     reasons?.map((reason: Reason) => {
       if (reason.id === id) {
@@ -52,8 +51,6 @@ export default function StudyChart({
   };
   const showReason = (id: string) => {
     if (id === "null" || id === undefined) {
-      console.log(id);
-
       return false;
     } else {
       return true;

@@ -58,7 +58,6 @@ export default function Reasons({
     const s = { ...studyEntry };
     s.reasonIds = selected;
     setStudyEntry(s);
-    console.log(selected);
   }, [selected]);
 
   const getText = (): string => {
@@ -136,7 +135,6 @@ export default function Reasons({
             <button
               onClick={() => {
                 setSelected(null);
-                console.log(selected);
               }}
               className={
                 "flex flex-row items-center justify-center flex-grow w-full p-3 my-2 border rounded-[32px] border-inactiveGrey " +

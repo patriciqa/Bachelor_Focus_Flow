@@ -203,7 +203,6 @@ export const StudyView = ({
               const e = { ...studyEntry };
               if (extend !== undefined) {
                 e.timer.duration += extend;
-                console.log(e);
                 setStudyEntry(e);
                 setRunningTimer(TimerViewState.EXTEND);
               }
