@@ -52,8 +52,6 @@ export default function BreakChart({
 
   const showActivity = (id: string) => {
     if (id === "null" || id === undefined) {
-      console.log(id);
-
       return false;
     } else {
       return true;
@@ -95,7 +93,7 @@ export default function BreakChart({
                           "text-breakChart3 py-1  text-h16 basis-[70%]	"))
                     }
                   >
-                    {showActivity(activity.id) ? (
+                    {showActivity(activity.id)|| index === 1 ? (
                       <p> {getActivity(parseInt(activity.id))}</p>
                     ) : (
                       <div className="font-medium text-chartGrey text-h14">
@@ -165,7 +163,7 @@ export default function BreakChart({
                           "text-breakChart3 py-1  text-h16 basis-[70%]	"))
                     }
                   >
-                    {showActivity(activity.id) ? (
+                    {showActivity(activity.id) || index === 1? (
                       <p> {getActivity(parseInt(activity.id))}</p>
                     ) : (
                       <div className="font-medium text-chartGrey text-h14">

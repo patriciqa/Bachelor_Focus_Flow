@@ -294,9 +294,28 @@ export default function PieChartBoosters({
     return count;
   };
 
+  const checkIfEmpty = (val: number[] | undefined | null) => {
+    if (val === undefined || val === null) {
+      return true;
+    }
+    return false;
+  };
+  const empty = (): boolean => {
+    console.log("hi", topThreeReasons);
+    console.log("du", topThreeBreak);
+    if (
+      (topThreeReasons === null && topThreeBreak === null) ||
+      topThreeReasons === undefined ||
+      topThreeBreak === undefined
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className="">
-      {topThreeReasons === null && topThreeBreak === null ? (
+      {empty() ? (
         <div className="flex justify-center  shadow-[1px_4px_16px_rgba(39,37,37,0.15)]  text-h14 items-center h-[12vh] text-pieGrey">
           no data available
         </div>
@@ -305,7 +324,8 @@ export default function PieChartBoosters({
           <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while studying{" "}
           </div>
-          {topThreeReasons === null ? (
+
+          {checkIfEmpty(topThreeReasons) === null ? (
             <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
               no data available
             </div>
@@ -319,7 +339,8 @@ export default function PieChartBoosters({
           <div className="pt-8 pl-3 font-medium text-h14 text-chartGrey">
             while taking breaks
           </div>
-          {topThreeBreak === null ? (
+          {console.log("hey,", topThreeBreak)}
+          {checkIfEmpty(topThreeBreak) ? (
             <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
               no data available
             </div>

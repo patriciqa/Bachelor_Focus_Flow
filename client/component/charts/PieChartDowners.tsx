@@ -326,9 +326,27 @@ export default function PieChartDowners({
     }
   };
 
+  const checkIfEmpty = (val: number[] | undefined | null) => {
+    if (val === undefined || val === null) {
+      return true;
+    }
+    return false;
+  };
+
+  const empty = (): boolean => {
+    if (
+      (badTopThree === null && badTopThreeBreak === null) ||
+      badTopThree === undefined ||
+      badTopThreeBreak === undefined
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className="">
-      {badTopThree === null && badTopThreeBreak === null ? (
+      {empty() ? (
         <div className="flex justify-center  shadow-[1px_4px_16px_rgba(39,37,37,0.15)]  text-h14 items-center h-[12vh] text-pieGrey">
           no data available
         </div>
@@ -337,7 +355,7 @@ export default function PieChartDowners({
           <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while studying
           </div>
-          {badTopThree === null ? (
+          {checkIfEmpty(badTopThree) ? (
             <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
               no data available
             </div>
@@ -353,7 +371,7 @@ export default function PieChartDowners({
           <div className="pt-3 pl-3 font-medium text-h14 text-chartGrey">
             while taking breaks
           </div>
-          {badTopThreeBreak === null ? (
+          {checkIfEmpty(badTopThreeBreak) ? (
             <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
               no data available
             </div>

@@ -103,7 +103,7 @@ export default function StudyChart({
                           "text-studyChart3 py-1  text-h16 basis-[70%]	"))
                     }
                   >
-                    {showReason(reason.id) ? (
+                    {showReason(reason.id) || index === 1 ? (
                       <p> {getReason(parseInt(reason.id))}</p>
                     ) : (
                       <div className="font-medium text-chartGrey text-h14">
@@ -182,7 +182,7 @@ export default function StudyChart({
                           "text-studyChart3 py-1  text-h16 basis-[70%]	"))
                     }
                   >
-                    {showReason(reason.id) ? (
+                    {showReason(reason.id) || index === 1 ? (
                       <p>{getReason(parseInt(reason.id))}</p>
                     ) : (
                       <div className="font-medium text-chartGrey text-h14">
