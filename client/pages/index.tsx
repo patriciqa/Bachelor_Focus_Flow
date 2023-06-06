@@ -3,7 +3,7 @@ import CreatePhaseView from "@/component/timer/CreatePhaseView";
 import { StudyView } from "@/component/timer/study/StudyView";
 import { useExamPhaseContext } from "@/context/ExamPhaseContext";
 import { useNavbarContext } from "@/context/HideNavbarContext";
-import { addElement, getElement } from "@/db/Actions";
+import { getElement } from "@/db/Actions";
 import initDb from "@/db/InitDb";
 import sToM from "@/hooks/SecondsToMinutes";
 import { Break, Study, WhichTimer } from "@/types/Timer";
@@ -48,92 +48,6 @@ const Timer = ({
       }
     });
   });
-  const hi = {
-    title: "FS23",
-    startDate: 1686038409000,
-    endDate: 1688139082000,
-    breakEntries: [
-      {
-        timer: { duration: 300, startTime: 1686038409000 }, //6.6 10am
-        studyTimer: false,
-        breakActivityId: 7,
-        mood: "rather bad",
-      },
-      {
-        timer: { duration: 600, startTime: 1686039900000 }, //10.25
-        studyTimer: false,
-        breakActivityId: 3,
-        mood: "good",
-      },
-      {
-        timer: { duration: 300, startTime: 1684414234600 },
-        studyTimer: false,
-        breakActivityId: 8,
-        mood: null,
-      },
-      {
-        timer: { duration: 300, startTime: 1686058560000 }, //6.6 15.36
-        studyTimer: false,
-        breakActivityId: 7,
-        mood: "rather bad",
-      },
-      {
-        timer: { duration: 600, startTime: 1686060480000 }, //16.08
-        studyTimer: false,
-        breakActivityId: 1,
-        mood: "rather good",
-      },
-      {
-        timer: { duration: 300, startTime: 1684414234600 },
-        studyTimer: false,
-        breakActivityId: 9,
-        mood: "bad",
-      },
-    ],
-
-    studyEntries: [
-      {
-        timer: { duration: 3600, startTime: 1686034809000 }, //6.6. 9am
-        studyTimer: true,
-        reasonIds: [1, 2, 3],
-        mood: "rather bad",
-      },
-      {
-        timer: { duration: 1200, startTime: 1686038700000 }, //6.6. 10.05am
-        studyTimer: true,
-        reasonIds: [9, 1, 12],
-        mood: "good",
-      },
-      {
-        timer: { duration: 3600, startTime: 1686040560000 }, //6.6 10.36
-        studyTimer: true,
-        reasonIds: [2, 1, 6],
-        mood: "rather bad",
-      },
-      {
-        timer: { duration: 3600, startTime: 1686054960000 }, //6.6. 2pm
-        studyTimer: true,
-        reasonIds: [4, 2, 5],
-        mood: "bad",
-      },
-      {
-        timer: { duration: 1200, startTime: 1686059220000 }, //6.6. 15.47am
-        studyTimer: true,
-        reasonIds: [8, 12, 13],
-        mood: "good",
-      },
-      {
-        timer: { duration: 3600, startTime: 1686061800000 }, //6.6 16.30
-        studyTimer: true,
-        reasonIds: [13, 10],
-        mood: "rather good",
-      },
-    ],
-  };
-
-  const addExample = () => {
-    addElement("examPhases", hi);
-  };
 
   const showPage = (): React.ReactElement => {
     let component;
@@ -192,7 +106,6 @@ const Timer = ({
   return (
     <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
-        <button onClick={() => addExample()}>add element</button>
         <div className={"flex justify-center w-full pt-10 px-14 pb-7 p-2	"}>
           {hideNavbar ? (
             <button
@@ -231,7 +144,7 @@ const Timer = ({
               </div>
             </>
           )}
-        </div>{" "}
+        </div>
         <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] relative bg-white rounded h-[66vh] w-11/12	">
           {showPage()}
         </div>
