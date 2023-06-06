@@ -114,7 +114,7 @@ export default function CreateExamPhase({
         <input
           // id="name"
           required
-          className={"w-full text-dark"}
+          className={"w-full  disabled:text-[#000000]"}
           onClick={() => {
             if (showCalender) {
               setShowCalender(false);
