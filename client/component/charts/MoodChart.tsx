@@ -58,7 +58,6 @@ export default function MoodChart({
     }
     return moodText;
   };
-  console.log(visibleComponentId);
 
   const allEntries = (): [] => {
     const newOb = [];
@@ -146,14 +145,32 @@ export default function MoodChart({
     return secondsSinceStartOfDay;
   };
 
+  const getIconSize = (text: string) => {
+    if (text === 2) {
+      return 36;
+    }
+    if (text === 0) {
+      return 26;
+    }
+    return 28;
+  };
+
+  const getIconX = (text: string, x: string) => {
+    if (text === 2 || text === 0) {
+      return x + 1;
+    } else {
+      return x;
+    }
+  };
+
   const YAxisLabel = ({ x, y, text }) => (
     <g>
       <image
-        x={text === 2 ? x + 1 : x}
+        x={getIconX(text, x)}
         y={y}
         href={getIcon(text)}
-        width={text === 2 ? 25 : 20}
-        height={text === 2 ? 25 : 20}
+        width={getIconSize(text)}
+        height={text === 2 ? 28 : 28}
       />
     </g>
   );
@@ -163,11 +180,6 @@ export default function MoodChart({
 
   const scrollToDiv = (id: number) => {
     const element = document.getElementById(id);
-    console.log(id);
-    console.log("active", element);
-    console.log("self", parseInt(visibleComponentId));
-    console.log("hihi", visibleComponentId);
-
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -198,7 +210,6 @@ export default function MoodChart({
             style={{
               axis: { stroke: "transparent" },
               tickLabels: {
-                fontSize: 5,
                 padding: 35,
               },
             }}
@@ -211,7 +222,6 @@ export default function MoodChart({
               axis: { stroke: "transparent" },
               ticks: { stroke: "transparent" },
               tickLabels: {
-                // this changed the color of my numbers to white
                 fill: "#C0C3C8",
               },
             }}
@@ -244,8 +254,6 @@ export default function MoodChart({
             style={{
               data: {
                 fill: ({ datum }) => colorScale(datum.z, datum.id),
-                // fill: ({ datum }) =>
-                //   datum.id === parseInt(visibleComponentId) ? "red" : "pink",
                 strokeWidth: 15,
                 zIndex: 100,
                 position: "relative",
@@ -261,10 +269,6 @@ export default function MoodChart({
                         target: "data",
                         mutation: (props) => {
                           scrollToDiv(props.datum.id);
-                          const fill = props.style && props.style.fill;
-                          //   return fill === "red"
-                          //     ? null
-                          //     : { style: { fill: "red" } };
                         },
                       },
                     ];
@@ -272,7 +276,6 @@ export default function MoodChart({
                 },
               },
             ]}
-            // labels={({ datum }) => ` ${datum.id}`}
           />
         </VictoryChart>
         <div className="absolute pt-2 text-chartGrey text-h14">

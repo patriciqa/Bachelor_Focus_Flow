@@ -78,7 +78,7 @@ export default function MoodCheckIn({
                   }
                 } else {
                   if (setShowComponent) {
-                    setShowComponent(BreakComponent.EXTEND_BREAK);
+                    setShowComponent(BreakComponent.BREAK_SUMMARY);
                   }
                 }
 
@@ -92,13 +92,13 @@ export default function MoodCheckIn({
                   console.log("study");
                 } else {
                   if (setShowComponent) {
-                    setShowComponent(BreakComponent.EXTEND_BREAK);
+                    setShowComponent(BreakComponent.BREAK_SUMMARY);
                   }
                 }
                 break;
             }
             if (setShowComponent) {
-              setShowComponent(BreakComponent.EXTEND_BREAK);
+              setShowComponent(BreakComponent.BREAK_SUMMARY);
             }
           }}
         >

@@ -176,7 +176,7 @@ const Timer = ({
                 <button
                   onClick={() => setWhichTimer(WhichTimer.STUDY)}
                   className={
-                    "w-[52%] rounded-2xl left-0  absolute text-white  h-[60px] font-medium  " +
+                    "w-[52%] rounded-2xl left-0  absolute text-white text-h24 pb-1  h-[60px] font-medium  " +
                     (whichTimer === WhichTimer.STUDY &&
                       "bg-study rounded z-10  ")
                   }
@@ -186,7 +186,7 @@ const Timer = ({
                 <button
                   onClick={() => setWhichTimer(WhichTimer.BREAK)}
                   className={
-                    "w-[52%] rounded-2xl right-0 absolute items-center justify-center flex text-white h-[60px] font-medium " +
+                    "w-[52%] rounded-2xl right-0 absolute items-center text-h24 justify-center pb-1 flex text-white h-[60px] font-medium " +
                     (whichTimer === WhichTimer.BREAK && "bg-break rounded  ")
                   }
                 >

@@ -19,7 +19,7 @@ export default function StudySummary({
 
   return (
     <div className="relative flex flex-col items-center h-full pt-20 ">
-      <div className="w-[80vw] text-h14 text-pieGrey pb-4">
+      <div className="w-[80vw] text-h16 text-pieGrey pb-4">
         {studyEntry.mood === Mood.GOOD || studyEntry.mood === Mood.RATHER_GOOD
           ? "Cool, keep it up! Now enjoy your well deserved break."
           : "Seems like your studying didn't go well. You should consider taking a longer break and do something you enjoy."}

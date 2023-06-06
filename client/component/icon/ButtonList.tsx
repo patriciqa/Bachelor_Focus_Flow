@@ -90,7 +90,8 @@ export default function ButtonList({
             {icon !== "" ? (
               <FontAwesomeIcon
                 icon={icon !== null && icon}
-                className={getIconColor()}
+                className={getIconColor() + " text-[24px]"}
+                size="xx"
               />
             ) : (
               <div>

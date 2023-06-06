@@ -10,7 +10,7 @@ export enum BreakComponent {
   NO_COMPONENT,
   MOODCHECKIN,
   ACTIVITIES,
-  EXTEND_BREAK,
+  BREAK_SUMMARY,
 }
 
 export enum SettingComponent {

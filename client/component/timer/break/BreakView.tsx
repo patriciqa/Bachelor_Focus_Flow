@@ -33,6 +33,7 @@ export const BreakView = ({
     TimerViewState.START
   );
   const { examPhaseId } = useExamPhaseContext();
+  const [activity, setActivities] = useState<Activity>();
 
   const { setHideNavbar } = useNavbarContext();
   const [selected, setSelected] = useState<number | null>(-1);
@@ -56,7 +57,7 @@ export const BreakView = ({
           />
         );
         break;
-      case BreakComponent.EXTEND_BREAK:
+      case BreakComponent.BREAK_SUMMARY:
         component = (
           <BreakSummary
             breakEntry={breakEntry}
@@ -71,6 +72,7 @@ export const BreakView = ({
         setShowComponent(null);
         component = null;
         setShowTimer(false);
+        console.log("HI");
     }
     return component;
   };
@@ -85,12 +87,13 @@ export const BreakView = ({
         setHideNavbar(true);
     }
   }, [runningTimer]);
-  const [activity, setActivities] = useState<Activity>();
 
   const getAllActivites = async () => {
     if (selected) {
       const data: Activity = await getElement("activities", selected);
       setActivities(data);
+    } else {
+      setActivities(undefined);
     }
   };
 
@@ -98,7 +101,7 @@ export const BreakView = ({
     getAllActivites();
   }, [selected]);
 
-  const getActivity = (): React.ReactElement => {
+  const getActivity = (black: boolean): React.ReactElement => {
     let entry = undefined;
     if (activity !== undefined) {
       entry = (
@@ -106,15 +109,18 @@ export const BreakView = ({
           {activity.icon !== undefined && (
             <FontAwesomeIcon
               icon={activity.icon}
-              className={"pr-4" + " text-break"}
+              className={"pr-4 " + (black ? "text-white" : "text-break")}
             />
           )}
-          <p className="text-dark">{activity.title}</p>
+          <p className={black ? "text-white" : "text-dark"}>{activity.title}</p>
         </div>
       );
     }
+    console.log(activity);
+
     return entry;
   };
+
   return (
     <>
       {showTimer ? (
@@ -149,9 +155,12 @@ export const BreakView = ({
                   className={
                     "w-5/6 px-4 py-2 mb-2 border rounded-full border-break text-dark"
                   }
+                  onClick={() => {
+                    setShowTimer(false);
+                  }}
                 >
-                  {getActivity() !== undefined
-                    ? getActivity()
+                  {getActivity(false) !== undefined
+                    ? getActivity(false)
                     : "no activity selected"}
                 </button>
                 <CustomButton
@@ -181,8 +190,8 @@ export const BreakView = ({
                     "w-4/6 px-4 py-2 mb-2 border rounded-full flex border-break bg-break text-white"
                   }
                 >
-                  {getActivity() !== undefined
-                    ? getActivity()
+                  {getActivity(true) !== undefined
+                    ? getActivity(true)
                     : "no activity selected"}
                 </button>
                 <CustomButton
@@ -213,6 +222,7 @@ export const BreakView = ({
                     setShowComponent(BreakComponent.MOODCHECKIN);
                     setRunningTimer(TimerViewState.START);
                     setSelected(-1);
+                    setShowTimer(false);
                   }}
                 >
                   finish break session

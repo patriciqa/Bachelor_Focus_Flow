@@ -55,7 +55,10 @@ const WeekCalendar = ({
       <div className="flex justify-between w-full pt-4 pb-6">
         <div className="flex">
           {initialRenderComplete && (
-            <FontAwesomeIcon icon={["fas", "calendar"]} />
+            <FontAwesomeIcon
+              icon={["fas", "calendar"]}
+              className={"text-[24px]"}
+            />
           )}
           <span className="pl-4 text-h24">
             {moment(currentMonth).format(dateFormat)}

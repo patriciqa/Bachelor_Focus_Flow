@@ -16,7 +16,7 @@ export default function CreatePhaseView({
     <>
       <div className="h-[100vh] bg-white/30 top-0  z-10 pb-20 left-0 fixed w-[100vw] items-center flex-col flex justify-center text-center p-5  backdrop-blur ">
         Create a new exam phase.
-        <div className="w-3/4 py-2 text-center text-h16 text-pieGrey">
+        <div className="w-3/4 py-2 mt-4 mb-6 text-center text-h16 text-pieGrey">
           This step is needed to manage your tracked data.
         </div>
         <CustomButton

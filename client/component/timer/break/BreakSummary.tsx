@@ -28,7 +28,7 @@ export default function BreakSummary({
   };
   return (
     <div className="relative flex flex-col items-center h-full pt-20 ">
-      <div className="w-[80vw] text-h14 text-pieGrey pb-4">
+      <div className="w-[80vw] text-h16 text-pieGrey pb-4">
         {breakEntry.mood === Mood.GOOD || breakEntry.mood === Mood.RATHER_GOOD
           ? "Cool! Now let’s get back to studying."
           : "Everyone feels down sometimes and that’s okay. Consider taking another break and do something that makes you feel good."}
