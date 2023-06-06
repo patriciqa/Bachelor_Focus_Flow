@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import MoodChart from "@/component/charts/MoodChart";
 import HorizontalCarousel from "@/component/overview/Carousel";

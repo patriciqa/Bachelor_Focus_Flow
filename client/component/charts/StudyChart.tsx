@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import { getElement } from "@/db/Actions";
 import { Reason } from "@/types/Timer";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";

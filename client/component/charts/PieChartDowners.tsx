@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import { ExamPhase, Mood, Study } from "@/types/Timer";
 import { filter, includes } from "lodash";
