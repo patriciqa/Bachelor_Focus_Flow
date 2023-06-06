@@ -327,7 +327,10 @@ export default function PieChartDowners({
   };
 
   const checkIfEmpty = (val: number[] | undefined | null) => {
-    if (val === undefined || val === null) {
+    if (val !== null && val !== undefined && val[0] === 0) {
+      return true;
+    }
+    if (val === undefined || val === null || val === [0]) {
       return true;
     }
     return false;
@@ -345,9 +348,9 @@ export default function PieChartDowners({
   };
 
   return (
-    <div className="">
+    <div className="pb-5">
       {empty() ? (
-        <div className="flex justify-center  shadow-[1px_4px_16px_rgba(39,37,37,0.15)]  text-h14 items-center h-[12vh] text-pieGrey">
+        <div className="flex justify-center  text-h14 items-center h-[12vh] text-pieGrey">
           no data available
         </div>
       ) : (

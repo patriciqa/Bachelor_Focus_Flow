@@ -13,8 +13,8 @@ export default function Analytcs() {
   const [phases, setPhases] = useState<ExamPhase[]>();
   const [activePhase, setActivePhase] = useState<ExamPhase>();
   const [selectedDate] = useState(new Date());
-  const [hidePrevArrow, setHidePrevArrow] = useState(false);
-  const [hideNextArrow, setHideNextArrow] = useState(false);
+  const [inactivePrevArrow, setInactivePrevArrow] = useState(false);
+  const [inactiveNextArrow, setInactiveNextArrow] = useState(false);
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
   const getData = async (): Promise<ExamPhase[]> => {
@@ -41,6 +41,20 @@ export default function Analytcs() {
     setInitialRenderComplete(true);
   }, []);
 
+  useEffect(() => {
+    const sorted = sortBy(phases, (p) => p.startDate);
+    if (sorted[0] === activePhase) {
+      setInactivePrevArrow(true);
+    } else {
+      setInactivePrevArrow(false);
+    }
+    if (sorted[sorted.length - 1] === activePhase) {
+      setInactiveNextArrow(true);
+    } else {
+      setInactiveNextArrow(false);
+    }
+  });
+
   const getPreviewPhase = (prev: boolean) => {
     if (activePhase !== undefined && activePhase.id !== undefined) {
       let newId = 0;
@@ -60,12 +74,11 @@ export default function Analytcs() {
         newId = activePhase.id + 1;
         sorted?.map((p, index) => {
           if (p.id === activePhase.id) {
-            console.log(index);
             const i = (index += 1);
             if (sorted[i] !== undefined) {
               setActivePhase(sorted[i]);
-              setHideNextArrow(false);
-              setHidePrevArrow(false);
+              setInactiveNextArrow(false);
+              setInactivePrevArrow(false);
             }
           }
         });
@@ -82,19 +95,20 @@ export default function Analytcs() {
           {activePhase !== undefined && (
             <>
               <div className="flex w-full pt-12">
-                {!hidePrevArrow && (
-                  <div
-                    className="flex-1 pt-1 text-center "
-                    onClick={() => getPreviewPhase(true)}
-                  >
-                    {initialRenderComplete && (
-                      <FontAwesomeIcon
-                        icon={["fas", "chevron-left"]}
-                        size="xl"
-                      />
-                    )}
-                  </div>
-                )}
+                <div
+                  className="flex-1 pt-1 text-center "
+                  onClick={() => getPreviewPhase(true)}
+                >
+                  {initialRenderComplete && (
+                    <FontAwesomeIcon
+                      icon={["fas", "chevron-left"]}
+                      size="xl"
+                      className={
+                        inactivePrevArrow ? "text-inactiveGrey" : "text-dark"
+                      }
+                    />
+                  )}
+                </div>
                 <div className="flex flex-col items-center justify-center">
                   <div className="pb-1 font-semibold text-h24 ">
                     {activePhase?.title}
@@ -104,19 +118,20 @@ export default function Analytcs() {
                     {moment(activePhase.endDate).format("L")}
                   </div>
                 </div>
-                {!hideNextArrow && (
-                  <div
-                    className="flex-1 text-center "
-                    onClick={() => getPreviewPhase(false)}
-                  >
-                    {initialRenderComplete && (
-                      <FontAwesomeIcon
-                        icon={["fas", "chevron-right"]}
-                        size="xl"
-                      />
-                    )}
-                  </div>
-                )}
+                <div
+                  className="flex-1 text-center "
+                  onClick={() => getPreviewPhase(false)}
+                >
+                  {initialRenderComplete && (
+                    <FontAwesomeIcon
+                      icon={["fas", "chevron-right"]}
+                      size="xl"
+                      className={
+                        inactiveNextArrow ? "text-inactiveGrey" : "text-dark"
+                      }
+                    />
+                  )}
+                </div>
               </div>
               <div className="pt-6 pb-1 text-h20 ">
                 your most selected mood boosters
@@ -125,7 +140,7 @@ export default function Analytcs() {
                   icon={["fas", "arrow-trend-up"]}
                 />
               </div>
-              <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)] rounded">
+              <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)]  rounded">
                 <PieChartBoosters activePhase={activePhase} />
               </div>
               <div className="pt-6 pb-1 text-h20">

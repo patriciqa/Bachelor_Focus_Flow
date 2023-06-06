@@ -294,6 +294,9 @@ export default function PieChartBoosters({
   };
 
   const checkIfEmpty = (val: number[] | undefined | null) => {
+    if (val !== null && val !== undefined && val[0] === 0) {
+      return true;
+    }
     if (val === undefined || val === null) {
       return true;
     }
@@ -311,9 +314,9 @@ export default function PieChartBoosters({
   };
 
   return (
-    <div className="">
+    <div className="pb-5">
       {empty() ? (
-        <div className="flex justify-center  shadow-[1px_4px_16px_rgba(39,37,37,0.15)]  text-h14 items-center h-[12vh] text-pieGrey">
+        <div className="flex justify-center    text-h14 items-center h-[12vh] text-pieGrey">
           no data available
         </div>
       ) : (
@@ -322,7 +325,7 @@ export default function PieChartBoosters({
             while studying{" "}
           </div>
 
-          {checkIfEmpty(topThreeReasons) === null ? (
+          {checkIfEmpty(topThreeReasons) ? (
             <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
               no data available
             </div>

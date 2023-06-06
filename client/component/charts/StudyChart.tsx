@@ -88,7 +88,7 @@ export default function StudyChart({
             </div>
             {topThreeId !== undefined &&
               topThreeId.map((reason: any, index) => (
-                <div key={reason} className={"flex 	"}>
+                <div key={reason} className={"flex "}>
                   <div
                     className={
                       "" +
