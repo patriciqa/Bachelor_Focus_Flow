@@ -6,6 +6,17 @@ export default function sToM(totalSeconds: number): string {
     if (minutes === -1) {
         minutes = 0;
     }
-    return `${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds
-        }`;
+    if (minutes === 0) {
+        return `${seconds}s`;
+    }
+    if (minutes === 60) {
+        return `1h`;
+    }
+    if (seconds === 0) {
+        return `${minutes}min`;
+    }
+    console.log(minutes)
+
+    return `${`${minutes}`}min ${seconds < 10 ? `0${seconds}` : seconds
+        }s `;
 }

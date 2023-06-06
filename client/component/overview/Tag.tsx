@@ -122,12 +122,13 @@ export default function Tag({ entry }: { entry: any }) {
         </div>
         <div className="flex flex-col w-3/4">
           <div className="pb-1 font-medium text-left text-h24">
-            {sToM(entry.timer.duration)} min
+            {sToM(entry.timer.duration)}
           </div>
+          {}
           <div className="flex text-h14">
             {moment(new Date(entry.timer.startTime)).format("HH:mm ")}-
             {moment(new Date(entry.timer.startTime))
-              .add(entry.timer.duration)
+              .add(entry.timer.duration * 1000)
               .format("HH:mm")}
           </div>
           <div className="flex flex-wrap pt-5 ">

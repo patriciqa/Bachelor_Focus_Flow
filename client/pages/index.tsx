@@ -137,7 +137,7 @@ const Timer = ({
             icon={["fas", "clock"]}
             className="pr-2 text-study"
           />
-          study: {sToM(studyEntry.timer.duration)}min
+          study: {sToM(studyEntry.timer.duration)}
         </div>
       );
     } else {
@@ -147,7 +147,7 @@ const Timer = ({
             icon={["fas", "clock"]}
             className="pr-2 text-break"
           />
-          <p>break: {sToM(breakEntry.timer.duration)}min</p>
+          <p>break: {sToM(breakEntry.timer.duration)}</p>
         </div>
       );
     }

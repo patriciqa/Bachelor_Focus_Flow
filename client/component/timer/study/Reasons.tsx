@@ -83,7 +83,7 @@ export default function Reasons({
     <div className="relative flex flex-col items-center h-full">
       <div className="mb-6 font-light text-h16 text-pieGrey">
         <FontAwesomeIcon icon={["fas", "clock"]} className="text-pieGrey" />{" "}
-        study {sToM(studyEntry.timer.duration)}min
+        study {sToM(studyEntry.timer.duration)}
       </div>
       <div>{getText()}</div>
       <div className="pt-2 text-h16 text-chartGrey">select up to 3 causes</div>
