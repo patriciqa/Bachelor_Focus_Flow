@@ -27,20 +27,6 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       'white': '#ffffff',
-      'purple': '#3f3cbb',
-      'midnight': '#121063',
-      'metal': '#565584',
-      'tahiti': '#3ab7bf',
-      'silver': '#ecebff',
-
-
-      'bubble-gum': '#ff77e9',
-      'bermuda': '#78dcca',
-      "active": '#333333',
-
-      "darkGrey": "#959494",
-      "breakGreen": "#5AB874",
-      "opposite": "#5AB874",
       "break": "#5AB874",
       "study": "#6A65F5",
       "studyChart1": "#332CF2",
@@ -50,7 +36,6 @@ module.exports = {
       "breakChart2": "#4CB66A",
       "breakChart3": "#96CDA5",
       'background': '#F9F9F9',
-      'lightBlue': '#E5F0FF',
       "inactiveGrey": "#CFCFD9",
       "chartGrey": "#ACAEB1",
       "pieGrey": "#828282",
@@ -64,17 +49,6 @@ module.exports = {
         'nunito': ['nunito', 'sans-serif'],
         'MyFont': ['"My Font"', 'serif'] // Ensure fonts with spaces have " " surrounding it.
       },
-      // fontFamily: {
-      //   sans: ["Sofia Pro", ...defaultTheme.fontFamily.sans],
-      // },
-      // fontFamily: {
-      //   sofiaPro: ['Sofia Pro', 'sans-serif'],
-      //   // fontFamily: {
-      //   //   sans: [
-      //   //     '"Source Sans 3Variable"',
-      //   //     ...defaultTheme.fontFamily.sans,
-      //   //   ],
-      // },
       fontSize: {
         h1: ['2.625rem', '1.2'], // 42px
         h2: ['1.625rem', '1.2'], // 26px

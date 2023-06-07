@@ -38,7 +38,7 @@ export default function MoodCheckIn({
           <div className="mb-6 text-h16 font-light text-pieGrey pt-[10vh]">
             <FontAwesomeIcon
               icon={["fas", "clock"]}
-              className=" text-pieGrey"
+              className="pr-2 text-pieGrey"
             />
             study {sToM(entry.timer.duration)}
           </div>
@@ -47,7 +47,10 @@ export default function MoodCheckIn({
       ) : (
         <>
           <div className="mb-6 text-h16 font-light text-pieGrey pt-[10vh]">
-            <FontAwesomeIcon icon={["fas", "clock"]} className="text-pieGrey" />
+            <FontAwesomeIcon
+              icon={["fas", "clock"]}
+              className="pr-2 text-pieGrey"
+            />
             break {sToM(entry.timer.duration)}
           </div>
           <div className="text-center pb-14">

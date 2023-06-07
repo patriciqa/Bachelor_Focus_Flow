@@ -1,10 +1,10 @@
 {
-    "theme_color": "#333333",
-    "background_color": "#333333",
+    "theme_color": "#F9F9F9",
+    "background_color": "#F9F9F9",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Focus Flow",
+    "name": "Focu<s Flow",
     "short_name": "Focus Flow",
     "icons": [
         {

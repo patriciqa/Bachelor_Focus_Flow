@@ -104,14 +104,14 @@ const Timer = ({
   };
 
   return (
-    <div className="flex flex-col items-center w-screen h-screen rw-screen bg-background">
+    <div className="fixed flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
-        <div className={"flex justify-center w-full pt-10 px-14 pb-7 p-2	"}>
+        <div className={"flex justify-center w-full pt-6 px-12 pb-7 p-2	"}>
           {hideNavbar ? (
             <button
               onClick={() => setWhichTimer(WhichTimer.STUDY)}
               className={
-                " " +
+                " h-[58px] " +
                 (whichTimer === WhichTimer.STUDY
                   ? "text-study  "
                   : "text-break")
@@ -145,7 +145,7 @@ const Timer = ({
             </>
           )}
         </div>
-        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] relative bg-white rounded h-[66vh] w-11/12	">
+        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] relative bg-white rounded h-[64vh] w-11/12	">
           {showPage()}
         </div>
       </>
