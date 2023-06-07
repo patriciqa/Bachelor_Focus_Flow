@@ -305,7 +305,7 @@ export default function PieChartBoosters({
   };
 
   return (
-    <div className="pb-6">
+    <div className="pb-8">
       {empty() ? (
         <div className="flex justify-center  text-h14 items-center h-[12vh] text-pieGrey">
           no data available

@@ -98,7 +98,7 @@ export default function StudyChart({
               </div>
             </div>
             {checkIfEmpty(topThree) ? (
-              <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
+              <div className="flex justify-start   text-h14 items-center h-[12vh] text-pieGrey">
                 no data available
               </div>
             ) : (
@@ -185,7 +185,7 @@ export default function StudyChart({
             </div>
 
             {checkIfEmpty(badTopThree) ? (
-              <div className="flex justify-center   text-h14 items-center h-[12vh] text-pieGrey">
+              <div className="flex justify-start   text-h14 items-center h-[12vh] text-pieGrey">
                 no data available
               </div>
             ) : (

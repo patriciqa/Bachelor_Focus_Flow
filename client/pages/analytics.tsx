@@ -19,6 +19,7 @@ export default function Analytcs() {
 
   const getData = async (): Promise<ExamPhase[]> => {
     const p: ExamPhase[] = [];
+    let active = false;
     const data: ExamPhase[] = await getElement("examPhases", "all");
     data.map((phase) => {
       const choosenDate = selectedDate.setHours(0, 0, 0, 0);
@@ -26,10 +27,11 @@ export default function Analytcs() {
       if (phase.startDate && phase.endDate) {
         if (phase.startDate <= choosenDate && choosenDate < phase.endDate) {
           setActivePhase(phase);
+          active = true;
         }
       }
     });
-    if (activePhase === undefined) {
+    if (!active) {
       setActivePhase(p[p.length - 1]);
     }
     setPhases(p);
@@ -143,7 +145,7 @@ export default function Analytcs() {
               <div className="bg-white shadow-[1px_4px_16px_rgba(39,37,37,0.15)]  rounded">
                 <PieChartBoosters activePhase={activePhase} />
               </div>
-              <div className="pt-6 pb-1 text-h20">
+              <div className="pt-6 mb-4 text-h20">
                 your most selected mood downers
                 <FontAwesomeIcon
                   className="ml-2"
