@@ -145,7 +145,7 @@ const Timer = ({
             </>
           )}
         </div>
-        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] relative bg-white rounded h-[64vh] w-11/12	">
+        <div className="shadow-[1px_4px_16px_rgba(39,37,37,0.15)] relative bg-white rounded h-[66vh] w-11/12	">
           {showPage()}
         </div>
       </>
