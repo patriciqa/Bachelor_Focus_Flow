@@ -103,8 +103,8 @@ export default function StudyChart({
               </div>
             ) : (
               <>
-                {topThreeId?.map((reason: any, index) => (
-                  <div key={reason} className={"flex "}>
+                {topThreeId?.map((reason: any, index: number) => (
+                  <div key={index} className={"flex "}>
                     <div
                       className={
                         "" +
@@ -117,7 +117,7 @@ export default function StudyChart({
                       }
                     >
                       {showReason(reason.id) || index === 1 ? (
-                        <p> {getReason(parseInt(reason.id))}</p>
+                        <div> {getReason(parseInt(reason.id))}</div>
                       ) : (
                         <div className="font-medium text-chartGrey text-h14">
                           no additional data available
@@ -192,7 +192,7 @@ export default function StudyChart({
               <>
                 {badTopThreeId?.map((reason: any, index: number) => (
                   <>
-                    <div key={reason} className={"flex justify-around "}>
+                    <div key={index} className={"flex justify-around "}>
                       <div
                         className={
                           "" +
@@ -205,7 +205,7 @@ export default function StudyChart({
                         }
                       >
                         {showReason(reason.id) || index === 1 ? (
-                          <p>{getReason(parseInt(reason.id))}</p>
+                          <div>{getReason(parseInt(reason.id))}</div>
                         ) : (
                           <div className="font-medium text-chartGrey text-h14">
                             no additional data available

@@ -39,7 +39,7 @@ export default function EditPhaseView({
     <div className="relative flex flex-col items-center h-full">
       <div className=" text-h24 pt-[10vh] mb-12"> edit exam phase</div>
       <p
-        className="flex justify-end w-4/5 text-chartGrey text-h16"
+        className="flex justify-end w-4/5 pb-1 text-chartGrey text-h16"
         id="characterCount"
       >
         <span id="count">{activePhase.title?.length}</span>/20

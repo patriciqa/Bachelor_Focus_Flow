@@ -46,7 +46,7 @@ export default function EditView({
         {!isBreak && !goodReason && <div>add negative cause</div>}
         {isBreak && <div>add break activity</div>}
         <p
-          className="flex justify-end w-4/5 text-chartGrey text-h16"
+          className="flex justify-end w-4/5 pb-1 text-chartGrey text-h16"
           id="characterCount"
         >
           <span id="count">{activeEntry.title.length}</span>/32

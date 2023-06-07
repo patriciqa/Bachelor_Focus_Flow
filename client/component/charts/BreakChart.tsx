@@ -91,8 +91,8 @@ export default function BreakChart({
               </div>
             ) : (
               <>
-                {topThreeId?.map((activity: any, index) => (
-                  <div key={activity} className={"flex  	"}>
+                {topThreeId?.map((activity: any, index: number) => (
+                  <div key={index} className={"flex  	"}>
                     <div
                       className={
                         "" +
@@ -105,7 +105,7 @@ export default function BreakChart({
                       }
                     >
                       {showActivity(activity.id) || index === 1 ? (
-                        <p> {getActivity(parseInt(activity.id))}</p>
+                        <div> {getActivity(parseInt(activity.id))}</div>
                       ) : (
                         <div className="font-medium text-chartGrey text-h14">
                           no additional data available
@@ -169,7 +169,7 @@ export default function BreakChart({
             ) : (
               <>
                 {badTopThreeId?.map((activity: any, index) => (
-                  <div key={activity} className={"flex justify-around "}>
+                  <div key={index} className={"flex justify-around "}>
                     <div
                       className={
                         "" +
@@ -182,7 +182,7 @@ export default function BreakChart({
                       }
                     >
                       {showActivity(activity.id) || index === 1 ? (
-                        <p> {getActivity(parseInt(activity.id))}</p>
+                        <div> {getActivity(parseInt(activity.id))}</div>
                       ) : (
                         <div className="font-medium text-chartGrey text-h14">
                           no additional data available

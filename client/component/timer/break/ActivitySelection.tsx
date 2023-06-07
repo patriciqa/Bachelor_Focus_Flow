@@ -37,9 +37,10 @@ export default function ActivitySelection({
         <div className="max-h-full overflow-auto">
           {activities !== undefined &&
             activities.map((activity) => (
-              <>
+              <div key={activity.id}>
                 {!activity.archived && (
                   <ButtonList
+                    key={activity.id}
                     text={activity.title}
                     icon={activity.icon}
                     reason={activity}
@@ -54,7 +55,7 @@ export default function ActivitySelection({
                     buttonVariant={ButtonVariant.BREAK}
                   />
                 )}
-              </>
+              </div>
             ))}
           <button
             onClick={() => {
