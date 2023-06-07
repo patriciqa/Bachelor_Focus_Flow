@@ -104,7 +104,7 @@ const Timer = ({
   };
 
   return (
-    <div className="fixed flex flex-col items-center w-screen h-screen rw-screen bg-background">
+    <div className="min-[361px]:fixed flex flex-col items-center w-screen h-screen rw-screen bg-background">
       <>
         <div className={"flex justify-center w-full pt-6 px-12 pb-7 p-2	"}>
           {hideNavbar ? (
