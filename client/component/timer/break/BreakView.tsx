@@ -160,7 +160,7 @@ export const BreakView = ({
                     : "no activity selected"}
                 </button>
                 <CustomButton
-                  variant="break"
+                  variant={duration !== 0 ? "break" : "disabled"}
                   onClick={() => {
                     setRunningTimer(TimerViewState.RUNNING);
                     setDuration(duration);

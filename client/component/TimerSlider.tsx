@@ -18,6 +18,7 @@ export default function TimerSlider({
   setDuration: (d: number) => void;
 }) {
   const [playActive] = useSound("/notification_sound.mp3", { volume: 1 });
+  const [secondsIndex, setSecondsIndex] = useState(1);
 
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
   useEffect(() => {
@@ -36,6 +37,9 @@ export default function TimerSlider({
         }
 
         setDuration(duration - 1);
+        if (duration % 5 === 0) {
+          setSecondsIndex(secondsIndex - 1);
+        }
       }, 1000);
     }
   }, [duration, runningTimer]);
@@ -55,7 +59,7 @@ export default function TimerSlider({
   function getTime(m: number) {
     const defaultMin = m || 5;
     let startTime = moment().startOf("D");
-    let endTime = moment().startOf("day").add(3600000);
+    let endTime = moment().startOf("day").add(3600100);
     let allTimes = [];
 
     while (startTime < endTime) {
@@ -69,13 +73,21 @@ export default function TimerSlider({
   const timeArr = getTime(5);
 
   function convertTimeToSeconds(time: any) {
-    var parts = time.split(":");
-    var hours = parseInt(parts[0]);
-    var minutes = parseInt(parts[1]);
-    var seconds = parseInt(parts[2]);
-    var totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    const parts = time.split(":");
+    const hours = parseInt(parts[0]);
+    const minutes = parseInt(parts[1]);
+    const seconds = parseInt(parts[2]);
+    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
     return totalSeconds;
   }
+  const findIndex = (arr: any, value: any) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === value) {
+        return i;
+      }
+    }
+    return -1;
+  };
 
   return (
     <div className="flex items-center justify-center scale-[0.9]">
@@ -84,7 +96,8 @@ export default function TimerSlider({
           <CircularSlider
             min={0}
             max={3600}
-            dataIndex={1}
+            // dataIndex={1}
+            dataIndex={secondsIndex}
             hideLabelValue
             labelBottom={true}
             knobColor={isStudy ? "#6A65F5" : "#5AB874"}
@@ -99,7 +112,10 @@ export default function TimerSlider({
               runningTimer !== TimerViewState.RUNNING ? true : false
             }
             onChange={(value: any) => {
-              setDuration(convertTimeToSeconds(value));
+              if (runningTimer === TimerViewState.START) {
+                setSecondsIndex(findIndex(timeArr, value));
+                setDuration(convertTimeToSeconds(value));
+              }
             }}
           >
             <div></div>

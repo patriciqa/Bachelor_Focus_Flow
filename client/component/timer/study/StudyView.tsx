@@ -137,7 +137,7 @@ export const StudyView = ({
       {runningTimer === TimerViewState.START && (
         <div className="absolute bottom-10">
           <CustomButton
-            variant="study"
+            variant={duration !== 0 ? "study" : "disabled"}
             onClick={() => {
               setRunningTimer(TimerViewState.RUNNING);
               setDuration(duration);

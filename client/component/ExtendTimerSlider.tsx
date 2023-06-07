@@ -18,6 +18,9 @@ export default function ExtendTimerSlider({
   setExtend: (d: number) => void;
 }) {
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+  const [secondsIndex, setSecondsIndex] = useState(0);
+  const [timerRuns, setTimerRuns] = useState(false);
+
   useEffect(() => {
     setInitialRenderComplete(true);
   }, []);
@@ -32,8 +35,12 @@ export default function ExtendTimerSlider({
           setRunningTimer(TimerViewState.FINISHED);
           return;
         }
-
+        setTimerRuns(true);
         setExtend(extend - 1);
+
+        if (extend % 300 === 0) {
+          setSecondsIndex(secondsIndex - 1);
+        }
       }, 1000);
     }
   }, [extend, runningTimer]);
@@ -53,7 +60,7 @@ export default function ExtendTimerSlider({
   function getTime(m: number) {
     const defaultMin = m || 5;
     let startTime = moment().startOf("D");
-    let endTime = moment().startOf("day").add(1260000);
+    let endTime = moment().startOf("day").add(1300000);
     //Times
     let allTimes = [];
 
@@ -69,49 +76,50 @@ export default function ExtendTimerSlider({
   const timeArr = getTime(5);
 
   function convertTimeToSeconds(time: any) {
-    var parts = time.split(":");
-    var hours = parseInt(parts[0]);
-    var minutes = parseInt(parts[1]);
-    var seconds = parseInt(parts[2]);
-    var totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    const parts = time.split(":");
+    const hours = parseInt(parts[0]);
+    const minutes = parseInt(parts[1]);
+    const seconds = parseInt(parts[2]);
+    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
     return totalSeconds;
   }
+
+  const findIndex = (arr: any, value: any) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === value) {
+        return i;
+      }
+    }
+    return -1;
+  };
 
   return (
     <div className="flex items-center justify-center scale-[0.9]">
       <div className="">
-        {/* <div>
-          <button onClick={showNotification}>Show Notification</button>
-          <button onClick={stopTimer}>Stop Timer</button>
-          <button onClick={startTimer}>Start Timer</button>
-          {isRunning ? (
-            <button onClick={stopTimer}>Stop Timer</button>
-          ) : (
-            <button onClick={startTimer}>Start Timer</button>
-          )}
-        </div> */}
         {initialRenderComplete && (
           <div className="">
             <CircularSlider
               min={0}
               max={1200}
-              dataIndex={0}
-              // dataIndex={1} //default start maybw 25min?
+              dataIndex={secondsIndex}
               hideLabelValue
               labelBottom={true}
               knobColor={isStudy ? "#6A65F5" : "#5AB874"}
-              knobSize={runningTimer === TimerViewState.START ? 60 : undefined}
+              knobSize={
+                runningTimer === TimerViewState.FINISHED ? 60 : undefined
+              }
               progressColorFrom={isStudy ? "#6A65F5" : "#5AB874"}
               progressColorTo={isStudy ? "#6A65F5" : "#5AB874"}
               progressSize={20}
               data={timeArr}
               trackColor="#E5F0FF"
               trackSize={12}
-              knobDraggable={
-                runningTimer !== TimerViewState.RUNNING ? true : false
-              }
+              knobDraggable={timerRuns ? false : true}
               onChange={(value: any) => {
-                setExtend(convertTimeToSeconds(value));
+                if (runningTimer === TimerViewState.FINISHED) {
+                  setSecondsIndex(findIndex(timeArr, value));
+                  setExtend(convertTimeToSeconds(value));
+                }
               }}
             >
               <div></div>
