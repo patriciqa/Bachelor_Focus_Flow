@@ -29,7 +29,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
               </Link>
             </li>
 
-            <li className={"w-full  pb- align-center  justify-center flex  "}>
+            <li className={"w-full   align-center  justify-center flex  "}>
               <Link href="/overview">
                 {initialRenderComplete && (
                   <FontAwesomeIcon
@@ -42,7 +42,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 )}
               </Link>
             </li>
-            <li className={"w-full  pb3 align-center  justify-center flex "}>
+            <li className={"w-full  align-center  justify-center flex "}>
               <Link href="/analytics">
                 {initialRenderComplete && (
                   <FontAwesomeIcon
@@ -57,7 +57,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
                 )}
               </Link>
             </li>
-            <li className={"w-full  pb- align-center  justify-center flex"}>
+            <li className={"w-full   align-center  justify-center flex"}>
               <Link href="/settings">
                 {initialRenderComplete && (
                   <FontAwesomeIcon
