@@ -14,7 +14,7 @@ export default function Navbar({ hideNavbar }: { hideNavbar: boolean }) {
     <>
       {!hideNavbar && (
         <div className=" shadow-[1px_-4px_16px_rgba(39,37,37,0.15)] fixed bottom-0 z-20 flex flex-col items-center justify-center w-screen  h-[10vh] bg-white">
-          <ul className="fixed flex justify-center w-full bottom- ">
+          <ul className="fixed flex justify-center w-full bottom-[4.5vh] ">
             <li className={"w-full  align-center  justify-center flex"}>
               <Link href="/">
                 {initialRenderComplete && (
