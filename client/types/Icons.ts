@@ -1545,7 +1545,6 @@ export const Icons = [
   { title: "fa-solid fa-exclamation", description: "fa-exclamation" },
   { title: "fa-solid fa-arrows-spin", description: "fa-arrows-spin" },
   { title: "fa-solid fa-print", description: "fa-print" },
-  { title: "fa-solid fa-turkish-lira-sign", description: "fa-turkish-lira-sign" },
   { title: "fa-solid fa-turkish-lira", description: "fa-turkish-lira" },
   { title: "fa-solid fa-usd", description: "fa-usd" },
   { title: "fa-solid fa-x", description: "fa-x" },
