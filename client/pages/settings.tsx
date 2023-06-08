@@ -4,7 +4,7 @@ import ReasonsOverview from "@/component/settings/reasons/ReasonsOverview";
 import { SettingComponent } from "@/types/Components";
 import { WhichTimer } from "@/types/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExamPhaseOverview from "../component/settings/ExamPhaseOverview";
 
 const Settings = ({
@@ -16,17 +16,6 @@ const Settings = ({
   const [showComponent, setShowComponent] = useState(
     SettingComponent.NO_COMPONENT
   );
-
-  const workerRef = useRef<Worker>();
-
-  useEffect(() => {
-    workerRef.current = new Worker(new URL("../worker.ts", import.meta.url));
-    workerRef.current.onmessage = (event: MessageEvent<number>) =>
-      alert(`WebWorker Response => ${event.data}`);
-    return () => {
-      workerRef.current?.terminate();
-    };
-  }, []);
 
   const showPage = (): React.ReactElement => {
     let component = null;
