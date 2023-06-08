@@ -1,5 +1,5 @@
 import { ExamPhase, Mood, Study } from "@/types/Timer";
-import { includes } from "lodash";
+import { filter, includes } from "lodash";
 import { useEffect, useState } from "react";
 import BreakChart from "./BreakChart";
 import StudyChart from "./StudyChart";
@@ -193,7 +193,7 @@ export default function PieChartBoosters({
       });
     } else {
       sortedArray = array.sort((a, b) => {
-        const aValue = Object.values(a)[0];
+        const aValue: any = Object.values(a)[0];
         const bValue = Object.values(b)[0];
         return aValue - bValue;
       });
@@ -266,7 +266,9 @@ export default function PieChartBoosters({
         });
       }
       setTopThreeBreak(good);
-      setTopThreeBreakId(topThree);
+      setTopThreeBreakId(filter(topThree, (e) => e.id !== "null"));
+      console.log(topThree);
+      console.log(topThreeBreakId);
     }
   };
 
