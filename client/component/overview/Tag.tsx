@@ -16,7 +16,10 @@ export default function Tag({ entry }: { entry: any }) {
   }, []);
 
   const nonSelected = (): string | null => {
-    if (entry.reasonIds === undefined && entry.studyTimer === true) {
+    if (
+      entry.reasonIds === undefined ||
+      (entry.reasonIds === null && entry.studyTimer === true)
+    ) {
       return "no cause selected";
     } else if (
       (entry.breakActivityId === undefined ||
