@@ -17,7 +17,6 @@ export default function EditView({
 }) {
   const [newEntry, setNewEntry] = useState<Reason | Activity>(activeEntry);
   const onIconChange = (icon: string) => {
-    console.log(icon);
     const a = { ...newEntry };
     a.icon = icon;
     setNewEntry(a);
