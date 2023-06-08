@@ -46,7 +46,6 @@ export default function initDb() {
         { title: "studying with friends", archived: false, goodReason: true, icon: "fa-solid fa-people-group" },
         { title: "music", archived: false, goodReason: true, icon: "fa-solid fa-music" },
         { title: "studying in school", archived: false, goodReason: true, icon: "fa-solid fa-school" },
-
       ];
 
       reasons.forEach(function (reason) {

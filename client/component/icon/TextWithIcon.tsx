@@ -16,10 +16,8 @@ export default function TextWithIcon({
     switch (variant) {
       case ButtonVariant.BREAK:
         return "text-break";
-        break;
       case ButtonVariant.STUDY:
         return "text-study";
-        break;
       default:
         return "text-dark;";
     }

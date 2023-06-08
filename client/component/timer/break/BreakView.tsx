@@ -199,7 +199,6 @@ export const BreakView = ({
                     );
                     setRunningTimer(TimerViewState.START);
                     saveToDb(examPhaseId, b, true);
-                    // setbreakEntry(b);
                   }}
                 >
                   cancel timer

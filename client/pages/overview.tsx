@@ -22,7 +22,7 @@ const Overview = () => {
   const [visibleComponentId, setVisibleComponentId] = useState(null);
 
   const getData = async (): Promise<ExamPhase[]> => {
-    const choosenDate = selectedDate.setHours(0, 0, 0, 0); //choosen date
+    const choosenDate = selectedDate.setHours(0, 0, 0, 0);
     const data: ExamPhase[] = await getElement("examPhases", "all");
     setPhases(data);
     data.map((phase) => {

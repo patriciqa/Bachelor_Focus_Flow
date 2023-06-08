@@ -13,26 +13,26 @@ const IconPicker = ({
   onChange: Function;
   isBreak: boolean;
 }) => {
-  const [SearchText, setSearchText] = useState("");
-  const [CurrentPage, setCurrentPage] = useState(1);
-  const [IsOpen, setIsOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isOpen, setIsOpen] = useState(false);
   //filter icons by search text
   const perPage = 40;
   const filteredIcons = Icons.filter((icon) =>
-    icon.description.toLowerCase().includes(SearchText.toLowerCase())
+    icon.description.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const noOfPages = Math.ceil(filteredIcons.length / perPage);
   //previous Page
   const previousPage = () => {
-    if (CurrentPage > 1) {
-      setCurrentPage(CurrentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
   //next Page
   const nextPage = () => {
-    if (CurrentPage < noOfPages) {
-      setCurrentPage(CurrentPage + 1);
+    if (currentPage < noOfPages) {
+      setCurrentPage(currentPage + 1);
     }
   };
   //select icon
@@ -71,7 +71,7 @@ const IconPicker = ({
             />
           </a>
         </div>
-        {IsOpen && (
+        {isOpen && (
           <div
             className={
               "z-10 pick-box-container border rounded bg-white pb-2 " +
@@ -92,7 +92,7 @@ const IconPicker = ({
                     (isBreak ? "break" : "study")
                   }
                   type="search"
-                  value={SearchText}
+                  value={searchText}
                   onChange={onSearch}
                   placeholder="search..."
                 />
@@ -110,7 +110,7 @@ const IconPicker = ({
                       className={isBreak ? "text-break" : "text-study"}
                     />
                   </a>
-                  {" " + CurrentPage} of {noOfPages + " "}
+                  {" " + currentPage} of {noOfPages + " "}
                   <a
                     className="m-1"
                     href="#"
@@ -128,7 +128,7 @@ const IconPicker = ({
               </div>
               <div className="bg-white">
                 {filteredIcons
-                  .slice((CurrentPage - 1) * perPage, CurrentPage * perPage)
+                  .slice((currentPage - 1) * perPage, currentPage * perPage)
                   .map((icon, index) => {
                     return (
                       <div

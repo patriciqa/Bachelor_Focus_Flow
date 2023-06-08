@@ -96,7 +96,6 @@ export default function TimerSlider({
           <CircularSlider
             min={0}
             max={3600}
-            // dataIndex={1}
             dataIndex={secondsIndex}
             hideLabelValue
             labelBottom={true}

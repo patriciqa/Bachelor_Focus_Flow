@@ -115,7 +115,6 @@ export default function BreakActivityOverview() {
                                     <button
                                       onClick={() => {
                                         setOpenEdit(true);
-                                        // setActiveReason(p);
                                       }}
                                       className={`block px-4 py-2 text-left w-full`}
                                     >
