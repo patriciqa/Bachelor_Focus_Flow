@@ -96,13 +96,15 @@ export const StudyView = ({
   return (
     <div className="flex flex-col items-center justify-center ">
       {runningTimer === TimerViewState.RUNNING && (
-        <div className=" my-[2vh]   ">Yeah, keep going!</div>
+        <div className=" my-[2vh]  text-h18 ">Yeah, keep going!</div>
       )}
       {runningTimer === TimerViewState.EXTEND && (
-        <div className=" my-[2vh] ">Yeah, keep going!</div>
+        <div className=" my-[2vh] text-h18">Yeah, keep going!</div>
       )}
       {runningTimer === TimerViewState.START && (
-        <div className=" my-[2vh] ">For how long would you like to study?</div>
+        <div className=" my-[2vh] text-h18">
+          For how long would you like to study?
+        </div>
       )}
       {runningTimer === TimerViewState.FINISHED && (
         <div className="flex flex-col mt-2 ml-1 mr-1 text-h16">
