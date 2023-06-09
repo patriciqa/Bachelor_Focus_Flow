@@ -122,14 +122,11 @@ export const BreakView = ({
       {showTimer ? (
         <>
           <div className="flex flex-col items-center justify-center h-[25vh] my-20 ">
-            {/* <div className="h-[10vh]">Yeah, keep going!</div> */}
             {runningTimer === TimerViewState.RUNNING && (
               <div className="my-[2vh] ">Enjoy your break.</div>
             )}
             {runningTimer === TimerViewState.START && (
-              <div className="my-[2vh]">
-                <br></br>
-              </div>
+              <div className="my-[2vh] ">How long should your break be?</div>
             )}
             {runningTimer === TimerViewState.FINISHED && (
               <div className="my-[2vh]">Welcome back!</div>

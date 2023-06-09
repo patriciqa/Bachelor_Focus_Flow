@@ -102,9 +102,7 @@ export const StudyView = ({
         <div className=" my-[2vh] ">Yeah, keep going!</div>
       )}
       {runningTimer === TimerViewState.START && (
-        <div className="my-[2vh]">
-          <br></br>
-        </div>
+        <div className=" my-[2vh] ">For how long would you like to study?</div>
       )}
       {runningTimer === TimerViewState.FINISHED && (
         <div className="flex flex-col mt-2 ml-1 mr-1 text-h16">
@@ -153,24 +151,22 @@ export const StudyView = ({
         </div>
       )}
       {runningTimer === TimerViewState.RUNNING && (
-        <>
-          <div className="absolute bottom-10">
-            <CustomButton
-              variant="study-unfilled"
-              onClick={() => {
-                setRunningTimer(TimerViewState.START);
+        <div className="absolute bottom-10">
+          <CustomButton
+            variant="study-unfilled"
+            onClick={() => {
+              setRunningTimer(TimerViewState.START);
 
-                const s = { ...studyEntry };
-                s.timer.duration = Math.round(
-                  (Date.now() - s.timer.startTime) / 1000
-                );
-                saveToDb(examPhaseId, s, true);
-              }}
-            >
-              cancel timer
-            </CustomButton>
-          </div>
-        </>
+              const s = { ...studyEntry };
+              s.timer.duration = Math.round(
+                (Date.now() - s.timer.startTime) / 1000
+              );
+              saveToDb(examPhaseId, s, true);
+            }}
+          >
+            cancel timer
+          </CustomButton>
+        </div>
       )}
       {runningTimer === TimerViewState.EXTEND && (
         <>
