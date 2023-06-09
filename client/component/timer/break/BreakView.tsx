@@ -145,7 +145,6 @@ export const BreakView = ({
           {runningTimer === TimerViewState.START && (
             <>
               <div className="absolute flex flex-col items-center justify-center w-full bottom-2">
-                {/* <div className="bg-transparent h-[30vh]" /> */}
                 <button
                   className={
                     "w-5/6 px-4 py-2 mb-2 border rounded-full border-break text-dark"
