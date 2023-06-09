@@ -70,7 +70,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
           inactive
         </button>
       </div>
-      <div className="h-[65%] relative w-full py-4 overflow-auto mb-4 ">
+      <div className="h-[62%] relative w-full py-4 overflow-auto mb-4 ">
         <div className="text-left text-chartGrey text-h14">
           {active
             ? "edit, archive or create new causes"
@@ -246,7 +246,7 @@ export default function ReasonsOverview({ good }: { good: boolean }) {
           ))}
       </div>
 
-      <div className="absolute flex items-end justify-center bottom-[3%] ">
+      <div className="absolute flex items-end justify-center bottom-[6%] ">
         {active && (
           <CustomButton
             variant="dark"
