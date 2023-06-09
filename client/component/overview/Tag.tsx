@@ -120,7 +120,8 @@ export default function Tag({ entry }: { entry: any }) {
         <div className="flex flex-col items-center w-1/4 ">
           <div>{getIcon(entry.mood)}</div>
           <div className="flex items-center justify-center w-4 pt-3 font-medium text-center text-h14">
-            {entry.mood}
+            {entry.mood !== undefined ? entry.mood : "no mood"}
+            {console.log(entry.mood)}
           </div>
         </div>
         <div className="flex flex-col w-3/4">
